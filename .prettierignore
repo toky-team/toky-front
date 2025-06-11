@@ -1,0 +1,6 @@
+# Add files here to ignore them from prettier formatting
+
+/dist
+/coverage
+/.github/workflows/dev.yml
+/appspec.yml
