@@ -1,3 +1,7 @@
 export default function Home() {
-  return <div>TOKY-FRONT-V3</div>;
+  return (
+    <div>
+      <h1 className="text-3xl font-bold underline">TOKY-V3</h1>
+    </div>
+  );
 }
