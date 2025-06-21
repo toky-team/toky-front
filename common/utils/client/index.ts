@@ -19,6 +19,8 @@ const responseErrorHandler = async (error: AxiosError) => {
       return Promise.reject(error);
     }
   }
+
+  return Promise.reject(error);
 };
 
 client.interceptors.response.use((response) => response, responseErrorHandler);
