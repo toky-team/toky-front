@@ -1,1 +1,10 @@
 @import 'tailwindcss';
+
+// TODO: Theme 설정
+@theme {
+  --color-light-red: #f95b6e;
+  --color-red: #f3233c;
+  --color-blue: #2948ff;
+  --color-light-blue: #5988ff;
+  --color-bg-0: #121212;
+}
