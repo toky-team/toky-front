@@ -2,6 +2,7 @@
 
 import Icon from '@/assets/icons';
 import KakaoLogin from '@/common/components/KakaoLogin';
+import TicketInfo from '@/common/components/TicketInfo';
 import Link from 'next/link';
 
 const MainTopBar = () => {
@@ -11,7 +12,8 @@ const MainTopBar = () => {
         <Icon.TokyLogo />
       </Link>
       <div className="flex shrink-0 flex-row items-center gap-3">
-        {<KakaoLogin />}
+        <TicketInfo />
+        <KakaoLogin />
         {/* TODO: Sidebar 구현 */}
       </div>
     </div>
