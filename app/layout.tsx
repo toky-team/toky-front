@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
+import QueryProvider from '@/common/utils/QueryProvider';
+
 export const metadata: Metadata = {
   title: '신나는 정기전 승부예측, TOKY',
   description:
@@ -14,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body>{children}</body>
+      <body>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
