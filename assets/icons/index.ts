@@ -1,6 +1,6 @@
-import KakaoLogo from '@/assets/icons/KakaoLogo';
+import KakaoLogo from './KakaoLogo';
 import TokyLogo from './TokyLogo';
-import Ticket from '@/assets/icons/Ticket';
+import Ticket from './Ticket';
 
 const Icon = {
   TokyLogo,
