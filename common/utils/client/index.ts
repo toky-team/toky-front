@@ -10,6 +10,8 @@ const client = axios.create({
 
 let isRefreshing = false;
 
+// TODO: Pending Requests Queue 추가 필요
+// 여러 요청이 동시에 발생할 경우 문제 발생 가능
 const responseErrorHandler = async (error: AxiosError) => {
   const { config, response } = error;
 
