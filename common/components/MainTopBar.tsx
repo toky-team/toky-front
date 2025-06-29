@@ -3,17 +3,19 @@
 import Icon from '@/assets/icons';
 import KakaoLogin from '@/common/components/KakaoLogin';
 import TicketInfo from '@/common/components/TicketInfo';
+import useGetAuthCheck from '@/common/hooks/apis/useGetAuthCheck';
 import Link from 'next/link';
 
 const MainTopBar = () => {
+  const { data: isLoggedIn, isLoading } = useGetAuthCheck();
+
   return (
     <div className="bg-bg-0 flex h-[2.875rem] w-full flex-row items-center justify-between px-5 py-2.5">
       <Link href={'/'}>
         <Icon.TokyLogo />
       </Link>
       <div className="flex shrink-0 flex-row items-center gap-3">
-        <TicketInfo />
-        <KakaoLogin />
+        {!isLoading && (isLoggedIn ? <TicketInfo /> : <KakaoLogin />)}
         {/* TODO: Sidebar 구현 */}
       </div>
     </div>

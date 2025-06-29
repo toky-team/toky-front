@@ -8,15 +8,20 @@ const client = axios.create({
   withCredentials: true,
 });
 
+let isRefreshing = false;
+
 const responseErrorHandler = async (error: AxiosError) => {
   const { config, response } = error;
 
-  if (response?.status === 401 && config) {
+  if (response?.status === 401 && config && !isRefreshing) {
+    isRefreshing = true;
     try {
       await client.post('/auth/refresh');
       return client(config);
-    } catch (error) {
-      return Promise.reject(error);
+    } catch {
+      console.log('log: 미로그인 상태');
+    } finally {
+      isRefreshing = false;
     }
   }
 
