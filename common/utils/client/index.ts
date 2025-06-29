@@ -19,7 +19,7 @@ const responseErrorHandler = async (error: AxiosError) => {
       await client.post('/auth/refresh');
       return client(config);
     } catch {
-      console.log('log: 미로그인 상태');
+      return Promise.reject(error);
     } finally {
       isRefreshing = false;
     }
