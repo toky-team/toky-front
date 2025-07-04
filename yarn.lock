@@ -3888,6 +3888,11 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
 
+uuid@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.1.0.tgz#9549028be1753bb934fc96e2bca09bb4105ae912"
+  integrity sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==
+
 valibot@^0.41.0:
   version "0.41.0"
   resolved "https://registry.yarnpkg.com/valibot/-/valibot-0.41.0.tgz#5c2efd49c078e455f7862379365f6036f3cd9f96"
@@ -3921,6 +3926,13 @@ vite-node@^3.1.4:
     es-module-lexer "^1.7.0"
     pathe "^2.0.3"
     vite "^5.0.0 || ^6.0.0 || ^7.0.0-0"
+
+vite-plugin-devtools-json@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-devtools-json/-/vite-plugin-devtools-json-0.2.1.tgz#49d672c9c1a807c8854c0a4903cd40d8f1b18149"
+  integrity sha512-5aiNvf/iLTuLR1dUqoI5CLLGgeK2hd6u+tA+RIp7GUZDyAcM6ECaUEWOOtGpidbcxbkKq++KtmSqA3jhMbPwMA==
+  dependencies:
+    uuid "^11.1.0"
 
 vite-tsconfig-paths@^5.1.4:
   version "5.1.4"
