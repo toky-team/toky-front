@@ -1,7 +1,11 @@
-export function meta() {
-  return [{ title: 'New React Router App' }, { name: 'description', content: 'Welcome to React Router!' }];
-}
+import MainTopBar from '@/common/components/MainTopBar';
+import TestButton from '@/common/components/TestButton';
 
 export default function Home() {
-  return <div>홈페이지</div>;
+  return (
+    <div>
+      <MainTopBar />
+      <TestButton />
+    </div>
+  );
 }
