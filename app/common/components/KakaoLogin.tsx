@@ -1,4 +1,4 @@
-import Icon from '@/libs/assets/icons';
+import Icon from '@/lib/assets/icons';
 import onClickKakaoLogin from '@/common/utils/kakaoLogin';
 
 const KakaoLogin = () => {

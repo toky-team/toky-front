@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 
 import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
-import Icon from '@/libs/assets/icons';
+import Icon from '@/lib/assets/icons';
 import KakaoLogin from '@/common/components/KakaoLogin';
 import TicketInfo from '@/common/components/TicketInfo';
 
