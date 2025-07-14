@@ -14,13 +14,13 @@ const TopBar = ({ hasHamburger = false, children }: Props) => {
       </button>
       {children}
       {/* TODO: 사이드바 메뉴 연결 */}
-      {hasHamburger ? (
-        <button>
-          <Icon.Hamburger />
-        </button>
-      ) : (
-        <span />
-      )}
+      <span className="flex h-[26px] w-[26px] items-center justify-center">
+        {hasHamburger && (
+          <button>
+            <Icon.Hamburger />
+          </button>
+        )}
+      </span>
     </div>
   );
 };
