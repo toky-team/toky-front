@@ -1,7 +1,24 @@
-import { createGlobalTheme, globalStyle } from '@vanilla-extract/css';
+import { createGlobalTheme, globalFontFace, globalStyle } from '@vanilla-extract/css';
+
+const spoqaHanSansNeo = 'SpoqaHanSansNeo-Regular';
+
+globalFontFace(spoqaHanSansNeo, {
+  src: 'url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff") format("woff")',
+  fontWeight: 'normal',
+  fontStyle: 'normal',
+});
+
+globalStyle('html', {
+  fontFamily: spoqaHanSansNeo,
+});
 
 globalStyle('button', {
   cursor: 'pointer',
+});
+
+globalStyle('input', {
+  border: 'none',
+  outline: 'none',
 });
 
 export const vars = createGlobalTheme(':root', {
