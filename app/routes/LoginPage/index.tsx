@@ -5,6 +5,7 @@ import Background from '@/lib/assets/images/login-background.webp';
 import KoreapasLogo from '@/lib/assets/images/koreapas.png';
 
 import * as s from './style.css';
+import { Link } from 'react-router';
 
 const Login = () => {
   return (
@@ -13,10 +14,10 @@ const Login = () => {
         <p className={s.LoginText}>로그인</p>
       </TopBar>
       <div className={s.ButtonContainer}>
-        <button className={s.LoginButton({ src: 'koreapas' })}>
+        <Link to="/login/koreapas" className={s.LoginButton({ src: 'koreapas' })}>
           <img className={s.LoginButtonIcon({ src: 'koreapas' })} src={KoreapasLogo} />
           <p className={s.LoginButtonText({ src: 'koreapas' })}>고파스로 시작하기</p>
-        </button>
+        </Link>
         <button className={s.LoginButton({ src: 'kakao' })} onClick={onClickKakaoLogin}>
           <span className={s.LoginButtonIcon({ src: 'kakao' })}>
             <Icon.KakaoLogo />

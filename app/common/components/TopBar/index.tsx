@@ -1,20 +1,23 @@
 import Icon from '@/lib/assets/icons';
 import type { PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router';
+import * as s from './style.css';
 
 interface Props extends PropsWithChildren {
+  color?: '87' | 'd9';
   hasHamburger?: boolean;
 }
-const TopBar = ({ hasHamburger = false, children }: Props) => {
+const TopBar = ({ hasHamburger = false, color = '87', children }: Props) => {
   const navigate = useNavigate();
+
   return (
-    <div className="flex h-[3.25rem] w-full items-center justify-between px-[1.25rem] py-[0.8125rem]">
-      <button onClick={() => navigate(-1)}>
+    <div className={s.Container}>
+      <button onClick={() => navigate(-1)} className={s.BackButton({ color })}>
         <Icon.ArrowBack />
       </button>
       {children}
       {/* TODO: 사이드바 메뉴 연결 */}
-      <span className="flex h-[26px] w-[26px] items-center justify-center">
+      <span className={s.RightArea}>
         {hasHamburger && (
           <button>
             <Icon.Hamburger />
