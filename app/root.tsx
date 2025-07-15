@@ -2,6 +2,7 @@ import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration }
 
 import type { Route } from './+types/root';
 import './app.css';
+import '@/root.css';
 import QueryProvider from '@/common/utils/QueryProvider';
 
 export const links: Route.LinksFunction = () => [
