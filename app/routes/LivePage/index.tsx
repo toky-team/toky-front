@@ -16,7 +16,7 @@ const LivePage = () => {
           </button>
         </div>
       </TopBar>
-      <Player />
+      <Player src="https://youtu.be/3Txsz8eq5KY?t=603" />
     </>
   );
 };
