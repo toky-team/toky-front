@@ -6,7 +6,13 @@ export const Container = style({
   height: '100vh',
   background: 'linear-gradient(180deg, rgba(249, 91, 110, 0.00) 0%, rgba(249, 91, 110, 0.10) 100%), #FFF',
   display: 'flex',
-  paddingTop: '6.06rem',
+  flexDirection: 'column',
+  gap: '2.81rem',
+  alignItems: 'stretch',
+});
+
+export const Content = style({
+  display: 'flex',
   flexDirection: 'column',
   gap: '2.06rem',
   alignItems: 'center',
