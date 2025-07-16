@@ -8,6 +8,4 @@ export interface ChatMessageInterface {
   university: UniversityType;
   sport: SportType;
   createdAt: string;
-  updatedAt: string;
-  deletedAt: string | null;
 }
