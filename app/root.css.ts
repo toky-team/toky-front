@@ -32,7 +32,7 @@ export const vars = createGlobalTheme(':root', {
     white: '#FFF',
     'white-87': 'rgba(255, 255, 255, 0.87)',
     'white-60': 'rgba(255, 255, 255, 0.60)',
-    'white-38': 'rgba(255, 255, 255, 0.60)',
+    'white-38': 'rgba(255, 255, 255, 0.38)',
     'white-15': 'rgba(255, 255, 255, 0.15)',
     'purple-gr': 'linear-gradient(90deg, #4C0EB0 -12.75%, rgba(76, 14, 176, 0.60) 113.73%)',
     'red-gr-1': 'linear-gradient(90deg, #F3233C 0%, rgba(243, 35, 60, 0.25) 100%)',
