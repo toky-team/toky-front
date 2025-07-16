@@ -19,7 +19,7 @@ const KoreapasLoginPage = () => {
           {/* TODO: 회원가입 페이지 연결 */}
         </div>
       </div>
-      <p className={s.Copyright}>️© 모두의 캠퍼스</p>
+      <p className={s.Copyright}>© 모두의 캠퍼스</p>
     </div>
   );
 };
