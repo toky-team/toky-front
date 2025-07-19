@@ -43,5 +43,6 @@ export const vars = createGlobalTheme(':root', {
     red: '#F3233C',
     blue: '#2948FF',
     'light-blue': '#5988FF',
+    purple: '#4C0EB0',
   },
 });

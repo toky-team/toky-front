@@ -2,20 +2,25 @@ import { Link } from 'react-router';
 
 import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 import Icon from '@/lib/assets/icons';
-import KakaoLogin from '@/common/components/KakaoLogin';
 import TicketInfo from '@/common/components/TicketInfo';
+import LoginButton from '@/domain/home/components/LoginButton';
+
+import * as s from './style.css';
 
 const MainTopBar = () => {
   const { data: isLoggedIn, isLoading } = useGetAuthCheck();
 
   return (
-    <div className="bg-bg-0 flex h-[2.875rem] w-full flex-row items-center justify-between px-5 py-2.5">
+    <div className={s.Container}>
       <Link to="/">
         <Icon.TokyLogo />
       </Link>
-      <div className="flex shrink-0 flex-row items-center gap-3">
-        {!isLoading && (isLoggedIn ? <TicketInfo /> : <KakaoLogin />)}
+      <div className={s.LeftArea}>
+        {!isLoading && (isLoggedIn ? <TicketInfo /> : <LoginButton />)}
         {/* TODO: Sidebar 구현 */}
+        <button>
+          <Icon.Hamburger />
+        </button>
       </div>
     </div>
   );
