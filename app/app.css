@@ -1,25 +1,16 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
-@font-face {
-  font-family: 'Pretendard-Regular';
-  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
 @theme {
-  --font-sans:
-    'Pretendard-Regular', 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
   --color-light-red: #f95b6e;
   --color-red: #f3233c;
   --color-blue: #2948ff;
   --color-light-blue: #5988ff;
   --color-bg-0: #121212;
   --color-white-87: rgba(255, 255, 255, 0.87);
+  --leading-normal: 1.2;
 }
 
 html,
@@ -107,5 +98,8 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+  button {
+    @apply cursor-pointer;
   }
 }

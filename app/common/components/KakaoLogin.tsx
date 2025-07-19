@@ -8,7 +8,9 @@ const KakaoLogin = () => {
       className="flex cursor-pointer flex-row items-center gap-[3px] rounded-[6px] bg-[#FEE500] px-3.5 py-2 text-[14px]"
       onClick={onClickKakaoLogin}
     >
-      <Icon.KakaoLogo />
+      <span className="h-[14px] w-[14px]">
+        <Icon.KakaoLogo />
+      </span>
       로그인
     </button>
   );
