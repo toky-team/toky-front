@@ -1960,7 +1960,7 @@ deep-object-diff@^1.1.9:
   resolved "https://registry.yarnpkg.com/deep-object-diff/-/deep-object-diff-1.1.9.tgz#6df7ef035ad6a0caa44479c536ed7b02570f4595"
   integrity sha512-Rn+RuwkmkDwCi2/oXOFS9Gsr5lJZu/yTGpK7wAaAIE75CC+LCGEZHpY6VQJa/RoJcrmaA/docWJZvYohlNkWPA==
 
-deepmerge@^4.0.0, deepmerge@^4.2.2:
+deepmerge@^4.2.2:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.3.1.tgz#44b5f2147cd3b00d4b56137685966f26fd25dd4a"
   integrity sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==
@@ -3901,19 +3901,19 @@ react-is@^16.13.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-player@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/react-player/-/react-player-3.2.1.tgz#b02db50455798215bdca8a076d79860cda479651"
-  integrity sha512-M48FXqaYLW1foYy99+TZuBF2NPaicfcH3Juj0usE28QBUkLGaG5pqoKe9b1SwJgz918vB9OC/p25QhmzdFAOuA==
+react-player@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-player/-/react-player-3.3.1.tgz#fa5466c2c9adb56ea407f1cc2cbc023186e1c6aa"
+  integrity sha512-wE/xLloneXZ1keelFCaNeIFVNUp4/7YoUjfHjwF945aQzsbDKiIB0LQuCchGL+la0Y1IybxnR0R6Cm3AiqInMw==
   dependencies:
     "@mux/mux-player-react" "^3.5.1"
     cloudflare-video-element "^1.3.3"
     dash-video-element "^0.1.6"
-    deepmerge "^4.0.0"
     hls-video-element "^1.5.6"
     spotify-audio-element "^1.0.2"
-    twitch-video-element "^0.1.1"
-    vimeo-video-element "^1.5.2"
+    tiktok-video-element "^0.1.0"
+    twitch-video-element "^0.1.2"
+    vimeo-video-element "^1.5.3"
     wistia-video-element "^1.3.3"
     youtube-video-element "^1.6.1"
 
@@ -4464,6 +4464,11 @@ tar@^7.4.3:
     mkdirp "^3.0.1"
     yallist "^5.0.0"
 
+tiktok-video-element@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/tiktok-video-element/-/tiktok-video-element-0.1.0.tgz#747fdf60ae2d462cea08bcc05e6d34a86ec7b78c"
+  integrity sha512-PVWUlpDdQ/LPXi7x4/furfD7Xh1L72CgkGCaMsZBIjvxucMGm1DDPJdM9IhWBFfo6tuR4cYVO/v596r6GG/lvQ==
+
 tinyglobby@^0.2.13, tinyglobby@^0.2.14:
   version "0.2.14"
   resolved "https://registry.yarnpkg.com/tinyglobby/-/tinyglobby-0.2.14.tgz#5280b0cf3f972b050e74ae88406c0a6a58f4079d"
@@ -4504,10 +4509,10 @@ tw-animate-css@^1.3.5:
   resolved "https://registry.yarnpkg.com/tw-animate-css/-/tw-animate-css-1.3.5.tgz#1bc393f6ac8b51f467235787561ac4334d523af2"
   integrity sha512-t3u+0YNoloIhj1mMXs779P6MO9q3p3mvGn4k1n3nJPqJw/glZcuijG2qTSN4z4mgNRfW5ZC3aXJFLwDtiipZXA==
 
-twitch-video-element@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/twitch-video-element/-/twitch-video-element-0.1.1.tgz#db265e59c1674346f87af7cac1be07f56c45e60b"
-  integrity sha512-m3V0+qBboBQKljT73GD1Yo8ebO8yBVyoEBUVcGqeNQfnhWKPHvyxEivYQPiEHrMmy+wLodZI4jLWQDs4hOR/Pg==
+twitch-video-element@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/twitch-video-element/-/twitch-video-element-0.1.2.tgz#3a29fc9227c24e8cdd615c836accb269e3c10a61"
+  integrity sha512-/up4KiWiTYiav+CUo+/DbV8JhP4COwEKSo8h1H/Zft/5NzZ/ZiIQ48h7erFKvwzalN0GfkEGGIfwIzAO0h7FHQ==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
@@ -4666,10 +4671,10 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
-vimeo-video-element@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/vimeo-video-element/-/vimeo-video-element-1.5.2.tgz#938e3fb42870b774f88d027a3753ad57801e773c"
-  integrity sha512-ws/CN1vJdvgmBHkudn8k4uBYx7nYEBUxml86X6TVMvFFHoXn41sPCVIKq0osN3/7bNygn+fjMxraqK1+Z8T90w==
+vimeo-video-element@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/vimeo-video-element/-/vimeo-video-element-1.5.3.tgz#a5448a9c91951e3f336806120b66a545c8f10a99"
+  integrity sha512-OQWyGS9nTouMqfRJyvmAm/n6IRhZ7x3EfPAef+Q+inGBeHa3SylDbtyeB/rEBd4B/T/lcYBW3rjaD9W2DRYkiQ==
   dependencies:
     "@vimeo/player" "2.29.0"
 
