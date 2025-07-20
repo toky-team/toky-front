@@ -1,13 +1,27 @@
-import { Link } from 'react-router';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router';
+
+import * as s from './style.css';
+
 import TopBar from '@/common/components/TopBar';
 import onClickKakaoLogin from '@/common/utils/kakaoLogin';
 import Icon from '@/lib/assets/icons';
 import Background from '@/lib/assets/images/login-background.webp';
 import KoreapasLogo from '@/lib/assets/images/koreapas.png';
-
-import * as s from './style.css';
+import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { data: isAuthenticated, isSuccess, isLoading } = useGetAuthCheck();
+
+  useEffect(() => {
+    if (isSuccess && isAuthenticated) {
+      navigate(-1);
+    }
+  }, [isAuthenticated, isSuccess, navigate]);
+
+  if (isLoading || isAuthenticated) return null;
+
   return (
     <>
       <TopBar>
