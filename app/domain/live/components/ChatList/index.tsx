@@ -7,18 +7,14 @@ import type { ChatMessageInterface } from '@/lib/types/live';
 import { useGetChatMessages } from '@/domain/live/apis/useGetChatMessages';
 import useIntersect from '@/common/hooks/useIntersect';
 import Chat from '@/domain/live/components/Chat';
+import type { SportType } from '@/lib/types';
 
-const ChatList = () => {
+interface Props {
+  sport: SportType;
+}
+const ChatList = ({ sport }: Props) => {
   const [newMessages, setNewMessages] = useState<ChatMessageInterface[]>([]);
-  const {
-    data: oldMessages,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-  } = useGetChatMessages({
-    sport: '축구',
-    limit: 20,
-  });
+  const { data: oldMessages, fetchNextPage, hasNextPage, isFetching } = useGetChatMessages({ sport, limit: 20 });
   const messages = [...newMessages, ...(oldMessages ?? [])];
 
   useEffect(() => {
@@ -32,13 +28,13 @@ const ChatList = () => {
 
     chatSocket.on('receive_message', onReceiveMessage);
     chatSocket.on('connect_error', onConnectError);
-    chatSocket.emit('join_room', { sport: '축구' });
+    chatSocket.emit('join_room', { sport });
 
     return () => {
       chatSocket.off('receive_message', onReceiveMessage);
       chatSocket.off('connect_error', onConnectError);
     };
-  }, []);
+  }, [sport]);
 
   const fetchNextRef = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target);

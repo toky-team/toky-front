@@ -32,7 +32,7 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
       {/* TODO: URI 제대로 끼우기 */}
       <Player src="https://youtu.be/3Txsz8eq5KY?t=603" />
       <ScoreBoard sport={sport} />
-      <ChatList />
+      <ChatList sport={sport} />
       <button onClick={() => handleSendMessage('안녕')}>전송</button>
     </>
   );
