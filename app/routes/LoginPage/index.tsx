@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import TopBar from '@/common/components/TopBar';
 import onClickKakaoLogin from '@/common/utils/kakaoLogin';
 import Icon from '@/lib/assets/icons';
@@ -5,7 +6,6 @@ import Background from '@/lib/assets/images/login-background.webp';
 import KoreapasLogo from '@/lib/assets/images/koreapas.png';
 
 import * as s from './style.css';
-import { Link } from 'react-router';
 
 const Login = () => {
   return (

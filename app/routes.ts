@@ -4,4 +4,5 @@ export default [
   index('routes/home.tsx'),
   route('login', 'routes/LoginPage/index.tsx'),
   route('login/koreapas', 'routes/KoreapasLoginPage/index.tsx'),
+  route('live/:sports', 'routes/LivePage/index.tsx'),
 ] satisfies RouteConfig;
