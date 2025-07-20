@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 
+import * as s from './style.css';
+
 import { chatSocket } from '@/common/utils/socket';
 import type { ChatMessageInterface } from '@/lib/types/live';
 import { useGetChatMessages } from '@/domain/live/apis/useGetChatMessages';
 import useIntersect from '@/common/hooks/useIntersect';
+import Chat from '@/domain/live/components/Chat';
 
 const ChatList = () => {
   const [newMessages, setNewMessages] = useState<ChatMessageInterface[]>([]);
@@ -14,7 +17,7 @@ const ChatList = () => {
     isFetching,
   } = useGetChatMessages({
     sport: '축구',
-    limit: 10,
+    limit: 20,
   });
   const messages = [...newMessages, ...(oldMessages ?? [])];
 
@@ -43,12 +46,9 @@ const ChatList = () => {
   });
 
   return (
-    <div>
+    <div className={s.Container}>
       {messages.map((message) => (
-        <div key={message.id}>
-          <p>{message.username}</p>
-          <p>{message.content}</p>
-        </div>
+        <Chat key={message.id} nickname={message.username} message={message.content} />
       ))}
     </div>
   );
