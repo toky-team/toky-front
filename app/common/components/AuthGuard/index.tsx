@@ -9,7 +9,7 @@ const AuthGuard = () => {
 
   useEffect(() => {
     if (isSuccess && !isAuthenticated) {
-      navigate('/login');
+      navigate('/login', { replace: true });
     }
   }, [isAuthenticated, isSuccess, navigate]);
 

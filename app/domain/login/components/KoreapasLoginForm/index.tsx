@@ -2,16 +2,32 @@ import { useState } from 'react';
 
 import * as s from './style.css';
 import { usePostKopasLogin } from '@/domain/login/apis/usePostKopasLogin';
+import { useNavigate } from 'react-router';
 
 const KoreapasLoginForm = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const { mutate: login } = usePostKopasLogin();
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (id && password) {
-      login({ id, password });
+      login(
+        { id, password },
+        {
+          onSuccess: (response) => {
+            if (response.isRegistered) {
+              navigate('/', { replace: true });
+            } else {
+              navigate('/signup', { replace: true });
+            }
+          },
+          onError: () => {
+            alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+          },
+        },
+      );
     }
   };
 
