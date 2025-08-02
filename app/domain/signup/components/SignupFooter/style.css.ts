@@ -4,7 +4,7 @@ import { recipe } from '@vanilla-extract/recipes';
 // TODO: Style 손보기
 export const Container = recipe({
   base: {
-    position: 'fixed',
+    position: 'absolute',
     bottom: 0,
 
     width: '100%',

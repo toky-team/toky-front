@@ -50,7 +50,7 @@ export const SignUpLink = style({
 });
 
 export const Copyright = style({
-  position: 'fixed',
+  position: 'absolute',
   bottom: '1.875rem',
   left: '50%',
   transform: 'translate3d(-50%, 0, 0)',
