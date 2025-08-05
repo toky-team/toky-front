@@ -5,13 +5,13 @@ interface Props {
   totalProgress: number;
 }
 const SignupProgress = ({ curProgress, totalProgress }: Props) => {
-  // TODO: Style 손보기
   return (
-    <div className="relative h-[5px] w-full bg-gray-700">
+    <div className="bg-white-15 relative h-[5px] w-full">
       <motion.div
         className="bg-white-87 absolute left-0 h-full w-full origin-[0%]"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: curProgress / totalProgress }}
+        transition={{ type: 'tween' }}
       />
     </div>
   );

@@ -1,7 +1,6 @@
 import { vars } from '@/root.css';
 import { recipe } from '@vanilla-extract/recipes';
 
-// TODO: Style 손보기
 export const Container = recipe({
   base: {
     position: 'absolute',
@@ -9,7 +8,7 @@ export const Container = recipe({
 
     width: '100%',
     height: '4rem',
-    padding: '1.25rem 0',
+    padding: '1.25rem 0 1.1875rem 0',
     background: vars.color['bg-5'],
 
     display: 'flex',
@@ -17,7 +16,7 @@ export const Container = recipe({
     justifyContent: 'center',
 
     fontSize: '1.25rem',
-    letterSpacing: '-0.8px',
+    letterSpacing: '-0.05rem',
     fontWeight: 700,
 
     transition: 'all 0.2s ease-in-out',
