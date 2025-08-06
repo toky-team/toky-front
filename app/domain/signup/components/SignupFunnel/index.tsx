@@ -12,7 +12,12 @@ interface Props {
 }
 const SignupFunnel = ({ setApi, curProgress }: Props) => {
   return (
-    <Carousel setApi={setApi} opts={{ watchDrag: false }} className="h-[calc(100%-4rem)] overflow-x-auto pb-[4rem]">
+    <Carousel
+      setApi={setApi}
+      opts={{ watchDrag: false, watchSlides: false, startIndex: 0 }}
+      enableKeyboardNavigation={false}
+      className="h-[calc(100%-4rem)] overflow-x-auto pb-[4rem]"
+    >
       <CarouselContent>
         <CarouselItem>
           <SetUniv />
