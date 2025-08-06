@@ -3,13 +3,15 @@ import EnterAuthNumber from '@/domain/signup/components/SignupFunnel/EnterAuthNu
 import SetName from '@/domain/signup/components/SignupFunnel/SetName';
 import SetPhoneNumber from '@/domain/signup/components/SignupFunnel/SetPhoneNumber';
 import SetUniv from '@/domain/signup/components/SignupFunnel/SetUniv';
+import TermsAgreement from '@/domain/signup/components/SignupFunnel/TermsAgreement';
 
 interface Props {
   setApi: (api: CarouselApi) => void;
+  curProgress: number;
 }
-const SignupFunnel = ({ setApi }: Props) => {
+const SignupFunnel = ({ setApi, curProgress }: Props) => {
   return (
-    <Carousel setApi={setApi} opts={{ watchDrag: false }}>
+    <Carousel setApi={setApi} opts={{ watchDrag: false }} className="h-[calc(100%-4rem)] overflow-x-auto pb-[4rem]">
       <CarouselContent>
         <CarouselItem>
           <SetUniv />
@@ -23,7 +25,9 @@ const SignupFunnel = ({ setApi }: Props) => {
         <CarouselItem>
           <EnterAuthNumber />
         </CarouselItem>
-        <CarouselItem>5</CarouselItem>
+        <CarouselItem>
+          <TermsAgreement curProgress={curProgress} />
+        </CarouselItem>
       </CarouselContent>
     </Carousel>
   );

@@ -5,7 +5,7 @@ export const Wrapper = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '2.13rem',
-  padding: '2.44rem 1.25rem 0 1.25rem',
+  padding: '2.44rem 1.25rem 1rem 1.25rem',
 });
 
 export const Guide = style({

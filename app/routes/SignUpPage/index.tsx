@@ -42,14 +42,14 @@ const SignUp = () => {
   }, [navigate, progress]);
 
   return (
-    <div>
+    <div className="h-full">
       {progress !== TOTAL_PROGRESS && (
         <>
           <TopBar handlePrevButton={handlePrevButton} />
           <SignupProgress curProgress={progress} totalProgress={TOTAL_PROGRESS - 1} />
         </>
       )}
-      <SignupFunnel setApi={setApi} />
+      <SignupFunnel curProgress={progress} setApi={setApi} />
       <SignupFooter
         progress={progress}
         totalProgress={TOTAL_PROGRESS}
