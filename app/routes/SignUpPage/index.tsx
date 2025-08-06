@@ -8,7 +8,7 @@ import SignupFooter from '@/domain/signup/components/SignupFooter';
 import type { CarouselApi } from '@/components/ui/carousel';
 import SignupFunnel from '@/domain/signup/components/SignupFunnel';
 
-const TOTAL_PROGRESS = 5;
+const TOTAL_PROGRESS = 6;
 
 const SignUp = () => {
   const [api, setApi] = useState<CarouselApi>();
@@ -43,7 +43,7 @@ const SignUp = () => {
 
   return (
     <div className="h-full">
-      {progress !== TOTAL_PROGRESS && (
+      {progress !== TOTAL_PROGRESS - 1 && (
         <>
           <TopBar handlePrevButton={handlePrevButton} />
           <SignupProgress curProgress={progress} totalProgress={TOTAL_PROGRESS - 1} />

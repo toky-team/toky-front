@@ -9,7 +9,7 @@ interface Props {
 const SignupFooter = ({ progress, totalProgress, clickable, onClick }: Props) => {
   return (
     <button className={s.Container({ clickable })} onClick={onClick}>
-      {progress === totalProgress ? '토키 시작하기' : progress === totalProgress - 1 ? '회원가입 완료' : '다음'}
+      {progress === totalProgress - 1 ? '토키 시작하기' : progress === totalProgress - 2 ? '회원가입 완료' : '다음'}
     </button>
   );
 };

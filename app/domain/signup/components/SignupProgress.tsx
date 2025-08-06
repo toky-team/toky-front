@@ -10,7 +10,7 @@ const SignupProgress = ({ curProgress, totalProgress }: Props) => {
       <motion.div
         className="bg-white-87 absolute left-0 h-full w-full origin-[0%]"
         initial={{ scaleX: 0 }}
-        animate={{ scaleX: curProgress / totalProgress }}
+        animate={{ scaleX: (curProgress + 1) / totalProgress }}
         transition={{ type: 'tween' }}
       />
     </div>

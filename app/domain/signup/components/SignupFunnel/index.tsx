@@ -4,6 +4,7 @@ import SetName from '@/domain/signup/components/SignupFunnel/SetName';
 import SetPhoneNumber from '@/domain/signup/components/SignupFunnel/SetPhoneNumber';
 import SetUniv from '@/domain/signup/components/SignupFunnel/SetUniv';
 import TermsAgreement from '@/domain/signup/components/SignupFunnel/TermsAgreement';
+import Welcome from '@/domain/signup/components/SignupFunnel/Welcome';
 
 interface Props {
   setApi: (api: CarouselApi) => void;
@@ -27,6 +28,9 @@ const SignupFunnel = ({ setApi, curProgress }: Props) => {
         </CarouselItem>
         <CarouselItem>
           <TermsAgreement curProgress={curProgress} />
+        </CarouselItem>
+        <CarouselItem>
+          <Welcome curProgress={curProgress} />
         </CarouselItem>
       </CarouselContent>
     </Carousel>
