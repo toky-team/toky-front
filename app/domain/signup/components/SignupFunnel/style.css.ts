@@ -37,6 +37,13 @@ export const FormWrapper = style({
   gap: '0.375rem',
 });
 
+export const ErrorMessageWrapper = style({
+  width: '100%',
+  padding: '0 0.25rem',
+  display: 'flex',
+  justifyContent: 'flex-end',
+});
+
 export const ErrorMessage = style({
   color: '#F95B6E',
   fontSize: '0.75rem',

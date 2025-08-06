@@ -25,7 +25,7 @@ export function InputBox({
   value,
   setValue,
   placeholder,
-  maxLength,
+  maxLength = 256,
   error = false,
   validationButton,
   clearError,
@@ -33,13 +33,20 @@ export function InputBox({
 }: InputBoxProps) {
   const [status, setStatus] = useState<StatusType>('default');
 
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > maxLength) {
+      e.target.value = e.target.value.slice(0, maxLength);
+    }
+    setValue(e.target.value);
+  };
+
   return (
     <div className={s.Wrapper}>
       <input
         className={s.Container({ status: error ? 'error' : changeable ? 'changeable' : status })}
         inputMode={inputType === 'number' ? 'numeric' : undefined}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={onChange}
         placeholder={placeholder}
         onFocus={() => {
           setStatus('focus');

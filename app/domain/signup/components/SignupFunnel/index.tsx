@@ -1,5 +1,6 @@
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 import SetName from '@/domain/signup/components/SignupFunnel/SetName';
+import SetPhoneNumber from '@/domain/signup/components/SignupFunnel/SetPhoneNumber';
 import SetUniv from '@/domain/signup/components/SignupFunnel/SetUniv';
 
 interface Props {
@@ -15,7 +16,9 @@ const SignupFunnel = ({ setApi }: Props) => {
         <CarouselItem>
           <SetName />
         </CarouselItem>
-        <CarouselItem>3</CarouselItem>
+        <CarouselItem>
+          <SetPhoneNumber />
+        </CarouselItem>
         <CarouselItem>4</CarouselItem>
         <CarouselItem>5</CarouselItem>
       </CarouselContent>
