@@ -8,6 +8,7 @@ interface SignupFormStore extends SignupFormType {
   setName: (input: string) => void;
   setPhoneNumber: (input: string) => void;
   setUniversity: (select: UniversityType) => void;
+  setAuthNumber: (input: string) => void;
   setAgreement: (input: boolean) => void;
 }
 
@@ -15,10 +16,12 @@ export const useSignupForm = create<SignupFormStore>((set) => ({
   name: '',
   university: null,
   phoneNumber: '',
+  authNumber: '',
   agreement: false,
   setName: (input: string) => set({ name: input }),
   setUniversity: (select: UniversityType) => set({ university: select }),
   setPhoneNumber: (input: string) => set({ phoneNumber: input }),
+  setAuthNumber: (input: string) => set({ authNumber: input }),
   setAgreement: (input: boolean) => set({ agreement: input }),
 }));
 

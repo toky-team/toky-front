@@ -16,7 +16,7 @@ export const Guide = style({
   fontSize: '1.375rem',
   fontWeight: 500,
   lineHeight: 1.2,
-  letterSpacing: '-0.055rem',
+  letterSpacing: '-0.04125rem',
   paddingLeft: '0.25rem',
 });
 
