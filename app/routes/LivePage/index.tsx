@@ -10,6 +10,7 @@ import ChatList from '@/domain/live/components/ChatList';
 import { SportsPathMap, type SportsPathType } from '@/lib/types';
 import ScoreBoard from '@/domain/live/components/ScoreBoard';
 import LiveMenu from '@/domain/live/components/LiveMenu';
+import ChatInput from '@/domain/live/components/ChatInput';
 
 const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
   // TODO: 전력 분석 페이지 구현
@@ -39,7 +40,7 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
       <ScoreBoard sport={sport} />
       <LiveMenu page={page} setPage={setPage} />
       <ChatList sport={sport} />
-      <button onClick={() => handleSendMessage('안녕')}>전송</button>
+      <ChatInput handleSendMessage={handleSendMessage} />
     </>
   );
 };
