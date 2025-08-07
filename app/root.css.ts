@@ -1,4 +1,4 @@
-import { createGlobalTheme, globalFontFace, globalStyle } from '@vanilla-extract/css';
+import { createGlobalTheme, globalFontFace, globalStyle, keyframes } from '@vanilla-extract/css';
 
 const spoqaHanSansNeo = 'SpoqaHanSansNeo-Regular';
 
@@ -54,5 +54,14 @@ export const vars = createGlobalTheme(':root', {
     blue: '#2948FF',
     'light-blue': '#5988FF',
     purple: '#4C0EB0',
+  },
+});
+
+export const spin = keyframes({
+  '0%': {
+    transform: 'rotate(0deg)',
+  },
+  '100%': {
+    transform: 'rotate(360deg)',
   },
 });
