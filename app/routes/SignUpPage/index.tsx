@@ -25,12 +25,15 @@ const SignUp = () => {
 
   const [progress, setProgress] = useState(0);
 
-  const { data: isAlreadySignup, isSuccess: isSuccessAuthCheck, isError: isErrorAuthCheck } = useGetAuthCheck();
+  const { data: authCheck, isSuccess: isSuccessAuthCheck, isLoading: isLoadingAuthCheck } = useGetAuthCheck();
   const { refetch: checkName } = useGetCheckName(formState.name);
   const { refetch: checkPhoneNumber } = useGetCheckPhoneNumber(formState.phoneNumber);
   const { mutate: signup } = usePostSignup();
   const { mutate: sendSMS } = usePostSendSMS();
   const { mutate: verifySMS } = usePostVerifySMS();
+
+  const isAlreadySignup = authCheck?.isSignup || false;
+  const isLogin = authCheck?.isLogin || false;
 
   useEffect(() => {
     // progress -> 캐러셀 동기화
@@ -51,11 +54,14 @@ const SignUp = () => {
   }, [api, progress]);
 
   useEffect(() => {
-    // TODO: 로그인을 아예 안한 사람은 login 페이지로 보내기
-    if ((isSuccessAuthCheck && isAlreadySignup) || isErrorAuthCheck) {
-      navigate('/');
+    if (isSuccessAuthCheck) {
+      if (isAlreadySignup) {
+        navigate('/', { replace: true });
+      } else if (!isLogin) {
+        navigate('/login', { replace: true });
+      }
     }
-  }, [isSuccessAuthCheck, isAlreadySignup, isErrorAuthCheck, navigate]);
+  }, [isSuccessAuthCheck, isAlreadySignup, isLogin, navigate]);
 
   const handlePrevButton = useCallback(() => {
     if (progress === 0) {
@@ -153,6 +159,8 @@ const SignUp = () => {
       }
     }
   };
+
+  if (isLoadingAuthCheck || isAlreadySignup) return null;
 
   return (
     <div className="h-full">

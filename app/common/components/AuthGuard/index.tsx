@@ -5,15 +5,17 @@ import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 
 const AuthGuard = () => {
   const navigate = useNavigate();
-  const { data: isAuthenticated, isSuccess, isLoading } = useGetAuthCheck();
+  const { data, isSuccess, isLoading } = useGetAuthCheck();
+
+  const isSignup = data?.isSignup || false;
 
   useEffect(() => {
-    if (isSuccess && !isAuthenticated) {
+    if (isSuccess && !isSignup) {
       navigate('/login', { replace: true });
     }
-  }, [isAuthenticated, isSuccess, navigate]);
+  }, [isSignup, isSuccess, navigate]);
 
-  if (isLoading || !isAuthenticated) return null;
+  if (isLoading || !isSignup) return null;
 
   return <Outlet />;
 };

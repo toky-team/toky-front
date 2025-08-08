@@ -8,7 +8,9 @@ import LoginButton from '@/domain/home/components/LoginButton';
 import * as s from './style.css';
 
 const MainTopBar = () => {
-  const { data: isLoggedIn, isLoading } = useGetAuthCheck();
+  const { data: authCheck, isLoading } = useGetAuthCheck();
+
+  const isLogin = authCheck?.isLogin || false;
 
   return (
     <div className={s.Container}>
@@ -16,7 +18,7 @@ const MainTopBar = () => {
         <Icon.TokyLogo />
       </Link>
       <div className={s.LeftArea}>
-        {!isLoading && (isLoggedIn ? <TicketInfo /> : <LoginButton />)}
+        {!isLoading && (isLogin ? <TicketInfo /> : <LoginButton />)}
         {/* TODO: Sidebar 구현 */}
         <button>
           <Icon.Hamburger />
