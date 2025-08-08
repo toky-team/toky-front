@@ -16,12 +16,14 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
   // TODO: 전력 분석 페이지 구현
   const [page, setPage] = useState<'chat' | 'analysis'>('chat');
   const sport = SportsPathMap[params.sports];
+  const [scrollTrigger, setScrollTrigger] = useState(0);
 
   const handleSendMessage = (message: string) => {
     chatSocket.emit('send_message', {
       message,
       sport,
     });
+    setScrollTrigger((prev) => prev + 1);
   };
 
   return (
@@ -39,7 +41,7 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
       <Player src="https://youtu.be/3Txsz8eq5KY?t=603" />
       <ScoreBoard sport={sport} />
       <LiveMenu page={page} setPage={setPage} />
-      <ChatList sport={sport} />
+      <ChatList sport={sport} scrollTrigger={scrollTrigger} />
       <ChatInput handleSendMessage={handleSendMessage} />
     </>
   );

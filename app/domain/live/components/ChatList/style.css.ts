@@ -5,7 +5,6 @@ export const Container = style({
   background: vars.color['bg-5'],
   overflowY: 'auto',
   height: '100%',
-  padding: '0.75rem',
   display: 'flex',
   flexDirection: 'column',
 });
@@ -34,4 +33,10 @@ export const LoadingSpinner = style({
   borderTop: '4px solid',
   borderTopColor: vars.color.red,
   animation: `${spin} 0.5s linear infinite`,
+});
+
+export const BottomRef = style({
+  height: '0.75rem',
+  width: '100%',
+  flexShrink: 0,
 });
