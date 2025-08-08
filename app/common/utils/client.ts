@@ -14,12 +14,7 @@ const client = axios.create({
 const responseErrorHandler = async (error: AxiosError<{ message: string }>) => {
   const { config, response } = error;
 
-  if (
-    response?.status === 401 &&
-    config &&
-    !REFRESH_WHITELIST_PATHS.includes(config.url as string) &&
-    response.data.message !== '사용자가 등록되지 않았습니다'
-  ) {
+  if (response?.status === 401 && config && !REFRESH_WHITELIST_PATHS.includes(config.url as string)) {
     try {
       await client.post('/auth/refresh');
       return client(config);
