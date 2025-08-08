@@ -6,6 +6,7 @@ export const Wrapper = style({
   padding: '0.625rem',
   borderTop: '1px solid rgba(255, 255, 255, 0.10)',
   background: vars.color['bg-5'],
+  flexShrink: 0,
 });
 
 export const Container = style({

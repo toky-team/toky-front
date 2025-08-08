@@ -1,11 +1,12 @@
+import { useCallback, useEffect, useRef } from 'react';
+
 import * as s from './style.css';
 
 import { useGetChatMessages } from '@/domain/live/apis/useGetChatMessages';
 import useIntersect from '@/common/hooks/useIntersect';
 import Chat from '@/domain/live/components/Chat';
 import type { SportType } from '@/lib/types';
-import { useSportSocketSocket } from '@/domain/live/hooks/useSportSocket';
-import { useCallback, useEffect, useRef } from 'react';
+import useSportSocket from '@/domain/live/hooks/useSportSocket';
 
 // TODO: 스크롤 관련 고치기!!!!
 // 1. 위로 올려서 페이지네이션 시에 스크롤 위치 저장했다가 유지하기
@@ -13,10 +14,11 @@ import { useCallback, useEffect, useRef } from 'react';
 // 3. 내가 메세지 보낼 때 하단으로 스크롤 스무스하게 이동 시켜주기
 interface Props {
   sport: SportType;
-  scrollTrigger: number;
 }
-const ChatList = ({ sport, scrollTrigger }: Props) => {
-  const newMessages = useSportSocketSocket(sport);
+const ChatList = ({ sport }: Props) => {
+  const newMessages = useSportSocket(sport);
+  // const { data: userInfo } = useGetUserInfo();
+  // const myId = userInfo?.id;
   const {
     data: oldMessages,
     fetchNextPage,
@@ -26,8 +28,8 @@ const ChatList = ({ sport, scrollTrigger }: Props) => {
   } = useGetChatMessages({ sport, limit: 20 });
   const messages = [...(oldMessages?.reverse() ?? []), ...newMessages];
   const scrollRef = useRef<HTMLDivElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
   const prevHeight = useRef(0);
+  const isMountedRef = useRef(false);
 
   const fetchNextRef = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target);
@@ -38,12 +40,32 @@ const ChatList = ({ sport, scrollTrigger }: Props) => {
   });
 
   useEffect(() => {
-    if (prevHeight.current > 0 && scrollRef.current && !isFetching) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight.current;
-    } else if (scrollRef.current) {
+    // 첫 방문시에 스크롤 위치 초기화
+    if (scrollRef.current && !isFetching && !isMountedRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      isMountedRef.current = true;
     }
   }, [isFetching]);
+
+  useEffect(() => {
+    // 페이지네이션시에 스크롤 보정
+    if (prevHeight.current > 0 && scrollRef.current && !isFetching) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight - prevHeight.current;
+    }
+  }, [isFetching]);
+
+  useEffect(() => {
+    if (newMessages.length > 0 && scrollRef.current) {
+      // if (newMessages[newMessages.length - 1].userId === myId) {
+      // 내가 새로운 메세지를 보낼 때
+      // 또는 새로운 메세지가 올 때 바닥에 있는 경우
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+      // }
+    }
+  }, [newMessages]);
 
   const Loader = useCallback(() => {
     if (!hasNextPage) return null;
@@ -64,7 +86,6 @@ const ChatList = ({ sport, scrollTrigger }: Props) => {
       {messages.map((message) => (
         <Chat key={message.id} nickname={message.username} message={message.content} />
       ))}
-      <div className={s.BottomRef} ref={bottomRef} />
     </div>
   );
 };

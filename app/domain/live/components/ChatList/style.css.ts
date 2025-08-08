@@ -4,13 +4,12 @@ import { style } from '@vanilla-extract/css';
 export const Container = style({
   background: vars.color['bg-5'],
   overflowY: 'auto',
-  height: '100%',
   display: 'flex',
   flexDirection: 'column',
+  flexGrow: 1,
 });
 
 export const Trigger = style({
-  height: '1px',
   width: '100%',
 });
 
@@ -33,10 +32,4 @@ export const LoadingSpinner = style({
   borderTop: '4px solid',
   borderTopColor: vars.color.red,
   animation: `${spin} 0.5s linear infinite`,
-});
-
-export const BottomRef = style({
-  height: '0.75rem',
-  width: '100%',
-  flexShrink: 0,
 });

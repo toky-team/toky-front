@@ -4,7 +4,7 @@ import type { ChatMessageInterface } from '@/lib/types/live';
 import { chatSocket } from '@/common/utils/socket';
 import type { SportType } from '@/lib/types';
 
-export const useSportSocketSocket = (sport: SportType) => {
+const useSportSocket = (sport: SportType) => {
   const [newMessages, setNewMessages] = useState<ChatMessageInterface[]>([]);
 
   useEffect(() => {
@@ -28,3 +28,5 @@ export const useSportSocketSocket = (sport: SportType) => {
 
   return newMessages;
 };
+
+export default useSportSocket;
