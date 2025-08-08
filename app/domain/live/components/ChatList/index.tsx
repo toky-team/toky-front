@@ -26,7 +26,7 @@ const ChatList = ({ sport }: Props) => {
     isFetching,
     isFetchingNextPage,
   } = useGetChatMessages({ sport, limit: 20 });
-  const messages = [...(oldMessages?.reverse() ?? []), ...newMessages];
+  const messages = [[...(oldMessages ?? [])].reverse(), ...newMessages].flat();
   const scrollRef = useRef<HTMLDivElement>(null);
   const prevHeight = useRef(0);
   const isMountedRef = useRef(false);
