@@ -10,8 +10,11 @@ const ChatInput = ({ handleSendMessage }: Props) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleSendMessage(input);
-    setInput('');
+    const trimmedInput = input.trim();
+    if (trimmedInput) {
+      handleSendMessage(trimmedInput);
+      setInput('');
+    }
   };
 
   return (
