@@ -8,5 +8,3 @@ export const LOCATION_MAP: Record<SportType, string> = {
   럭비: '고양 종합운동장',
   아이스하키: '목동아이스링크',
 };
-
-// export const TOTAL_SIGNUP_PROGRESS = 5;

@@ -3,7 +3,7 @@ import { motion, type Transition } from 'motion/react';
 import * as s from './style.css';
 import { useSignupForm } from '@/domain/signup/stores/SignupFormStore';
 
-const AnimatieTransition: Transition = {
+const AnimationTransition: Transition = {
   delay: 1,
   duration: 1,
 };
@@ -21,7 +21,7 @@ const Welcome = ({ curProgress }: Props) => {
       <motion.div
         initial={{ opacity: 1 }}
         animate={{ opacity: startAnimation ? 0 : 1 }}
-        transition={AnimatieTransition}
+        transition={AnimationTransition}
       >
         원래 이미지
         {/* <image className={s.Image} /> */}
@@ -29,7 +29,7 @@ const Welcome = ({ curProgress }: Props) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: startAnimation ? 1 : 0 }}
-        transition={AnimatieTransition}
+        transition={AnimationTransition}
       >
         환영합니다.
         <br />
