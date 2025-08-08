@@ -21,7 +21,7 @@ const ChatInput = ({ handleSendMessage }: Props) => {
     <form className={s.Wrapper} onSubmit={onSubmit}>
       <input
         className={s.Container}
-        placeholder="실시간 대화에 참여해보세요 "
+        placeholder="실시간 대화에 참여해보세요"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
