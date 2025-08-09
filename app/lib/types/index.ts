@@ -30,6 +30,14 @@ export const SportsPathMap = {
   hockey: '아이스하키',
 } as const;
 
+export const SportsToIndexMap: Record<SportType, number> = {
+  야구: 0,
+  축구: 1,
+  농구: 2,
+  럭비: 3,
+  아이스하키: 4,
+};
+
 export const UniversityArray = ['고려대학교', '연세대학교'] as const;
 
 export type SportType = (typeof SportArray)[number]['id'];
