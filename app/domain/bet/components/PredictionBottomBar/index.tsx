@@ -9,18 +9,35 @@ interface Props {
 }
 const PredictionBottomBar = ({ curSport, handleNav }: Props) => {
   const endIndex = SportArray.length - 1;
+
+  const canGoPrev = curSport !== SportArray[0].id;
+  const canGoNext = curSport !== SportArray[endIndex].id;
   return (
     <div className={s.Container}>
-      <button className={s.NavButton} onClick={() => handleNav(SportArray[SportsToIndexMap[curSport] - 1].id)}>
-        {curSport !== SportArray[0].id && (
+      <button
+        className={s.NavButton}
+        onClick={() => {
+          if (canGoPrev) {
+            handleNav(SportArray[SportsToIndexMap[curSport] - 1].id);
+          }
+        }}
+      >
+        {canGoPrev && (
           <>
             <Icon.SportNavArrow />
             {SportArray[SportsToIndexMap[curSport] - 1].value}
           </>
         )}
       </button>
-      <button className={s.NavButton} onClick={() => handleNav(SportArray[SportsToIndexMap[curSport] + 1].id)}>
-        {curSport !== SportArray[endIndex].id && (
+      <button
+        className={s.NavButton}
+        onClick={() => {
+          if (canGoNext) {
+            handleNav(SportArray[SportsToIndexMap[curSport] + 1].id);
+          }
+        }}
+      >
+        {canGoNext && (
           <>
             {SportArray[SportsToIndexMap[curSport] + 1].value}
             <Icon.SportNavArrow rotate={180} />
