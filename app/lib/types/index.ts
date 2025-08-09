@@ -1,16 +1,16 @@
 // TODO: value 값 정비
 export const SportArray = [
   {
+    id: '야구',
+    value: '야구',
+  },
+  {
     id: '축구',
     value: '축구',
   },
   {
     id: '농구',
     value: '농구',
-  },
-  {
-    id: '야구',
-    value: '야구',
   },
   {
     id: '럭비',
