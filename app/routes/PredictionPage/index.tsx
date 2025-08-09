@@ -1,8 +1,11 @@
 import MainTopBar from '@/common/components/MainTopBar';
 import NavBar from '@/common/components/NavBar';
+import PredictionBottomBar from '@/domain/bet/components/PredictionBottomBar';
+import PredictionContents from '@/domain/bet/components/PredictionContents';
 import SportNav from '@/domain/bet/components/SportNav';
 import type { SportType } from '@/lib/types';
 import { useSearchParams } from 'react-router';
+import * as s from './style.css';
 
 const PredictionPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,10 +16,12 @@ const PredictionPage = () => {
   };
 
   return (
-    <div>
+    <div className={s.Container}>
       <MainTopBar />
       <NavBar />
       <SportNav curSport={sport} setSport={setSport} />
+      <PredictionContents />
+      <PredictionBottomBar curSport={sport} handleNav={setSport} />
     </div>
   );
 };
