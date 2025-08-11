@@ -3,7 +3,7 @@ import LoginButton from "./LoginButton";
 
 const loginCardVariants = tv({
   slots: {
-    root: "flex flex-row p-5 justify-between bg-gradient-bg-5",
+    root: "flex flex-row w-full p-5 justify-between items-center rounded-lg [background:var(--color-background-5)]",
     description: "flex flex-col",
   },
 });
