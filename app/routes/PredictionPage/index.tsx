@@ -6,6 +6,7 @@ import SportNav from '@/domain/bet/components/SportNav';
 import type { SportType } from '@/lib/types';
 import { useSearchParams } from 'react-router';
 import * as s from './style.css';
+import Banner from '@/domain/bet/components/Banner';
 
 const PredictionPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,6 +20,7 @@ const PredictionPage = () => {
     <div className={s.Container}>
       <MainTopBar />
       <NavBar />
+      <Banner />
       <SportNav curSport={sport} setSport={setSport} />
       <PredictionContents />
       <PredictionBottomBar curSport={sport} handleNav={setSport} />
