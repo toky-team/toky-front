@@ -50,6 +50,11 @@ export const vars = createGlobalTheme(':root', {
     'light-blue': '#5988FF',
     purple: '#4C0EB0',
   },
+  zIndex: {
+    toast: '400',
+    modal: '300',
+    modalBackdrop: '299',
+  },
 });
 
 export const spin = keyframes({
