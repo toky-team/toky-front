@@ -86,6 +86,8 @@ const SignUp = () => {
         return formState.authNumber !== '';
       case 4:
         return formState.agreement;
+      case 5:
+        return true;
       default:
         return false;
     }
