@@ -4,6 +4,7 @@ import type { Route } from './+types/root';
 import './app.css';
 import '@/root.css';
 import QueryProvider from '@/common/utils/QueryProvider';
+import { OverlayProvider } from '@/common/utils/OverlayProvider';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -32,7 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="max-w-screen-sm mx-auto">
+      <body className="mx-auto max-w-screen-sm">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -44,7 +45,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <QueryProvider>
-      <Outlet />
+      <OverlayProvider>
+        <Outlet />
+      </OverlayProvider>
     </QueryProvider>
   );
 }
