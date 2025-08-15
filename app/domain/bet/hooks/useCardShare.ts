@@ -12,7 +12,7 @@ export type PredictionResult = 'KOREA' | 'YONSEI' | 'DRAW';
 
 export function useCardShare() {
   const queryClient = useQueryClient();
-  const [isDownloding, setIsDownloading] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const [isCanvasLoading, setIsCanvasLoading] = useState(true);
   const [isShareLoading, setIsShareLoading] = useState(false);
   const [canvasImageUrl, setCanvasImageUrl] = useState('');
@@ -21,7 +21,7 @@ export function useCardShare() {
   const { data: scoreData, isLoading: isFetchLoading } = useGetShareScore();
   const { mutate: postShare } = usePostShare();
   const imageRef = useRef(null);
-  const isLoading = isFetchLoading || isCanvasLoading || isDownloding || isShareLoading;
+  const isLoading = isFetchLoading || isCanvasLoading || isDownloading || isShareLoading;
 
   const predictionResult: PredictionResult | undefined = useMemo(() => {
     if (!scoreData) return undefined;
@@ -32,14 +32,14 @@ export function useCardShare() {
 
   const imgSrc = useMemo(() => {
     if (!predictionResult) return undefined;
-    const charaterSrcList =
+    const characterSrcList =
       predictionResult === 'KOREA'
         ? KOREA_WIN_IMAGE_LIST
         : predictionResult === 'YONSEI'
           ? YONSEI_WIN_IMAGE_LIST
           : DRAW_IMAGE_LIST;
-    const randomIndex = Math.floor(Math.random() * charaterSrcList.length);
-    return charaterSrcList[randomIndex];
+    const randomIndex = Math.floor(Math.random() * characterSrcList.length);
+    return characterSrcList[randomIndex];
   }, [predictionResult]);
 
   const shareRef = useRefEffect(
