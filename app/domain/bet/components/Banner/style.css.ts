@@ -11,7 +11,7 @@ export const Container = style({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '1.235rem',
+  gap: '1.23rem',
 });
 
 export const ButtonWrapper = style({

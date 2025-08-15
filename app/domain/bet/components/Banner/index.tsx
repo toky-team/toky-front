@@ -1,3 +1,5 @@
+import banner from '@/lib/assets/images/prediction-banner-title.svg';
+
 import * as s from './style.css';
 
 interface Props {
@@ -6,7 +8,7 @@ interface Props {
 const Banner = ({ openShareModal }: Props) => {
   return (
     <div className={s.Container}>
-      <div>배너배너</div>
+      <img src={banner} alt="banner" />
       <div className={s.ButtonWrapper}>
         <button className={s.ButtonStyle({ type: 'primary' })}>더 알아보기</button>
         <button className={s.ButtonStyle({ type: 'secondary' })} onClick={openShareModal}>
