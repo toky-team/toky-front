@@ -13,7 +13,7 @@ export const LoginText = style({
 export const ButtonContainer = style({
   display: 'flex',
   flexDirection: 'column',
-  position: 'fixed',
+  position: 'absolute',
   right: 0,
   bottom: 0,
   left: 0,
@@ -93,7 +93,7 @@ export const LoginButtonIcon = recipe({
 });
 
 export const BackgroundFilter = style({
-  position: 'fixed',
+  position: 'absolute',
   bottom: 0,
   left: 0,
   right: 0,
@@ -103,7 +103,7 @@ export const BackgroundFilter = style({
 });
 
 export const Background = style({
-  position: 'fixed',
+  position: 'absolute',
   bottom: 0,
   right: 0,
   left: 0,
