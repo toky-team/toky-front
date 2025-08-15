@@ -3,11 +3,11 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 const navBarVariants = tv({
   slots: {
-    root: "w-full bg-black border-b border-gray-800",
+    root: "w-full bg-black",
     container: "w-full max-w-screen-sm mx-auto",
-    tabsList: "w-full grid grid-cols-6 h-12",
-    tab: "flex items-center justify-center text-sm font-medium transition-colors relative",
-    activeIndicator: "absolute bottom-0 left-0 right-0 h-0.5 bg-white"
+    tabsList: "w-full flex flex-row justify-between h-12 px-5",
+    tab: "flex items-center justify-center text-base font-medium transition-colors relative px-1",
+    activeIndicator: "absolute bottom-0 left-0 right-0 h-0.5 rounded-t-lg bg-white-87"
   },
   variants: {
     active: {
@@ -15,7 +15,7 @@ const navBarVariants = tv({
         tab: "text-white"
       },
       false: {
-        tab: "text-gray-400 hover:text-gray-200"
+        tab: "text-white-disabled-38"
       }
     }
   },
