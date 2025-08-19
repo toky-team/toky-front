@@ -24,7 +24,7 @@ const PredictionPage = () => {
       <NavBar />
       <Banner openShareModal={openShareModal} />
       <SportNav curSport={sport} setSport={setSport} />
-      <PredictionContents />
+      <PredictionContents sport={sport} />
       <PredictionBottomBar curSport={sport} handleNav={setSport} />
     </div>
   );

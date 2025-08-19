@@ -9,6 +9,8 @@ import SportNavArrow from '@/lib/assets/icons/SportNavArrow';
 import Ticket from '@/lib/assets/icons/Ticket';
 import TokyLogo from '@/lib/assets/icons/TokyLogo';
 import { Divider } from '@/lib/assets/icons/Divider';
+import GoldenTicket from '@/lib/assets/icons/GoldenTicket';
+import Return from '@/lib/assets/icons/Return';
 
 const Icon = {
   TokyLogo,
@@ -22,6 +24,8 @@ const Icon = {
   Share,
   Cancel,
   Divider,
+  GoldenTicket,
+  Return,
 };
 
 export default Icon;
