@@ -5,8 +5,16 @@ const useGuideModal = () => {
   const overlay = useOverlay();
 
   const openModal = () => {
-    return new Promise<boolean>(() => {
-      overlay.open(({ isOpen, exit }) => <GuideModal isModalOpen={isOpen} onClose={exit} />);
+    return new Promise<boolean>((resolve) => {
+      overlay.open(({ isOpen, exit }) => (
+        <GuideModal
+          isModalOpen={isOpen}
+          onClose={() => {
+            exit();
+            resolve(true);
+          }}
+        />
+      ));
     });
   };
 
