@@ -7,7 +7,7 @@ interface KopasLoginRequest {
 }
 
 const postKopasLogin = async (request: KopasLoginRequest) => {
-  const response = await client.post('/auth/login/kopas', request);
+  const response = await client.post<{ isRegistered: boolean }>('/auth/login/kopas', request);
   return response.data;
 };
 

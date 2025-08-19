@@ -12,15 +12,22 @@ import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { data: isAuthenticated, isSuccess, isLoading } = useGetAuthCheck();
+  const { data: authCheck, isSuccess, isLoading } = useGetAuthCheck();
+
+  const isLogin = authCheck?.isLogin || false;
+  const isSignup = authCheck?.isSignup || false;
 
   useEffect(() => {
-    if (isSuccess && isAuthenticated) {
-      navigate(-1);
+    if (isSuccess) {
+      if (isSignup) {
+        navigate(-1);
+      } else if (isLogin) {
+        navigate('/signup');
+      }
     }
-  }, [isAuthenticated, isSuccess, navigate]);
+  }, [isLogin, isSignup, isSuccess, navigate]);
 
-  if (isLoading || isAuthenticated) return null;
+  if (isLoading || isLogin) return null;
 
   return (
     <>

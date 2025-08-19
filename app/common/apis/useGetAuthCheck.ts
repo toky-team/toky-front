@@ -4,16 +4,33 @@ import { isAxiosError } from 'axios';
 
 const getAuthCheck = async () => {
   try {
-    const response = await client.get('/auth/check');
-    if (response.status === 200) return true;
+    const response = await client.get<{ isRegistered: boolean }>('/auth/check');
+    if (response.status === 200) {
+      if (response.data.isRegistered) {
+        return {
+          isLogin: true,
+          isSignup: true,
+        };
+      }
+      return {
+        isLogin: true,
+        isSignup: false,
+      };
+    }
   } catch (error) {
     // TODO: 예외 없이 처리되는지 확인 필요
     if (isAxiosError(error) && error.status === 401) {
-      return false;
+      return {
+        isLogin: false,
+        isSignup: false,
+      };
     }
     return Promise.reject(error);
   }
-  return false;
+  return {
+    isLogin: false,
+    isSignup: false,
+  };
 };
 
 const useGetAuthCheck = () => {

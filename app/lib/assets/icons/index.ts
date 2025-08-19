@@ -1,4 +1,5 @@
 import ArrowBack from '@/lib/assets/icons/ArrowBack';
+import { Check } from '@/lib/assets/icons/Check';
 import DropdownArrow from '@/lib/assets/icons/DropdownArrow';
 import Hamburger from '@/lib/assets/icons/Hamburger';
 import KakaoLogo from '@/lib/assets/icons/KakaoLogo';
@@ -12,6 +13,7 @@ const Icon = {
   ArrowBack,
   Hamburger,
   DropdownArrow,
+  Check,
 };
 
 export default Icon;
