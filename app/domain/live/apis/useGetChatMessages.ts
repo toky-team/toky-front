@@ -27,5 +27,7 @@ export const useGetChatMessages = (params: GetChatMessagesRequest) => {
     initialPageParam: params.cursor,
     getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
     select: (data) => data.pages.flatMap((page) => page.items),
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 };
