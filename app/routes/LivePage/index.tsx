@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import * as s from './style.css';
 
@@ -11,11 +11,17 @@ import { SportsPathMap, type SportsPathType } from '@/lib/types';
 import ScoreBoard from '@/domain/live/components/ScoreBoard';
 import LiveMenu from '@/domain/live/components/LiveMenu';
 import ChatInput from '@/domain/live/components/ChatInput';
+import useGuideModal from '@/domain/live/hooks/useGuideModal';
 
 const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
   // TODO: 전력 분석 페이지 구현
   const [page, setPage] = useState<'chat' | 'analysis'>('chat');
   const sport = SportsPathMap[params.sports];
+  const { openModal } = useGuideModal();
+
+  useEffect(() => {
+    openModal();
+  }, [openModal]);
 
   const handleSendMessage = (message: string) => {
     chatSocket.emit('send_message', {
