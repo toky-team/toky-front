@@ -39,7 +39,6 @@ export const ScoreNumberContainer = style({
   letterSpacing: '-0.035rem',
   borderRadius: '0.625rem',
   background: 'rgba(255, 255, 255, 0.05)',
-  padding: '0 1.25rem',
   flex: '1 0 0',
 });
 

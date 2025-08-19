@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import * as s from './style.css';
 
@@ -15,11 +15,47 @@ interface Props {
   sport: SportType;
 }
 const PredictionContents = ({ sport }: Props) => {
-  const [isScorePrediction, setIsScorePrediction] = useState(false);
   const { data: myBet } = useGetMyBet(sport);
   const { mutate: postBet } = usePostBet();
 
   const betData: BetAnswer = myBet || { sport, predict: {}, player: { kuPlayerId: null, yuPlayerId: null } };
+
+  const canPredictScore = sport === '야구' || sport === '축구' || sport === '아이스하키';
+  const isScorePrediction = betData.predict.score !== undefined && betData.predict.score !== null && canPredictScore;
+
+  const changePredictionMode = () => {
+    if (isScorePrediction && betData.predict.score) {
+      const matchResult =
+        betData.predict.score.kuScore > betData.predict.score.yuScore
+          ? '고려대학교'
+          : betData.predict.score.kuScore < betData.predict.score.yuScore
+            ? '연세대학교'
+            : '무승부';
+      postBet({
+        ...betData,
+        predict: {
+          score: undefined,
+          matchResult,
+        },
+      });
+      return;
+    }
+
+    const newScore =
+      betData.predict.matchResult === '고려대학교'
+        ? { kuScore: 1, yuScore: 0 }
+        : betData.predict.matchResult === '연세대학교'
+          ? { kuScore: 0, yuScore: 1 }
+          : { kuScore: 0, yuScore: 0 };
+
+    postBet({
+      ...betData,
+      predict: {
+        matchResult: undefined,
+        score: newScore,
+      },
+    });
+  };
 
   const handleTeamPrediction = (team: UniversityType | '무승부') => {
     postBet({
@@ -31,6 +67,19 @@ const PredictionContents = ({ sport }: Props) => {
     });
   };
 
+  const handleScorePrediction = (
+    setScore: (prev: { kuScore: number; yuScore: number }) => { kuScore: number; yuScore: number },
+  ) => {
+    const newScore = setScore(betData.predict.score || { kuScore: 0, yuScore: 0 });
+    postBet({
+      ...betData,
+      predict: {
+        score: newScore,
+        matchResult: undefined,
+      },
+    });
+  };
+
   return (
     <div className={s.Container}>
       <div className={s.Wrapper}>
@@ -38,21 +87,23 @@ const PredictionContents = ({ sport }: Props) => {
           {isScorePrediction ? '최종 점수를 예측해주세요' : '우승할 팀을 예측해주세요'}
         </h2>
         {isScorePrediction ? (
-          <ScorePrediction />
+          <ScorePrediction betData={betData} handleScorePrediction={handleScorePrediction} />
         ) : (
           <TeamPrediction sport={sport} betData={betData} handleTeamPrediction={handleTeamPrediction} />
         )}
-        <button className={s.MoreButton({ isScorePrediction })} onClick={() => setIsScorePrediction((prev) => !prev)}>
-          {isScorePrediction ? (
-            <Icon.Return />
-          ) : (
-            <span className={s.MoreTicketText}>
-              <Icon.GoldenTicket />
-              추가 응모권
-            </span>
-          )}
-          {isScorePrediction ? '우승팀만 예측할래요' : '점수까지 예측해볼래요'}
-        </button>
+        {canPredictScore && (
+          <button className={s.MoreButton({ isScorePrediction })} onClick={changePredictionMode}>
+            {isScorePrediction ? (
+              <Icon.Return />
+            ) : (
+              <span className={s.MoreTicketText}>
+                <Icon.GoldenTicket />
+                추가 응모권
+              </span>
+            )}
+            {isScorePrediction ? '우승팀만 예측할래요' : '점수까지 예측해볼래요'}
+          </button>
+        )}
       </div>
       <div className={s.Wrapper}>
         <h2 className={s.QuestionTitle}>{PREDICTION_QUESTION[sport]}</h2>
