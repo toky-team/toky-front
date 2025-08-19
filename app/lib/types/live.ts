@@ -9,3 +9,11 @@ export interface ChatMessageInterface {
   sport: SportType;
   createdAt: string;
 }
+
+export interface CheerUpInterface {
+  sport: SportType;
+  KULike: number;
+  YULike: number;
+  createdAt: string;
+  updatedAt: string;
+}

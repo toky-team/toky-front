@@ -46,7 +46,7 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
       <ScoreBoard sport={sport} />
       <LiveMenu page={page} setPage={setPage} />
       <ChatList sport={sport} />
-      <ChatInput handleSendMessage={handleSendMessage} />
+      <ChatInput sport={sport} handleSendMessage={handleSendMessage} />
     </>
   );
 };
