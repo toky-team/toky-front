@@ -1,10 +1,11 @@
 import { useOverlay } from '@/common/hooks/useOverlay';
 import GuideModal from '@/domain/live/components/GuideModal';
+import { useCallback } from 'react';
 
 const useGuideModal = () => {
   const overlay = useOverlay();
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     return new Promise<boolean>((resolve) => {
       overlay.open(({ isOpen, exit }) => (
         <GuideModal
@@ -16,7 +17,7 @@ const useGuideModal = () => {
         />
       ));
     });
-  };
+  }, [overlay]);
 
   return { openModal };
 };

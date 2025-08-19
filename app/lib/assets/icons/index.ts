@@ -9,6 +9,7 @@ import SportNavArrow from '@/lib/assets/icons/SportNavArrow';
 import Ticket from '@/lib/assets/icons/Ticket';
 import TokyLogo from '@/lib/assets/icons/TokyLogo';
 import { Divider } from '@/lib/assets/icons/Divider';
+import Heart from '@/lib/assets/icons/Heart';
 
 const Icon = {
   TokyLogo,
@@ -22,6 +23,7 @@ const Icon = {
   Share,
   Cancel,
   Divider,
+  Heart,
 };
 
 export default Icon;

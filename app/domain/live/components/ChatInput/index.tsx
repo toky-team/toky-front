@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import * as s from './style.css';
+import CheerUp from '@/domain/live/components/CheerUp';
 
 interface Props {
   handleSendMessage: (message: string) => void;
@@ -25,6 +26,7 @@ const ChatInput = ({ handleSendMessage }: Props) => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
+      <CheerUp />
     </form>
   );
 };
