@@ -35,10 +35,10 @@ const OptionButton = ({ value, text, position, handleClick, percentage, myAnswer
           <>
             {text}
             {(isAnswered || hasRealAnswer) && (
-              <p>
-                <span>{percentage}</span>
-                <span>%</span>
-              </p>
+              <div className={s.PercentageWrapper({ isMyAnswer })}>
+                <span className={s.PercentageNumber({ isMyAnswer })}>{percentage}</span>
+                <span className={s.PercentageText}>%</span>
+              </div>
             )}
           </>
         )}

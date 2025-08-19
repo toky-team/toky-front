@@ -134,3 +134,48 @@ export const StickerWrapper = style({
   left: '50%',
   transform: 'translate3d(-50%, -48.5%, 0)',
 });
+
+export const PercentageWrapper = recipe({
+  base: {
+    display: 'flex',
+    gap: '0.125rem',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    fontWeight: 700,
+  },
+  variants: {
+    isMyAnswer: {
+      true: {
+        color: vars.color.white,
+      },
+      false: {
+        color: '#3C3C3C',
+      },
+    },
+  },
+});
+
+export const PercentageNumber = recipe({
+  base: {
+    fontSize: '1.875rem',
+    WebkitTextStrokeWidth: '0.5px',
+    letterSpacing: '-0.1875rem',
+    lineHeight: 1.2,
+  },
+  variants: {
+    isMyAnswer: {
+      true: {
+        WebkitTextStrokeColor: vars.color.white,
+      },
+      false: {
+        WebkitTextStrokeColor: '#3C3C3C',
+      },
+    },
+  },
+});
+
+export const PercentageText = style({
+  height: '1.75rem',
+  letterSpacing: '-0.045rem',
+  fontSize: '0.75rem',
+});
