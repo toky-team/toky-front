@@ -7,6 +7,7 @@ import type { SportType } from '@/lib/types';
 import { useSearchParams } from 'react-router';
 import * as s from './style.css';
 import Banner from '@/domain/bet/components/Banner';
+import { useShareModal } from '@/domain/bet/hooks/useShareModal';
 
 const PredictionPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,12 +16,13 @@ const PredictionPage = () => {
     searchParams.set('sport', sport);
     setSearchParams(searchParams);
   };
+  const { openShareModal } = useShareModal();
 
   return (
     <div className={s.Container}>
       <MainTopBar />
       <NavBar />
-      <Banner />
+      <Banner openShareModal={openShareModal} />
       <SportNav curSport={sport} setSport={setSport} />
       <PredictionContents />
       <PredictionBottomBar curSport={sport} handleNav={setSport} />
