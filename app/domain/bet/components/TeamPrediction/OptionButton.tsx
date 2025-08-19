@@ -1,6 +1,9 @@
-import type { UniversityType } from '@/lib/types';
 import { motion } from 'motion/react';
+
 import * as s from './style.css';
+
+import type { UniversityType } from '@/lib/types';
+import Icon from '@/lib/assets/icons';
 
 const motionVariant = { visible: { opacity: 1 }, hidden: { opacity: 0 } };
 
@@ -22,7 +25,11 @@ const OptionButton = ({ value, text, position, handleClick, percentage, myAnswer
 
   return (
     <div className={s.ButtonContainer}>
-      {isCorrect && <div className={s.StickerWrapper}>{/* TODO: 정답 아이콘 */}</div>}
+      {isCorrect && (
+        <div className={s.StickerWrapper}>
+          <Icon.Hit />
+        </div>
+      )}
       <button
         key={value}
         className={s.BetButton({ position, isAnswered, isMyAnswer })}

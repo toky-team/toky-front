@@ -11,6 +11,7 @@ import TokyLogo from '@/lib/assets/icons/TokyLogo';
 import { Divider } from '@/lib/assets/icons/Divider';
 import GoldenTicket from '@/lib/assets/icons/GoldenTicket';
 import Return from '@/lib/assets/icons/Return';
+import { Hit } from '@/lib/assets/icons/Hit';
 
 const Icon = {
   TokyLogo,
@@ -26,6 +27,7 @@ const Icon = {
   Divider,
   GoldenTicket,
   Return,
+  Hit,
 };
 
 export default Icon;
