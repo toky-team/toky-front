@@ -36,20 +36,76 @@ export const SelectedPlayerView = recipe({
     border: '1px solid',
 
     transition: 'all 0.2s ease-in-out',
+    position: 'relative',
+    overflow: 'hidden',
   },
   variants: {
     status: {
       default: {
         borderColor: 'transparent',
         background: vars.color['bg-10'],
+        opacity: 0.5,
       },
       selecting: {
         borderColor: vars.color['white-38'],
         background: 'linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.15) 100%)',
       },
-      selected: {},
+      selected: {
+        borderColor: 'transparent',
+      },
+    },
+    university: {
+      고려대학교: {},
+      연세대학교: {},
     },
   },
+  compoundVariants: [
+    {
+      variants: {
+        status: 'selected',
+        university: '고려대학교',
+      },
+      style: {
+        background: 'linear-gradient(180deg, rgba(243, 35, 60, 0.30) 0%, rgba(243, 35, 60, 0.15) 100%)',
+      },
+    },
+    {
+      variants: {
+        status: 'selected',
+        university: '연세대학교',
+      },
+      style: {
+        background: 'linear-gradient(0deg, rgba(41, 72, 255, 0.15) 0%, rgba(41, 72, 255, 0.30) 100%)',
+      },
+    },
+  ],
+});
+
+export const SelectedPlayerViewText = style({
+  display: 'flex',
+  flexDirection: 'column',
+  color: vars.color['white-60'],
+  fontSize: '0.875rem',
+  fontWeight: 400,
+  lineHeight: 1.5,
+  letterSpacing: '-0.035rem',
+  zIndex: 10,
+  position: 'absolute',
+  top: '0.75rem',
+  left: '0.75rem',
+  alignItems: 'flex-start',
+});
+export const SelectedPlayerViewName = style({
+  color: vars.color['white-87'],
+  fontSize: '1rem',
+  fontWeight: 500,
+  letterSpacing: '-0.04rem',
+});
+export const SelectedPlayerViewImage = style({
+  position: 'absolute',
+  bottom: 0,
+  right: 0,
+  maxWidth: '8rem',
 });
 
 export const UnivTitle = style({
@@ -103,6 +159,17 @@ export const PlayerItemContainer = style({
   flexDirection: 'column',
 });
 
+export const PlayerImageClipper = style({
+  overflow: 'hidden',
+  borderRadius: '0.625rem',
+  flexGrow: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-end',
+  alignItems: 'stretch',
+  width: '100%',
+});
+
 export const PlayerItemImage = recipe({
   base: {
     position: 'relative',
@@ -111,10 +178,31 @@ export const PlayerItemImage = recipe({
     justifyContent: 'center',
     height: '3rem',
     flexShrink: 0,
-    background: vars.color['white-15'],
     borderRadius: '0.625rem',
     color: vars.color['white-87'],
+
+    border: '1px solid',
+    transition: 'all 0.2s ease-in-out',
   },
+  variants: {
+    isSelected: {
+      true: {
+        borderColor: vars.color.white,
+        background: vars.color['white-38'],
+      },
+      false: {
+        borderColor: 'transparent',
+        background: vars.color['white-15'],
+      },
+    },
+  },
+});
+
+export const PlayerImage = style({
+  position: 'absolute',
+  right: 0,
+  bottom: 0,
+  maxHeight: '3.875rem',
 });
 
 export const PlayerItemText = recipe({
@@ -138,4 +226,12 @@ export const PlayerItemText = recipe({
       },
     },
   },
+});
+
+export const PositionStyle = style({
+  color: vars.color['white-60'],
+  fontSize: '0.75rem',
+  fontWeight: 400,
+  lineHeight: 1.5,
+  letterSpacing: '-0.03rem',
 });

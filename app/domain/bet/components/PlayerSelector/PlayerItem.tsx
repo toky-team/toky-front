@@ -1,29 +1,34 @@
+import type { PlayerInterface } from '@/lib/types/player';
 import * as s from './style.css';
 
 import Icon from '@/lib/assets/icons';
 
 interface Props {
-  playerInfo?: {
-    name: string;
-  };
+  player?: PlayerInterface;
+  onClick: () => void;
+  isSelected: boolean;
 }
-const PlayerItem = ({ playerInfo }: Props) => {
-  const isPlayer = !!playerInfo;
+const PlayerItem = ({ player, isSelected, onClick }: Props) => {
+  const isPlayer = !!player;
   return (
-    <div className={s.PlayerItemContainer}>
-      <div className={s.PlayerItemImage()}>{isPlayer ? <img /> : <Icon.Ban />}</div>
+    <button className={s.PlayerItemContainer} onClick={onClick}>
+      <div className={s.PlayerImageClipper}>
+        <div className={s.PlayerItemImage({ isSelected })}>
+          {isPlayer ? <img className={s.PlayerImage} src={player.imageUrl} /> : <Icon.Ban />}
+        </div>
+      </div>
       <div className={s.PlayerItemText({ isPlayer })}>
         {isPlayer ? (
           <>
-            <p>{playerInfo.name}</p>
-            <p>포지션</p>
+            <p className={s.PositionStyle}>{player.position}</p>
+            <p>{player.name}</p>
           </>
         ) : (
           // TODO: 스포츠마다 워딩 바꿔야 할 듯
           <p>득점 없음</p>
         )}
       </div>
-    </div>
+    </button>
   );
 };
 export default PlayerItem;

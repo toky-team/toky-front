@@ -114,7 +114,7 @@ const PredictionContents = ({ sport }: Props) => {
       </div>
       <div className={s.Wrapper}>
         <h2 className={s.QuestionTitle}>{PREDICTION_QUESTION[sport]}</h2>
-        <PlayerSelector />
+        <PlayerSelector sport={sport} />
       </div>
     </div>
   );
