@@ -25,8 +25,8 @@ export function useCardShare() {
 
   const predictionResult: PredictionResult | undefined = useMemo(() => {
     if (!scoreData) return undefined;
-    if (scoreData.numWinKorea > scoreData.numWinYonsei) return 'KOREA';
-    if (scoreData.numWinKorea < scoreData.numWinYonsei) return 'YONSEI';
+    if (scoreData.kuScore > scoreData.yuScore) return 'KOREA';
+    if (scoreData.kuScore < scoreData.yuScore) return 'YONSEI';
     return 'DRAW';
   }, [scoreData]);
 
@@ -51,7 +51,6 @@ export function useCardShare() {
   );
 
   const openShareSuccessToast = () => {
-    // TODO : 공유 성공 토스트
     queryClient.setQueryData(['ticket-count'], (old: number) => old + 1);
     openToast({ message: `응모권 1장 획득!` });
   };

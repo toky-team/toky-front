@@ -1,8 +1,9 @@
+import client from '@/common/utils/client';
 import { useMutation } from '@tanstack/react-query';
 
-// TODO
 const postShare = async () => {
-  return {};
+  const response = await client.post('/bet-answer/share');
+  return response.data;
 };
 
 export const usePostShare = () => {

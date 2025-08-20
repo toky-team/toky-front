@@ -33,8 +33,8 @@ export function ShareModal({ isModalOpen = true, onClose }: ShareModalProps) {
                 src={imgSrc}
                 predictionResult={predictionResult}
                 nickname={userInfo.name}
-                numWinKorea={scoreData.numWinKorea}
-                numWinYonsei={scoreData.numWinYonsei}
+                numWinKorea={scoreData.kuScore}
+                numWinYonsei={scoreData.yuScore}
               />
             </div>
             <div className={s.ContentWrapper}>

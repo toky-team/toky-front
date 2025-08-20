@@ -1,4 +1,3 @@
-// TODO: value 값 정비
 export const SportArray = [
   {
     id: '야구',
