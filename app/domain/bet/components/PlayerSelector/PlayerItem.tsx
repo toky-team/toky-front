@@ -14,7 +14,20 @@ const PlayerItem = ({ player, isSelected, onClick }: Props) => {
     <button className={s.PlayerItemContainer} onClick={onClick}>
       <div className={s.PlayerImageClipper}>
         <div className={s.PlayerItemImage({ isSelected })}>
-          {isPlayer ? <img className={s.PlayerImage} src={player.imageUrl} /> : <Icon.Ban />}
+          {isPlayer ? (
+            <>
+              {isSelected ? (
+                <div className={s.CheckIcon}>
+                  <Icon.CheckCircle />
+                </div>
+              ) : (
+                <div className={s.BackNumber}>{player.backNumber}</div>
+              )}
+              <img className={s.PlayerImage} src={player.imageUrl} />
+            </>
+          ) : (
+            <Icon.Ban />
+          )}
         </div>
       </div>
       <div className={s.PlayerItemText({ isPlayer })}>
