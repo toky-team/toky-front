@@ -23,6 +23,7 @@ const useSportSocket = (sport: SportType) => {
     return () => {
       chatSocket.off('receive_message', onReceiveMessage);
       chatSocket.off('connect_error', onConnectError);
+      chatSocket.emit('leave_room', { sport });
     };
   }, [sport]);
 

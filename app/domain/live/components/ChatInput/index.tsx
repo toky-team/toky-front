@@ -2,10 +2,14 @@ import { useState } from 'react';
 
 import * as s from './style.css';
 
+import CheerUp from '@/domain/live/components/CheerUp';
+import type { SportType } from '@/lib/types';
+
 interface Props {
+  sport: SportType;
   handleSendMessage: (message: string) => void;
 }
-const ChatInput = ({ handleSendMessage }: Props) => {
+const ChatInput = ({ sport, handleSendMessage }: Props) => {
   const [input, setInput] = useState('');
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,6 +29,7 @@ const ChatInput = ({ handleSendMessage }: Props) => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
+      <CheerUp sport={sport} />
     </form>
   );
 };
