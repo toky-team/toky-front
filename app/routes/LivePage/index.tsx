@@ -13,6 +13,7 @@ import LiveMenu from '@/domain/live/components/LiveMenu';
 import ChatInput from '@/domain/live/components/ChatInput';
 import useGuideModal from '@/domain/live/hooks/useGuideModal';
 import { useGetLiveUrl } from '@/domain/live/apis/useGetLiveUrl';
+import { FALLBACK_LIVE_URL } from '@/lib/constants';
 
 const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
   // TODO: 전력 분석 페이지 구현
@@ -22,7 +23,7 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
   const { data: rawUrls } = useGetLiveUrl();
   const liveUrls = rawUrls?.filter((url) => url.sport === sport);
   // TODO: 여러 라이브 주소 변경 가능하도록
-  const liveUrl = liveUrls?.[0]?.url || 'https://youtu.be/3Txsz8eq5KY?t=603';
+  const liveUrl = liveUrls?.[0]?.url || FALLBACK_LIVE_URL;
 
   useEffect(() => {
     openModal();
