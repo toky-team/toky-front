@@ -2,13 +2,16 @@ import type { PlayerInterface } from '@/lib/types/player';
 import * as s from './style.css';
 
 import Icon from '@/lib/assets/icons';
+import getNoPlayerSelectText from '@/domain/bet/utils/getNoPlayerSelectText';
+import type { SportType } from '@/lib/types';
 
 interface Props {
+  sport: SportType;
   player?: PlayerInterface;
   onClick: () => void;
   isSelected: boolean;
 }
-const PlayerItem = ({ player, isSelected, onClick }: Props) => {
+const PlayerItem = ({ sport, player, isSelected, onClick }: Props) => {
   const isPlayer = !!player;
   return (
     <button className={s.PlayerItemContainer} onClick={onClick}>
@@ -38,7 +41,7 @@ const PlayerItem = ({ player, isSelected, onClick }: Props) => {
           </>
         ) : (
           // TODO: 스포츠마다 워딩 바꿔야 할 듯
-          <p>득점 없음</p>
+          <p>{getNoPlayerSelectText(sport)}</p>
         )}
       </div>
     </button>
