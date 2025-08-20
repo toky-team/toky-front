@@ -7,6 +7,7 @@ export const Wrapper = style({
   borderTop: '1px solid rgba(255, 255, 255, 0.10)',
   background: vars.color['bg-5'],
   flexShrink: 0,
+  position: 'relative',
 });
 
 export const Container = style({

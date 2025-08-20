@@ -14,6 +14,7 @@ import Return from '@/lib/assets/icons/Return';
 import { Hit } from '@/lib/assets/icons/Hit';
 import Plus from '@/lib/assets/icons/Plus';
 import Minus from '@/lib/assets/icons/Minus';
+import Heart from '@/lib/assets/icons/Heart';
 
 const Icon = {
   TokyLogo,
@@ -32,6 +33,7 @@ const Icon = {
   Hit,
   Plus,
   Minus,
+  Heart,
 };
 
 export default Icon;

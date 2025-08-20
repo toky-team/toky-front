@@ -30,6 +30,6 @@ export const LoadingSpinner = style({
   alignSelf: 'center',
   border: '4px solid #f3f3f3',
   borderTop: '4px solid',
-  borderTopColor: vars.color.red,
+  borderTopColor: vars.color.purple,
   animation: `${spin} 0.5s linear infinite`,
 });
