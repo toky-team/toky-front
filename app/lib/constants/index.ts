@@ -17,3 +17,6 @@ export const PREV_SCORE_MAP: Record<SportType, string> = {
   럭비: '8:6',
   아이스하키: '1:1',
 };
+
+// TODO: 라이브 주소 추가
+export const FALLBACK_LIVE_URL = 'https://youtu.be/3Txsz8eq5KY?t=603';
