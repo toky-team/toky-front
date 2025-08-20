@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-
 import * as s from './style.css';
 
-import { PREDICTION_QUESTION } from '@/domain/bet/constants';
+import { DEFAULT_BET_DATA, PREDICTION_QUESTION } from '@/domain/bet/constants';
 import type { SportType, UniversityType } from '@/lib/types';
 import Icon from '@/lib/assets/icons';
 import PlayerSelector from '@/domain/bet/components/PlayerSelector';
@@ -18,13 +16,15 @@ const PredictionContents = ({ sport }: Props) => {
   const { data: myBet, isLoading } = useGetMyBet(sport);
   const { mutate: postBet } = usePostBet();
 
-  const betData: BetAnswer = myBet || { sport, predict: {}, player: { kuPlayerId: null, yuPlayerId: null } };
+  const betData: BetAnswer = myBet || DEFAULT_BET_DATA(sport);
 
   const canPredictScore = sport === '야구' || sport === '축구' || sport === '아이스하키';
   const isScorePrediction = betData.predict.score !== undefined && betData.predict.score !== null && canPredictScore;
 
   const changePredictionMode = () => {
     if (isScorePrediction && betData.predict.score) {
+      // 점수 예측 -> 우승팀 예측으로 변경
+      // 점수 예측 데이터에 맞추어 우승팀 예측을 만들어주고, 점수 예측 데이터를 삭제
       const matchResult =
         betData.predict.score.kuScore > betData.predict.score.yuScore
           ? '고려대학교'
@@ -41,6 +41,8 @@ const PredictionContents = ({ sport }: Props) => {
       return;
     }
 
+    // 우승팀 예측 -> 점수 예측으로 변경
+    // 우승팀 예측 데이터에 맞추어 점수 예측을 만들어주고 (1 : 0), 우승팀 예측 데이터를 삭제
     const newScore =
       betData.predict.matchResult === '고려대학교'
         ? { kuScore: 1, yuScore: 0 }
