@@ -292,6 +292,11 @@ export const PlayerButton = recipe({
         flex: '1 0 0',
         color: vars.color.white,
       },
+      noPlayerSelect: {
+        width: '100%',
+        color: vars.color['bg-0'],
+        background: vars.color.white,
+      },
     },
     status: {
       고려대학교: {},
