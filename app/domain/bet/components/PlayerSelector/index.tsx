@@ -1,61 +1,65 @@
 import { useState } from 'react';
 import * as s from './style.css';
-import type { UniversityType } from '@/lib/types';
+import type { SportType, UniversityType } from '@/lib/types';
 import { ChevronRight } from 'lucide-react';
 import PlayerItem from '@/domain/bet/components/PlayerSelector/PlayerItem';
+import { useGetPlayer } from '@/common/apis/useGetPlayer';
+import type { PlayerInterface } from '@/lib/types/player';
+import SelectedPlayerView from '@/domain/bet/components/PlayerSelector/SelectedPlayerView';
 
-type StatusType = null | UniversityType;
-
-const PlayerSelector = () => {
-  const [status, setStatus] = useState<StatusType>(null);
+interface Props {
+  sport: SportType;
+}
+const PlayerSelector = ({ sport }: Props) => {
+  const [status, setStatus] = useState<UniversityType | null>(null);
+  const { data } = useGetPlayer(sport, status || '고려대학교');
+  const [kuSelectedPlayer, setKUSelectedPlayer] = useState<PlayerInterface | null>(null);
+  const [yuSelectedPlayer, setYuSelectedPlayer] = useState<PlayerInterface | null>(null);
 
   return (
     <div className={s.Wrapper}>
       <div className={s.Container}>
-        <button
-          className={s.SelectedPlayerView({ status: status === '고려대학교' ? 'selecting' : 'default' })}
+        <SelectedPlayerView
+          university="고려대학교"
+          status={status}
+          selectedPlayer={kuSelectedPlayer}
           onClick={() => setStatus('고려대학교')}
-        >
-          <p className={s.UnivTitle}>고려대학교</p>
-          선수보기
-        </button>
-        <button
-          className={s.SelectedPlayerView({
-            status: status === '연세대학교' ? 'selecting' : 'default',
-          })}
+        />
+        <SelectedPlayerView
+          university="연세대학교"
+          status={status}
+          selectedPlayer={yuSelectedPlayer}
           onClick={() => setStatus('연세대학교')}
-        >
-          <p className={s.UnivTitle}>연세대학교</p>
-          선수보기
-        </button>
+        />
       </div>
-      {status !== null && (
-        <div className={s.PlayerContainer}>
-          <div className={s.PlayerContainerHeader}>
-            <h2>{status} 선수</h2>
-            <button className={s.MoreButton}>
-              자세히보기 <ChevronRight size={18} />
-            </button>
-          </div>
-          <div className={s.PlayerList}>
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-            <PlayerItem />
-          </div>
-        </div>
-      )}
+      {status !== null &&
+        (() => {
+          const selectedPlayer = status === '고려대학교' ? kuSelectedPlayer : yuSelectedPlayer;
+          const setSelectedPlayer = status === '고려대학교' ? setKUSelectedPlayer : setYuSelectedPlayer;
+          return (
+            <div className={s.PlayerContainer}>
+              <div className={s.PlayerContainerHeader}>
+                <h2>{status} 선수</h2>
+                {/* TODO: 선수 페이지 보내기 */}
+                <button className={s.MoreButton}>
+                  자세히보기 <ChevronRight size={18} />
+                </button>
+              </div>
+              <div className={s.PlayerList}>
+                {/* TODO: 캐러셀 적용 */}
+                <PlayerItem isSelected={selectedPlayer === null} onClick={() => setSelectedPlayer(null)} />
+                {data?.map((player) => (
+                  <PlayerItem
+                    key={player.id}
+                    player={player}
+                    isSelected={selectedPlayer?.id === player.id}
+                    onClick={() => setSelectedPlayer(player)}
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        })()}
     </div>
   );
 };
