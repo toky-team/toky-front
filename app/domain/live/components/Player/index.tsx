@@ -13,15 +13,9 @@ const Player = ({ src }: Props) => {
    * Each child in a list should have a unique "key" prop.
    */
   return (
-    <ReactPlayer
-      className={s.Container}
-      src={src}
-      style={{
-        width: '100%',
-        height: 'auto',
-        aspectRatio: '16/9',
-      }}
-    />
+    <div className={s.Wrapper}>
+      <ReactPlayer className={s.Container} src={src} width="100%" height="100%" />
+    </div>
   );
 };
 export default Player;

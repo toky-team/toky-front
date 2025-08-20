@@ -2,8 +2,8 @@ import { vars } from '@/root.css';
 import { style } from '@vanilla-extract/css';
 
 export const Container = style({
-  width: '100vw',
-  height: '100vh',
+  width: '100%',
+  height: '100%',
   background: 'linear-gradient(180deg, rgba(249, 91, 110, 0.00) 0%, rgba(249, 91, 110, 0.10) 100%), #FFF',
   display: 'flex',
   flexDirection: 'column',
@@ -50,7 +50,7 @@ export const SignUpLink = style({
 });
 
 export const Copyright = style({
-  position: 'fixed',
+  position: 'absolute',
   bottom: '1.875rem',
   left: '50%',
   transform: 'translate3d(-50%, 0, 0)',

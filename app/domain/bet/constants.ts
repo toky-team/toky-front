@@ -1,0 +1,53 @@
+import type { BetAnswer } from '@/domain/bet/apis/usePostBet';
+import type { SportType } from '@/lib/types';
+
+// TODO: 이미지 경로 수정 필요
+export const KOREA_WIN_IMAGE_LIST = [
+  '/image-proxy/card/korea1.png',
+  '/image-proxy/card/korea2.png',
+  '/image-proxy/card/korea3.png',
+  '/image-proxy/card/korea4.png',
+  '/image-proxy/card/korea5.png',
+  '/image-proxy/card/korea6v2.png',
+  '/image-proxy/card/korea7v2.png',
+  '/image-proxy/card/korea8v2.png',
+  '/image-proxy/card/korea9v2.png',
+  '/image-proxy/card/korea10.png',
+  '/image-proxy/card/korea11.png',
+  '/image-proxy/card/korea12.png',
+];
+
+export const YONSEI_WIN_IMAGE_LIST = [
+  '/image-proxy/card/yonsei1.png',
+  '/image-proxy/card/yonsei2.png',
+  '/image-proxy/card/yonsei3.png',
+  '/image-proxy/card/yonsei4.png',
+  '/image-proxy/card/yonsei5.png',
+  '/image-proxy/card/yonsei6.png',
+  '/image-proxy/card/yonsei7.png',
+  '/image-proxy/card/yonsei8.png',
+  '/image-proxy/card/yonsei9v3.png',
+  '/image-proxy/card/yonsei10.png',
+  '/image-proxy/card/yonsei11.png',
+  '/image-proxy/card/yonsei12.png',
+];
+
+export const DRAW_IMAGE_LIST = [
+  '/image-proxy/card/draw1.png',
+  '/image-proxy/card/draw2.png',
+  '/image-proxy/card/draw3.png',
+];
+
+export const PREDICTION_QUESTION: Record<SportType, string> = {
+  야구: '안타를 칠 선수를 예측해주세요',
+  축구: '골을 넣을 선수를 예측해주세요',
+  농구: '총 득점이 가장 많을 MVP 선수를 예측해주세요',
+  럭비: '총 득점이 가장 많을 MVP 선수를 예측해주세요',
+  아이스하키: '총 득점이 가장 많을 MVP 선수를 예측해주세요',
+};
+
+export const DEFAULT_BET_DATA = (sport: SportType): BetAnswer => ({
+  sport,
+  predict: {},
+  player: { kuPlayerId: null, yuPlayerId: null },
+});

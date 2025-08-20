@@ -1,46 +1,19 @@
-import type { SportType } from '@/lib/types';
 import * as s from './style.css';
+
+import type { SportType } from '@/lib/types';
 import { LOCATION_MAP } from '@/lib/constants';
-import { useEffect, useState } from 'react';
-import { scoreSocket } from '@/common/utils/socket';
+import { useScoreSocket } from '@/domain/live/hooks/useScoreSocket';
 
 interface Props {
   sport: SportType;
 }
 const ScoreBoard = ({ sport }: Props) => {
-  const [kuScore, setKuScore] = useState(0);
-  const [yuScore, setYuScore] = useState(0);
-
-  const onReceiveScore = ({
-    score,
-  }: {
-    score: {
-      sport: SportType;
-      KUScore: number;
-      YUScore: number;
-      isActive: boolean;
-      createdAt: string;
-      updatedAt: string;
-    };
-  }) => {
-    setKuScore(score.KUScore);
-    setYuScore(score.YUScore);
-  };
-
-  useEffect(() => {
-    scoreSocket.emit('join_room', { sport });
-    scoreSocket.on('score_update', onReceiveScore);
-
-    return () => {
-      scoreSocket.emit('leave_room', { sport });
-      scoreSocket.off('score_update', onReceiveScore);
-    };
-  }, [sport]);
+  const { KUScore, YUScore } = useScoreSocket({ sport });
 
   return (
     <div className={s.Container}>
       <div className={s.Score}>
-        <div className={s.ScoreNumber}>{kuScore}</div>
+        <div className={s.ScoreNumber}>{KUScore}</div>
         <p>고려대</p>
       </div>
       <div className={s.Info}>
@@ -55,7 +28,7 @@ const ScoreBoard = ({ sport }: Props) => {
         </div>
       </div>
       <div className={s.Score}>
-        <div className={s.ScoreNumber}>{yuScore}</div>
+        <div className={s.ScoreNumber}>{YUScore}</div>
         <p>연세대</p>
       </div>
       <div className={s.Background({ school: 'korea' })} />
