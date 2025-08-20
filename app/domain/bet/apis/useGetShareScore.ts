@@ -1,17 +1,20 @@
+import client from '@/common/utils/client';
 import { useQuery } from '@tanstack/react-query';
 
-// TODO
+interface GetShareScoreResponse {
+  kuScore: number;
+  yuScore: number;
+}
+
 const getShareScore = async () => {
-  return {
-    numWinKorea: 1,
-    numWinYonsei: 2,
-    numDraw: 3,
-  };
+  const response = await client.get<GetShareScoreResponse>('/bet-answer/summary');
+  return response.data;
 };
 
 export const useGetShareScore = () => {
   return useQuery({
     queryKey: ['share-score'],
     queryFn: getShareScore,
+    staleTime: 0,
   });
 };
