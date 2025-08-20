@@ -16,9 +16,10 @@ interface Props {
   sport: SportType;
   betData: BetAnswer;
   handleTeamPrediction: (team: UniversityType | '무승부') => void;
+  isLoading: boolean;
 }
-const TeamPrediction = ({ sport, betData, handleTeamPrediction }: Props) => {
-  const { data: betAnswerRatio } = useGetBetAnswerRatio(sport);
+const TeamPrediction = ({ sport, betData, handleTeamPrediction, isLoading: isMyBetLoading }: Props) => {
+  const { data: betAnswerRatio, isLoading: isBetAnswerRatioLoading } = useGetBetAnswerRatio(sport);
   const selectedTeam = useMemo(() => {
     if (betData.predict.matchResult) return betData.predict.matchResult;
     if (betData.predict.score) {
@@ -28,6 +29,8 @@ const TeamPrediction = ({ sport, betData, handleTeamPrediction }: Props) => {
     }
     return null;
   }, [betData]);
+
+  const isLoading = isBetAnswerRatioLoading || isMyBetLoading;
 
   const totalSum = useMemo(() => {
     if (!betAnswerRatio) return undefined;
@@ -44,6 +47,7 @@ const TeamPrediction = ({ sport, betData, handleTeamPrediction }: Props) => {
         return (
           <OptionButton
             key={option.value}
+            isLoading={isLoading}
             position={option.position}
             text={option.text}
             value={option.value}

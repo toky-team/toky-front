@@ -15,7 +15,7 @@ interface Props {
   sport: SportType;
 }
 const PredictionContents = ({ sport }: Props) => {
-  const { data: myBet } = useGetMyBet(sport);
+  const { data: myBet, isLoading } = useGetMyBet(sport);
   const { mutate: postBet } = usePostBet();
 
   const betData: BetAnswer = myBet || { sport, predict: {}, player: { kuPlayerId: null, yuPlayerId: null } };
@@ -89,7 +89,12 @@ const PredictionContents = ({ sport }: Props) => {
         {isScorePrediction ? (
           <ScorePrediction betData={betData} handleScorePrediction={handleScorePrediction} />
         ) : (
-          <TeamPrediction sport={sport} betData={betData} handleTeamPrediction={handleTeamPrediction} />
+          <TeamPrediction
+            sport={sport}
+            betData={betData}
+            handleTeamPrediction={handleTeamPrediction}
+            isLoading={isLoading}
+          />
         )}
         {canPredictScore && (
           <button className={s.MoreButton({ isScorePrediction })} onClick={changePredictionMode}>
