@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import * as s from './style.css';
 
 import type { SportType, UniversityType } from '@/lib/types';
@@ -14,6 +16,7 @@ interface Props {
   sport: SportType;
 }
 const PredictionContents = ({ sport }: Props) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
   const { data: myBet, isLoading } = useGetMyBet(sport);
   const { mutate: postBet } = usePostBet();
 
@@ -21,6 +24,15 @@ const PredictionContents = ({ sport }: Props) => {
 
   const canPredictScore = sport === '야구' || sport === '축구' || sport === '아이스하키';
   const isScorePrediction = betData.predict.score !== undefined && betData.predict.score !== null && canPredictScore;
+
+  const scrollToBottom = async () => {
+    if (scrollRef.current) {
+      await scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   const changePredictionMode = () => {
     if (isScorePrediction && betData.predict.score) {
@@ -94,7 +106,7 @@ const PredictionContents = ({ sport }: Props) => {
   };
 
   return (
-    <div className={s.Container}>
+    <div className={s.Container} ref={scrollRef}>
       <div className={s.Wrapper}>
         <h2 className={s.QuestionTitle}>
           {isScorePrediction ? '최종 점수를 예측해주세요' : '우승할 팀을 예측해주세요'}
@@ -125,7 +137,12 @@ const PredictionContents = ({ sport }: Props) => {
       </div>
       <div className={s.Wrapper}>
         <h2 className={s.QuestionTitle}>{PREDICTION_QUESTION[sport]}</h2>
-        <PlayerSelector sport={sport} mySelection={betData.player} handlePlayerSelection={handlePlayerSelection} />
+        <PlayerSelector
+          sport={sport}
+          mySelection={betData.player}
+          handlePlayerSelection={handlePlayerSelection}
+          scrollToBottom={scrollToBottom}
+        />
       </div>
     </div>
   );
