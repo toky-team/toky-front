@@ -34,6 +34,9 @@ const PlayerSelector = ({ sport, mySelection, handlePlayerSelection }: Props) =>
     // TODO: 스크롤 가장 아래로 내리기
   }, [kuSelectedPlayer, yuSelectedPlayer]);
 
+  // 스포츠 변경 시 상태 초기화
+  useEffect(() => setStatus(null), [sport]);
+
   const handlePlayerProfileClick = (playerId: string) => {
     // TODO: 선수 프로필 보여주기
     alert(playerId);
@@ -70,12 +73,17 @@ const PlayerSelector = ({ sport, mySelection, handlePlayerSelection }: Props) =>
               </div>
               <div className={s.PlayerList}>
                 {/* TODO: 캐러셀 적용 */}
-                <PlayerItem isSelected={selectedPlayer === null} onClick={() => setSelectedPlayer(null)} />
+                <PlayerItem
+                  sport={sport}
+                  isSelected={selectedPlayer === null}
+                  onClick={() => setSelectedPlayer(null)}
+                />
                 {data?.map((player) => {
                   if (player.university !== status) return null;
                   return (
                     <PlayerItem
                       key={player.id}
+                      sport={sport}
                       player={player}
                       isSelected={selectedPlayer?.id === player.id}
                       onClick={() => setSelectedPlayer(player)}
