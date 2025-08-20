@@ -91,7 +91,16 @@ const PlayerSelector = ({ sport, mySelection, handlePlayerSelection }: Props) =>
                   );
                 })}
               </div>
-              {selectedPlayer !== null && (
+              {selectedPlayer === null ? (
+                <button
+                  className={s.PlayerButton({ type: 'noPlayerSelect' })}
+                  onClick={() => {
+                    setStatus(null);
+                  }}
+                >
+                  ‘득점 없음' 선택
+                </button>
+              ) : (
                 <div className={s.ButtonWrapper}>
                   <button
                     className={s.PlayerButton({ type: 'profile' })}
