@@ -24,18 +24,14 @@ export const Score = style({
   letterSpacing: '-0.03rem',
   zIndex: 1,
 });
-// TODO: 폰트 추가
+
 export const ScoreNumber = style({
-  color: '#FFF',
-  fontSize: '2.5rem',
-  fontWeight: 400,
+  color: vars.color.white,
+  fontSize: '2.25rem',
+  fontWeight: 700,
   lineHeight: 1.5,
-  letterSpacing: '0.4rem',
   textAlign: 'center',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '3.125rem',
+  fontFamily: vars.font.giantsBold,
 });
 
 export const Background = recipe({

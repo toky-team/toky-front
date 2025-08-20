@@ -1,7 +1,7 @@
 import * as s from './style.css';
 
 import type { SportType } from '@/lib/types';
-import { LOCATION_MAP } from '@/lib/constants';
+import { LOCATION_MAP, PREV_SCORE_MAP } from '@/lib/constants';
 import { useScoreSocket } from '@/domain/live/hooks/useScoreSocket';
 
 interface Props {
@@ -24,7 +24,7 @@ const ScoreBoard = ({ sport }: Props) => {
         <div className={s.PrevStats}>
           {/* TODO: 정기전 총점 추가 */}
           <span className={s.PrevText}>정기전 총점</span>
-          <span className={s.PrevScore}>1:0</span>
+          <span className={s.PrevScore}>{PREV_SCORE_MAP[sport]}</span>
         </div>
       </div>
       <div className={s.Score}>
