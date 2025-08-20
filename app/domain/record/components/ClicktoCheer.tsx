@@ -8,17 +8,17 @@ const clicktoCheerVariants = tv({
     root: "w-full flex flex-col items-center gap-6 px-5 py-15 [background:var(--color-background-5)]",
     title: "text-white-87 text-xl font-bold text-center",
     buttonsRow: "w-full flex justify-center items-center gap-px",
-    leftButton: "px-10 py-6 [border-radius:10px_0_0_10px] [background:linear-gradient(0deg,_rgba(255,_255,_255,_0.14)_0%,_rgba(255,_255,_255,_0.14)_100%),_#121212] text-white text-base font-bold transition-colors",
-    rightButton: "px-10 py-6 [border-radius:0_10px_10px_0] [background:linear-gradient(0deg,_rgba(255,_255,_255,_0.14)_0%,_rgba(255,_255,_255,_0.14)_100%),_#121212] text-white text-base font-bold transition-colors",
-    footer: "text-white-87 text-sm text-center break-keep",
+    leftButton: "px-10 py-6 rounded-l-[10px] bg-gradient-to-b from-white/14 to-white/14 bg-[#121212] text-white text-base font-bold transition-colors",
+    rightButton: "px-10 py-6 rounded-r-[10px] bg-gradient-to-b from-white/14 to-white/14 bg-[#121212] text-white text-base font-bold transition-colors",
+    footer: "text-white-87 text-base text-center",
   },
   variants: {
     selected: {
       left: {
-        leftButton: "[background:linear-gradient(270deg,_#F3233C_0%,_rgba(243,_35,_60,_0.25)_100%)]",
+        leftButton: "bg-gradient-to-l from-[#F3233C] to-[#F3233C]/25",
       },
       right: {
-        rightButton: "[background:linear-gradient(270deg,_rgba(41,_72,_255,_0.25)_0%,_#2948FF_100%)]",
+        rightButton: "bg-gradient-to-l from-[#2948FF]/25 to-[#2948FF]",
       },
       none: {},
     },
@@ -41,6 +41,7 @@ const ClicktoCheer = () => {
   };
 
   const selectedVariant = selectedTeam === "고려대학교" ? "left" : selectedTeam === "연세대학교" ? "right" : "none";
+
   const { root, title, buttonsRow, leftButton, rightButton, footer } = clicktoCheerVariants({ selected: selectedVariant });
 
   return (
@@ -55,7 +56,7 @@ const ClicktoCheer = () => {
         </button>
       </div>
       <div className={footer()}>
-        현재 {leftCount}명이 고려대학교, {rightCount}명이 연세대학교를 응원하고있어요!
+        현재 <span className="font-bold">{leftCount}명</span>이 고려대학교, <span className="font-bold">{rightCount}명</span>이 연세대학교를 응원하고있어요!
       </div>
     </div>
   );

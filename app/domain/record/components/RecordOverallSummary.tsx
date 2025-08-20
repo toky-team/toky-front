@@ -4,16 +4,16 @@ import { tv } from "tailwind-variants";
 
 type SportItem = {
   label: string;
-  leftWins: number;
-  rightWins: number;
+  KOREA_WINS: number;
+  YONSEI_WINS: number;
 };
 
 const sports: SportItem[] = [
-  { label: "축구", leftWins: 20, rightWins: 17 },
-  { label: "럭비", leftWins: 20, rightWins: 25 },
-  { label: "야구", leftWins: 25, rightWins: 18 },
-  { label: "농구", leftWins: 23, rightWins: 22 },
-  { label: "빙구", leftWins: 17, rightWins: 23 },
+  { label: "축구", KOREA_WINS: 20, YONSEI_WINS: 17 },
+  { label: "럭비", KOREA_WINS: 20, YONSEI_WINS: 25 },
+  { label: "야구", KOREA_WINS: 25, YONSEI_WINS: 18 },
+  { label: "농구", KOREA_WINS: 23, YONSEI_WINS: 22 },
+  { label: "빙구", KOREA_WINS: 17, YONSEI_WINS: 23 },
 ];
 
 const overallSummaryVariants = tv({
@@ -30,8 +30,8 @@ const overallSummaryVariants = tv({
     sportRow: "w-full flex flex-col gap-2",
     sportLabel: "flex items-center justify-center text-white-87 font-semibold",
     bar: "relative h-3 bg-white-15 overflow-hidden",
-    leftBar: "h-full [border-radius:34px_0_0_34px] [background:linear-gradient(270deg,_#F3233C_0%,_rgba(243,_35,_60,_0.25)_100%)]",
-    rightBar: "absolute right-0 top-0 bottom-0 [border-radius:0_34px_34px_0] [background:linear-gradient(270deg,_rgba(41,_72,_255,_0.25)_0%,_#2948FF_100%)]",
+    leftBar: "h-full rounded-l-[34px] bg-gradient-to-l from-[#F3233C] to-[#F3233C]/25",
+    rightBar: "absolute right-0 top-0 bottom-0 rounded-r-[34px] bg-gradient-to-l from-[#2948FF]/25 to-[#2948FF]",
     scoreRow: "flex items-center justify-between",
     scoreColLeft: "text-white-87 text-sm",
     scoreColRight: "text-white-87 text-sm text-right",
@@ -98,8 +98,8 @@ const RecordOverallSummary = () => {
         <img src={YonseiUniversitySymbol} alt="yonsei" className="pointer-events-none absolute right-0 top-2/3 -translate-y-1/2 z-10" />
         <div className={listRoot()}>
           {sports.map((s) => {
-            const sum = s.leftWins + s.rightWins;
-            const leftPct = Math.round((s.leftWins / sum) * 1000) / 10;
+            const sum = s.KOREA_WINS + s.YONSEI_WINS;
+            const leftPct = Math.round((s.KOREA_WINS / sum) * 1000) / 10;
             const rightPct = 100 - leftPct;
             return (
               <div key={s.label} className={sportRow()}>
@@ -117,13 +117,13 @@ const RecordOverallSummary = () => {
                 <div className={scoreRow()}>
                   <div className={scoreColLeft()}>
                     <div className="flex flex-col items-start">
-                      <div className={scoreValue()}>{s.leftWins}승</div>
+                      <div className={scoreValue()}>{s.KOREA_WINS}승</div>
                       <div className={scoreSchool()}>고려대학교</div>
                     </div>
                   </div>
                   <div className={scoreColRight()}>
                     <div className="flex flex-col items-end">
-                      <div className={scoreValue()}>{s.rightWins}승</div>
+                      <div className={scoreValue()}>{s.YONSEI_WINS}승</div>
                       <div className={scoreSchool()}>연세대학교</div>
                     </div>
                   </div>

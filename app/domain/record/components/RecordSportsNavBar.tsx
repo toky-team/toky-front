@@ -4,7 +4,7 @@ export const SPORTS_TABS = ["전체", "야구", "농구", "빙구", "럭비", "�
 export type SportsTab = typeof SPORTS_TABS[number];
 
 const root = tv({
-  base: "sticky top-0 z-10 w-full h-12 [background:linear-gradient(180deg,_rgba(18,_18,_18,_0.80)_0%,_rgba(18,_18,_18,_0.00)_100%)]",
+  base: "sticky top-0 z-10 w-full h-12 bg-gradient-to-b from-[#121212]/80 to-[#121212]/0",
 });
 
 const tabsList = tv({
