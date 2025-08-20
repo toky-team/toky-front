@@ -1,6 +1,5 @@
 import * as s from './style.css';
 
-import { DEFAULT_BET_DATA, PREDICTION_QUESTION } from '@/domain/bet/constants';
 import type { SportType, UniversityType } from '@/lib/types';
 import Icon from '@/lib/assets/icons';
 import PlayerSelector from '@/domain/bet/components/PlayerSelector';
@@ -8,6 +7,8 @@ import ScorePrediction from '@/domain/bet/components/ScorePrediction';
 import TeamPrediction from '@/domain/bet/components/TeamPrediction';
 import { useGetMyBet } from '@/domain/bet/apis/useGetMyBet';
 import { usePostBet, type BetAnswer } from '@/domain/bet/apis/usePostBet';
+import { PREDICTION_QUESTION } from '@/domain/bet/constants';
+import editBetAnswer from '@/domain/bet/utils/editBetAnswer';
 
 interface Props {
   sport: SportType;
@@ -16,7 +17,7 @@ const PredictionContents = ({ sport }: Props) => {
   const { data: myBet, isLoading } = useGetMyBet(sport);
   const { mutate: postBet } = usePostBet();
 
-  const betData: BetAnswer = myBet || DEFAULT_BET_DATA(sport);
+  const betData: BetAnswer = editBetAnswer(sport, myBet);
 
   const canPredictScore = sport === '야구' || sport === '축구' || sport === '아이스하키';
   const isScorePrediction = betData.predict.score !== undefined && betData.predict.score !== null && canPredictScore;
@@ -82,6 +83,16 @@ const PredictionContents = ({ sport }: Props) => {
     });
   };
 
+  const handlePlayerSelection = (university: UniversityType, playerId: string | null) => {
+    postBet({
+      ...betData,
+      player: {
+        kuPlayerId: university === '고려대학교' ? playerId : betData.player.kuPlayerId,
+        yuPlayerId: university === '연세대학교' ? playerId : betData.player.yuPlayerId,
+      },
+    });
+  };
+
   return (
     <div className={s.Container}>
       <div className={s.Wrapper}>
@@ -114,7 +125,7 @@ const PredictionContents = ({ sport }: Props) => {
       </div>
       <div className={s.Wrapper}>
         <h2 className={s.QuestionTitle}>{PREDICTION_QUESTION[sport]}</h2>
-        <PlayerSelector />
+        <PlayerSelector sport={sport} mySelection={betData.player} handlePlayerSelection={handlePlayerSelection} />
       </div>
     </div>
   );
