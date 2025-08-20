@@ -1,10 +1,16 @@
 import { createGlobalTheme, globalFontFace, globalStyle, keyframes } from '@vanilla-extract/css';
 
 const spoqaHanSansNeo = 'SpoqaHanSansNeo-Regular';
+const giantsBold = 'Giants-Bold';
 
 globalFontFace(spoqaHanSansNeo, {
   src: 'url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff") format("woff")',
   fontWeight: 'normal',
+  fontStyle: 'normal',
+});
+globalFontFace(giantsBold, {
+  src: "url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2')",
+  fontWeight: 700,
   fontStyle: 'normal',
 });
 
@@ -54,6 +60,10 @@ export const vars = createGlobalTheme(':root', {
     toast: '400',
     modal: '300',
     modalBackdrop: '299',
+  },
+  font: {
+    giantsBold,
+    spoqaHanSansNeo,
   },
 });
 

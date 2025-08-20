@@ -246,13 +246,14 @@ export const BackNumber = style({
   flexShrink: 0,
   zIndex: 10,
   textShadow: '0 0.85px 8.5px rgba(0, 0, 0, 0.25)',
-  fontSize: '1rem',
+  fontSize: '0.875rem',
   fontWeight: 700,
-  letterSpacing: '-0.02rem',
+  letterSpacing: '-0.0175rem',
   lineHeight: 1.2,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  fontFamily: vars.font.giantsBold,
 });
 
 export const CheckIcon = style({

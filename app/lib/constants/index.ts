@@ -8,3 +8,12 @@ export const LOCATION_MAP: Record<SportType, string> = {
   럭비: '고양 종합운동장',
   아이스하키: '목동아이스링크',
 };
+
+// TODO: 정기전 총점 추가
+export const PREV_SCORE_MAP: Record<SportType, string> = {
+  축구: '1:0',
+  농구: '5:0',
+  야구: '3:2',
+  럭비: '8:6',
+  아이스하키: '1:1',
+};
