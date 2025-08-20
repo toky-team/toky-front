@@ -12,12 +12,17 @@ import ScoreBoard from '@/domain/live/components/ScoreBoard';
 import LiveMenu from '@/domain/live/components/LiveMenu';
 import ChatInput from '@/domain/live/components/ChatInput';
 import useGuideModal from '@/domain/live/hooks/useGuideModal';
+import { useGetLiveUrl } from '@/domain/live/apis/useGetLiveUrl';
 
 const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
   // TODO: 전력 분석 페이지 구현
   const [page, setPage] = useState<'chat' | 'analysis'>('chat');
   const sport = SportsPathMap[params.sports];
   const { openModal } = useGuideModal();
+  const { data: rawUrls } = useGetLiveUrl();
+  const liveUrls = rawUrls?.filter((url) => url.sport === sport);
+  // TODO: 여러 라이브 주소 변경 가능하도록
+  const liveUrl = liveUrls?.[0]?.url || 'https://youtu.be/3Txsz8eq5KY?t=603';
 
   useEffect(() => {
     openModal();
@@ -42,7 +47,7 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
         </div>
       </TopBar>
       {/* TODO: URI 제대로 끼우기 */}
-      <Player src="https://youtu.be/3Txsz8eq5KY?t=603" />
+      <Player src={liveUrl} />
       <ScoreBoard sport={sport} />
       <LiveMenu page={page} setPage={setPage} />
       <ChatList sport={sport} />
