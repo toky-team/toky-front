@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import * as s from './style.css';
-import type { SportType, UniversityType } from '@/lib/types';
 import { ChevronRight } from 'lucide-react';
+
+import * as s from './style.css';
+
+import type { SportType, UniversityType } from '@/lib/types';
 import PlayerItem from '@/domain/bet/components/PlayerSelector/PlayerItem';
 import { useGetPlayer } from '@/common/apis/useGetPlayer';
 import type { PlayerInterface } from '@/lib/types/player';
@@ -14,8 +16,9 @@ interface Props {
     yuPlayerId: string | null;
   };
   handlePlayerSelection: (university: UniversityType, playerId: string | null) => void;
+  scrollToBottom: () => void;
 }
-const PlayerSelector = ({ sport, mySelection, handlePlayerSelection }: Props) => {
+const PlayerSelector = ({ sport, mySelection, handlePlayerSelection, scrollToBottom }: Props) => {
   const [status, setStatus] = useState<UniversityType | null>(null);
   const { data } = useGetPlayer(sport);
 
@@ -37,6 +40,11 @@ const PlayerSelector = ({ sport, mySelection, handlePlayerSelection }: Props) =>
   // 스포츠 변경 시 상태 초기화
   useEffect(() => setStatus(null), [sport]);
 
+  // Status 변경 시 스크롤 하단 고정
+  useEffect(() => {
+    scrollToBottom();
+  }, [scrollToBottom, status]);
+
   const handlePlayerProfileClick = (playerId: string) => {
     // TODO: 선수 프로필 보여주기
     alert(playerId);
@@ -49,13 +57,19 @@ const PlayerSelector = ({ sport, mySelection, handlePlayerSelection }: Props) =>
           university="고려대학교"
           status={status}
           selectedPlayer={kuSelectedPlayer}
-          onClick={() => setStatus('고려대학교')}
+          onClick={() => {
+            scrollToBottom();
+            setStatus('고려대학교');
+          }}
         />
         <SelectedPlayerView
           university="연세대학교"
           status={status}
           selectedPlayer={yuSelectedPlayer}
-          onClick={() => setStatus('연세대학교')}
+          onClick={() => {
+            scrollToBottom();
+            setStatus('연세대학교');
+          }}
         />
       </div>
       {status !== null &&
