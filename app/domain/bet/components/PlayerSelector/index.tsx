@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as s from './style.css';
 import type { SportType, UniversityType } from '@/lib/types';
 import { ChevronRight } from 'lucide-react';
@@ -15,6 +15,15 @@ const PlayerSelector = ({ sport }: Props) => {
   const { data } = useGetPlayer(sport, status || '고려대학교');
   const [kuSelectedPlayer, setKUSelectedPlayer] = useState<PlayerInterface | null>(null);
   const [yuSelectedPlayer, setYuSelectedPlayer] = useState<PlayerInterface | null>(null);
+
+  useEffect(() => {
+    // TODO: 스크롤 가장 아래로 내리기
+  }, [kuSelectedPlayer, yuSelectedPlayer]);
+
+  const handlePlayerProfileClick = (playerId: string) => {
+    // TODO: 선수 프로필 보여주기
+    alert(playerId);
+  };
 
   return (
     <div className={s.Wrapper}>
@@ -57,6 +66,24 @@ const PlayerSelector = ({ sport }: Props) => {
                   />
                 ))}
               </div>
+              {selectedPlayer !== null && (
+                <div className={s.ButtonWrapper}>
+                  <button
+                    className={s.PlayerButton({ type: 'profile' })}
+                    onClick={() => handlePlayerProfileClick(selectedPlayer.id)}
+                  >
+                    선수 프로필
+                  </button>
+                  <button
+                    className={s.PlayerButton({ type: 'select', status })}
+                    onClick={() => {
+                      setStatus(null);
+                    }}
+                  >
+                    '{selectedPlayer.name}' 선수 선택
+                  </button>
+                </div>
+              )}
             </div>
           );
         })()}

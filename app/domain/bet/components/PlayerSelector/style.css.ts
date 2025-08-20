@@ -235,3 +235,87 @@ export const PositionStyle = style({
   lineHeight: 1.5,
   letterSpacing: '-0.03rem',
 });
+
+export const BackNumber = style({
+  position: 'absolute',
+  top: '0.125rem',
+  left: '0.25rem',
+  color: vars.color['white-87'],
+  height: '1.4375rem',
+  width: '1.375rem',
+  flexShrink: 0,
+  zIndex: 10,
+  textShadow: '0 0.85px 8.5px rgba(0, 0, 0, 0.25)',
+  fontSize: '1rem',
+  fontWeight: 700,
+  letterSpacing: '-0.02rem',
+  lineHeight: 1.2,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+export const CheckIcon = style({
+  position: 'absolute',
+  top: '0.375rem',
+  left: '0.375rem',
+  color: vars.color.white,
+  zIndex: 10,
+});
+
+export const ButtonWrapper = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.75rem',
+});
+
+export const PlayerButton = recipe({
+  base: {
+    height: '2.875rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '0.5rem',
+    background: vars.color['white-15'],
+    fontSize: '1rem',
+    fontWeight: 500,
+    lineHeight: 1.2,
+    letterSpacing: '-0.04rem',
+  },
+  variants: {
+    type: {
+      profile: {
+        width: '7.125rem',
+        color: vars.color['white-87'],
+      },
+      select: {
+        flex: '1 0 0',
+        color: vars.color.white,
+      },
+    },
+    status: {
+      고려대학교: {},
+      연세대학교: {},
+    },
+  },
+  compoundVariants: [
+    {
+      variants: {
+        type: 'select',
+        status: '고려대학교',
+      },
+      style: {
+        background: vars.color['red-gr-2'],
+      },
+    },
+    {
+      variants: {
+        type: 'select',
+        status: '연세대학교',
+      },
+      style: {
+        background: vars.color['blue-gr-2'],
+      },
+    },
+  ],
+});
