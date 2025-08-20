@@ -1,3 +1,6 @@
+import type { BetAnswer } from '@/domain/bet/apis/usePostBet';
+import type { SportType } from '@/lib/types';
+
 // TODO: 이미지 경로 수정 필요
 export const KOREA_WIN_IMAGE_LIST = [
   '/image-proxy/card/korea1.png',
@@ -34,3 +37,17 @@ export const DRAW_IMAGE_LIST = [
   '/image-proxy/card/draw2.png',
   '/image-proxy/card/draw3.png',
 ];
+
+export const PREDICTION_QUESTION: Record<SportType, string> = {
+  야구: '안타를 칠 선수를 예측해주세요',
+  축구: '골을 넣을 선수를 예측해주세요',
+  농구: '총 득점이 가장 많을 MVP 선수를 예측해주세요',
+  럭비: '총 득점이 가장 많을 MVP 선수를 예측해주세요',
+  아이스하키: '총 득점이 가장 많을 MVP 선수를 예측해주세요',
+};
+
+export const DEFAULT_BET_DATA = (sport: SportType): BetAnswer => ({
+  sport,
+  predict: {},
+  player: { kuPlayerId: null, yuPlayerId: null },
+});
