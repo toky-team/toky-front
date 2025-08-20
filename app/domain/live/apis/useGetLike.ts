@@ -21,6 +21,5 @@ export const useGetLike = (sport: SportType) => {
   return useQuery({
     queryKey: ['cheer-up', sport],
     queryFn: () => getLike(sport),
-    staleTime: 0,
   });
 };
