@@ -9,12 +9,26 @@ import SelectedPlayerView from '@/domain/bet/components/PlayerSelector/SelectedP
 
 interface Props {
   sport: SportType;
+  mySelection: {
+    kuPlayerId: string | null;
+    yuPlayerId: string | null;
+  };
+  handlePlayerSelection: (university: UniversityType, playerId: string | null) => void;
 }
-const PlayerSelector = ({ sport }: Props) => {
+const PlayerSelector = ({ sport, mySelection, handlePlayerSelection }: Props) => {
   const [status, setStatus] = useState<UniversityType | null>(null);
-  const { data } = useGetPlayer(sport, status || '고려대학교');
-  const [kuSelectedPlayer, setKUSelectedPlayer] = useState<PlayerInterface | null>(null);
-  const [yuSelectedPlayer, setYuSelectedPlayer] = useState<PlayerInterface | null>(null);
+  const { data } = useGetPlayer(sport);
+
+  const kuSelectedPlayer =
+    mySelection?.kuPlayerId && data ? data.find((player) => player.id === mySelection.kuPlayerId) || null : null;
+  const yuSelectedPlayer =
+    mySelection?.yuPlayerId && data ? data.find((player) => player.id === mySelection.yuPlayerId) || null : null;
+  const setKuSelectedPlayer = (player: PlayerInterface | null) => {
+    handlePlayerSelection('고려대학교', player?.id || null);
+  };
+  const setYuSelectedPlayer = (player: PlayerInterface | null) => {
+    handlePlayerSelection('연세대학교', player?.id || null);
+  };
 
   useEffect(() => {
     // TODO: 스크롤 가장 아래로 내리기
@@ -44,7 +58,7 @@ const PlayerSelector = ({ sport }: Props) => {
       {status !== null &&
         (() => {
           const selectedPlayer = status === '고려대학교' ? kuSelectedPlayer : yuSelectedPlayer;
-          const setSelectedPlayer = status === '고려대학교' ? setKUSelectedPlayer : setYuSelectedPlayer;
+          const setSelectedPlayer = status === '고려대학교' ? setKuSelectedPlayer : setYuSelectedPlayer;
           return (
             <div className={s.PlayerContainer}>
               <div className={s.PlayerContainerHeader}>
@@ -57,14 +71,17 @@ const PlayerSelector = ({ sport }: Props) => {
               <div className={s.PlayerList}>
                 {/* TODO: 캐러셀 적용 */}
                 <PlayerItem isSelected={selectedPlayer === null} onClick={() => setSelectedPlayer(null)} />
-                {data?.map((player) => (
-                  <PlayerItem
-                    key={player.id}
-                    player={player}
-                    isSelected={selectedPlayer?.id === player.id}
-                    onClick={() => setSelectedPlayer(player)}
-                  />
-                ))}
+                {data?.map((player) => {
+                  if (player.university !== status) return null;
+                  return (
+                    <PlayerItem
+                      key={player.id}
+                      player={player}
+                      isSelected={selectedPlayer?.id === player.id}
+                      onClick={() => setSelectedPlayer(player)}
+                    />
+                  );
+                })}
               </div>
               {selectedPlayer !== null && (
                 <div className={s.ButtonWrapper}>
