@@ -1,15 +1,16 @@
 import { tv } from "tailwind-variants";
 import Icon from "@/lib/assets/icons";
+import type { PlayerInterface } from "@/lib/types/player";
 
 const playerCardVariants = tv({
   slots: {
-    card: "bg-white rounded-md overflow-hidden relative shadow-sm",
+    card: "bg-white rounded-md overflow-hidden relative shadow-sm cursor-pointer transition-shadow",
     imageContainer: "relative aspect-[4/5] bg-white",
     playerImage: "w-full h-full object-cover",
     numberBadge: "absolute top-2 left-2 text-xl font-normal max-w-11 text-center",
     playerName: "absolute top-8 left-2 text-[#121212] font-bold text-base",
     bottomHalfBlur: "absolute bottom-0 left-0 right-0 h-1/2 rounded-b-md bg-gradient-to-t from-white/80 to-transparent",
-    likeContainer: "absolute bottom-1 left-1 right-1 flex items-center justify-between bg-gradient-to-r from-black/14 to-black text-white py-1.5 px-3 rounded-md",
+    likeContainer: "absolute bottom-1 left-1 right-1 flex items-center justify-between bg-[#333333] text-white py-1.5 px-3 rounded-md",
     likeCount: "text-sm font-medium",
     heartIcon: "w-4 h-4 text-red-500 [&>svg]:w-4 [&>svg]:h-4",
   },
@@ -32,13 +33,21 @@ interface PlayerCardProps {
   image: string;
   likes: number;
   team: "korea" | "yonsei";
+  player?: PlayerInterface; // 전체 플레이어 정보 (있으면 오버레이 표시)
+  onClick?: () => void; // 커스텀 클릭 핸들러
 }
 
-const PlayerCard = ({ id, name, number, image, likes, team }: PlayerCardProps) => {
+const PlayerCard = ({ id, name, number, image, likes, team, player, onClick }: PlayerCardProps) => {
   const { card, imageContainer, playerImage, numberBadge, playerName, bottomHalfBlur, likeContainer, likeCount, heartIcon } = playerCardVariants();
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <div className={card()}>
+    <div className={card()} onClick={handleClick}>
       <div className={imageContainer()}>
         <img
           src={image}

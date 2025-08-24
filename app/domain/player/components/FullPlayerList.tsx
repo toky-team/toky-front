@@ -1,6 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { tv } from "tailwind-variants";
 import PlayerCard from "./PlayerCard";
+import { useGetPlayer } from "@/common/apis/useGetPlayer";
+import { usePlayerOverlay } from "../hooks/usePlayerOverlay";
+import type { PlayerInterface } from "@/lib/types/player";
 
 const fullPlayerListVariants = tv({
   slots: {
@@ -17,31 +20,19 @@ const fullPlayerListVariants = tv({
   },
 });
 
-// 샘플 플레이어 데이터 - 고려대
-const koreaPlayers = [
-  { id: "1", name: "김정현", number: 7, image: "", likes: 1999 },
-  { id: "2", name: "이승훈", number: 10, image: "", likes: 2150 },
-  { id: "3", name: "박동혁", number: 23, image: "", likes: 1850 },
-  { id: "4", name: "최민석", number: 15, image: "", likes: 1750 },
-  { id: "5", name: "장현우", number: 8, image: "", likes: 1920 },
-  { id: "6", name: "김태현", number: 4, image: "", likes: 1680 },
-  { id: "7", name: "이준호", number: 19, image: "", likes: 2050 },
-  { id: "8", name: "박성민", number: 12, image: "", likes: 1820 },
-  { id: "9", name: "정우진", number: 5, image: "", likes: 1950 },
-];
-
-// 샘플 플레이어 데이터 - 연세대
-const yonseiPlayers = [
-  { id: "10", name: "박민수", number: 7, image: "", likes: 1850 },
-  { id: "11", name: "이동민", number: 11, image: "", likes: 2100 },
-  { id: "12", name: "정현우", number: 18, image: "", likes: 1750 },
-  { id: "13", name: "김승호", number: 9, image: "", likes: 1920 },
-  { id: "14", name: "장민재", number: 3, image: "", likes: 1680 },
-  { id: "15", name: "오준석", number: 21, image: "", likes: 2050 },
-];
-
 const FullPlayerList = () => {
   const { root, container, containerLeft, title, description, tabs, tabsList, tabsTrigger, tabsContent, playerGrid } = fullPlayerListVariants();
+  
+  // API 데이터 가져오기
+  const { data: koreaPlayers = [] } = useGetPlayer(undefined, "고려대학교");
+  const { data: yonseiPlayers = [] } = useGetPlayer(undefined, "연세대학교");
+  
+  // 오버레이 훅
+  const { openPlayerOverlay } = usePlayerOverlay();
+  
+  const handlePlayerClick = (player: PlayerInterface) => {
+    openPlayerOverlay(player);
+  };
 
   return (
     <div className={root()}>
@@ -67,10 +58,12 @@ const FullPlayerList = () => {
                 key={player.id}
                 id={player.id}
                 name={player.name}
-                number={player.number}
-                image={player.image}
-                likes={player.likes}
+                number={player.backNumber}
+                image={player.imageUrl}
+                likes={player.likeCount}
                 team="korea"
+                player={player}
+                onClick={() => handlePlayerClick(player)}
               />
             ))}
           </div>
@@ -82,10 +75,12 @@ const FullPlayerList = () => {
                 key={player.id}
                 id={player.id}
                 name={player.name}
-                number={player.number}
-                image={player.image}
-                likes={player.likes}
+                number={player.backNumber}
+                image={player.imageUrl}
+                likes={player.likeCount}
                 team="yonsei"
+                player={player}
+                onClick={() => handlePlayerClick(player)}
               />
             ))}
           </div>
