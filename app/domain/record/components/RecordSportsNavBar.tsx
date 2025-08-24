@@ -4,11 +4,11 @@ export const SPORTS_TABS = ["전체", "야구", "농구", "빙구", "럭비", "�
 export type SportsTab = typeof SPORTS_TABS[number];
 
 const root = tv({
-  base: "sticky top-0 z-10 w-full h-12 bg-gradient-to-b from-[#121212]/80 to-[#121212]/0",
+  base: "sticky top-0 z-10 w-full h-[44px] flex justify-center items-center bg-gradient-to-b from-[#121212]/80 to-[#121212]/0",
 });
 
 const tabsList = tv({
-  base: "w-full justify-between mx-auto px-5 flex flex-row h-full items-center",
+  base: "w-full justify-between mx-auto px-5 flex flex-row py-[9px] items-center",
 });
 
 const tabStyle = tv({
