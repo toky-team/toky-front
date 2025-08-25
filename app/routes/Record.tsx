@@ -15,7 +15,7 @@ export default function Record() {
       <MainTopBar />
       <NavBar />
       <RecordSportsNavBar value={tab} onChange={setTab} />
-      <div className="w-full -mt-12">
+      <div className="w-full -mt-[42px]">
         {tab === "전체" && (
           <div className="w-full flex flex-col">
             <div
