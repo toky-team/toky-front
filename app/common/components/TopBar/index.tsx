@@ -2,6 +2,8 @@ import Icon from '@/lib/assets/icons';
 import type { PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router';
 import * as s from './style.css';
+import { useState } from 'react';
+import SideBar from '@/common/components/SideBar';
 
 interface Props extends PropsWithChildren {
   color?: '87' | 'd9';
@@ -10,6 +12,7 @@ interface Props extends PropsWithChildren {
 }
 const TopBar = ({ hasHamburger = false, color = '87', children, handlePrevButton }: Props) => {
   const navigate = useNavigate();
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
 
   const handleBackButton = () => {
     if (handlePrevButton) {
@@ -25,14 +28,17 @@ const TopBar = ({ hasHamburger = false, color = '87', children, handlePrevButton
         <Icon.ArrowBack />
       </button>
       {children}
-      {/* TODO: 사이드바 메뉴 연결 */}
       <span className={s.RightArea}>
         {hasHamburger && (
-          <button>
+          <button onClick={() => {
+            setIsSideBarOpen(true);
+            console.log('hamburger');
+          }}>
             <Icon.Hamburger />
           </button>
         )}
       </span>
+      {isSideBarOpen && <SideBar onClose={() => setIsSideBarOpen(false)} />}
     </div>
   );
 };

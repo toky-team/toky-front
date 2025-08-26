@@ -6,10 +6,12 @@ import TicketInfo from '@/common/components/TicketInfo';
 import LoginButton from '@/domain/home/components/LoginButton';
 
 import * as s from './style.css';
+import { useState } from 'react';
+import SideBar from '@/common/components/SideBar';
 
 const MainTopBar = () => {
   const { data: authCheck, isLoading } = useGetAuthCheck();
-
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const isLogin = authCheck?.isLogin || false;
 
   return (
@@ -19,12 +21,13 @@ const MainTopBar = () => {
       </Link>
       <div className={s.LeftArea}>
         {!isLoading && (isLogin ? <TicketInfo /> : <LoginButton />)}
-        {/* TODO: Sidebar 구현 */}
-        <button>
+        <button onClick={() => setIsSideBarOpen(true)}>
           <Icon.Hamburger />
         </button>
       </div>
+      {isSideBarOpen && <SideBar onClose={() => setIsSideBarOpen(false)} />}
     </div>
   );
 };
+
 export default MainTopBar;
