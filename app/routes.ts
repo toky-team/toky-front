@@ -10,5 +10,6 @@ export default [
   layout('common/components/AuthGuard/index.tsx', [
     route('live/:sports', 'routes/LivePage/index.tsx'),
     route('prediction', 'routes/PredictionPage/index.tsx'),
+    route('attendance', 'routes/AttendancePage/index.tsx'),
   ]),
 ] satisfies RouteConfig;
