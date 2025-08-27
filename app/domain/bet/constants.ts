@@ -1,4 +1,3 @@
-import type { BetAnswer } from '@/domain/bet/apis/usePostBet';
 import type { SportType } from '@/lib/types';
 
 // TODO: 이미지 경로 수정 필요
@@ -45,9 +44,3 @@ export const PREDICTION_QUESTION: Record<SportType, string> = {
   럭비: '총 득점이 가장 많을 MVP 선수를 예측해주세요',
   아이스하키: '총 득점이 가장 많을 MVP 선수를 예측해주세요',
 };
-
-export const DEFAULT_BET_DATA = (sport: SportType): BetAnswer => ({
-  sport,
-  predict: {},
-  player: { kuPlayerId: null, yuPlayerId: null },
-});

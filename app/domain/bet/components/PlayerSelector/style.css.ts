@@ -103,8 +103,8 @@ export const SelectedPlayerViewName = style({
 });
 export const SelectedPlayerViewImage = style({
   position: 'absolute',
-  bottom: 0,
-  right: 0,
+  bottom: '-1.3125rem',
+  right: '-0.75rem',
   maxWidth: '8rem',
 });
 

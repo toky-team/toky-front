@@ -2,9 +2,10 @@ import { useGetBetAnswerRatio } from '@/domain/bet/apis/useGetBetAnswerRatio';
 import type { SportType, UniversityType } from '@/lib/types';
 
 import * as s from './style.css';
-import type { BetAnswer } from '@/domain/bet/apis/usePostBet';
+import { usePostMatchResultBet } from '@/domain/bet/apis/usePostMatchResultBet';
 import { useMemo } from 'react';
 import OptionButton from '@/domain/bet/components/TeamPrediction/OptionButton';
+import type { BetAnswer } from '@/domain/bet/apis/useGetMyBet';
 
 const OPTIONS: { value: UniversityType | '무승부'; text: string; position: 'left' | 'center' | 'right' }[] = [
   { value: '고려대학교', text: '고려대', position: 'left' },
@@ -15,22 +16,22 @@ const OPTIONS: { value: UniversityType | '무승부'; text: string; position: 'l
 interface Props {
   sport: SportType;
   betData: BetAnswer;
-  handleTeamPrediction: (team: UniversityType | '무승부') => void;
   isLoading: boolean;
 }
-const TeamPrediction = ({ sport, betData, handleTeamPrediction, isLoading: isMyBetLoading }: Props) => {
+const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading }: Props) => {
+  const { mutate: postMatchResultBet } = usePostMatchResultBet();
   const { data: betAnswerRatio, isLoading: isBetAnswerRatioLoading } = useGetBetAnswerRatio(sport);
   const selectedTeam = useMemo(() => {
+    if (!betData.predict) return null;
     if (betData.predict.matchResult) return betData.predict.matchResult;
-    if (betData.predict.score) {
-      if (betData.predict.score.kuScore > betData.predict.score.yuScore) return '고려대학교';
-      if (betData.predict.score.kuScore < betData.predict.score.yuScore) return '연세대학교';
-      return '무승부';
-    }
     return null;
   }, [betData]);
 
   const isLoading = isBetAnswerRatioLoading || isMyBetLoading;
+
+  const handleTeamPrediction = (team: UniversityType | '무승부') => {
+    postMatchResultBet({ sport, predict: { matchResult: team } });
+  };
 
   const totalSum = useMemo(() => {
     if (!betAnswerRatio) return undefined;
