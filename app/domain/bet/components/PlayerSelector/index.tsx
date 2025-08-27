@@ -8,6 +8,7 @@ import PlayerItem from '@/domain/bet/components/PlayerSelector/PlayerItem';
 import { useGetPlayer } from '@/common/apis/useGetPlayer';
 import type { PlayerInterface } from '@/lib/types/player';
 import SelectedPlayerView from '@/domain/bet/components/PlayerSelector/SelectedPlayerView';
+import { usePostPlayerBet } from '@/domain/bet/apis/usePostPlayerBet';
 
 interface Props {
   sport: SportType;
@@ -15,22 +16,22 @@ interface Props {
     kuPlayerId: string | null;
     yuPlayerId: string | null;
   };
-  handlePlayerSelection: (university: UniversityType, playerId: string | null) => void;
   scrollToBottom: () => void;
 }
-const PlayerSelector = ({ sport, mySelection, handlePlayerSelection, scrollToBottom }: Props) => {
+const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
   const [status, setStatus] = useState<UniversityType | null>(null);
   const { data } = useGetPlayer(sport);
+  const { mutate: postPlayerBet } = usePostPlayerBet();
 
   const kuSelectedPlayer =
     mySelection?.kuPlayerId && data ? data.find((player) => player.id === mySelection.kuPlayerId) || null : null;
   const yuSelectedPlayer =
     mySelection?.yuPlayerId && data ? data.find((player) => player.id === mySelection.yuPlayerId) || null : null;
   const setKuSelectedPlayer = (player: PlayerInterface | null) => {
-    handlePlayerSelection('고려대학교', player?.id || null);
+    postPlayerBet({ sport, university: '고려대학교', playerId: player?.id || null });
   };
   const setYuSelectedPlayer = (player: PlayerInterface | null) => {
-    handlePlayerSelection('연세대학교', player?.id || null);
+    postPlayerBet({ sport, university: '연세대학교', playerId: player?.id || null });
   };
 
   useEffect(() => {

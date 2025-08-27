@@ -1,6 +1,8 @@
 import Icon from '@/lib/assets/icons';
 import * as s from './style.css';
-import type { BetAnswer } from '@/domain/bet/apis/usePostBet';
+import type { BetAnswer } from '@/domain/bet/apis/useGetMyBet';
+import { usePostMatchResultBet } from '@/domain/bet/apis/usePostMatchResultBet';
+import type { SportType } from '@/lib/types';
 
 interface ScoreControllerProps {
   handlePlus: () => void;
@@ -20,16 +22,20 @@ const ScoreController = ({ handlePlus, handleMinus }: ScoreControllerProps) => {
 };
 
 interface Props {
+  sport: SportType;
   betData: BetAnswer;
-  handleScorePrediction: (
-    setScore: (prev: { kuScore: number; yuScore: number }) => {
-      kuScore: number;
-      yuScore: number;
-    },
-  ) => void;
 }
-const ScorePrediction = ({ betData, handleScorePrediction }: Props) => {
-  const { kuScore, yuScore } = betData.predict.score || { kuScore: 0, yuScore: 0 };
+const ScorePrediction = ({ sport, betData }: Props) => {
+  const { mutate: postMatchResultBet } = usePostMatchResultBet();
+  const { kuScore, yuScore } = betData.predict?.score || { kuScore: 0, yuScore: 0 };
+
+  const handleScorePrediction = (
+    setScore: (prev: { kuScore: number; yuScore: number }) => { kuScore: number; yuScore: number },
+  ) => {
+    const newScore = setScore({ kuScore, yuScore });
+    postMatchResultBet({ sport, predict: { score: newScore } });
+  };
+
   return (
     <div className={s.Container}>
       <div className={s.ScoreBox}>

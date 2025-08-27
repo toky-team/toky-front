@@ -1,8 +1,23 @@
 import client from '@/common/utils/client';
-import type { BetAnswer } from '@/domain/bet/apis/usePostBet';
-import type { SportType } from '@/lib/types';
+import type { SportType, UniversityType } from '@/lib/types';
 import { useQuery } from '@tanstack/react-query';
 
+export interface BetAnswer {
+  sport: SportType;
+  predict: {
+    matchResult?: UniversityType | '무승부';
+    score?: {
+      kuScore: number;
+      yuScore: number;
+    };
+  } | null;
+  kuPlayer: {
+    playerId: string;
+  } | null;
+  yuPlayer: {
+    playerId: string;
+  } | null;
+}
 const getMyBet = async (sport: SportType) => {
   const response = await client.get<BetAnswer>('/bet-answer', {
     params: {
