@@ -4,6 +4,7 @@ import { useGetAttendance } from '@/domain/attendance/apis/useGetAttendance';
 import { useGetAttendanceAll } from '@/domain/attendance/apis/useGetAttendanceAll';
 import * as s from './style.css';
 import AttendancePolicy from '@/domain/attendance/components/AttendancePolicy';
+import AttendanceBanner from '@/domain/attendance/components/AttendanceBanner';
 
 const AttendancePage = () => {
   const { data: todayAttendance } = useGetAttendance();
@@ -14,9 +15,8 @@ const AttendancePage = () => {
   return (
     <div className={s.Container}>
       <MainTopBar />
-      <NavBar />
-      <div className={s.Wrapper}>
-        {/* <AttendanceBanner>
+      <AttendanceBanner />
+      {/* <AttendanceBanner>
           매일매일 쏟아지는 응모권!
           <Icon.AttendanceQuizBadge />
         </AttendanceBanner>
@@ -26,7 +26,7 @@ const AttendancePage = () => {
         <AttendanceTicket>
           <Icon.AttendanceTicket />
         </AttendanceTicket> */}
-        {/* {todayQuizInfo && !isAttendanceLoading && (
+      {/* {todayQuizInfo && !isAttendanceLoading && (
           <>
             <AttendanceCalendar
               attendanceHistory={attendanceInfo?.attendanceHistory ?? []}
@@ -42,7 +42,6 @@ const AttendancePage = () => {
             /> }
           </>
         )} */}
-      </div>
       <AttendancePolicy />
     </div>
   );

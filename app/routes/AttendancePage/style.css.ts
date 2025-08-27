@@ -5,8 +5,3 @@ export const Container = style({
   flexDirection: 'column',
   width: '100%',
 });
-
-export const Wrapper = style({
-  position: 'relative',
-  width: '100%',
-});
