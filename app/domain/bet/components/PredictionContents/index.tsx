@@ -89,8 +89,8 @@ const PredictionContents = ({ sport }: Props) => {
         <PlayerSelector
           sport={sport}
           mySelection={{
-            kuPlayerId: betData.kuPlayer?.playerId || null,
-            yuPlayerId: betData.yuPlayer?.playerId || null,
+            kuPlayerId: betData.kuPlayer ? betData.kuPlayer.playerId : undefined,
+            yuPlayerId: betData.yuPlayer ? betData.yuPlayer.playerId : undefined,
           }}
           scrollToBottom={scrollToBottom}
         />

@@ -12,10 +12,10 @@ export interface BetAnswer {
     };
   } | null;
   kuPlayer: {
-    playerId: string;
+    playerId: string | null;
   } | null;
   yuPlayer: {
-    playerId: string;
+    playerId: string | null;
   } | null;
 }
 const getMyBet = async (sport: SportType) => {

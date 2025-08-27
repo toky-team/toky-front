@@ -13,8 +13,8 @@ import { usePostPlayerBet } from '@/domain/bet/apis/usePostPlayerBet';
 interface Props {
   sport: SportType;
   mySelection: {
-    kuPlayerId: string | null;
-    yuPlayerId: string | null;
+    kuPlayerId: string | null | undefined;
+    yuPlayerId: string | null | undefined;
   };
   scrollToBottom: () => void;
 }
@@ -24,9 +24,18 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
   const { mutate: postPlayerBet } = usePostPlayerBet();
 
   const kuSelectedPlayer =
-    mySelection?.kuPlayerId && data ? data.find((player) => player.id === mySelection.kuPlayerId) || null : null;
+    mySelection.kuPlayerId === undefined
+      ? undefined
+      : mySelection.kuPlayerId === null
+        ? null
+        : data?.find((player) => player.id === mySelection.kuPlayerId) || undefined;
   const yuSelectedPlayer =
-    mySelection?.yuPlayerId && data ? data.find((player) => player.id === mySelection.yuPlayerId) || null : null;
+    mySelection.yuPlayerId === undefined
+      ? undefined
+      : mySelection.yuPlayerId === null
+        ? null
+        : data?.find((player) => player.id === mySelection.yuPlayerId) || undefined;
+
   const setKuSelectedPlayer = (player: PlayerInterface | null) => {
     postPlayerBet({ sport, university: '고려대학교', playerId: player?.id || null });
   };
@@ -106,33 +115,34 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
                   );
                 })}
               </div>
-              {selectedPlayer === null ? (
-                <button
-                  className={s.PlayerButton({ type: 'noPlayerSelect' })}
-                  onClick={() => {
-                    setStatus(null);
-                  }}
-                >
-                  ‘득점 없음' 선택
-                </button>
-              ) : (
-                <div className={s.ButtonWrapper}>
+              {selectedPlayer !== undefined &&
+                (selectedPlayer === null ? (
                   <button
-                    className={s.PlayerButton({ type: 'profile' })}
-                    onClick={() => handlePlayerProfileClick(selectedPlayer.id)}
-                  >
-                    선수 프로필
-                  </button>
-                  <button
-                    className={s.PlayerButton({ type: 'select', status })}
+                    className={s.PlayerButton({ type: 'noPlayerSelect' })}
                     onClick={() => {
                       setStatus(null);
                     }}
                   >
-                    '{selectedPlayer.name}' 선수 선택
+                    ‘득점 없음' 선택
                   </button>
-                </div>
-              )}
+                ) : (
+                  <div className={s.ButtonWrapper}>
+                    <button
+                      className={s.PlayerButton({ type: 'profile' })}
+                      onClick={() => handlePlayerProfileClick(selectedPlayer.id)}
+                    >
+                      선수 프로필
+                    </button>
+                    <button
+                      className={s.PlayerButton({ type: 'select', status })}
+                      onClick={() => {
+                        setStatus(null);
+                      }}
+                    >
+                      '{selectedPlayer.name}' 선수 선택
+                    </button>
+                  </div>
+                ))}
             </div>
           );
         })()}

@@ -1,9 +1,7 @@
-import { useToast } from '@/common/hooks/useToast';
 import client from '@/common/utils/client';
 import useHandleMutationError from '@/common/utils/handleMutationError';
 import type { SportType, UniversityType } from '@/lib/types';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
 
 interface PostPlayerBetRequest {
   sport: SportType;
@@ -21,7 +19,7 @@ export const usePostPlayerBet = () => {
   return useMutation({
     mutationFn: postPlayerBet,
     onSuccess: (_, request) => {
-      queryClient.setQueryData(['my-bet', request.sport], request);
+      queryClient.invalidateQueries({ queryKey: ['my-bet', request.sport] });
       queryClient.invalidateQueries({ queryKey: ['bet-answer-ratio', request.sport] });
     },
     onError: (error) => onError(error),

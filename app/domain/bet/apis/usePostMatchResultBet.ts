@@ -24,7 +24,7 @@ export const usePostMatchResultBet = () => {
   return useMutation({
     mutationFn: postMatchResultBet,
     onSuccess: (_, request) => {
-      queryClient.setQueryData(['my-bet', request.sport], request);
+      queryClient.invalidateQueries({ queryKey: ['my-bet', request.sport] });
       queryClient.invalidateQueries({ queryKey: ['bet-answer-ratio', request.sport] });
     },
     onError: (error) => onError(error),
