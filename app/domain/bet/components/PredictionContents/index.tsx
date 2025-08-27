@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import * as s from './style.css';
 
@@ -16,15 +16,27 @@ interface Props {
 }
 const PredictionContents = ({ sport }: Props) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { data: betData, isLoading, isError } = useGetMyBet(sport);
+  const {
+    data: betData = { sport, predict: null, kuPlayer: null, yuPlayer: null },
+    isLoading,
+    isError,
+    isSuccess,
+  } = useGetMyBet(sport);
   const { mutate: postMatchResultBet } = usePostMatchResultBet();
 
   const [isScorePrediction, setIsScorePrediction] = useState(false);
-
-  if (isError) return <div>데이터를 불러오는데 실패했습니다.</div>; // TODO: Not Found 페이지
-  if (betData === undefined) return null;
-
   const canPredictScore = sport === '야구' || sport === '축구' || sport === '아이스하키';
+
+  useEffect(() => {
+    // score 뷰 상태 제어
+    if (canPredictScore && isSuccess && betData.predict?.score) {
+      setIsScorePrediction(true);
+    } else {
+      setIsScorePrediction(false);
+    }
+  }, [canPredictScore, isSuccess, betData?.predict?.score, sport]);
+
+  if (isError) return <div className={s.Container}>데이터를 불러오는데 실패했습니다.</div>; // TODO: Not Found 페이지
 
   const scrollToBottom = async () => {
     if (scrollRef.current) {
@@ -46,15 +58,18 @@ const PredictionContents = ({ sport }: Props) => {
       setIsScorePrediction(true);
       // 우승팀 예측 -> 점수 예측으로 변경
       // 우승팀 예측 데이터에 맞추어 점수 예측을 만들어주고 (1 : 0), 우승팀 예측 데이터를 삭제
+      if (betData.predict && betData.predict.score) return;
+
+      let newScore = { kuScore: 0, yuScore: 0 };
       if (betData.predict && betData.predict.matchResult) {
-        const newScore =
+        newScore =
           betData.predict.matchResult === '고려대학교'
             ? { kuScore: 1, yuScore: 0 }
             : betData.predict.matchResult === '연세대학교'
               ? { kuScore: 0, yuScore: 1 }
               : { kuScore: 0, yuScore: 0 };
-        postMatchResultBet({ sport, predict: { score: newScore } });
       }
+      postMatchResultBet({ sport, predict: { score: newScore } });
       return;
     }
   };
