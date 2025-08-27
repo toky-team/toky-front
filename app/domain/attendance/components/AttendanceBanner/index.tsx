@@ -21,7 +21,7 @@ const AttendanceBanner = () => {
           <p>현재까지 획득한 응모권</p>
           <TicketInfo />
         </div>
-        <Link className={s.GameButton} to="/attendance/game">
+        <Link className={s.GameButton} to="/attendance/game" replace={true}>
           게임 참여하기
         </Link>
       </div>

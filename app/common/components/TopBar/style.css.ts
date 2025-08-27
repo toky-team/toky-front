@@ -10,6 +10,7 @@ export const Container = style({
   justifyContent: 'space-between',
   padding: '0.8125rem 1.25rem',
   zIndex: 50,
+  flexShrink: 0,
 });
 
 export const BackButton = recipe({
