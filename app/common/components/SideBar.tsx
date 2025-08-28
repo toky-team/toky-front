@@ -4,30 +4,33 @@ import { useLocation, useNavigate } from 'react-router';
 import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 import { useGetUserInfo } from '@/common/apis/useGetUserInfo';
 import useGetTicketCount from '@/common/apis/useGetTicketCount';
+import { useGetInviteCode } from '@/common/apis/useGetInviteCode';
 import useLogout from '../apis/useLogout';
+import { useToast } from '@/common/hooks/useToast';
+import { CopyIcon } from 'lucide-react';
+import LoginButton from '@/domain/home/components/LoginButton';
+import Icon from '@/lib/assets/icons';
 
 const sideBarVariants = tv({
   slots: {
     root: 'fixed inset-0 z-50 flex justify-end',
     scrim: 'absolute inset-0 bg-black/60 backdrop-blur-sm',
     drawer:
-      'absolute right-0 top-0 w-[80vw] h-full bg-[#232323] px-4 pt-16 transition-transform duration-300 overflow-y-auto',
+      'absolute right-0 top-0 w-[80vw] h-full bg-[#232323] px-5 pt-10 transition-transform duration-300 overflow-y-auto',
     header: 'flex items-center gap-4 px-1',
     avatar:
       'h-14 w-14 shrink-0 rounded-full bg-white-disabled-12 flex items-center justify-center text-white/60 text-lg',
-    userBlock: 'flex flex-col gap-1',
-    userName: 'text-white text-xl font-semibold leading-tight',
-    university: 'text-red-400 text-sm',
+    userBlock: 'flex flex-col gap-[2px]',
+    userName: 'text-white text-xl font-bold',
+    university: 'text-xs font-normal',
     ticketBox:
-      'mt-5 rounded-2xl bg-[#333333] p-4 flex items-center justify-between',
-    ticketText: 'text-white-disabled-60 text-sm',
-    ticketCount: 'text-white text-xl font-semibold',
+      'mt-5 rounded-[10px] bg-[#333333] p-4 flex items-center justify-between',
+    ticketText: 'text-white/60 text-xs font-normal',
+    ticketCount: 'text-white/87 text-lg font-medium',
     inviteBtn:
-      'ml-2 inline-flex items-center justify-center rounded-xl bg-white text-black h-10 px-3 text-sm font-semibold',
+      'inline-flex items-center justify-center rounded-full bg-white-87 text-[#121212] h-[34px] px-4 text-sm font-bold',
     guestCard:
-      'mx-1 mb-5 rounded-2xl bg-white-disabled-12 p-4 flex items-center justify-between',
-    loginBtn:
-      'h-10 rounded-xl bg-primary px-5 text-sm font-semibold text-white',
+      'mt-5 rounded-[10px] bg-[#333333] p-4 flex items-center justify-between',
     nav: 'mt-6 flex flex-col gap-8',
     navItem:
       'relative w-max text-left text-white-disabled-60 text-base font-medium',
@@ -87,10 +90,12 @@ const SideBar = ({ onClose }: SideBarProps) => {
   const { data: userInfo } = useGetUserInfo();
   const { data: ticketCount } = useGetTicketCount();
   const logout = useLogout();
+  const { data: inviteCode } = useGetInviteCode();
+  const { openToast } = useToast();
 
   const currentPath = useLocation().pathname;
 
-  const { root, scrim, drawer, header, userBlock, userName, university, ticketBox, ticketText, ticketCount: ticketCountCls, inviteBtn, guestCard, loginBtn, nav } = sideBarVariants({ open: isVisible });
+  const { root, scrim, drawer, header, userBlock, userName, university, ticketBox, ticketText, ticketCount: ticketCountCls, inviteBtn, guestCard, nav } = sideBarVariants({ open: isVisible });
 
   useEffect(() => {
     // 컴포넌트가 마운트된 후 애니메이션 시작
@@ -118,7 +123,12 @@ const SideBar = ({ onClose }: SideBarProps) => {
   };
 
   const handleCopyInvite = async () => {
-    // TODO: 초대링크 복사 기능 추가
+    //TODO: 실제 배포 시 환경변수 변경
+    const text = import.meta.env.VITE_CLIENT_URL + '/?referer=' + inviteCode;
+    await navigator.clipboard.writeText(text);
+    openToast({
+      message: '초대 링크가 복사되었습니다.',
+    });
   };
 
   const isLoggedIn = Boolean(auth?.isLogin);
@@ -136,11 +146,15 @@ const SideBar = ({ onClose }: SideBarProps) => {
               </div>
             </div>
             <div className={ticketBox()}>
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-1">
                 <span className={ticketText()}>내 응모권</span>
-                <span className={ticketCountCls()}>{ticketCount ?? 0}장</span>
+                <div className="flex items-center gap-1">
+                  <Icon.Ticket />
+                  <span className={ticketCountCls()}>{ticketCount ?? 0}장</span>
+                </div>
               </div>
               <button onClick={handleCopyInvite} className={inviteBtn()}>
+                <CopyIcon className="w-[18px] h-[18px] mr-1" />
                 내 초대링크
               </button>
             </div>
@@ -151,9 +165,7 @@ const SideBar = ({ onClose }: SideBarProps) => {
               <div className="text-sm text-white/80">10초만에 로그인하고</div>
               <div className="text-sm text-white/80">승부예측 참여하세요</div>
             </div>
-            <button className={loginBtn()} onClick={() => handleNavigate('/login')}>
-              로그인
-            </button>
+            <LoginButton size="lg" />
           </div>
         )}
 
