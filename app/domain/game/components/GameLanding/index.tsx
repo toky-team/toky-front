@@ -18,8 +18,9 @@ const GameLanding = ({ step, sport, handleStart }: Props) => {
           <p>단계를 통과할 때마다 응모권을 드려요!</p>
         </div>
       </div>
+      {/* TODO: 사진 추가 */}
       <div className={s.BottomButton} onClick={handleStart}>
-        시작하기
+        {step === 1 ? '시작하기' : '2단계 도전하기'}
       </div>
     </div>
   );

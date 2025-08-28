@@ -11,16 +11,14 @@ const GameReady = ({ step, goToNextStep }: Props) => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCount((prev) => {
-        if (prev <= 1) {
-          goToNextStep();
-          return 0;
-        }
-        return prev - 1;
-      });
+      if (count === 1) {
+        goToNextStep();
+        return;
+      }
+      setCount((prev) => prev - 1);
     }, 1000);
     return () => clearInterval(timer);
-  }, [count, goToNextStep]);
+  }, [goToNextStep, count]);
 
   return (
     <div className={s.Container}>

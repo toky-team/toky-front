@@ -3,13 +3,15 @@ import TopBar from '@/common/components/TopBar';
 import * as s from './style.css';
 import { useState } from 'react';
 import GameLanding from '@/domain/game/components/GameLanding';
-import { SportArray, type SportType } from '@/lib/types';
+import { type SportType } from '@/lib/types';
 import GameReady from '@/domain/game/components/GameReady';
 import { usePostGameStart } from '@/domain/game/apis/usePostGameStart';
 import GamePlaying from '@/domain/game/components/GamePlaying';
 import GameSuccess from '@/domain/game/components/GameSuccess';
 import GameFail from '@/domain/game/components/GameFail';
 import { useNavigate } from 'react-router';
+import getRandomSport from '@/domain/game/utils/getRandomSport';
+import { useToast } from '@/common/hooks/useToast';
 
 type PageState = 'landing' | 'ready' | 'playing' | 'success' | 'fail' | 'restart';
 
@@ -17,8 +19,9 @@ const GamePage = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [pageState, setPageState] = useState<PageState>('landing');
-  const [sport, setSport] = useState<SportType>(SportArray[Math.floor(Math.random() * 5)].id);
+  const [sport, setSport] = useState<SportType>(getRandomSport());
   const { mutate: postGameStart } = usePostGameStart();
+  const { openToast } = useToast();
 
   const handleBack = () => {
     navigate('/attendance', { replace: true });
@@ -50,7 +53,21 @@ const GamePage = () => {
       {pageState === 'landing' && <GameLanding step={step} sport={sport} handleStart={handleStart} />}
       {pageState === 'ready' && <GameReady step={step} goToNextStep={handleGameStart} />}
       {pageState === 'playing' && <GamePlaying step={step} goToFail={handleGameFail} goToSuccess={handleGameSuccess} />}
-      {pageState === 'success' && <GameSuccess />}
+      {pageState === 'success' && (
+        <GameSuccess
+          step={step}
+          goToNextStep={() => {
+            if (step === 1) {
+              setStep(2);
+              setPageState('landing');
+              return;
+            }
+
+            navigate('/attendance', { replace: true });
+            openToast({ message: '응모권 2장 획득!' });
+          }}
+        />
+      )}
       {pageState === 'fail' && <GameFail step={step} />}
     </div>
   );

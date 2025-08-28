@@ -3,7 +3,8 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const Image = style({
-  maxWidth: '13.8125rem',
+  maxWidth: '21.75rem',
+  maxHeight: '27.625rem',
 });
 
 export const Container = style({
