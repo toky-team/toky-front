@@ -22,8 +22,6 @@ const GameFail = ({ step, handleRestart }: Props) => {
     }
 
     if (navigator.canShare({ text: import.meta.env.VITE_CLIENT_URL })) {
-      navigator.canShare({});
-
       try {
         await navigator.share({
           text: import.meta.env.VITE_CLIENT_URL,
