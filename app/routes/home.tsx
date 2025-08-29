@@ -27,15 +27,12 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center gap-8 px-5 py-8">
         {!isLoggedIn && <LoginCard />}
         <ActionCard />
-        <div className="w-full flex flex-row justify-between">
+        <div className="w-full flex flex-col gap-3">
           <div className="text-lg font-bold">
             정기전 일정
           </div>
-          <div className="text-sm text-gray-500">
-            자세히 보기
-          </div>
+          <ScheduleCarousel />
         </div>
-        <ScheduleCarousel />
         <AdsCarousel />
         <div className="w-full flex flex-row justify-between">
           <div className="text-lg font-bold">
