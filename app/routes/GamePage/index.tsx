@@ -1,7 +1,7 @@
 import TopBar from '@/common/components/TopBar';
 
 import * as s from './style.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import GameLanding from '@/domain/game/components/GameLanding';
 import { type SportType } from '@/lib/types';
 import GameReady from '@/domain/game/components/GameReady';
@@ -19,7 +19,7 @@ const GamePage = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [pageState, setPageState] = useState<PageState>('landing');
-  const [sport, setSport] = useState<SportType>(getRandomSport());
+  const [sport, setSport] = useState<SportType>('농구');
   const { mutate: postGameStart } = usePostGameStart();
   const { openToast } = useToast();
 
@@ -51,12 +51,19 @@ const GamePage = () => {
     setPageState('restart');
   };
 
+  useEffect(() => {
+    // 스텝 바뀔 때마다 스포츠 랜덤 선택
+    setSport(getRandomSport());
+  }, [step]);
+
   return (
     <div className={s.Container}>
       {pageState !== 'playing' && pageState !== 'ready' && <TopBar handlePrevButton={handleBack} />}
       {pageState === 'landing' && <GameLanding step={step} sport={sport} handleStart={handleStart} />}
       {pageState === 'ready' && <GameReady step={step} goToNextStep={handleGameStart} />}
-      {pageState === 'playing' && <GamePlaying step={step} goToFail={handleGameFail} goToSuccess={handleGameSuccess} />}
+      {pageState === 'playing' && (
+        <GamePlaying step={step} sport={sport} goToFail={handleGameFail} goToSuccess={handleGameSuccess} />
+      )}
       {pageState === 'success' && (
         <GameSuccess
           step={step}

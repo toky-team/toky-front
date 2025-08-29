@@ -1,25 +1,24 @@
 import Ball from '@/domain/game/components/Ball';
-import { GAME_TIME } from '@/domain/game/constants';
-import { useCallback, useEffect, useState } from 'react';
+import { BALL_NAME, BOARD_BG_URL_MAP, GAME_TIME } from '@/domain/game/constants';
+import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 
 import * as s from './style.css';
+import type { SportType } from '@/lib/types';
+import makeRandomBoard from '@/domain/game/utils/makeRandomBoard';
+import BallItem from '@/domain/game/components/GamePlaying/BallItem';
 
 interface Props {
   step: number;
+  sport: SportType;
   goToFail: () => void;
   goToSuccess: () => void;
 }
-const GamePlaying = ({ step, goToFail, goToSuccess }: Props) => {
+const GamePlaying = ({ step, sport, goToFail, goToSuccess }: Props) => {
   const time = GAME_TIME[step - 1];
   const [catchCount, setCatchCount] = useState(0);
 
-  const checkGameResult = useCallback(() => {
-    if (catchCount < 3) {
-      goToFail();
-      return;
-    }
-  }, [catchCount, goToFail]);
+  const board = useMemo(() => makeRandomBoard(sport), [sport]);
 
   useEffect(() => {
     if (catchCount >= 3) {
@@ -29,22 +28,52 @@ const GamePlaying = ({ step, goToFail, goToSuccess }: Props) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      checkGameResult();
+      goToFail();
     }, time);
     return () => clearTimeout(timer);
-  }, [checkGameResult, time]);
+  }, [goToFail, time]);
 
   return (
-    <div>
-      <div className={s.ProgressBar}>
-        <motion.div
-          className={s.ProgressBarFill}
-          initial={{ width: 0 }}
-          animate={{ width: '100%' }}
-          transition={{ duration: time / 1000, ease: 'linear' }}
-        />
+    <div className={s.Container}>
+      <div className={s.Header}>
+        <div>미션! {BALL_NAME[sport]}을 잡아라</div>
+        <div className={s.BallCount}>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <div key={index} className={s.BallCountItem}>
+              <Ball sport={sport} isNull={index >= catchCount} className={s.BallCountItemBall} />
+            </div>
+          ))}
+        </div>
       </div>
-      <button onClick={() => setCatchCount(3)}>성공하는 버튼</button>
+      <div className={s.Board}>
+        {board.map((item, index) => {
+          return (
+            <BallItem
+              key={index}
+              sport={item}
+              onClick={() => {
+                if (item !== sport) {
+                  goToFail();
+                  return;
+                }
+
+                setCatchCount((prev) => prev + 1);
+              }}
+            />
+          );
+        })}
+      </div>
+      <div className={s.ProgressBarContainer}>
+        <div className={s.ProgressBar}>
+          <motion.div
+            className={s.ProgressBarFill}
+            initial={{ width: 0 }}
+            animate={{ width: '100%' }}
+            transition={{ duration: time / 1000, ease: 'linear' }}
+          />
+        </div>
+      </div>
+      <img src={BOARD_BG_URL_MAP[sport]} className={s.Filter} />
     </div>
   );
 };
