@@ -47,6 +47,10 @@ const GamePage = () => {
     setPageState('success');
   };
 
+  const handleRestart = () => {
+    setPageState('restart');
+  };
+
   return (
     <div className={s.Container}>
       {pageState !== 'playing' && pageState !== 'ready' && <TopBar handlePrevButton={handleBack} />}
@@ -68,7 +72,8 @@ const GamePage = () => {
           }}
         />
       )}
-      {pageState === 'fail' && <GameFail step={step} />}
+      {pageState === 'fail' && <GameFail step={step} handleRestart={handleRestart} />}
+      {pageState === 'restart' && <GameLanding step={step} sport={sport} handleStart={handleStart} retry />}
     </div>
   );
 };

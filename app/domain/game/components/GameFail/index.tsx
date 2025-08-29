@@ -8,8 +8,9 @@ import { useToast } from '@/common/hooks/useToast';
 
 interface Props {
   step: number;
+  handleRestart: () => void;
 }
-const GameFail = ({ step }: Props) => {
+const GameFail = ({ step, handleRestart }: Props) => {
   const navigate = useNavigate();
   const { mutate: postAttendanceShare } = usePostAttendanceShare();
   const { openToast } = useToast();
@@ -29,7 +30,10 @@ const GameFail = ({ step }: Props) => {
         });
       } finally {
         postAttendanceShare(undefined, {
-          onSuccess: () => openToast({ message: '공유 성공' }),
+          onSuccess: () => {
+            openToast({ message: '공유 성공' });
+            handleRestart();
+          },
         });
       }
     }
