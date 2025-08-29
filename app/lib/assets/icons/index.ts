@@ -17,6 +17,10 @@ import Minus from '@/lib/assets/icons/Minus';
 import Heart from '@/lib/assets/icons/Heart';
 import Ban from '@/lib/assets/icons/Ban';
 import CheckCircle from '@/lib/assets/icons/CheckCircle';
+import Prediction from '@/lib/assets/icons/Prediction';
+import Record from '@/lib/assets/icons/Record';
+import Attendance from '@/lib/assets/icons/Attendance';
+import Application from '@/lib/assets/icons/Application';
 
 const Icon = {
   TokyLogo,
@@ -38,6 +42,10 @@ const Icon = {
   Heart,
   Ban,
   CheckCircle,
+  Prediction,
+  Record,
+  Attendance,
+  Application,
 };
 
 export default Icon;
