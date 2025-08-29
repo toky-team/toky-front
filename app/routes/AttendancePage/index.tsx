@@ -1,14 +1,10 @@
-import MainTopBar from '@/common/components/MainTopBar';
-import NavBar from '@/common/components/NavBar';
-import { useGetAttendance } from '@/domain/attendance/apis/useGetAttendance';
-import { useGetAttendanceAll } from '@/domain/attendance/apis/useGetAttendanceAll';
 import * as s from './style.css';
-import AttendancePolicy from '@/domain/attendance/components/AttendancePolicy';
-import AttendanceBanner from '@/domain/attendance/components/AttendanceBanner';
+
+import MainTopBar from '@/common/components/MainTopBar';
+import AttendancePolicy from '@/domain/game/components/AttendancePolicy';
+import AttendanceBanner from '@/domain/game/components/AttendanceBanner';
 
 const AttendancePage = () => {
-  const { data: todayAttendance } = useGetAttendance();
-  const { data: attendanceData } = useGetAttendanceAll();
   // const { data: todayQuizInfo } = useGetTodayQuiz();
   // const { data: attendanceInfo, isLoading: isAttendanceLoading, refetch: refetchAttendance } = useGetMyAttendance();
 

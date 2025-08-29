@@ -4,6 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 interface GetAttendanceResponse {
   attendandAt: string;
   isAttended: boolean;
+  firstStageResult: boolean;
+  secondStageResult: boolean;
 }
 
 const getAttendance = async () => {

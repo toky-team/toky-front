@@ -6,6 +6,8 @@ interface GetAttendanceAllResponse {
     {
       attendandAt: string;
       isAttended: boolean;
+      firstStageResult: boolean;
+      secondStageResult: boolean;
     },
   ];
   ticketCountByAttendance: number;

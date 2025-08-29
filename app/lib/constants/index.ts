@@ -1,6 +1,5 @@
 import type { SportType } from '@/lib/types';
 
-// TODO: 추후 수정
 export const LOCATION_MAP: Record<SportType, string> = {
   축구: '고양 종합운동장',
   농구: '고양운동장 체육관',
