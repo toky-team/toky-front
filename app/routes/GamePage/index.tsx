@@ -1,7 +1,7 @@
 import TopBar from '@/common/components/TopBar';
 
 import * as s from './style.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import GameLanding from '@/domain/game/components/GameLanding';
 import { type SportType } from '@/lib/types';
 import GameReady from '@/domain/game/components/GameReady';
@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router';
 import getRandomSport from '@/domain/game/utils/getRandomSport';
 import { useToast } from '@/common/hooks/useToast';
 import { usePostGameComplete } from '@/domain/game/apis/usePostGameComplete';
+import { useGetAttendance } from '@/domain/game/apis/useGetAttendance';
 
 type PageState = 'landing' | 'ready' | 'playing' | 'success' | 'fail' | 'restart';
 
@@ -23,18 +24,25 @@ const GamePage = () => {
   const [sport, setSport] = useState<SportType>('농구');
   const { mutate: postGameStart } = usePostGameStart();
   const { mutate: postGameComplete } = usePostGameComplete();
+  const { data: todayAttendance, isSuccess: isTodayAttendanceSuccess } = useGetAttendance();
   const { openToast } = useToast();
+  const isMount = useRef(false);
 
   const handleBack = () => {
     navigate('/attendance', { replace: true });
   };
 
   const handleStart = () => {
-    postGameStart(undefined, {
-      onSuccess: () => {
-        setPageState('ready');
-      },
-    });
+    if (step === 1) {
+      postGameStart(undefined, {
+        onSuccess: () => {
+          setPageState('ready');
+        },
+      });
+      return;
+    }
+
+    setPageState('ready');
   };
 
   const handleGameStart = () => {
@@ -51,6 +59,7 @@ const GamePage = () => {
       },
     );
   };
+
   const handleGameSuccess = () => {
     postGameComplete(
       { stage: step, win: true },
@@ -62,9 +71,37 @@ const GamePage = () => {
     );
   };
 
+  const handleNextStep = () => {
+    if (step === 1) {
+      setStep(2);
+      setPageState('landing');
+      return;
+    }
+
+    navigate('/attendance', { replace: true });
+    openToast({ message: '응모권 2장 획득!' });
+  };
+
   const handleRestart = () => {
     setPageState('restart');
   };
+
+  useEffect(() => {
+    if (isMount.current) return;
+    isMount.current = true;
+
+    if (!isTodayAttendanceSuccess) return;
+
+    if (todayAttendance.secondStageResult !== null) {
+      navigate('/attendance', { replace: true });
+      return;
+    }
+
+    if (todayAttendance.firstStageResult) {
+      setStep(2);
+      return;
+    }
+  }, [todayAttendance, isTodayAttendanceSuccess, navigate]);
 
   useEffect(() => {
     // 스텝 바뀔 때마다 스포츠 랜덤 선택
@@ -79,21 +116,7 @@ const GamePage = () => {
       {pageState === 'playing' && (
         <GamePlaying step={step} sport={sport} goToFail={handleGameFail} goToSuccess={handleGameSuccess} />
       )}
-      {pageState === 'success' && (
-        <GameSuccess
-          step={step}
-          goToNextStep={() => {
-            if (step === 1) {
-              setStep(2);
-              setPageState('landing');
-              return;
-            }
-
-            navigate('/attendance', { replace: true });
-            openToast({ message: '응모권 2장 획득!' });
-          }}
-        />
-      )}
+      {pageState === 'success' && <GameSuccess step={step} goToNextStep={handleNextStep} />}
       {pageState === 'fail' && <GameFail step={step} handleRestart={handleRestart} />}
       {pageState === 'restart' && <GameLanding step={step} sport={sport} handleStart={handleStart} retry />}
     </div>

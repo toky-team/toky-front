@@ -12,8 +12,10 @@ const AttendanceBanner = () => {
   const { data: todayAttendance, isSuccess: isTodayAttendanceSuccess } = useGetAttendance();
   const { data: attendanceData } = useGetAttendanceAll();
 
+  const isDisabled = !isTodayAttendanceSuccess || todayAttendance.secondStageResult !== null;
+
   const handleGameStart = () => {
-    if (!isTodayAttendanceSuccess || todayAttendance.isAttended) return;
+    if (isDisabled) return;
     navigate('/attendance/game', { replace: true });
   };
 
@@ -32,11 +34,12 @@ const AttendanceBanner = () => {
           <p>현재까지 획득한 응모권</p>
           <TicketInfo />
         </div>
-        <button
-          className={s.GameButton({ disabled: !isTodayAttendanceSuccess || todayAttendance.isAttended })}
-          onClick={handleGameStart}
-        >
-          {isTodayAttendanceSuccess ? (todayAttendance.isAttended ? '내일 다시 참여해보세요!' : '게임 참여하기') : ''}
+        <button className={s.GameButton({ disabled: isDisabled })} onClick={handleGameStart}>
+          {isTodayAttendanceSuccess
+            ? todayAttendance.secondStageResult !== null
+              ? '내일 다시 참여해보세요!'
+              : '게임 참여하기'
+            : ''}
         </button>
       </div>
     </div>

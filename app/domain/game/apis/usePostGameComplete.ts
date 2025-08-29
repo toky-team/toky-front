@@ -1,5 +1,5 @@
 import client from '@/common/utils/client';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface PostGameCompleteRequest {
   stage: 1 | 2;
@@ -11,7 +11,13 @@ const postGameComplete = async (request: PostGameCompleteRequest) => {
 };
 
 export const usePostGameComplete = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: postGameComplete,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['today-attendance'] });
+      queryClient.invalidateQueries({ queryKey: ['attendance-all'] });
+    },
   });
 };

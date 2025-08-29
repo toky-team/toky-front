@@ -12,6 +12,7 @@ export const usePostGameStart = () => {
     mutationFn: postGameStart,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['today-attendance'] });
+      queryClient.invalidateQueries({ queryKey: ['attendance-all'] });
     },
   });
 };
