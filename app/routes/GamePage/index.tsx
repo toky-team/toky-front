@@ -12,15 +12,17 @@ import GameFail from '@/domain/game/components/GameFail';
 import { useNavigate } from 'react-router';
 import getRandomSport from '@/domain/game/utils/getRandomSport';
 import { useToast } from '@/common/hooks/useToast';
+import { usePostGameComplete } from '@/domain/game/apis/usePostGameComplete';
 
 type PageState = 'landing' | 'ready' | 'playing' | 'success' | 'fail' | 'restart';
 
 const GamePage = () => {
   const navigate = useNavigate();
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState<1 | 2>(1);
   const [pageState, setPageState] = useState<PageState>('landing');
   const [sport, setSport] = useState<SportType>('농구');
   const { mutate: postGameStart } = usePostGameStart();
+  const { mutate: postGameComplete } = usePostGameComplete();
   const { openToast } = useToast();
 
   const handleBack = () => {
@@ -28,11 +30,11 @@ const GamePage = () => {
   };
 
   const handleStart = () => {
-    // postGameStart(undefined, {
-    //   onSuccess: () => {
-    setPageState('ready');
-    //   },
-    // });
+    postGameStart(undefined, {
+      onSuccess: () => {
+        setPageState('ready');
+      },
+    });
   };
 
   const handleGameStart = () => {
@@ -40,11 +42,24 @@ const GamePage = () => {
   };
 
   const handleGameFail = () => {
-    setPageState('fail');
+    postGameComplete(
+      { stage: step, win: false },
+      {
+        onSuccess: () => {
+          setPageState('fail');
+        },
+      },
+    );
   };
   const handleGameSuccess = () => {
-    // TODO: 성공 로직
-    setPageState('success');
+    postGameComplete(
+      { stage: step, win: true },
+      {
+        onSuccess: () => {
+          setPageState('success');
+        },
+      },
+    );
   };
 
   const handleRestart = () => {

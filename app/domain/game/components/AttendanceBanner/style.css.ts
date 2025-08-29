@@ -1,5 +1,6 @@
 import { vars } from '@/root.css';
 import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
 export const Wrapper = style({
   position: 'relative',
@@ -62,13 +63,24 @@ export const TicketWrapper = style({
   gap: '0.5rem',
 });
 
-export const GameButton = style({
-  background: 'linear-gradient(90deg, #58009E 0%, #9100D5 100%)',
-  borderRadius: '0.5rem',
-  width: '100%',
-  height: '2.875rem',
-  padding: '0.75rem 1.25rem',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+export const GameButton = recipe({
+  base: {
+    borderRadius: '0.5rem',
+    width: '100%',
+    height: '2.875rem',
+    padding: '0.75rem 1.25rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  variants: {
+    disabled: {
+      true: {
+        background: 'rgba(255, 255, 255, 0.10)',
+      },
+      false: {
+        background: 'linear-gradient(90deg, #58009E 0%, #9100D5 100%)',
+      },
+    },
+  },
 });

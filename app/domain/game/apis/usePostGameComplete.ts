@@ -6,7 +6,7 @@ interface PostGameCompleteRequest {
   win: boolean;
 }
 const postGameComplete = async (request: PostGameCompleteRequest) => {
-  const response = await client.post('/game/complete', request);
+  const response = await client.post('/attendance/game/complete', request);
   return response.data;
 };
 
