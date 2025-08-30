@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { tv, type VariantProps } from 'tailwind-variants';
+import { tv } from 'tailwind-variants';
 import { useLocation, useNavigate } from 'react-router';
 import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 import { useGetUserInfo } from '@/common/apis/useGetUserInfo';
@@ -10,6 +10,7 @@ import { useToast } from '@/common/hooks/useToast';
 import { CopyIcon } from 'lucide-react';
 import LoginButton from '@/domain/home/components/LoginButton';
 import Icon from '@/lib/assets/icons';
+import { motion } from 'motion/react';
 
 const sideBarVariants = tv({
   slots: {
@@ -146,7 +147,14 @@ const SideBar = ({ onClose }: SideBarProps) => {
 
   return (
     <div className={root()}>
-      <div className={scrim()} onClick={handleClose} />
+      <motion.div
+        className={scrim()}
+        onClick={handleClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      />
       <div className={drawer()}>
         {isLoggedIn ? (
           <>
