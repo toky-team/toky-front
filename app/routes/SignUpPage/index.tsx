@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { useSignupError, useSignupForm } from '@/domain/signup/stores/SignupFormStore';
@@ -31,6 +31,7 @@ const SignUp = () => {
   const { mutate: signup } = usePostSignup();
   const { mutate: sendSMS } = usePostSendSMS();
   const { mutate: verifySMS } = usePostVerifySMS();
+  const isFirstRender = useRef(false);
 
   const isAlreadySignup = authCheck?.isSignup || false;
   const isLogin = authCheck?.isLogin || false;
@@ -54,7 +55,10 @@ const SignUp = () => {
   }, [api, progress]);
 
   useEffect(() => {
+    if (isFirstRender.current) return;
+
     if (isSuccessAuthCheck) {
+      isFirstRender.current = true;
       if (isAlreadySignup) {
         navigate('/', { replace: true });
       } else if (!isLogin) {
