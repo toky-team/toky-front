@@ -1,6 +1,7 @@
 import client from '@/common/utils/client';
 import type { SignupFormType } from '@/lib/types/signup';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router';
 
 const postSignup = async (data: Omit<SignupFormType, 'authNumber'>) => {
   const response = await client.post('/auth/register', data);
@@ -8,12 +9,14 @@ const postSignup = async (data: Omit<SignupFormType, 'authNumber'>) => {
 };
 
 export const usePostSignup = () => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: postSignup,
     onSuccess: () => {
       // 회원가입 성공시 인증 관련 캐시 무효화
+      navigate('/welcome', { replace: true });
       queryClient.invalidateQueries({ queryKey: ['auth-check'] });
       queryClient.invalidateQueries({ queryKey: ['user-info'] });
       queryClient.invalidateQueries({ queryKey: ['ticket-count'] });
