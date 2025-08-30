@@ -14,10 +14,10 @@ const KoreapasLoginPage = () => {
           <KoreapasLoginForm />
           <div className={s.SignUpLinkWrapper}>
             <p className={s.SignUpInstruction}>고파스 계정이 없으신가요?</p>
-            <a href="https://www.koreapas.com" className={s.SignUpLink}>
+            <a href="https://www.koreapas.com/m/member_join_new.php" className={s.SignUpLink}>
               회원가입
             </a>
-            {/* TODO: 회원가입 페이지 연결 */}
+            {/* TODO: TOKY용 회원가입 페이지 연결 */}
           </div>
         </div>
       </div>
