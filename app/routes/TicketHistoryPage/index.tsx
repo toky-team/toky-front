@@ -6,7 +6,7 @@ import useIntersect from '@/common/hooks/useIntersect';
 import { formatDate } from 'date-fns';
 
 const TicketHistoryPage = () => {
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } = useGetTicketHistory(undefined);
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } = useGetTicketHistory();
 
   const fetchNextRef = useIntersect(async (entry, observer) => {
     observer.unobserve(entry.target);
