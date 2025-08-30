@@ -17,9 +17,11 @@ export const usePostSignup = () => {
     onSuccess: () => {
       // 회원가입 성공시 인증 관련 캐시 무효화
       navigate('/welcome', { replace: true });
-      queryClient.invalidateQueries({ queryKey: ['auth-check'] });
-      queryClient.invalidateQueries({ queryKey: ['user-info'] });
-      queryClient.invalidateQueries({ queryKey: ['ticket-count'] });
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ['auth-check'] });
+        queryClient.invalidateQueries({ queryKey: ['user-info'] });
+        queryClient.invalidateQueries({ queryKey: ['ticket-count'] });
+      }, 0);
     },
   });
 };
