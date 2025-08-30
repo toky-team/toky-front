@@ -243,7 +243,6 @@ export const PositionStyle = style({
   textOverflow: 'ellipsis',
   overflow: 'hidden',
   whiteSpace: 'nowrap',
-  flexShrink: 0,
 });
 
 export const PlayerName = style({
