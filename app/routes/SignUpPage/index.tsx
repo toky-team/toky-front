@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { useSignupError, useSignupForm } from '@/domain/signup/stores/SignupFormStore';
@@ -14,7 +14,7 @@ import { usePostSendSMS } from '@/domain/signup/apis/usePostSendSMS';
 import { usePostVerifySMS } from '@/domain/signup/apis/usePostVerifySMS';
 import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 
-const TOTAL_PROGRESS = 6;
+const TOTAL_PROGRESS = 5;
 
 const SignUp = () => {
   const [api, setApi] = useState<CarouselApi>();
@@ -31,6 +31,7 @@ const SignUp = () => {
   const { mutate: signup } = usePostSignup();
   const { mutate: sendSMS } = usePostSendSMS();
   const { mutate: verifySMS } = usePostVerifySMS();
+  const isFirstRender = useRef(false);
 
   const isAlreadySignup = authCheck?.isSignup || false;
   const isLogin = authCheck?.isLogin || false;
@@ -54,7 +55,10 @@ const SignUp = () => {
   }, [api, progress]);
 
   useEffect(() => {
+    if (isFirstRender.current) return;
+
     if (isSuccessAuthCheck) {
+      isFirstRender.current = true;
       if (isAlreadySignup) {
         navigate('/', { replace: true });
       } else if (!isLogin) {
@@ -65,7 +69,7 @@ const SignUp = () => {
 
   const handlePrevButton = useCallback(() => {
     if (progress === 0) {
-      navigate(-1);
+      navigate('/', { replace: true });
     } else {
       setProgress((prev) => prev - 1);
     }
@@ -86,8 +90,6 @@ const SignUp = () => {
         return formState.authNumber !== '';
       case 4:
         return formState.agreement;
-      case 5:
-        return true;
       default:
         return false;
     }
@@ -149,15 +151,12 @@ const SignUp = () => {
             },
             {
               onSuccess: () => {
-                setProgress((prev) => prev + 1);
+                navigate('/welcome', { replace: true });
               },
             },
           );
           break;
         }
-        case 5:
-          navigate('/');
-          break;
       }
     }
   };
@@ -166,12 +165,8 @@ const SignUp = () => {
 
   return (
     <div className="h-full">
-      {progress !== TOTAL_PROGRESS - 1 && (
-        <>
-          <TopBar handlePrevButton={handlePrevButton} />
-          <SignupProgress curProgress={progress} totalProgress={TOTAL_PROGRESS - 1} />
-        </>
-      )}
+      <TopBar handlePrevButton={handlePrevButton} />
+      <SignupProgress curProgress={progress} totalProgress={TOTAL_PROGRESS} />
       <SignupFunnel curProgress={progress} setApi={setApi} />
       <SignupFooter
         progress={progress}

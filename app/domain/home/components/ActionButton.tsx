@@ -11,7 +11,7 @@ const actionButtonVariants = tv({
 interface ActionButtonProps extends VariantProps<typeof actionButtonVariants> {
   link: string;
   className?: string;
-  image?: string;
+  image?: React.ReactNode;
   description?: string;
 }
 
@@ -21,7 +21,7 @@ const ActionButton = ({ link, className, image, description }: ActionButtonProps
   return (
     <div className={root({ className })}>
       <Link to={link}>
-        {image ? <img src={image} /> : <div className="w-13 h-13 bg-gray-200" />}
+        {image ? image : <div className="w-13 h-13 bg-gray-200" />}
       </Link>
       {description && <div className={descriptionClass()}>{description}</div>}
     </div>

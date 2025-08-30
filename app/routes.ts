@@ -8,6 +8,7 @@ export default [
   route('player', 'routes/Player.tsx'),
   route('signup', 'routes/SignUpPage/index.tsx'),
   layout('common/components/AuthGuard/index.tsx', [
+    route('welcome', 'routes/WelcomePage/index.tsx'),
     route('live/:sports', 'routes/LivePage/index.tsx'),
     route('prediction', 'routes/PredictionPage/index.tsx'),
     route('attendance', 'routes/AttendancePage/index.tsx'),
