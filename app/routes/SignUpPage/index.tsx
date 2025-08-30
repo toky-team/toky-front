@@ -143,18 +143,11 @@ const SignUp = () => {
           // TODO: 초대 코드 추가 필요
           // const inviteCode = localStorage.getItem('invite-code');
           // localStorage.removeItem('invite-code');
-          signup(
-            {
-              name: formState.name,
-              phoneNumber: formState.phoneNumber,
-              university: formState.university,
-            },
-            {
-              onSuccess: () => {
-                navigate('/welcome', { replace: true });
-              },
-            },
-          );
+          signup({
+            name: formState.name,
+            phoneNumber: formState.phoneNumber,
+            university: formState.university,
+          });
           break;
         }
       }
