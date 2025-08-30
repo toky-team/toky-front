@@ -21,7 +21,7 @@ export const ButtonContainer = style({
   padding: '0 1.25rem',
   paddingBottom: '3.125rem',
   gap: '0.75rem',
-  zIndex: 1,
+  zIndex: 2,
 });
 
 export const LoginButton = recipe({
@@ -99,7 +99,7 @@ export const BackgroundFilter = style({
   right: 0,
   height: '21rem',
   background: 'linear-gradient(180deg, rgba(18, 18, 18, 0.00) 3.77%, #121212 55.12%)',
-  zIndex: 0,
+  zIndex: 1,
 });
 
 export const Background = style({
@@ -107,5 +107,5 @@ export const Background = style({
   bottom: 0,
   right: 0,
   left: 0,
-  zIndex: -1,
+  zIndex: 0,
 });

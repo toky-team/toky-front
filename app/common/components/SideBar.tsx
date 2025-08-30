@@ -142,7 +142,7 @@ const SideBar = ({ onClose }: SideBarProps) => {
     });
   };
 
-  const isLoggedIn = Boolean(auth?.isLogin);
+  const isLoggedIn = Boolean(auth?.isSignup);
 
   return (
     <div className={root()}>

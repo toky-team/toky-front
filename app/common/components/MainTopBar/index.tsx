@@ -12,7 +12,7 @@ import SideBar from '@/common/components/SideBar';
 const MainTopBar = () => {
   const { data: authCheck, isLoading } = useGetAuthCheck();
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const isLogin = authCheck?.isLogin || false;
+  const isLogin = authCheck?.isSignup || false;
 
   return (
     <div className={s.Container}>
