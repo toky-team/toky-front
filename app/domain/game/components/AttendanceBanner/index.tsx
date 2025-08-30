@@ -6,6 +6,8 @@ import TicketInfo from '@/common/components/TicketInfo';
 import { useNavigate } from 'react-router';
 import { useGetAttendance } from '@/domain/game/apis/useGetAttendance';
 import { useGetAttendanceAll } from '@/domain/game/apis/useGetAttendanceAll';
+import { CALENDAR_DATE } from '@/domain/game/constants';
+import Icon from '@/lib/assets/icons';
 
 const AttendanceBanner = () => {
   const navigate = useNavigate();
@@ -28,7 +30,25 @@ const AttendanceBanner = () => {
           <img src={png} className={s.ImageUnder} />
         </div>
       </div>
-      {/* TODO: 캘린더 만들기 */}
+      <div className={s.CalendarWrapper}>
+        {CALENDAR_DATE.map((value) => {
+          const isVisible = value.isVisible;
+          const isToday = isVisible && new Date(value.date).getDate() === new Date().getDate();
+          const isAttended =
+            isVisible &&
+            attendanceData?.attendances.some(
+              (attendance) => new Date(attendance.attendandAt).getDate() === new Date(value.date).getDate(),
+            );
+          return (
+            <span
+              key={value.date}
+              className={s.CalendarItem({ variant: isAttended ? 'isAttended' : isToday ? 'today' : undefined })}
+            >
+              {isVisible && (isAttended ? <Icon.Check width={18} height={18} /> : new Date(value.date).getDate())}
+            </span>
+          );
+        })}
+      </div>
       <div className={s.GameButtonWrapper}>
         <div className={s.TicketWrapper}>
           <p>현재까지 획득한 응모권</p>

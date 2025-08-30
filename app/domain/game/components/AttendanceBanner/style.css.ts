@@ -84,3 +84,43 @@ export const GameButton = recipe({
     },
   },
 });
+
+export const CalendarWrapper = style({
+  width: '100%',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(7, 1fr)',
+  rowGap: '0.5rem',
+  columnGap: '1.12rem',
+  padding: '0 3.125rem',
+  paddingTop: '1.87rem',
+  paddingBottom: '2rem',
+});
+
+export const CalendarItem = recipe({
+  base: {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: vars.color['white-87'],
+    textAlign: 'center',
+    fontSize: '0.8125rem',
+    fontWeight: 400,
+    lineHeight: 1,
+    letterSpacing: '-0.0325rem',
+    width: '1.625rem',
+    height: '1.625rem',
+    borderRadius: '6.1875rem',
+  },
+  variants: {
+    variant: {
+      today: {
+        border: '1px solid',
+        borderColor: vars.color['white-87'],
+      },
+      isAttended: {
+        backgroundColor: '#C33DEF',
+      },
+    },
+  },
+});

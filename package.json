@@ -3,11 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc -b && vite build",
-    "dev": "vite",
-    "start": "vite preview",
-    "typecheck": "tsc",
-    "lint": "eslint ."
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
