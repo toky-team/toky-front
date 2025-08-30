@@ -14,6 +14,7 @@ import getRandomSport from '@/domain/game/utils/getRandomSport';
 import { useToast } from '@/common/hooks/useToast';
 import { usePostGameComplete } from '@/domain/game/apis/usePostGameComplete';
 import { useGetAttendance } from '@/domain/game/apis/useGetAttendance';
+import { useGetUserInfo } from '@/common/apis/useGetUserInfo';
 
 type PageState = 'landing' | 'ready' | 'playing' | 'success' | 'fail' | 'restart';
 
@@ -27,6 +28,9 @@ const GamePage = () => {
   const { data: todayAttendance, isSuccess: isTodayAttendanceSuccess } = useGetAttendance();
   const { openToast } = useToast();
   const isMount = useRef(false);
+  const { data: userInfo } = useGetUserInfo();
+
+  const university = userInfo?.university || '고려대학교';
 
   const handleBack = () => {
     navigate('/attendance', { replace: true });
@@ -112,14 +116,18 @@ const GamePage = () => {
   return (
     <div className={s.Container}>
       {pageState !== 'playing' && pageState !== 'ready' && <TopBar handlePrevButton={handleBack} />}
-      {pageState === 'landing' && <GameLanding step={step} sport={sport} handleStart={handleStart} />}
+      {pageState === 'landing' && (
+        <GameLanding step={step} sport={sport} handleStart={handleStart} university={university} />
+      )}
       {pageState === 'ready' && <GameReady step={step} goToNextStep={handleGameStart} />}
       {pageState === 'playing' && (
         <GamePlaying step={step} sport={sport} goToFail={handleGameFail} goToSuccess={handleGameSuccess} />
       )}
       {pageState === 'success' && <GameSuccess step={step} goToNextStep={handleNextStep} />}
       {pageState === 'fail' && <GameFail step={step} handleRestart={handleRestart} />}
-      {pageState === 'restart' && <GameLanding step={step} sport={sport} handleStart={handleStart} retry />}
+      {pageState === 'restart' && (
+        <GameLanding step={step} sport={sport} handleStart={handleStart} university={university} retry />
+      )}
     </div>
   );
 };
