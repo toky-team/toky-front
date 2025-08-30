@@ -21,12 +21,6 @@ const GamePlaying = ({ step, sport, goToFail, goToSuccess }: Props) => {
   const board = useMemo(() => makeRandomBoard(sport), [sport]);
 
   useEffect(() => {
-    if (catchCount >= 3) {
-      goToSuccess();
-    }
-  }, [catchCount, goToSuccess]);
-
-  useEffect(() => {
     const timer = setTimeout(() => {
       goToFail();
     }, time);
@@ -57,7 +51,12 @@ const GamePlaying = ({ step, sport, goToFail, goToSuccess }: Props) => {
                   return;
                 }
 
-                setCatchCount((prev) => prev + 1);
+                setCatchCount((prev) => {
+                  if (prev === 2) {
+                    goToSuccess();
+                  }
+                  return prev + 1;
+                });
               }}
             />
           );
