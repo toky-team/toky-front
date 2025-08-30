@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { tv, type VariantProps } from 'tailwind-variants';
+import { tv } from 'tailwind-variants';
 import { useLocation, useNavigate } from 'react-router';
 import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 import { useGetUserInfo } from '@/common/apis/useGetUserInfo';
