@@ -45,3 +45,22 @@ export const BottomButton = style({
   left: '1.25rem',
   right: '1.25rem',
 });
+
+export const BallImage = style({
+  width: '18rem',
+  height: '18rem',
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -14rem)',
+  zIndex: 1,
+});
+
+export const TokyImage = style({
+  height: '18rem',
+  zIndex: 2,
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -4rem)',
+});

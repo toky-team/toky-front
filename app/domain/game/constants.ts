@@ -15,6 +15,7 @@ export const GAME_TIME = [3000, 1000]; // MS
 
 export const GAME_GAP_TIME = 3000; // MS
 
+// TODO: 야구 경기장 이미지 추가
 export const BOARD_BG_URL_MAP: Record<SportType, string> = {
   야구: basketballBg,
   축구: soccerBg,
