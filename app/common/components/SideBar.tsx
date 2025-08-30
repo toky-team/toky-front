@@ -23,17 +23,14 @@ const sideBarVariants = tv({
     userBlock: 'flex flex-col gap-[2px]',
     userName: 'text-white text-xl font-bold',
     university: 'text-xs font-normal',
-    ticketBox:
-      'mt-5 rounded-[10px] bg-[#333333] p-4 flex items-center justify-between',
+    ticketBox: 'mt-5 rounded-[10px] bg-[#333333] p-4 flex items-center justify-between',
     ticketText: 'text-white/60 text-xs font-normal',
     ticketCount: 'text-white/87 text-lg font-medium',
     inviteBtn:
       'inline-flex items-center justify-center rounded-full bg-white-87 text-[#121212] h-[34px] px-4 text-sm font-bold',
-    guestCard:
-      'mt-5 rounded-[10px] bg-[#333333] p-4 flex items-center justify-between',
-    nav: 'mt-6 flex flex-col gap-8',
-    navItem:
-      'relative w-max text-left text-white-disabled-60 text-base font-medium',
+    guestCard: 'mt-5 rounded-[10px] bg-[#333333] p-4 flex items-center justify-between',
+    nav: 'mt-6 flex flex-col gap-8 pb-8',
+    navItem: 'relative w-max text-left text-white-disabled-60 text-base font-medium',
   },
   variants: {
     open: {
@@ -53,8 +50,8 @@ const sideBarVariants = tv({
       yonsei: { university: 'text-light-blue' },
     },
   },
-  defaultVariants: { 
-    open: false, 
+  defaultVariants: {
+    open: false,
     university: 'korea',
     active: false,
   },
@@ -95,7 +92,21 @@ const SideBar = ({ onClose }: SideBarProps) => {
 
   const currentPath = useLocation().pathname;
 
-  const { root, scrim, drawer, header, userBlock, userName, university, ticketBox, ticketText, ticketCount: ticketCountCls, inviteBtn, guestCard, nav } = sideBarVariants({ open: isVisible });
+  const {
+    root,
+    scrim,
+    drawer,
+    header,
+    userBlock,
+    userName,
+    university,
+    ticketBox,
+    ticketText,
+    ticketCount: ticketCountCls,
+    inviteBtn,
+    guestCard,
+    nav,
+  } = sideBarVariants({ open: isVisible });
 
   useEffect(() => {
     // 컴포넌트가 마운트된 후 애니메이션 시작
@@ -154,8 +165,7 @@ const SideBar = ({ onClose }: SideBarProps) => {
                 </div>
               </div>
               <button onClick={handleCopyInvite} className={inviteBtn()}>
-                <CopyIcon className="w-[18px] h-[18px] mr-1" />
-                내 초대링크
+                <CopyIcon className="mr-1 h-[18px] w-[18px]" />내 초대링크
               </button>
             </div>
           </>
@@ -170,22 +180,20 @@ const SideBar = ({ onClose }: SideBarProps) => {
         )}
 
         <nav className={nav()}>
-          {navItems.filter((item) => !item.onlyLoggedIn || isLoggedIn).map((item) => {
-            const isActive = currentPath === item.path;
-            const variantStyles = sideBarVariants({ 
-              open: isVisible, 
-              active: isActive 
-            });
-            return (
-              <button
-                key={item.path}
-                className={variantStyles.navItem()}
-                onClick={() => handleNavigate(item.path)}
-              >
-                {item.label}
-              </button>
-            );
-          })}
+          {navItems
+            .filter((item) => !item.onlyLoggedIn || isLoggedIn)
+            .map((item) => {
+              const isActive = currentPath === item.path;
+              const variantStyles = sideBarVariants({
+                open: isVisible,
+                active: isActive,
+              });
+              return (
+                <button key={item.path} className={variantStyles.navItem()} onClick={() => handleNavigate(item.path)}>
+                  {item.label}
+                </button>
+              );
+            })}
           {isLoggedIn && (
             <button className={sideBarVariants({ active: false }).navItem()} onClick={handleLogout}>
               로그아웃

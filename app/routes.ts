@@ -13,5 +13,6 @@ export default [
     route('prediction', 'routes/PredictionPage/index.tsx'),
     route('attendance', 'routes/AttendancePage/index.tsx'),
     route('attendance/game', 'routes/GamePage/index.tsx'),
+    route('account', 'routes/EditInfoPage/index.tsx'),
   ]),
 ] satisfies RouteConfig;
