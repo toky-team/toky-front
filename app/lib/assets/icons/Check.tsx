@@ -1,6 +1,14 @@
-export function Check({ opacity = 0.87 }: { opacity?: number }) {
+export function Check({
+  opacity = 0.87,
+  width = 24,
+  height = 25,
+}: {
+  opacity?: number;
+  width?: number;
+  height?: number;
+}) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 25" fill="none">
       <mask
         id="mask0_1843_110"
         style={{ maskType: 'alpha' }}
