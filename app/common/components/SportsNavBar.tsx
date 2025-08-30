@@ -1,6 +1,6 @@
 import { tv } from "tailwind-variants";
 
-export const SPORTS_TABS = ["전체", "야구", "농구", "빙구", "럭비", "축구"] as const;
+export const SPORTS_TABS = ["전체", "야구", "축구", "농구", "럭비", "빙구"] as const;
 export type SportsTab = typeof SPORTS_TABS[number];
 
 const root = tv({
@@ -24,16 +24,19 @@ const tabStyle = tv({
   },
 });
 
-interface RecordSportsNavBarProps {
+interface SportsNavBarProps {
   value: SportsTab;
   onChange: (value: SportsTab) => void;
+  viewAll?: boolean;
 }
 
-const RecordSportsNavBar = ({ value, onChange }: RecordSportsNavBarProps) => {
+const SportsNavBar = ({ viewAll = true, value, onChange }: SportsNavBarProps) => {
+  const tabsToShow = viewAll ? SPORTS_TABS : SPORTS_TABS.filter(tab => tab !== "전체");
+  
   return (
     <div className={root()}>
       <div className={tabsList()}>
-        {SPORTS_TABS.map((label) => {
+        {tabsToShow.map((label) => {
           const isActive = value === label;
           return (
             <button
@@ -50,4 +53,4 @@ const RecordSportsNavBar = ({ value, onChange }: RecordSportsNavBarProps) => {
   );
 };
 
-export default RecordSportsNavBar;
+export default SportsNavBar;

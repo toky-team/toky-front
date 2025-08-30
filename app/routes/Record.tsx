@@ -1,5 +1,5 @@
 import MainTopBar from "@/common/components/MainTopBar";
-import RecordSportsNavBar, { type SportsTab } from "@/domain/record/components/RecordSportsNavBar";
+import SportsNavBar, { type SportsTab } from "@/common/components/SportsNavBar";
 import NavBar from "@/common/components/NavBar";
 import { useState } from "react";
 import RecordSportDetail from "@/domain/record/components/RecordSportDetail";
@@ -14,7 +14,7 @@ export default function Record() {
     <>
       <MainTopBar />
       <NavBar />
-      <RecordSportsNavBar value={tab} onChange={setTab} />
+      <SportsNavBar value={tab} onChange={setTab} />
       <div className="w-full -mt-[42px]">
         {tab === "전체" && (
           <div className="w-full flex flex-col">
