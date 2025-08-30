@@ -1,9 +1,5 @@
-## TOKY-FRONT-V3
+## TOKY-FRONT
 
-즐거운 고연전
+Enjoy the Korea-Yonsei regular match(고연전) with TOKY!
 
-### 사용 스택
-
-- React Router v7 (Remix)
-- Tailwind CSS
-- TypeScript
+[![Used Stacks](https://skillicons.dev/icons?i=remix,tailwind,ts)](https://skillicons.dev)

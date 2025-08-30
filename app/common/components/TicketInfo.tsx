@@ -1,5 +1,5 @@
 import useGetTicketCount from '@/common/apis/useGetTicketCount';
-import Icon from '@/libs/assets/icons';
+import Icon from '@/lib/assets/icons';
 
 const TicketInfo = () => {
   const { data: ticketCount } = useGetTicketCount();

@@ -1,0 +1,16 @@
+import { io } from 'socket.io-client';
+
+export const chatSocket = io(`${import.meta.env.VITE_API_URL}/chat`, {
+  withCredentials: true,
+  transports: ['websocket'],
+});
+
+export const scoreSocket = io(`${import.meta.env.VITE_API_URL}/score`, {
+  withCredentials: true,
+  transports: ['websocket'],
+});
+
+export const cheerUpSocket = io(`${import.meta.env.VITE_API_URL}/like`, {
+  withCredentials: true,
+  transports: ['websocket'],
+});
