@@ -40,7 +40,10 @@ const AttendanceBanner = () => {
               (attendance) => new Date(attendance.attendandAt).getDate() === new Date(value.date).getDate(),
             );
           return (
-            <span className={s.CalendarItem({ variant: isAttended ? 'isAttended' : isToday ? 'today' : undefined })}>
+            <span
+              key={value.date}
+              className={s.CalendarItem({ variant: isAttended ? 'isAttended' : isToday ? 'today' : undefined })}
+            >
               {isVisible && (isAttended ? <Icon.Check width={18} height={18} /> : new Date(value.date).getDate())}
             </span>
           );
