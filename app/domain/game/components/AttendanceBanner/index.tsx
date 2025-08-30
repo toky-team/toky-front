@@ -37,7 +37,8 @@ const AttendanceBanner = () => {
           const isAttended =
             isVisible &&
             attendanceData?.attendances.some(
-              (attendance) => new Date(attendance.attendandAt).getDate() === new Date(value.date).getDate(),
+              (attendance) =>
+                new Date(attendance.attendandAt).getDate() === new Date(value.date).getDate() && attendance.isAttended,
             );
           return (
             <span
