@@ -3,6 +3,7 @@ import * as s from './style.css';
 import { useGetTicketHistory } from '@/domain/ticket/apis/useGetTicketHistory';
 import Loader from '@/common/components/Loader';
 import useIntersect from '@/common/hooks/useIntersect';
+import { formatDate } from 'date-fns';
 
 const TicketHistoryPage = () => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } = useGetTicketHistory(undefined);
@@ -26,7 +27,7 @@ const TicketHistoryPage = () => {
           <div key={item.id} className={s.Item}>
             <div className={s.LeftSide}>
               <h3 className={s.ItemTitle}>{item.reason}</h3>
-              <p>{item.createdAt}</p>
+              <p>{formatDate(item.createdAt, 'yy.MM.dd HH:mm')}</p>
             </div>
             <div className={s.RightSide}>
               <p>{item.changeAmount > 0 ? `+${item.changeAmount}` : item.changeAmount}장</p>

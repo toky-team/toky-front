@@ -38,6 +38,8 @@ export const Item = style({
   paddingTop: '1rem',
   paddingBottom: '0.9375rem',
   borderBottom: `0.5px solid ${vars.color['white-15']}`,
+  overflow: 'hidden',
+  gap: '0.5rem',
 });
 
 export const LeftSide = style({
@@ -55,6 +57,7 @@ export const ItemTitle = style({
   fontSize: '0.9375rem',
   fontWeight: 400,
   lineHeight: 1.2,
+  wordBreak: 'keep-all',
 });
 
 export const RightSide = style({
@@ -67,6 +70,7 @@ export const RightSide = style({
   fontSize: '1.0625rem',
   fontWeight: 500,
   lineHeight: 1.2,
+  flexShrink: 0,
 });
 
 export const ResultAmount = style({
