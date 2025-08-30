@@ -50,11 +50,6 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
   // 스포츠 변경 시 상태 초기화
   useEffect(() => setStatus(null), [sport]);
 
-  // Status 변경 시 스크롤 하단 고정
-  useEffect(() => {
-    scrollToBottom();
-  }, [scrollToBottom, status]);
-
   const handlePlayerProfileClick = (playerId: string) => {
     // TODO: 선수 프로필 보여주기
     alert(playerId);
@@ -68,8 +63,10 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
           status={status}
           selectedPlayer={kuSelectedPlayer}
           onClick={() => {
-            scrollToBottom();
             setStatus('고려대학교');
+            setTimeout(() => {
+              scrollToBottom();
+            }, 0);
           }}
         />
         <SelectedPlayerView
@@ -77,8 +74,10 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
           status={status}
           selectedPlayer={yuSelectedPlayer}
           onClick={() => {
-            scrollToBottom();
             setStatus('연세대학교');
+            setTimeout(() => {
+              scrollToBottom();
+            }, 0);
           }}
         />
       </div>
