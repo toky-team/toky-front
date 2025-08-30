@@ -32,7 +32,7 @@ const PredictionCard = forwardRef(
                 <p className={s.UnivName}>연세대학교</p>
               </div>
               <div className={s.ShareFooter}>
-                <p>2024 정기전 승부예측 토키</p>
+                <p>2025 정기전 승부예측 토키</p>
                 <Icon.Divider />
                 <p>@official.toky</p>
               </div>
