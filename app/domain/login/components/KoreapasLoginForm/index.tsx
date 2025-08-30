@@ -54,7 +54,7 @@ const KoreapasLoginForm = () => {
             setPassword(e.target.value);
           }}
         />
-        <div className={s.ErrorWrapper}>{error && '아이디 또는 비밀번호를 다시 확인해주세요'}</div>
+        <div className={s.ErrorWrapper} role="alert">{error && '아이디 또는 비밀번호를 다시 확인해주세요'}</div>
       </div>
       <button className={s.ButtonStyle} type="submit">
         고파스로 시작하기
