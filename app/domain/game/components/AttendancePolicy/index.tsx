@@ -5,7 +5,7 @@ const AttendancePolicy = () => {
     <div className={s.Container}>
       <div className={s.Item}>
         <h2 className={s.Title}>참여 기간</h2>
-        <p>2024.09.09 (월) - 2024.09.28 (토)</p>
+        <p>2024.08.30 (토) - 2024.09.20 (토)</p>
       </div>
       <div className={s.Item}>
         <h2 className={s.Title}>참여 방법</h2>
