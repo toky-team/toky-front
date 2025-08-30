@@ -49,3 +49,13 @@ export const ButtonStyle = style({
   lineHeight: 1.2,
   letterSpacing: '-0.04rem',
 });
+
+export const ErrorWrapper = style({
+  height: '1rem',
+  fontSize: '0.8125rem',
+  fontWeight: 500,
+  lineHeight: 1.2,
+  letterSpacing: '-0.0325rem',
+  color: '#F95B6E',
+  textAlign: 'center',
+});
