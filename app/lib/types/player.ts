@@ -11,6 +11,7 @@ export interface PlayerInterface {
   weight: number;
   position: string;
   backNumber: number;
+  isPrimary: Boolean;
   careers: string[];
   imageUrl: string;
   likeCount: number;

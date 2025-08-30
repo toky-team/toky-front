@@ -6,9 +6,9 @@ const playerCardVariants = tv({
   slots: {
     card: "bg-white rounded-md overflow-hidden relative shadow-sm cursor-pointer transition-shadow",
     imageContainer: "relative aspect-[4/5] bg-white",
-    playerImage: "w-full h-full object-cover",
-    numberBadge: "absolute top-2 left-2 text-xl font-normal max-w-11 text-center",
-    playerName: "absolute top-8 left-2 text-[#121212] font-bold text-base",
+    playerImage: "w-full h-full object-cover object-[-150%_center]",
+    numberBadge: "absolute top-2 left-2 text-xl font-normal max-w-11 text-center font-giants-bold",
+    playerName: "absolute top-[30px] left-2 text-[#121212] font-bold text-base",
     bottomHalfBlur: "absolute bottom-0 left-0 right-0 h-1/2 rounded-b-md bg-gradient-to-t from-white/80 to-transparent",
     likeContainer: "absolute bottom-1 left-1 right-1 flex items-center justify-between bg-[#333333] text-white py-1.5 px-3 rounded-md",
     likeCount: "text-sm font-medium",

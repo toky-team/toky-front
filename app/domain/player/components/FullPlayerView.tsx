@@ -1,11 +1,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { tv } from "tailwind-variants";
 import PlayerCard from "./PlayerCard";
-import { useGetPlayer } from "@/common/apis/useGetPlayer";
 import { usePlayerOverlay } from "../hooks/usePlayerOverlay";
 import type { PlayerInterface } from "@/lib/types/player";
 
-const fullPlayerListVariants = tv({
+const fullPlayerViewVariants = tv({
   slots: {
     root: "w-full max-w-screen-sm mx-auto flex flex-col gap-6 px-4",
     container: "w-full flex flex-row justify-between items-center",
@@ -20,12 +19,8 @@ const fullPlayerListVariants = tv({
   },
 });
 
-const FullPlayerList = () => {
-  const { root, container, containerLeft, title, description, tabs, tabsList, tabsTrigger, tabsContent, playerGrid } = fullPlayerListVariants();
-  
-  // API 데이터 가져오기
-  const { data: koreaPlayers = [] } = useGetPlayer(undefined, "고려대학교");
-  const { data: yonseiPlayers = [] } = useGetPlayer(undefined, "연세대학교");
+const FullPlayerView = ({ koreaPlayers, yonseiPlayers }: { koreaPlayers: PlayerInterface[], yonseiPlayers: PlayerInterface[] }) => {
+  const { root, container, containerLeft, title, description, tabs, tabsList, tabsTrigger, tabsContent, playerGrid } = fullPlayerViewVariants();
   
   // 오버레이 훅
   const { openPlayerOverlay } = usePlayerOverlay();
@@ -90,4 +85,4 @@ const FullPlayerList = () => {
   );
 };
 
-export default FullPlayerList;
+export default FullPlayerView;
