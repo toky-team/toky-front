@@ -37,10 +37,9 @@ const PlayerItem = ({ sport, player, isSelected, onClick }: Props) => {
         {isPlayer ? (
           <>
             <p className={s.PositionStyle}>{player.position}</p>
-            <p>{player.name}</p>
+            <p className={s.PlayerName}>{player.name}</p>
           </>
         ) : (
-          // TODO: 스포츠마다 워딩 바꿔야 할 듯
           <p>{getNoPlayerSelectText(sport)}</p>
         )}
       </div>

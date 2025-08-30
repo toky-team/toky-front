@@ -146,7 +146,7 @@ export const MoreButton = style({
 
 export const PlayerList = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, 1fr)',
+  gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
   gap: '0.5rem 0.75rem',
 });
 
@@ -157,6 +157,8 @@ export const PlayerItemContainer = style({
   justifyContent: 'flex-end',
   gap: '0.25rem',
   flexDirection: 'column',
+  flexShrink: 0,
+  flexBasis: 0,
 });
 
 export const PlayerImageClipper = style({
@@ -168,6 +170,7 @@ export const PlayerImageClipper = style({
   justifyContent: 'flex-end',
   alignItems: 'stretch',
   width: '100%',
+  flexShrink: 0,
 });
 
 export const PlayerItemImage = recipe({
@@ -214,6 +217,9 @@ export const PlayerItemText = recipe({
     fontWeight: 500,
     lineHeight: 1.5,
     letterSpacing: '-0.035rem',
+    flexShrink: 0,
+    flexBasis: 0,
+    gap: '0.5rem',
   },
   variants: {
     isPlayer: {
@@ -234,6 +240,17 @@ export const PositionStyle = style({
   fontWeight: 400,
   lineHeight: 1.5,
   letterSpacing: '-0.03rem',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  flexShrink: 0,
+});
+
+export const PlayerName = style({
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  flexShrink: 0,
 });
 
 export const BackNumber = style({
