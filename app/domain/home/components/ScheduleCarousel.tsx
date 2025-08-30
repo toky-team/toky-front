@@ -1,7 +1,12 @@
-import React from "react";
 import { tv } from "tailwind-variants";
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { ScheduleCard } from "./ScheduleCard";
+import Reels from "@/lib/assets/images/reels_background.png"
+import Baseball from "@/lib/assets/images/baseball_background.png"
+import Basketball from "@/lib/assets/images/basketball_background.png"
+import Rugby from "@/lib/assets/images/rugby_background.png"
+import IceHockey from "@/lib/assets/images/icehockey_background.png"
+import Soccer from "@/lib/assets/images/soccer_background.png"
 
 interface ScheduleEvent {
   title: string;
@@ -14,8 +19,8 @@ const scheduleCarouselVariants = tv({
   slots: {
     root: "w-full",
     dateSection: "flex flex-col gap-4 w-full",
-    date: "flex items-center justify-center text-sm bg-[#363636] font-bold text-white-87 h-7 w-[88px] rounded-[8px] ", // 고정 높이
-    dateInvisible: "flex items-center justify-center font-bold text-white-87 h-7 invisible", // 같은 높이의 투명 공간
+    date: "flex items-center justify-center text-sm bg-[#363636] font-bold text-white-87 h-[30px] w-[88px] rounded-[8px] ", // 고정 높이
+    dateInvisible: "flex items-center justify-center font-bold text-white-87 h-[30px] invisible", // 같은 높이의 투명 공간
     flex: "flex gap-3 overflow-x-auto scrollbar-hide",
   },
 });
@@ -26,7 +31,7 @@ const SCHEDULE_INFO: Record<string, ScheduleEvent[]> = {
       title: "합동응원전",
       time: "18:00",
       location: "연세대학교 노천극장",
-      img: "/images/schedule/1.png",
+      img: Reels,
     },
   ],
   "9/19 (금)": [
@@ -34,19 +39,19 @@ const SCHEDULE_INFO: Record<string, ScheduleEvent[]> = {
       title: "야구",
       time: "11:00", 
       location: "잠실 야구장",
-      img: "/images/schedule/2.png",
+      img: Baseball,
     },
     {
       title: "빙구", 
       time: "14:00",
       location: "목동 아이스링크",
-      img: "/images/schedule/3.png",
+      img: IceHockey,
     },
     {
       title: "농구",
       time: "17:00",
       location: "고양 체육관", 
-      img: "/images/schedule/4.png",
+      img: Basketball,
     },
   ],
   "9/20 (토)": [
@@ -54,13 +59,13 @@ const SCHEDULE_INFO: Record<string, ScheduleEvent[]> = {
       title: "럭비",
       time: "11:00",
       location: "고양 종합운동장",
-      img: "/images/schedule/5.png",
+      img: Rugby,
     },
     {
       title: "축구",
       time: "14:00", 
       location: "고양 종합운동장",
-      img: "/images/schedule/6.png",
+      img: Soccer,
     },
   ],
 };

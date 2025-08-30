@@ -2,7 +2,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 const scheduleCardVariants = tv({
   slots: {
-    card: "relative w-[152px] h-24 flex flex-col items-start rounded-[10px] mr-3 p-3 px-4 bg-[#121212] overflow-hidden",
+    card: "relative w-[152px] h-24 flex flex-col items-start rounded-[10px] mr-3 p-3 px-4 bg-[#1E1E1E] overflow-hidden",
     backgroundImage: "absolute -top-0.5 left-0 w-[152px] h-24 object-cover",
     cardContent: "flex flex-col items-start gap-[5px] self-stretch relative z-10",
     time: "self-stretch text-white-87 font-bold text-sm leading-[1.5] tracking-[-0.56px] z-10",
