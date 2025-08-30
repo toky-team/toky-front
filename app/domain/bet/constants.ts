@@ -2,39 +2,32 @@ import type { SportType } from '@/lib/types';
 
 // TODO: 이미지 경로 수정 필요
 export const KOREA_WIN_IMAGE_LIST = [
-  '/image-proxy/card/korea1.png',
-  '/image-proxy/card/korea2.png',
-  '/image-proxy/card/korea3.png',
-  '/image-proxy/card/korea4.png',
-  '/image-proxy/card/korea5.png',
-  '/image-proxy/card/korea6v2.png',
-  '/image-proxy/card/korea7v2.png',
-  '/image-proxy/card/korea8v2.png',
-  '/image-proxy/card/korea9v2.png',
-  '/image-proxy/card/korea10.png',
-  '/image-proxy/card/korea11.png',
-  '/image-proxy/card/korea12.png',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-0.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-2.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-3.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-4.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-5.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-6.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-7.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-14.webp',
 ];
 
 export const YONSEI_WIN_IMAGE_LIST = [
-  '/image-proxy/card/yonsei1.png',
-  '/image-proxy/card/yonsei2.png',
-  '/image-proxy/card/yonsei3.png',
-  '/image-proxy/card/yonsei4.png',
-  '/image-proxy/card/yonsei5.png',
-  '/image-proxy/card/yonsei6.png',
-  '/image-proxy/card/yonsei7.png',
-  '/image-proxy/card/yonsei8.png',
-  '/image-proxy/card/yonsei9v3.png',
-  '/image-proxy/card/yonsei10.png',
-  '/image-proxy/card/yonsei11.png',
-  '/image-proxy/card/yonsei12.png',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-1.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-8.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-9.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-10.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-11.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-12.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-13.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-15.webp',
 ];
 
 export const DRAW_IMAGE_LIST = [
-  '/image-proxy/card/draw1.png',
-  '/image-proxy/card/draw2.png',
-  '/image-proxy/card/draw3.png',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-16.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-17.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-18.webp',
+  'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-19.webp',
 ];
 
 export const PREDICTION_QUESTION: Record<SportType, string> = {
