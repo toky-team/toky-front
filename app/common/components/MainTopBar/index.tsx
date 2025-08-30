@@ -8,6 +8,7 @@ import LoginButton from '@/domain/home/components/LoginButton';
 import * as s from './style.css';
 import { useState } from 'react';
 import SideBar from '@/common/components/SideBar';
+import { AnimatePresence } from 'motion/react';
 
 const MainTopBar = () => {
   const { data: authCheck, isLoading } = useGetAuthCheck();
@@ -25,7 +26,7 @@ const MainTopBar = () => {
           <Icon.Hamburger />
         </button>
       </div>
-      {isSideBarOpen && <SideBar onClose={() => setIsSideBarOpen(false)} />}
+      <AnimatePresence>{isSideBarOpen && <SideBar onClose={() => setIsSideBarOpen(false)} />}</AnimatePresence>
     </div>
   );
 };

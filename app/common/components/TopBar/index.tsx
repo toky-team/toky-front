@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import * as s from './style.css';
 import { useState } from 'react';
 import SideBar from '@/common/components/SideBar';
+import { AnimatePresence } from 'motion/react';
 
 interface Props extends PropsWithChildren {
   color?: '87' | 'd9';
@@ -39,7 +40,7 @@ const TopBar = ({ hasHamburger = false, color = '87', children, handlePrevButton
           </button>
         )}
       </span>
-      {isSideBarOpen && <SideBar onClose={() => setIsSideBarOpen(false)} />}
+      <AnimatePresence>{isSideBarOpen && <SideBar onClose={() => setIsSideBarOpen(false)} />}</AnimatePresence>
     </div>
   );
 };
