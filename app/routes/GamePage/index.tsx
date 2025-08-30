@@ -88,9 +88,10 @@ const GamePage = () => {
 
   useEffect(() => {
     if (isMount.current) return;
-    isMount.current = true;
 
     if (!isTodayAttendanceSuccess) return;
+
+    isMount.current = true;
 
     if (todayAttendance.secondStageResult !== null) {
       navigate('/attendance', { replace: true });

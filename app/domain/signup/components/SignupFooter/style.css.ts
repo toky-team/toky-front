@@ -5,8 +5,9 @@ export const Container = recipe({
   base: {
     position: 'absolute',
     bottom: 0,
+    left: 0,
+    right: 0,
 
-    width: '100%',
     height: '4rem',
     padding: '1.25rem 0 1.1875rem 0',
     background: vars.color['bg-5'],
