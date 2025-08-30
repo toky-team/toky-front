@@ -7,6 +7,7 @@ import useIntersect from '@/common/hooks/useIntersect';
 import Chat from '@/domain/live/components/Chat';
 import type { SportType } from '@/lib/types';
 import useSportSocket from '@/domain/live/hooks/useSportSocket';
+import Loader from '@/common/components/Loader';
 
 // TODO: 스크롤 관련 고치기!!!!
 // 1. 위로 올려서 페이지네이션 시에 스크롤 위치 저장했다가 유지하기
@@ -67,22 +68,9 @@ const ChatList = ({ sport }: Props) => {
     }
   }, [newMessages]);
 
-  const Loader = useCallback(() => {
-    if (!hasNextPage) return null;
-
-    if (isFetchingNextPage)
-      return (
-        <div className={s.LoadingWrapper}>
-          <div className={s.LoadingSpinner} />
-        </div>
-      );
-
-    return <div className={s.Trigger} ref={fetchNextRef} />;
-  }, [hasNextPage, isFetchingNextPage, fetchNextRef]);
-
   return (
     <div className={s.Container} ref={scrollRef}>
-      <Loader />
+      <Loader hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextRef={fetchNextRef} />
       {messages.map((message) => (
         <Chat key={message.id} nickname={message.username} message={message.content} />
       ))}
