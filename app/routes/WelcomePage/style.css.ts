@@ -7,9 +7,28 @@ export const Wrapper = style({
   position: 'relative',
 });
 
+export const Text = style({
+  position: 'absolute',
+  top: '50%',
+  right: '1.125rem',
+  transform: 'translateY(-50%)',
+  color: vars.color['white-60'],
+  fontSize: '1.25rem',
+  fontWeight: 500,
+  lineHeight: 1.4,
+  letterSpacing: '-0.05rem',
+});
+
+export const Nickname = style({
+  color: vars.color.white,
+});
+
 export const Image = style({
   width: '100%',
   height: '100%',
+  position: 'absolute',
+  left: 0,
+  right: 0,
   objectFit: 'cover',
 });
 
