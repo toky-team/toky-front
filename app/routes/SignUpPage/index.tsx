@@ -140,13 +140,14 @@ const SignUp = () => {
           );
           break;
         case 4: {
-          // TODO: 초대 코드 추가 필요
-          // const inviteCode = localStorage.getItem('invite-code');
-          // localStorage.removeItem('invite-code');
+          const inviteCode = localStorage.getItem('invite-code');
+          localStorage.removeItem('invite-code');
+
           signup({
             name: formState.name,
             phoneNumber: formState.phoneNumber,
             university: formState.university,
+            inviteCode: inviteCode || undefined,
           });
           break;
         }

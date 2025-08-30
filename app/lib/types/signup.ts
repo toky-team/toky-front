@@ -5,6 +5,7 @@ export interface SignupFormType {
   phoneNumber: string;
   university: UniversityType | null;
   authNumber: string;
+  inviteCode?: string;
 }
 
 export type SignupElements = keyof SignupFormType;
