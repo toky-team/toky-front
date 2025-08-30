@@ -30,10 +30,11 @@ const TopBar = ({ hasHamburger = false, color = '87', children, handlePrevButton
       {children}
       <span className={s.RightArea}>
         {hasHamburger && (
-          <button onClick={() => {
-            setIsSideBarOpen(true);
-            console.log('hamburger');
-          }}>
+          <button
+            onClick={() => {
+              setIsSideBarOpen(true);
+            }}
+          >
             <Icon.Hamburger />
           </button>
         )}
