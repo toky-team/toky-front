@@ -13,6 +13,8 @@ interface Props {
 }
 const PlayerItem = ({ sport, player, isSelected, onClick }: Props) => {
   const isPlayer = !!player;
+  const positionString =
+    sport === '야구' && player?.university === '고려대학교' ? player.position?.split('(')[0] : player?.position;
   return (
     <button className={s.PlayerItemContainer} onClick={onClick}>
       <div className={s.PlayerImageClipper}>
@@ -36,7 +38,7 @@ const PlayerItem = ({ sport, player, isSelected, onClick }: Props) => {
       <div className={s.PlayerItemText({ isPlayer })}>
         {isPlayer ? (
           <>
-            <p className={s.PositionStyle}>{player.position}</p>
+            <p className={s.PositionStyle}>{positionString}</p>
             <p className={s.PlayerName}>{player.name}</p>
           </>
         ) : (
