@@ -20,7 +20,7 @@ const recordSportDetailVariants = tv({
     teamColLeft: "flex flex-col",
     teamColRight: "flex flex-col items-end",
     teamName: "text-sm font-bold",
-    teamWins: "text-[42px] font-normal bg-clip-text text-transparent",
+    teamWins: "text-[42px] font-normal bg-clip-text text-transparent font-giants-bold tracking-[-1.68px]",
   },
   variants: {
     isKoreaWins: {
@@ -60,41 +60,41 @@ interface MatchHistoryItem {
 }
 
 const sports: SportItem[] = [
-  { label: "축구", KOREA_WINS: 20, YONSEI_WINS: 17 },
-  { label: "럭비", KOREA_WINS: 20, YONSEI_WINS: 25 },
-  { label: "야구", KOREA_WINS: 25, YONSEI_WINS: 18 },
-  { label: "농구", KOREA_WINS: 23, YONSEI_WINS: 22 },
-  { label: "빙구", KOREA_WINS: 17, YONSEI_WINS: 23 },
+  { label: "축구", KOREA_WINS: 21, YONSEI_WINS: 18 },
+  { label: "럭비", KOREA_WINS: 21, YONSEI_WINS: 25 },
+  { label: "야구", KOREA_WINS: 26, YONSEI_WINS: 19 },
+  { label: "농구", KOREA_WINS: 24, YONSEI_WINS: 23 },
+  { label: "빙구", KOREA_WINS: 18, YONSEI_WINS: 24 },
 ];
 
 const matchHistories: Record<string, MatchHistoryItem[]> = {
-  축구: [
-    { year: "2018", winner: "고려대" },
-    { year: "2019", winner: "연세대" },
-    { year: "2022", winner: "고려대" },
-    { year: "2023", winner: "연세대" },
-    { year: "2024", winner: "고려대" },
-  ],
-  럭비: [
-    { year: "2018", winner: "고려대" },
-    { year: "2019", winner: "연세대" },
-    { year: "2022", winner: "고려대" },
-    { year: "2023", winner: "연세대" },
-    { year: "2024", winner: "고려대" },
-  ],
   야구: [
-    { year: "2018", winner: "고려대" },
+    { year: "2018", winner: "연세대" },
     { year: "2019", winner: "연세대" },
-    { year: "2022", winner: "고려대" },
+    { year: "2022", winner: "연세대" },
     { year: "2023", winner: "연세대" },
     { year: "2024", winner: "고려대" },
+  ],
+  축구: [
+    { year: "2017", winner: "연세대" },
+    { year: "2018", winner: "연세대" },
+    { year: "2022", winner: "연세대" },
+    { year: "2023", winner: "고려대" },
+    { year: "2024", winner: "연세대" },
   ],
   농구: [
-    { year: "2018", winner: "고려대" },
+    { year: "2018", winner: "연세대" },
+    { year: "2019", winner: "고려대" },
+    { year: "2022", winner: "고려대" },
+    { year: "2023", winner: "고려대" },
+    { year: "2024", winner: "연세대" },
+  ],
+  럭비: [
+    { year: "2017", winner: "연세대" },
+    { year: "2018", winner: "연세대" },
     { year: "2019", winner: "연세대" },
     { year: "2022", winner: "고려대" },
-    { year: "2023", winner: "연세대" },
-    { year: "2024", winner: "고려대" },
+    { year: "2023", winner: "고려대" },
   ],
   빙구: [
     { year: "2018", winner: "고려대" },
