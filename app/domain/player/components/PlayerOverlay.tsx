@@ -9,10 +9,12 @@ const overlayVariants = tv({
     backButton: "flex items-center justify-center w-6 h-6 text-white",
     hamburgerButton: "flex items-center justify-center w-6 h-6 text-white",
     header: "relative",
-    imageContainer: "relative h-[60vh] bg-gray-100",
-    playerImage: "w-full h-full object-cover",
-    numberBadge: "absolute bottom-5 right-5 text-[72px] font-giants-bold text-white",
-    playerInfo: "absolute bottom-4 left-4 flex flex-col gap-1",
+    imageContainer: "relative h-[60vh]",
+    playerImage: "w-full h-full object-cover relative",
+    backgroundNumber: "absolute inset-0 flex pb-20 items-center justify-center text-[300px] font-giants-bold pointer-events-none select-none",
+    numberBadge: "absolute bottom-5 right-5 text-[72px] font-giants-bold text-white z-20",
+    playerInfoBg: "absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-[#121212]/0 to-[#121212]/80",
+    playerInfo: "absolute bottom-4 left-4 flex flex-col gap-1 z-10",
     playerName: "text-white/80 text-[34px] font-normal [text-shadow:0_4px_40px_rgba(0,0,0,0.25)]",
     universityName: "text-white/80 text-lg font-medium [text-shadow:0_4px_40px_rgba(0,0,0,0.25)]",
     content: "p-6 space-y-6 pb-8",
@@ -35,6 +37,16 @@ const overlayVariants = tv({
         container: "translate-x-full opacity-0 pointer-events-none",
       },
     },
+    team: {
+      korea: {
+        imageContainer: "bg-[#F3233C]/10",
+        backgroundNumber: "text-[#F3233C]/15",
+      },
+      yonsei: {
+        imageContainer: "bg-[#2948FF]/10",
+        backgroundNumber: "text-[#2948FF]/15",
+      },
+    },
   },
 });
 
@@ -53,6 +65,8 @@ const formatDate = (dateString: string): string => {
 };
 
 const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
+  const team = player.university === "고려대학교" ? "korea" : "yonsei";
+
   const {
     container,
     topBar,
@@ -61,7 +75,9 @@ const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
     header,
     imageContainer,
     playerImage,
+    backgroundNumber,
     numberBadge,
+    playerInfoBg,
     playerInfo,
     playerName,
     universityName,
@@ -75,7 +91,7 @@ const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
     careerItem,
     universityContainer,
     universityDepartment,
-  } = overlayVariants({ isOpen });
+  } = overlayVariants({ isOpen, team });
 
   return (
     <div className={container()}>
@@ -91,6 +107,9 @@ const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
 
       <div className={header()}>
         <div className={imageContainer()}>
+          <div className={backgroundNumber()}>
+            {player.backNumber}
+          </div>
           <img
             src={player.imageUrl}
             alt={`${player.name} 선수`}
@@ -99,6 +118,7 @@ const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
           <div className={numberBadge()}>
             {player.backNumber}
           </div>
+          <div className={playerInfoBg()}></div>
           <div className={playerInfo()}>
             <div className={playerName()}>
               {player.name}
