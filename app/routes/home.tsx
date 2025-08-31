@@ -9,6 +9,8 @@ import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 import ShortRankChart from '@/domain/home/components/ShortRankChart';
 import bannerGuide from '@/lib/assets/images/banner_guide.webp';
 import bannerAttendance from '@/lib/assets/images/banner_attendance.webp';
+import { ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 export default function Home() {
   const slides = [
@@ -18,6 +20,7 @@ export default function Home() {
 
   const { data: auth } = useGetAuthCheck();
   const isLoggedIn = Boolean(auth?.isSignup);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -32,11 +35,15 @@ export default function Home() {
           <ScheduleCarousel />
         </div>
         <AdsCarousel />
-        <div className="flex w-full flex-row justify-between">
-          <div className="text-lg font-bold">적중률 랭킹</div>
-          <div className="text-sm text-gray-500">자세히 보기</div>
+        <div className="w-full flex flex-col gap-3">
+          <div className="flex w-full flex-row justify-between">
+            <div className="text-lg font-bold">적중률 랭킹</div>
+            <button className="flex items-center text-white/60 text-sm font-normal leading-normal tracking-tight" onClick={() => navigate('/ranking')}>
+              자세히보기 <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+          <ShortRankChart />
         </div>
-        <ShortRankChart />
       </div>
     </div>
   );
