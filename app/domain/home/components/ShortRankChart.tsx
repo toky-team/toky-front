@@ -87,19 +87,32 @@ const ShortRankChart = ({ type = 'activity' }: ShortRankChartProps) => {
             </div>
           </div>
         </div>
-                  <div className={hitRate()}>
-            <span>{(item.hitRate || item.score)}{scoreUnit}</span>
-          </div>
+        <div className={hitRate()}>
+          <span>{(item.hitRate || item.score)}{scoreUnit}</span>
+        </div>
       </div>
     );
   };
 
   const { root } = shortRankChartStyle();
 
+  // 데이터 없는 경우 처리
+  if (!myRankData && !rankData?.items?.length) {
+    return (
+      <div className={root()}>
+        <div className="flex items-center justify-center py-8">
+          <span className="text-white-54 text-sm">랭킹 데이터를 불러오는 중...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={root()}>
-      {renderRankItem(myRankData, true)}
-      <div className="w-full h-px bg-white/15 my-3"></div>
+      {myRankData && renderRankItem(myRankData, true)}
+      {myRankData && rankData?.items?.length && (
+        <div className="w-full h-px bg-white/15 my-3"></div>
+      )}
       <div className="flex flex-col gap-3">
         {rankData?.items?.map((item) => renderRankItem(item, false))}
       </div>
