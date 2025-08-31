@@ -7,13 +7,13 @@ import LoginCard from '@/domain/home/components/LoginCard';
 import ScheduleCarousel from '@/domain/home/components/ScheduleCarousel';
 import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 import ShortRankChart from '@/domain/home/components/ShortRankChart';
+import bannerGuide from '@/lib/assets/images/banner_guide.webp';
+import bannerAttendance from '@/lib/assets/images/banner_attendance.webp';
 
 export default function Home() {
-  // 임시 슬라이드 데이터 (실제 이미지로 교체 예정)
-  const tempSlides = [
-    { id: '1', image: 'https://placehold.co/600x200', alt: '슬라이드 1' },
-    { id: '2', image: 'https://placehold.co/600x200', alt: '슬라이드 2' },
-    { id: '3', image: 'https://placehold.co/600x200', alt: '슬라이드 3' },
+  const slides = [
+    { id: '1', image: bannerGuide, alt: '가이드' }, // TODO: 가이드 페이지로 리다이렉트
+    { id: '2', image: bannerAttendance, alt: '출석퀴즈', link: '/attendance' },
   ];
 
   const { data: auth } = useGetAuthCheck();
@@ -23,7 +23,7 @@ export default function Home() {
     <div>
       <MainTopBar />
       <NavBar />
-      <CustomCarousel slides={tempSlides} />
+      <CustomCarousel slides={slides} />
       <div className="flex flex-col items-center justify-center gap-8 px-5 py-8">
         {!isLoggedIn && <LoginCard />}
         <ActionCard />
