@@ -1,28 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-
 import client from '@/common/utils/client';
+import type { BetHitRankItem, BetHitRankResponse } from './useBetHitRankPagination';
 
-interface BetHitRankInterface {
-  userId: string;
-  username: string;
-  university: string;
-  hitRate: number;
-  rank: number;
-}
-
-const getBetHitRank = async (cursor: string, limit: number) => {
-  const response = await client.get<BetHitRankInterface[]>('/bet-hit/rank', {
+const getBetHitRank = async (limit: number, cursor?: string): Promise<BetHitRankResponse> => {
+  const response = await client.get<BetHitRankResponse>('/bet-hit/rank', {
     params: {
-      cursor,
       limit,
+      cursor,
     },
   });
   return response.data;
 };
 
-export const useGetBetHitRank = (cursor: string, limit: number) => {
+export const useGetBetHitRank = (limit: number, cursor?: string) => {
   return useQuery({
     queryKey: ['bet-hit-rank', cursor, limit],
-    queryFn: () => getBetHitRank(cursor, limit),
+    queryFn: () => getBetHitRank(limit, cursor),
   });
 };
+
+export type { BetHitRankItem, BetHitRankResponse };
