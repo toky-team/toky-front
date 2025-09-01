@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router';
 
 export default function Home() {
   const slides = [
-    { id: '1', image: bannerGuide, alt: '가이드', link: '/guide' }, // TODO: 가이드 페이지로 리다이렉트
+    { id: '1', image: bannerGuide, alt: '가이드', link: '/guide' },
     { id: '2', image: bannerAttendance, alt: '출석퀴즈', link: '/attendance' },
   ];
 
