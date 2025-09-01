@@ -3,6 +3,17 @@ import basketballBg from '@/lib/assets/images/field_basketball.webp';
 import soccerBg from '@/lib/assets/images/field_soccer.webp';
 import hockeyBg from '@/lib/assets/images/field_hockey.webp';
 
+import baseballKorea from '@/lib/assets/images/toky/baseball_korea.webp';
+import baseballYonsei from '@/lib/assets/images/toky/baseball_yonsei.webp';
+import soccerKorea from '@/lib/assets/images/toky/soccer_korea.webp';
+import soccerYonsei from '@/lib/assets/images/toky/soccer_yonsei.webp';
+import basketballKorea from '@/lib/assets/images/toky/basketball_korea.webp';
+import basketballYonsei from '@/lib/assets/images/toky/basketball_yonsei.webp';
+import rugbyKorea from '@/lib/assets/images/toky/rugby_korea.webp';
+import rugbyYonsei from '@/lib/assets/images/toky/rugby_yonsei.webp';
+import hockeyKorea from '@/lib/assets/images/toky/hockey_korea.webp';
+import hockeyYonsei from '@/lib/assets/images/toky/hockey_yonsei.webp';
+
 export const BALL_NAME: Record<SportType, string> = {
   야구: '야구공',
   축구: '축구공',
@@ -11,9 +22,9 @@ export const BALL_NAME: Record<SportType, string> = {
   아이스하키: '퍽',
 };
 
-export const GAME_TIME = [3000, 1000]; // MS
+export const GAME_TIME = [2000, 500]; // MS
 
-export const GAME_GAP_TIME = 3000; // MS
+export const GAME_GAP_TIME = 2000; // MS
 
 // TODO: 야구 경기장 이미지 추가
 export const BOARD_BG_URL_MAP: Record<SportType, string> = {
@@ -135,3 +146,32 @@ export const CALENDAR_DATE: { date: string; isVisible: boolean }[] = [
     isVisible: true,
   },
 ];
+
+export const GAME_LANDING_CHARACTER_IMAGE: Record<
+  SportType,
+  {
+    korea: string;
+    yonsei: string;
+  }
+> = {
+  야구: {
+    korea: baseballKorea,
+    yonsei: baseballYonsei,
+  },
+  축구: {
+    korea: soccerKorea,
+    yonsei: soccerYonsei,
+  },
+  농구: {
+    korea: basketballKorea,
+    yonsei: basketballYonsei,
+  },
+  럭비: {
+    korea: rugbyKorea,
+    yonsei: rugbyYonsei,
+  },
+  아이스하키: {
+    korea: hockeyKorea,
+    yonsei: hockeyYonsei,
+  },
+};

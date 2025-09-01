@@ -1,6 +1,6 @@
-import { SportToEnglishMap, type SportType, type UniversityType } from '@/lib/types';
+import { type SportType, type UniversityType } from '@/lib/types';
 import * as s from './style.css';
-import { BALL_NAME } from '@/domain/game/constants';
+import { BALL_NAME, GAME_LANDING_CHARACTER_IMAGE } from '@/domain/game/constants';
 import StepToken from '@/domain/game/components/StepToken';
 import Ball from '@/domain/game/components/Ball';
 
@@ -23,7 +23,7 @@ const GameLanding = ({ step, sport, handleStart, retry, university }: Props) => 
       </div>
       <Ball sport={sport} className={s.BallImage} />
       <img
-        src={`/app/lib/assets/images/toky/${SportToEnglishMap[sport]}_${university === '고려대학교' ? 'korea' : 'yonsei'}.webp`}
+        src={GAME_LANDING_CHARACTER_IMAGE[sport][university === '고려대학교' ? 'korea' : 'yonsei']}
         className={s.TokyImage}
       />
 
