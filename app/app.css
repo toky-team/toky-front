@@ -121,4 +121,7 @@ img {
   button {
     @apply cursor-pointer;
   }
+  img {
+    @apply inline-block;
+  }
 }
