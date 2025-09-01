@@ -22,7 +22,7 @@ export const BALL_NAME: Record<SportType, string> = {
   아이스하키: '퍽',
 };
 
-export const GAME_TIME = [2000, 500]; // MS
+export const GAME_TIME = [2000, 800]; // MS
 
 export const GAME_GAP_TIME = 2000; // MS
 
