@@ -7,23 +7,26 @@ import LoginCard from '@/domain/home/components/LoginCard';
 import ScheduleCarousel from '@/domain/home/components/ScheduleCarousel';
 import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 import ShortRankChart from '@/domain/home/components/ShortRankChart';
+import bannerGuide from '@/lib/assets/images/banner_guide.webp';
+import bannerAttendance from '@/lib/assets/images/banner_attendance.webp';
+import { ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 export default function Home() {
-  // 임시 슬라이드 데이터 (실제 이미지로 교체 예정)
-  const tempSlides = [
-    { id: '1', image: 'https://placehold.co/600x200', alt: '슬라이드 1' },
-    { id: '2', image: 'https://placehold.co/600x200', alt: '슬라이드 2' },
-    { id: '3', image: 'https://placehold.co/600x200', alt: '슬라이드 3' },
+  const slides = [
+    { id: '1', image: bannerGuide, alt: '가이드' }, // TODO: 가이드 페이지로 리다이렉트
+    { id: '2', image: bannerAttendance, alt: '출석퀴즈', link: '/attendance' },
   ];
 
   const { data: auth } = useGetAuthCheck();
   const isLoggedIn = Boolean(auth?.isSignup);
+  const navigate = useNavigate();
 
   return (
     <div>
       <MainTopBar />
       <NavBar />
-      <CustomCarousel slides={tempSlides} />
+      <CustomCarousel slides={slides} />
       <div className="flex flex-col items-center justify-center gap-8 px-5 py-8">
         {!isLoggedIn && <LoginCard />}
         <ActionCard />
@@ -32,11 +35,15 @@ export default function Home() {
           <ScheduleCarousel />
         </div>
         <AdsCarousel />
-        <div className="flex w-full flex-row justify-between">
-          <div className="text-lg font-bold">적중률 랭킹</div>
-          <div className="text-sm text-gray-500">자세히 보기</div>
+        <div className="w-full flex flex-col gap-3">
+          <div className="flex w-full flex-row justify-between">
+            <div className="text-lg font-bold">적중률 랭킹</div>
+            <button className="flex items-center text-white/60 text-sm font-normal leading-normal tracking-tight" onClick={() => navigate('/ranking')}>
+              자세히보기 <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+          <ShortRankChart />
         </div>
-        <ShortRankChart />
       </div>
     </div>
   );

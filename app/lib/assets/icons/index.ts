@@ -21,6 +21,7 @@ import Prediction from '@/lib/assets/icons/Prediction';
 import Record from '@/lib/assets/icons/Record';
 import Attendance from '@/lib/assets/icons/Attendance';
 import Application from '@/lib/assets/icons/Application';
+import QuestionMark from '@/lib/assets/icons/QuestionMark';
 
 const Icon = {
   TokyLogo,
@@ -46,6 +47,7 @@ const Icon = {
   Record,
   Attendance,
   Application,
+  QuestionMark,
 };
 
 export default Icon;
