@@ -2,7 +2,7 @@ import { vars } from '@/root.css';
 import { style } from '@vanilla-extract/css';
 
 export const ToastLayout = style({
-  position: 'absolute',
+  position: 'fixed',
   bottom: 0,
   left: '50%',
   transform: 'translate3d(-50%,0,0)',
