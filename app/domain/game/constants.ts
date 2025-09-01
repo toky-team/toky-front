@@ -2,6 +2,7 @@ import type { SportType } from '@/lib/types';
 import basketballBg from '@/lib/assets/images/field_basketball.webp';
 import soccerBg from '@/lib/assets/images/field_soccer.webp';
 import hockeyBg from '@/lib/assets/images/field_hockey.webp';
+import baseballBg from '@/lib/assets/images/field_baseball.webp';
 
 import baseballKorea from '@/lib/assets/images/toky/baseball_korea.webp';
 import baseballYonsei from '@/lib/assets/images/toky/baseball_yonsei.webp';
@@ -26,9 +27,8 @@ export const GAME_TIME = [2000, 800]; // MS
 
 export const GAME_GAP_TIME = 2000; // MS
 
-// TODO: 야구 경기장 이미지 추가
 export const BOARD_BG_URL_MAP: Record<SportType, string> = {
-  야구: basketballBg,
+  야구: baseballBg,
   축구: soccerBg,
   농구: basketballBg,
   럭비: soccerBg,

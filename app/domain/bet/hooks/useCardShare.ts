@@ -119,13 +119,11 @@ export function useCardShare() {
 
   const shareImage = async () => {
     if (!navigator.share) {
-      // TODO 모달로 변경
       alert('지원되지 않는 브라우저입니다. 모바일 크롬으로 접속해주세요!');
       return;
     }
 
     if (!canvasImageUrl) {
-      //TODO : 이미지 준비중 alert
       alert('이미지를 준비 중입니다. 다시 한 번 시도해주세요');
       return;
     }

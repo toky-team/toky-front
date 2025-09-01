@@ -12,6 +12,7 @@ import { useLoginModal } from '@/common/hooks/useLoginModal';
 import { ChevronRight } from 'lucide-react';
 import { useToast } from '@/common/hooks/useToast';
 import { usePlayerOverlay } from '@/domain/player/hooks/usePlayerOverlay';
+import { Link } from 'react-router';
 
 interface Props {
   sport: SportType;
@@ -225,10 +226,10 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
             <div className={s.PlayerContainer}>
               <div className={s.PlayerContainerHeader}>
                 <h2>{status} 선수</h2>
-                {/* TODO: 선수 페이지 보내기 */}
-                <button className={s.MoreButton}>
+                {/* TODO: 종목을 연결해줄 순 없나? */}
+                <Link to="/player" className={s.MoreButton}>
                   자세히보기 <ChevronRight size={18} />
-                </button>
+                </Link>
               </div>
               <div
                 ref={playerListRef}
