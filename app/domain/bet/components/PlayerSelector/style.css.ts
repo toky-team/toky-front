@@ -150,15 +150,24 @@ export const PlayerList = style({
   gap: '0.5rem 0.75rem',
 });
 
-export const PlayerItemContainer = style({
-  height: '5.3125rem',
-  display: 'flex',
-  alignItems: 'stretch',
-  justifyContent: 'flex-end',
-  gap: '0.25rem',
-  flexDirection: 'column',
-  flexShrink: 0,
-  flexBasis: 0,
+export const PlayerItemContainer = recipe({
+  base: {
+    height: '5.3125rem',
+    display: 'flex',
+    alignItems: 'stretch',
+    justifyContent: 'flex-end',
+    gap: '0.25rem',
+    flexDirection: 'column',
+    flexShrink: 0,
+    flexBasis: 0,
+  },
+  variants: {
+    isDummy: {
+      true: {
+        visibility: 'hidden',
+      },
+    },
+  },
 });
 
 export const PlayerImageClipper = style({
@@ -340,4 +349,32 @@ export const PlayerButton = recipe({
       },
     },
   ],
+});
+
+export const PaginationContainer = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '0.375rem',
+});
+
+export const PaginationButton = recipe({
+  base: {
+    width: '0.375rem',
+    height: '0.375rem',
+    borderRadius: '100%',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease-in-out',
+  },
+  variants: {
+    isActive: {
+      true: {
+        background: vars.color['white-87'],
+      },
+      false: {
+        background: vars.color['white-38'],
+      },
+    },
+  },
 });

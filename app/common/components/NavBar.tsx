@@ -3,7 +3,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 
 const navBarVariants = tv({
   slots: {
-    root: "w-full bg-black",
+    root: "w-full bg-[#1E1E1E]",
     container: "w-full max-w-screen-sm mx-auto",
     tabsList: "w-full flex flex-row justify-between h-12 px-5",
     tab: "flex items-center justify-center text-base font-medium transition-colors relative px-1",
@@ -12,7 +12,7 @@ const navBarVariants = tv({
   variants: {
     active: {
       true: {
-        tab: "text-white"
+        tab: "text-white-87"
       },
       false: {
         tab: "text-white-disabled-38"
