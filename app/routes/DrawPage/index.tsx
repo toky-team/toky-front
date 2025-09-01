@@ -4,8 +4,13 @@ import MainTopBar from '@/common/components/MainTopBar';
 import Icon from '@/lib/assets/icons';
 import draw_text from '@/lib/assets/images/draw_text.webp';
 import DrawTicketInfo from '@/domain/ticket/components/DrawTicketInfo';
+import { DrawCard } from '@/domain/ticket/components/DrawCard';
+import { useGetGift } from '@/domain/ticket/apis/useGetGift';
+import useGetTicketCount from '@/common/apis/useGetTicketCount';
 
 const DrawPage = () => {
+  const { data: giftList } = useGetGift();
+  const { data: ticketCount } = useGetTicketCount();
   return (
     <div className={s.Container}>
       <MainTopBar />
@@ -23,6 +28,19 @@ const DrawPage = () => {
               응모권은 어떻게 받을 수 있나요?
             </div>
           </div>
+        </div>
+        <div className={s.DrawCards}>
+          {giftList?.map((gift) => (
+            <DrawCard
+              key={gift.id}
+              id={gift.id}
+              imgUrl={gift.imageUrl}
+              productName={gift.name}
+              totalDraw={gift.drawCount}
+              canDraw={gift.requiredTicket <= (ticketCount ?? 0)}
+              productAlias={gift.alias}
+            />
+          ))}
         </div>
       </div>
     </div>

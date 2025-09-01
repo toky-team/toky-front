@@ -53,3 +53,12 @@ export const InfoText = style({
   lineHeight: 1.2,
   letterSpacing: '-0.03rem',
 });
+
+export const DrawCards = style({
+  display: 'flex',
+  width: '100%',
+  paddingTop: '0.625rem',
+  gap: '1.125rem 0.75rem',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+});

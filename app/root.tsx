@@ -25,7 +25,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <html lang="ko" className="h-full">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <title>신나는 정기전 승부예측, TOKY</title>
         <meta
           name="description"
