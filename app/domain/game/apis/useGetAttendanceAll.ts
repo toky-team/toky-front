@@ -1,15 +1,9 @@
 import client from '@/common/utils/client';
+import type { GetAttendanceResponse } from '@/domain/game/apis/useGetAttendance';
 import { useQuery } from '@tanstack/react-query';
 
 interface GetAttendanceAllResponse {
-  attendances: [
-    {
-      attendandAt: string;
-      isAttended: boolean;
-      firstStageResult: boolean;
-      secondStageResult: boolean;
-    },
-  ];
+  attendances: GetAttendanceResponse[];
   ticketCountByAttendance: number;
 }
 

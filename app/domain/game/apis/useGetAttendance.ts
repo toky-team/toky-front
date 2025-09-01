@@ -1,11 +1,11 @@
 import client from '@/common/utils/client';
 import { useQuery } from '@tanstack/react-query';
 
-interface GetAttendanceResponse {
+export interface GetAttendanceResponse {
   attendandAt: string;
   isAttended: boolean;
-  firstStageResult: boolean;
-  secondStageResult: boolean;
+  firstStageResult: boolean | null;
+  secondStageResult: boolean | null;
 }
 
 const getAttendance = async () => {
