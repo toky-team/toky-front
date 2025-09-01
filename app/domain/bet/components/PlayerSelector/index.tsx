@@ -10,6 +10,7 @@ import SelectedPlayerView from '@/domain/bet/components/PlayerSelector/SelectedP
 import { usePostPlayerBet } from '@/domain/bet/apis/usePostPlayerBet';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
 import { ChevronRight } from 'lucide-react';
+import { useToast } from '@/common/hooks/useToast';
 
 interface Props {
   sport: SportType;
@@ -28,6 +29,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
   const { data } = useGetPlayer(sport);
   const { mutate: postPlayerBet } = usePostPlayerBet();
   const { openLoginModal } = useLoginModal();
+  const { openToast } = useToast();
 
   // 스와이프 제스처를 위한 ref와 상태
   const playerListRef = useRef<HTMLDivElement>(null);
@@ -59,6 +61,9 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
           setTimeout(() => {
             scrollToBottom();
           }, 0);
+          if (mySelection.kuPlayerId === undefined) {
+            openToast({ message: '응모권 1장 획득' });
+          }
         },
       },
     );
@@ -72,6 +77,9 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
           setTimeout(() => {
             scrollToBottom();
           }, 0);
+          if (mySelection.yuPlayerId === undefined) {
+            openToast({ message: '응모권 1장 획득' });
+          }
         },
       },
     );

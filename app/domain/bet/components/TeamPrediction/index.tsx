@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 import OptionButton from '@/domain/bet/components/TeamPrediction/OptionButton';
 import type { BetAnswer } from '@/domain/bet/apis/useGetMyBet';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
+import { useToast } from '@/common/hooks/useToast';
 
 const OPTIONS: { value: UniversityType | '무승부'; text: string; position: 'left' | 'center' | 'right' }[] = [
   { value: '고려대학교', text: '고려대', position: 'left' },
@@ -28,12 +29,22 @@ const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading }: Props) =>
     if (betData.predict.matchResult) return betData.predict.matchResult;
     return null;
   }, [betData]);
+  const { openToast } = useToast();
 
   const isLoading = isBetAnswerRatioLoading || isMyBetLoading;
 
   const handleTeamPrediction = (team: UniversityType | '무승부') => {
     if (openLoginModal() !== false) return;
-    postMatchResultBet({ sport, predict: { matchResult: team } });
+    postMatchResultBet(
+      { sport, predict: { matchResult: team } },
+      {
+        onSuccess: () => {
+          if (betData.predict === null) {
+            openToast({ message: '응모권 1장 획득!' });
+          }
+        },
+      },
+    );
   };
 
   const totalSum = useMemo(() => {
