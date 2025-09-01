@@ -40,6 +40,7 @@ export const Item = style({
   borderBottom: `0.5px solid ${vars.color['white-15']}`,
   overflow: 'hidden',
   gap: '0.5rem',
+  flexShrink: 0,
 });
 
 export const LeftSide = style({

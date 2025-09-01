@@ -9,6 +9,7 @@ import { useGetPlayer } from '@/common/apis/useGetPlayer';
 import type { PlayerInterface } from '@/lib/types/player';
 import SelectedPlayerView from '@/domain/bet/components/PlayerSelector/SelectedPlayerView';
 import { usePostPlayerBet } from '@/domain/bet/apis/usePostPlayerBet';
+import { useLoginModal } from '@/common/hooks/useLoginModal';
 
 interface Props {
   sport: SportType;
@@ -22,6 +23,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
   const [status, setStatus] = useState<UniversityType | null>(null);
   const { data } = useGetPlayer(sport);
   const { mutate: postPlayerBet } = usePostPlayerBet();
+  const { openLoginModal } = useLoginModal();
 
   const kuSelectedPlayer =
     mySelection.kuPlayerId === undefined
@@ -37,15 +39,31 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
         : data?.find((player) => player.id === mySelection.yuPlayerId) || undefined;
 
   const setKuSelectedPlayer = (player: PlayerInterface | null) => {
-    postPlayerBet({ sport, university: '고려대학교', playerId: player?.id || null });
+    if (openLoginModal() !== false) return;
+    postPlayerBet(
+      { sport, university: '고려대학교', playerId: player?.id || null },
+      {
+        onSuccess: () => {
+          setTimeout(() => {
+            scrollToBottom();
+          }, 0);
+        },
+      },
+    );
   };
   const setYuSelectedPlayer = (player: PlayerInterface | null) => {
-    postPlayerBet({ sport, university: '연세대학교', playerId: player?.id || null });
+    if (openLoginModal() !== false) return;
+    postPlayerBet(
+      { sport, university: '연세대학교', playerId: player?.id || null },
+      {
+        onSuccess: () => {
+          setTimeout(() => {
+            scrollToBottom();
+          }, 0);
+        },
+      },
+    );
   };
-
-  useEffect(() => {
-    // TODO: 스크롤 가장 아래로 내리기
-  }, [kuSelectedPlayer, yuSelectedPlayer]);
 
   // 스포츠 변경 시 상태 초기화
   useEffect(() => setStatus(null), [sport]);

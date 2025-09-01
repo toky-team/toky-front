@@ -10,6 +10,7 @@ import * as s from './style.css';
 import Icon from '@/lib/assets/icons';
 import { usePostDraw } from '@/domain/ticket/apis/usePostDraw';
 import { useNeedTicketModal } from '@/domain/ticket/hooks/useNeedTicketModal';
+import { useLoginModal } from '@/common/hooks/useLoginModal';
 
 interface DrawCardProps {
   id: string;
@@ -24,7 +25,7 @@ interface DrawCardProps {
 export function DrawCard({ id, totalDraw, productName, productAlias, canDraw, imgUrl, isDone = false }: DrawCardProps) {
   const [isClicked, setIsClicked] = useState(false);
   const { openToast } = useToast();
-  // const { openLoginModal } = useLoginModal();
+  const { openLoginModal } = useLoginModal();
   const { openNeedTicketModal } = useNeedTicketModal();
   // const { openEndModal } = useEndModal();
   const { mutate: draw } = usePostDraw(id);
@@ -55,7 +56,7 @@ export function DrawCard({ id, totalDraw, productName, productAlias, canDraw, im
       // openEndModal();
       return;
     }
-    // if (openLoginModal() !== false) return;
+    if (openLoginModal() !== false) return;
 
     if (!canDraw) {
       openNeedTicketModal();

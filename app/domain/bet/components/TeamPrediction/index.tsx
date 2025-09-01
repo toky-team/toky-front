@@ -6,6 +6,7 @@ import { usePostMatchResultBet } from '@/domain/bet/apis/usePostMatchResultBet';
 import { useMemo } from 'react';
 import OptionButton from '@/domain/bet/components/TeamPrediction/OptionButton';
 import type { BetAnswer } from '@/domain/bet/apis/useGetMyBet';
+import { useLoginModal } from '@/common/hooks/useLoginModal';
 
 const OPTIONS: { value: UniversityType | '무승부'; text: string; position: 'left' | 'center' | 'right' }[] = [
   { value: '고려대학교', text: '고려대', position: 'left' },
@@ -21,6 +22,7 @@ interface Props {
 const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading }: Props) => {
   const { mutate: postMatchResultBet } = usePostMatchResultBet();
   const { data: betAnswerRatio, isLoading: isBetAnswerRatioLoading } = useGetBetAnswerRatio(sport);
+  const { openLoginModal } = useLoginModal();
   const selectedTeam = useMemo(() => {
     if (!betData.predict) return null;
     if (betData.predict.matchResult) return betData.predict.matchResult;
@@ -30,6 +32,7 @@ const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading }: Props) =>
   const isLoading = isBetAnswerRatioLoading || isMyBetLoading;
 
   const handleTeamPrediction = (team: UniversityType | '무승부') => {
+    if (openLoginModal() !== false) return;
     postMatchResultBet({ sport, predict: { matchResult: team } });
   };
 
