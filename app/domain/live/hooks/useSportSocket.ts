@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import type { ChatMessageInterface } from '@/lib/types/live';
 import { chatSocket } from '@/common/utils/socket';
 import type { SportType } from '@/lib/types';
+import { useToast } from '@/common/hooks/useToast';
 
 const useSportSocket = (sport: SportType) => {
+  const { openToast } = useToast();
   const [newMessages, setNewMessages] = useState<ChatMessageInterface[]>([]);
 
   useEffect(() => {
@@ -12,8 +14,8 @@ const useSportSocket = (sport: SportType) => {
       setNewMessages((prev) => [...prev, message]);
     };
 
-    const onConnectError = (error: { message: string }) => {
-      console.log(error.message);
+    const onConnectError = () => {
+      openToast({ message: '라이브 채팅 연결에 실패했어요' });
     };
 
     chatSocket.on('receive_message', onReceiveMessage);
@@ -25,7 +27,7 @@ const useSportSocket = (sport: SportType) => {
       chatSocket.off('connect_error', onConnectError);
       chatSocket.emit('leave_room', { sport });
     };
-  }, [sport]);
+  }, [sport, openToast]);
 
   return newMessages;
 };

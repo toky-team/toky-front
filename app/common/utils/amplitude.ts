@@ -7,14 +7,12 @@ export const initAmplitude = async (userId?: string, callback?: () => void) => {
   init(AMPLITUDE_API_KEY, {
     userId,
     defaultTracking: true,
-  })
-    .promise.then(() => {
-      console.log('[[[[[Amplitude Initiated]]]]]');
-      callback?.();
-    })
-    .catch((error) => {
-      console.log('[[[[[Amplitude Init Error]]]]]', error);
-    });
+    autocapture: {
+      elementInteractions: true,
+    },
+  }).promise.then(() => {
+    callback?.();
+  });
 };
 
 export const setInitialUserProperties = (user: UserInfoInterface) => {
