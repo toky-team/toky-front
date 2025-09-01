@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import * as s from './style.css';
 
@@ -28,6 +28,14 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
   const { data } = useGetPlayer(sport);
   const { mutate: postPlayerBet } = usePostPlayerBet();
   const { openLoginModal } = useLoginModal();
+
+  // 스와이프 제스처를 위한 ref와 상태
+  const playerListRef = useRef<HTMLDivElement>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [mouseStart, setMouseStart] = useState<number | null>(null);
+  const [mouseEnd, setMouseEnd] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const kuSelectedPlayer =
     mySelection.kuPlayerId === undefined
@@ -83,6 +91,69 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
   const handlePlayerProfileClick = (playerId: string) => {
     // TODO: 선수 프로필 보여주기
     alert(playerId);
+  };
+
+  // 스와이프 제스처 핸들러들
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+    if (isRightSwipe && currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // 마우스 이벤트 핸들러들 (데스크톱용)
+  const onMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setMouseEnd(null);
+    setMouseStart(e.clientX);
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    setMouseEnd(e.clientX);
+  };
+
+  const onMouseUp = () => {
+    if (!isDragging || !mouseStart || !mouseEnd) {
+      setIsDragging(false);
+      return;
+    }
+
+    const distance = mouseStart - mouseEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+    if (isRightSwipe && currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+
+    setIsDragging(false);
+  };
+
+  const onMouseLeave = () => {
+    setIsDragging(false);
   };
 
   // 현재 대학교의 선수들만 필터링
@@ -150,7 +221,18 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
                   자세히보기 <ChevronRight size={18} />
                 </button>
               </div>
-              <div className={s.PlayerList}>
+              <div
+                ref={playerListRef}
+                className={s.PlayerList}
+                onTouchStart={onTouchStart}
+                onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
+                onMouseDown={onMouseDown}
+                onMouseMove={onMouseMove}
+                onMouseUp={onMouseUp}
+                onMouseLeave={onMouseLeave}
+                style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+              >
                 {currentPageItems.map((player, index) => (
                   <PlayerItem
                     key={
