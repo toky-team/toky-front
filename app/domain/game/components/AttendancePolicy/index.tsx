@@ -21,7 +21,7 @@ const AttendancePolicy = () => {
                 1단계 성공시 1장, <br />
                 2단계 성공시 1장 추가 지급!
               </p>
-              <p className={s.Description}>*2단계에서 실패자에 한해, 공유시 한 번의 추가 기회를!</p>
+              <p className={s.Description}>*1단계에서 실패자에 한해, 공유시 한 번의 추가 기회를!</p>
             </span>
           </div>
           <div className={s.TextWrapper}>

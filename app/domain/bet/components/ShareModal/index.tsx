@@ -10,7 +10,7 @@ interface ShareModalProps {
   isModalOpen: boolean;
   onClose: () => void;
 }
-// TODO: 쉐어 모달 제대로 안 뜨는 거 고치기
+
 export function ShareModal({ isModalOpen = true, onClose }: ShareModalProps) {
   const { shareImage, shareRef, imageRef, userInfo, scoreData, isFetchLoading, imgSrc, predictionResult } =
     useCardShare();
