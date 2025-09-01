@@ -42,11 +42,3 @@ export const UniversityArray = ['고려대학교', '연세대학교'] as const;
 export type SportType = (typeof SportArray)[number]['id'];
 export type UniversityType = (typeof UniversityArray)[number];
 export type SportsPathType = keyof typeof SportsPathMap;
-
-export const SportToEnglishMap: Record<SportType, string> = {
-  야구: 'baseball',
-  축구: 'soccer',
-  농구: 'basketball',
-  럭비: 'rugby',
-  아이스하키: 'hockey',
-};
