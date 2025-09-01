@@ -62,3 +62,7 @@ export const DrawCards = style({
   flexWrap: 'wrap',
   alignItems: 'center',
 });
+
+export const Instruction = style({
+  width: '100%',
+});
