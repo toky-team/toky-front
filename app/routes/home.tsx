@@ -23,7 +23,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <>
       <MainTopBar />
       <NavBar />
       <CustomCarousel slides={slides} />
@@ -35,16 +35,19 @@ export default function Home() {
           <ScheduleCarousel />
         </div>
         <AdsCarousel />
-        <div className="w-full flex flex-col gap-3">
+        <div className="flex w-full flex-col gap-3">
           <div className="flex w-full flex-row justify-between">
             <div className="text-lg font-bold">적중률 랭킹</div>
-            <button className="flex items-center text-white/60 text-sm font-normal leading-normal tracking-tight" onClick={() => navigate('/ranking')}>
-              자세히보기 <ChevronRight className="w-4 h-4" />
+            <button
+              className="flex items-center text-sm leading-normal font-normal tracking-tight text-white/60"
+              onClick={() => navigate('/ranking')}
+            >
+              자세히보기 <ChevronRight className="h-4 w-4" />
             </button>
           </div>
           <ShortRankChart />
         </div>
       </div>
-    </div>
+    </>
   );
 }
