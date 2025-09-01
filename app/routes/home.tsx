@@ -9,18 +9,23 @@ import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 import ShortRankChart from '@/domain/home/components/ShortRankChart';
 import bannerGuide from '@/lib/assets/images/banner_guide.webp';
 import bannerAttendance from '@/lib/assets/images/banner_attendance.webp';
+import { useGetIsAnswerSet } from '@/common/apis/useGetIsAnswerSet';
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
 export default function Home() {
   const slides = [
-    { id: '1', image: bannerGuide, alt: '가이드' }, // TODO: 가이드 페이지로 리다이렉트
+    { id: '1', image: bannerGuide, alt: '가이드', link: '/guide' },
     { id: '2', image: bannerAttendance, alt: '출석퀴즈', link: '/attendance' },
   ];
+
+  const { data: isAnswerSet } = useGetIsAnswerSet();
 
   const { data: auth } = useGetAuthCheck();
   const isLoggedIn = Boolean(auth?.isSignup);
   const navigate = useNavigate();
+
+  const ChartType = isAnswerSet ? 'betRate' : 'activity';
 
   return (
     <>
@@ -45,7 +50,7 @@ export default function Home() {
               자세히보기 <ChevronRight className="h-4 w-4" />
             </button>
           </div>
-          <ShortRankChart />
+          <ShortRankChart type={ChartType} />
         </div>
       </div>
     </>

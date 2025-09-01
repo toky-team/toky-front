@@ -12,6 +12,14 @@ import draw_instruction from '@/lib/assets/images/draw_instruction.webp';
 const DrawPage = () => {
   const { data: giftList } = useGetGift();
   const { data: ticketCount } = useGetTicketCount();
+
+  const scrollToBottom = async () => {
+    await window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className={s.Container}>
       <MainTopBar />
@@ -24,10 +32,10 @@ const DrawPage = () => {
           </div>
           <div className={s.InfoContainer}>
             <DrawTicketInfo />
-            <div className={s.InfoText}>
+            <button className={s.InfoText} onClick={scrollToBottom}>
               <Icon.QuestionMark />
               응모권은 어떻게 받을 수 있나요?
-            </div>
+            </button>
           </div>
         </div>
         <div className={s.DrawCards}>

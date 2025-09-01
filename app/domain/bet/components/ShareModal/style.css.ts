@@ -117,3 +117,10 @@ export const Backdrop = recipe({
     },
   },
 });
+
+export const FlexBox = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  height: '100%',
+});

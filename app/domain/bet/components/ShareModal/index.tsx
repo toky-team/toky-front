@@ -27,30 +27,32 @@ export function ShareModal({ isModalOpen = true, onClose }: ShareModalProps) {
       {isModalOpen && scoreData && userInfo && !isFetchLoading && predictionResult && imgSrc && (
         <div className={s.Wrapper}>
           <div className={s.Content}>
-            <div ref={imageRef}>
-              <PredictionCard
-                ref={shareRef}
-                src={imgSrc}
-                predictionResult={predictionResult}
-                nickname={userInfo.name}
-                numWinKorea={scoreData.kuScore}
-                numWinYonsei={scoreData.yuScore}
-              />
-            </div>
-            <div className={s.ContentWrapper}>
-              <div className={s.ButtonWrapper}>
-                <button className={s.CancelButton} onClick={onClose}>
-                  <Icon.Cancel />
-                </button>
-                <button className={s.ShareButton} onClick={shareImage}>
-                  <Icon.Share />
-                  공유하기
-                </button>
+            <div className={s.FlexBox}>
+              <div ref={imageRef}>
+                <PredictionCard
+                  ref={shareRef}
+                  src={imgSrc}
+                  predictionResult={predictionResult}
+                  nickname={userInfo.name}
+                  numWinKorea={scoreData.kuScore}
+                  numWinYonsei={scoreData.yuScore}
+                />
               </div>
-              <div className={s.ToolTip}>
-                @official.toky 태그하고 <br />
-                공유 이벤트에 참여해보세요!
-                <div className={s.ToolTipArrow} />
+              <div className={s.ContentWrapper}>
+                <div className={s.ButtonWrapper}>
+                  <button className={s.CancelButton} onClick={onClose}>
+                    <Icon.Cancel />
+                  </button>
+                  <button className={s.ShareButton} onClick={shareImage}>
+                    <Icon.Share />
+                    공유하기
+                  </button>
+                </div>
+                <div className={s.ToolTip}>
+                  @official.toky 태그하고 <br />
+                  공유 이벤트에 참여해보세요!
+                  <div className={s.ToolTipArrow} />
+                </div>
               </div>
             </div>
           </div>

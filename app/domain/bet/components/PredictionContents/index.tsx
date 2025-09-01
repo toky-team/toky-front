@@ -11,6 +11,7 @@ import { useGetMyBet } from '@/domain/bet/apis/useGetMyBet';
 import { PREDICTION_QUESTION } from '@/domain/bet/constants';
 import { usePostMatchResultBet } from '@/domain/bet/apis/usePostMatchResultBet';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
+import { useToast } from '@/common/hooks/useToast';
 
 interface Props {
   sport: SportType;
@@ -24,6 +25,7 @@ const PredictionContents = ({ sport }: Props) => {
   } = useGetMyBet(sport);
   const { mutate: postMatchResultBet } = usePostMatchResultBet();
   const { openLoginModal } = useLoginModal();
+  const { openToast } = useToast();
 
   const [isScorePrediction, setIsScorePrediction] = useState(false);
   const canPredictScore = sport === '야구' || sport === '축구' || sport === '아이스하키';
@@ -70,7 +72,17 @@ const PredictionContents = ({ sport }: Props) => {
               ? { kuScore: 0, yuScore: 1 }
               : { kuScore: 0, yuScore: 0 };
       }
-      postMatchResultBet({ sport, predict: { score: newScore } });
+      postMatchResultBet(
+        { sport, predict: { score: newScore } },
+        {
+          onSuccess: () => {
+            if (betData.predict === null) {
+              openToast({ message: '응모권 2장 획득!' });
+            }
+          },
+        },
+      );
+
       return;
     }
   };
