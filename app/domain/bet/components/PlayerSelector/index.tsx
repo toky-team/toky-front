@@ -11,6 +11,7 @@ import { usePostPlayerBet } from '@/domain/bet/apis/usePostPlayerBet';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
 import { ChevronRight } from 'lucide-react';
 import { useToast } from '@/common/hooks/useToast';
+import { usePlayerOverlay } from '@/domain/player/hooks/usePlayerOverlay';
 
 interface Props {
   sport: SportType;
@@ -30,6 +31,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
   const { mutate: postPlayerBet } = usePostPlayerBet();
   const { openLoginModal } = useLoginModal();
   const { openToast } = useToast();
+  const { openPlayerOverlay } = usePlayerOverlay();
 
   // 스와이프 제스처를 위한 ref와 상태
   const playerListRef = useRef<HTMLDivElement>(null);
@@ -96,9 +98,8 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
     setCurrentPage(1);
   }, [status]);
 
-  const handlePlayerProfileClick = (playerId: string) => {
-    // TODO: 선수 프로필 보여주기
-    alert(playerId);
+  const handlePlayerProfileClick = (player: PlayerInterface) => {
+    openPlayerOverlay(player);
   };
 
   // 스와이프 제스처 핸들러들
@@ -283,7 +284,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
                   <div className={s.ButtonWrapper}>
                     <button
                       className={s.PlayerButton({ type: 'profile' })}
-                      onClick={() => handlePlayerProfileClick(selectedPlayer.id)}
+                      onClick={() => handlePlayerProfileClick(selectedPlayer)}
                     >
                       선수 프로필
                     </button>
