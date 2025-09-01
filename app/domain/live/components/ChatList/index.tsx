@@ -9,10 +9,6 @@ import type { SportType } from '@/lib/types';
 import useSportSocket from '@/domain/live/hooks/useSportSocket';
 import Loader from '@/common/components/Loader';
 
-// TODO: 스크롤 관련 고치기!!!!
-// 1. 위로 올려서 페이지네이션 시에 스크롤 위치 저장했다가 유지하기
-// 2. 처음 페이지 접속 시에 가장 하단으로 스크롤 고정
-// 3. 내가 메세지 보낼 때 하단으로 스크롤 스무스하게 이동 시켜주기
 interface Props {
   sport: SportType;
 }

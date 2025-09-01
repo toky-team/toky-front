@@ -135,7 +135,6 @@ const SideBar = ({ onClose }: SideBarProps) => {
   };
 
   const handleCopyInvite = async () => {
-    //TODO: 실제 배포 시 환경변수 변경
     const text = import.meta.env.VITE_CLIENT_URL + '/?referer=' + inviteCode;
     await navigator.clipboard.writeText(text);
     openToast({

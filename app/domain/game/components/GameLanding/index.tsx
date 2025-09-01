@@ -26,8 +26,6 @@ const GameLanding = ({ step, sport, handleStart, retry, university }: Props) => 
         src={GAME_LANDING_CHARACTER_IMAGE[sport][university === '고려대학교' ? 'korea' : 'yonsei']}
         className={s.TokyImage}
       />
-
-      {/* TODO: 사진 추가 */}
       <div className={s.BottomButton} onClick={handleStart}>
         {step === 1 ? '시작하기' : '2단계 도전하기'}
       </div>

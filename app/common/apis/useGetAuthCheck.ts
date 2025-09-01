@@ -18,7 +18,6 @@ const getAuthCheck = async () => {
       };
     }
   } catch (error) {
-    // TODO: 예외 없이 처리되는지 확인 필요
     if (isAxiosError(error) && error.status === 401) {
       return {
         isLogin: false,
