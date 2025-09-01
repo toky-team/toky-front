@@ -3,11 +3,9 @@ import type { GiftInterface } from '@/domain/ticket/apis/useGetGift';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const postDraw = async (id: string, count?: number) => {
-  // const response = await client.post(`/gift/${id}/draw`, { count: count ?? 1 });
-  // return response.data;
-  return;
+  const response = await client.post(`/gift/${id}/draw`, { count: count ?? 1 });
+  return response.data;
 };
-
 export const usePostDraw = (giftId: string) => {
   const queryClient = useQueryClient();
 
