@@ -15,20 +15,20 @@ interface BetHitRankResponse {
   hasNext: boolean;
 }
 
-const getBetHitRankPagination = async (limit: number, cursor?: string): Promise<BetHitRankResponse> => {
+const getBetHitRankPagination = async (cursor?: string, limit: number = 20): Promise<BetHitRankResponse> => {
   const response = await client.get<BetHitRankResponse>('/bet-hit/rank', {
     params: {
-      limit,
       cursor,
+      limit,
     },
   });
   return response.data;
 };
 
-export const useBetHitRankPagination = (limit: number = 10) => {
+export const useBetHitRankPagination = (limit: number = 20) => {
   return useInfiniteQuery({
     queryKey: ['bet-hit-rank-pagination', limit],
-    queryFn: ({ pageParam }) => getBetHitRankPagination(limit, pageParam),
+    queryFn: ({ pageParam }) => getBetHitRankPagination(pageParam, limit),
     getNextPageParam: (lastPage) => {
       return lastPage.hasNext ? lastPage.nextCursor : undefined;
     },
