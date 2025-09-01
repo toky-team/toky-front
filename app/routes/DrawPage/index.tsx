@@ -7,6 +7,7 @@ import DrawTicketInfo from '@/domain/ticket/components/DrawTicketInfo';
 import { DrawCard } from '@/domain/ticket/components/DrawCard';
 import { useGetGift } from '@/domain/ticket/apis/useGetGift';
 import useGetTicketCount from '@/common/apis/useGetTicketCount';
+import draw_instruction from '@/lib/assets/images/draw_instruction.webp';
 
 const DrawPage = () => {
   const { data: giftList } = useGetGift();
@@ -43,6 +44,7 @@ const DrawPage = () => {
           ))}
         </div>
       </div>
+      <img className={s.Instruction} src={draw_instruction} alt="draw page instruction" />
     </div>
   );
 };
