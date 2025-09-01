@@ -23,11 +23,13 @@ const PredictionPage = () => {
     <div className={s.Container}>
       <MainTopBar />
       <NavBar />
-      <Banner openShareModal={openShareModal} />
-      <SportNav curSport={sport} setSport={setSport} />
-      <Suspense>
-        <PredictionContents sport={sport} />
-      </Suspense>
+      <div className={s.ScrollContainer}>
+        <Banner openShareModal={openShareModal} />
+        <SportNav curSport={sport} setSport={setSport} />
+        <Suspense>
+          <PredictionContents sport={sport} />
+        </Suspense>
+      </div>
       <PredictionBottomBar curSport={sport} handleNav={setSport} />
     </div>
   );

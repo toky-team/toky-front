@@ -10,7 +10,6 @@ export const Container = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '2.5rem',
-  overflowY: 'auto',
 });
 
 export const Wrapper = style({
