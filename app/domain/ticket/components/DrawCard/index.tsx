@@ -9,6 +9,7 @@ import * as s from './style.css';
 // import { useEndModal } from '@/common/hooks/useEndModal';
 import Icon from '@/lib/assets/icons';
 import { usePostDraw } from '@/domain/ticket/apis/usePostDraw';
+import { useNeedTicketModal } from '@/domain/ticket/hooks/useNeedTicketModal';
 
 interface DrawCardProps {
   id: string;
@@ -24,7 +25,7 @@ export function DrawCard({ id, totalDraw, productName, productAlias, canDraw, im
   const [isClicked, setIsClicked] = useState(false);
   const { openToast } = useToast();
   // const { openLoginModal } = useLoginModal();
-  // const { openNeedTikcetModal } = useNeedTicketModal();
+  const { openNeedTicketModal } = useNeedTicketModal();
   // const { openEndModal } = useEndModal();
   const { mutate: draw } = usePostDraw(id);
   const ticketControls = useAnimation();
@@ -55,9 +56,9 @@ export function DrawCard({ id, totalDraw, productName, productAlias, canDraw, im
       return;
     }
     // if (openLoginModal() !== false) return;
+
     if (!canDraw) {
-      // TODO: 티켓 부족 모달
-      // openNeedTikcetModal();
+      openNeedTicketModal();
       return;
     }
     setIsClicked(true);
