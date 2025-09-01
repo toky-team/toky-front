@@ -3,6 +3,7 @@ import * as s from './style.css';
 import type { BetAnswer } from '@/domain/bet/apis/useGetMyBet';
 import { usePostMatchResultBet } from '@/domain/bet/apis/usePostMatchResultBet';
 import type { SportType } from '@/lib/types';
+import { useLoginModal } from '@/common/hooks/useLoginModal';
 
 interface ScoreControllerProps {
   handlePlus: () => void;
@@ -28,10 +29,12 @@ interface Props {
 const ScorePrediction = ({ sport, betData }: Props) => {
   const { mutate: postMatchResultBet } = usePostMatchResultBet();
   const { kuScore, yuScore } = betData.predict?.score || { kuScore: 0, yuScore: 0 };
+  const { openLoginModal } = useLoginModal();
 
   const handleScorePrediction = (
     setScore: (prev: { kuScore: number; yuScore: number }) => { kuScore: number; yuScore: number },
   ) => {
+    if (openLoginModal() !== false) return;
     const newScore = setScore({ kuScore, yuScore });
     postMatchResultBet({ sport, predict: { score: newScore } });
   };

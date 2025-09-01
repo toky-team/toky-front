@@ -10,6 +10,7 @@ import TeamPrediction from '@/domain/bet/components/TeamPrediction';
 import { useGetMyBet } from '@/domain/bet/apis/useGetMyBet';
 import { PREDICTION_QUESTION } from '@/domain/bet/constants';
 import { usePostMatchResultBet } from '@/domain/bet/apis/usePostMatchResultBet';
+import { useLoginModal } from '@/common/hooks/useLoginModal';
 
 interface Props {
   sport: SportType;
@@ -19,10 +20,10 @@ const PredictionContents = ({ sport }: Props) => {
   const {
     data: betData = { sport, predict: null, kuPlayer: null, yuPlayer: null },
     isLoading,
-    isError,
     isSuccess,
   } = useGetMyBet(sport);
   const { mutate: postMatchResultBet } = usePostMatchResultBet();
+  const { openLoginModal } = useLoginModal();
 
   const [isScorePrediction, setIsScorePrediction] = useState(false);
   const canPredictScore = sport === '야구' || sport === '축구' || sport === '아이스하키';
@@ -36,8 +37,6 @@ const PredictionContents = ({ sport }: Props) => {
     }
   }, [canPredictScore, isSuccess, betData?.predict?.score, sport]);
 
-  if (isError) return <div className={s.Container}>데이터를 불러오는데 실패했습니다.</div>; // TODO: Not Found 페이지
-
   const scrollToBottom = async () => {
     if (scrollRef.current) {
       await scrollRef.current.scrollTo({
@@ -48,6 +47,8 @@ const PredictionContents = ({ sport }: Props) => {
   };
 
   const changePredictionMode = () => {
+    if (openLoginModal() !== false) return;
+
     if (isScorePrediction) {
       // 점수 예측 -> 우승팀 예측으로 변경
       setIsScorePrediction(false);
