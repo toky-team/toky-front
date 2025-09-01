@@ -6,6 +6,7 @@ import '@/root.css';
 import QueryProvider from '@/common/utils/QueryProvider';
 import { OverlayProvider } from '@/common/utils/OverlayProvider';
 import useInviteCode from '@/common/hooks/useInviteCode';
+import AmplitudeProvider from '@/common/utils/AmplitudeProvider';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -49,6 +50,7 @@ export default function App() {
   return (
     <QueryProvider>
       <OverlayProvider>
+        <AmplitudeProvider />
         <Outlet />
       </OverlayProvider>
     </QueryProvider>
