@@ -53,7 +53,7 @@ const AttendanceBanner = () => {
       <div className={s.GameButtonWrapper}>
         <div className={s.TicketWrapper}>
           <p>현재까지 획득한 응모권</p>
-          <TicketInfo />
+          <TicketInfo number={attendanceData?.ticketCountByAttendance} />
         </div>
         <button className={s.GameButton({ disabled: isDisabled })} onClick={handleGameStart}>
           {isTodayAttendanceSuccess
