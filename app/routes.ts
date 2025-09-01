@@ -6,6 +6,7 @@ export default [
   route('login/koreapas', 'routes/KoreapasLoginPage/index.tsx'),
   route('record', 'routes/Record.tsx'),
   route('player', 'routes/Player.tsx'),
+  route('ranking', 'routes/Ranking.tsx'),
   route('signup', 'routes/SignUpPage/index.tsx'),
   layout('common/components/AuthGuard/index.tsx', [
     route('welcome', 'routes/WelcomePage/index.tsx'),
