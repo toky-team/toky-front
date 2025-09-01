@@ -150,7 +150,6 @@ export function useCardShare() {
         });
       } finally {
         postShare(undefined, {
-          // TODO: 티켓 추가 로직 수정
           onSuccess: openShareSuccessToast,
         });
         setIsShareLoading(false);

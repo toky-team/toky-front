@@ -1,6 +1,5 @@
 import type { SportType } from '@/lib/types';
 
-// TODO: 이미지 경로 수정 필요
 export const KOREA_WIN_IMAGE_LIST = [
   'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-0.webp',
   'https://toky-storage.s3.ap-northeast-2.amazonaws.com/assets/shared-card/card-2.webp',

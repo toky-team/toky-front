@@ -22,7 +22,6 @@ const ScoreBoard = ({ sport }: Props) => {
           <div className={s.SportsLocation}>{LOCATION_MAP[sport]}</div>
         </div>
         <div className={s.PrevStats}>
-          {/* TODO: 정기전 총점 추가 */}
           <span className={s.PrevText}>정기전 총점</span>
           <span className={s.PrevScore}>{PREV_SCORE_MAP[sport]}</span>
         </div>

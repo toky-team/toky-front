@@ -8,13 +8,12 @@ export const LOCATION_MAP: Record<SportType, string> = {
   아이스하키: '목동아이스링크',
 };
 
-// TODO: 정기전 총점 추가
 export const PREV_SCORE_MAP: Record<SportType, string> = {
-  축구: '1:0',
-  농구: '5:0',
-  야구: '3:2',
-  럭비: '8:6',
-  아이스하키: '1:1',
+  축구: '21:18',
+  농구: '24:23',
+  야구: '26:19',
+  럭비: '21:25',
+  아이스하키: '18:24',
 };
 
 // TODO: 라이브 주소 추가
