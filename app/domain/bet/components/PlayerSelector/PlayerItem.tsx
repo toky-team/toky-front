@@ -7,16 +7,34 @@ import type { SportType } from '@/lib/types';
 
 interface Props {
   sport: SportType;
-  player?: PlayerInterface;
+  player?: PlayerInterface | null;
   onClick: () => void;
   isSelected: boolean;
+  isDummy?: boolean;
 }
-const PlayerItem = ({ sport, player, isSelected, onClick }: Props) => {
+const PlayerItem = ({ sport, player, isSelected, onClick, isDummy = false }: Props) => {
   const isPlayer = !!player;
   const positionString =
     sport === '야구' && player?.university === '고려대학교' ? player.position?.split('(')[0] : player?.position;
+
+  // 더미 아이템인 경우 빈 공간으로 렌더링
+  if (isDummy) {
+    return (
+      <div className={s.PlayerItemContainer({ isDummy })}>
+        <div className={s.PlayerImageClipper}>
+          <div className={s.PlayerItemImage({ isSelected: false })}>
+            <div style={{ width: '100%', height: '100%' }} />
+          </div>
+        </div>
+        <div className={s.PlayerItemText({ isPlayer: false })}>
+          <p>&nbsp;</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <button className={s.PlayerItemContainer} onClick={onClick}>
+    <button className={s.PlayerItemContainer()} onClick={onClick}>
       <div className={s.PlayerImageClipper}>
         <div className={s.PlayerItemImage({ isSelected })}>
           {isPlayer ? (
