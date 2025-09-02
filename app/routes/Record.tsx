@@ -7,6 +7,7 @@ import RecordMain from "@/lib/assets/images/record-main.png";
 import RecordOverallSummary from "@/domain/record/components/RecordOverallSummary";
 import ClicktoCheer from "@/domain/record/components/ClicktoCheer";
 import { useNavigate } from "react-router";
+import RecordStats from "@/domain/record/components/RecordStats";
 
 export default function Record() {
   const [tab, setTab] = useState<SportsTab>("전체");
@@ -43,7 +44,10 @@ export default function Record() {
           </div>
         )}
         {tab !== "전체" && (
-          <RecordSportDetail sport={tab} />
+          <>
+            <RecordSportDetail sport={tab} />
+            <RecordStats sport={tab} />
+          </>
         )}
       </div>
     </>
