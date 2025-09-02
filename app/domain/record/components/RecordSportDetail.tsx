@@ -1,5 +1,9 @@
 import { tv } from "tailwind-variants";
 import TokyKoreaBaseball from "@/lib/assets/images/toky_korea_baseball.webp";
+import TokyKoreaSoccer from "@/lib/assets/images/toky_korea_soccer.webp";
+import TokyKoreaBasketball from "@/lib/assets/images/toky_korea_basketball.webp";
+import TokyYonseiRugby from "@/lib/assets/images/toky_yonsei_rugby.webp";
+import TokyYonseiIceHockey from "@/lib/assets/images/toky_yonsei_ice_hockey.webp";
 
 type Team = "고려대" | "연세대";
 
@@ -22,7 +26,7 @@ const recordSportDetailVariants = tv({
     teamColRight: "flex flex-col items-end",
     teamName: "text-sm font-bold",
     teamWins: "text-[42px] font-normal bg-clip-text text-transparent font-giants-bold tracking-[-1.68px]",
-    imageContainer: "absolute bottom-[-45px] left-[45%] -translate-x-1/2 w-full h-full flex items-end",
+    imageContainer: "absolute bottom-[-10px] left-0 w-full h-full flex self-end items-end",
   },
   variants: {
     isKoreaWins: {
@@ -71,6 +75,10 @@ const sports: SportItem[] = [
 
 const sportsImage: Record<string, string> = {
   야구: TokyKoreaBaseball,
+  축구: TokyKoreaSoccer,
+  럭비: TokyYonseiRugby,
+  농구: TokyKoreaBasketball,
+  빙구: TokyYonseiIceHockey,
 };
 
 const matchHistories: Record<string, MatchHistoryItem[]> = {
@@ -130,13 +138,16 @@ const RecordSportDetail = ({ sport }: RecordSportDetailProps) => {
     teamWins,
     imageContainer,
   } = recordSportDetailVariants({ isKoreaWins });
-  
+
   const currentSportHistory = matchHistories[sport] || [];
   const currentSportKoreaWins = sports.find((s) => s.label === sport)?.KOREA_WINS || 0;
   const currentSportYonseiWins = sports.find((s) => s.label === sport)?.YONSEI_WINS || 0;
 
   return (
     <div className={container()}>
+      <div className={imageContainer()}>
+        <img src={sportsImage[sport]} alt="sport" />
+      </div>
       <div className={background()}>
         <div className={topSection()}>
           <div className={caption()}>역대전적</div>
@@ -154,7 +165,7 @@ const RecordSportDetail = ({ sport }: RecordSportDetailProps) => {
                 고려대학교
               </div>
               <div className={teamWins({ team: "고려대" })}>
-                {currentSportKoreaWins}승 
+                {currentSportKoreaWins}승
               </div>
             </div>
             <div className={teamColRight()}>
@@ -167,9 +178,6 @@ const RecordSportDetail = ({ sport }: RecordSportDetailProps) => {
             </div>
           </div>
         </div>
-      </div>
-      <div className={imageContainer()}>
-        <img src={TokyKoreaBaseball} alt="sport" />
       </div>
     </div>
   );
