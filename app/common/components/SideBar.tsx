@@ -93,6 +93,13 @@ const SideBar = ({ onClose }: SideBarProps) => {
 
   const currentPath = useLocation().pathname;
 
+  // 대학교명에 따른 variant 결정
+  const getUniversityVariant = (universityName: string | undefined) => {
+    if (universityName === '고려대학교') return 'korea';
+    if (universityName === '연세대학교') return 'yonsei';
+    return 'korea'; // 기본값
+  };
+
   const {
     root,
     scrim,
@@ -107,7 +114,10 @@ const SideBar = ({ onClose }: SideBarProps) => {
     inviteBtn,
     guestCard,
     nav,
-  } = sideBarVariants({ open: isVisible });
+  } = sideBarVariants({ 
+    open: isVisible,
+    university: getUniversityVariant(userInfo?.university)
+  });
 
   useEffect(() => {
     // 컴포넌트가 마운트된 후 애니메이션 시작
