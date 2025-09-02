@@ -148,7 +148,11 @@ export function useCardShare() {
         });
       } finally {
         postShare(undefined, {
-          onSuccess: openShareSuccessToast,
+          onSuccess: (data) => {
+            if (data.isFirstShared) {
+              openShareSuccessToast();
+            }
+          },
         });
         setIsShareLoading(false);
       }
