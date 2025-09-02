@@ -279,7 +279,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
                       setStatus(null);
                     }}
                   >
-                    '득점 없음' 선택
+                    {sport === '야구' ? "'안타 없음' 선택" : "'득점 없음' 선택"}
                   </button>
                 ) : (
                   <div className={s.ButtonWrapper}>
