@@ -17,6 +17,7 @@ export const TicketInfo = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.25rem',
+  alignItems: 'center',
 });
 
 export const TicketHistory = style({
