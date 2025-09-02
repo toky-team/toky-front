@@ -15,7 +15,7 @@ import { motion } from 'motion/react';
 const sideBarVariants = tv({
   slots: {
     root: 'fixed inset-0 z-50 flex justify-end',
-    scrim: 'absolute inset-0 bg-black/60 backdrop-blur-sm',
+    scrim: 'absolute inset-0 bg-black/60',
     drawer:
       'absolute right-0 top-0 w-[80vw] h-full bg-[#232323] px-5 pt-10 transition-transform duration-300 overflow-y-auto',
     header: 'flex items-center gap-4 px-1',
@@ -114,6 +114,18 @@ const SideBar = ({ onClose }: SideBarProps) => {
     const timer = setTimeout(() => setIsVisible(true), 10);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    // 사이드바가 열리면 body 스크롤 방지
+    if (isVisible) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      // 컴포넌트가 언마운트되거나 사이드바가 닫히면 스크롤 복구
+      document.body.style.overflow = '';
+    };
+  }, [isVisible]);
 
   const handleClose = () => {
     setIsVisible(false);
