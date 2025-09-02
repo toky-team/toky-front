@@ -5,10 +5,35 @@ const giantsBold = 'Giants-Bold';
 const esamanru = 'Esamanru';
 
 globalFontFace(spoqaHanSansNeo, {
-  src: 'url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css)',
-  fontWeight: 'normal',
-  fontStyle: 'normal',
+  src: "url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Thin.woff') format('woff')",
+  fontWeight: 100,
+  fontDisplay: 'swap',
 });
+
+globalFontFace(spoqaHanSansNeo, {
+  src: "url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Light.woff') format('woff')",
+  fontWeight: 300,
+  fontDisplay: 'swap',
+});
+
+globalFontFace(spoqaHanSansNeo, {
+  src: "url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff')",
+  fontWeight: 'normal',
+  fontDisplay: 'swap',
+});
+
+globalFontFace(spoqaHanSansNeo, {
+  src: "url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Medium.woff') format('woff')",
+  fontWeight: 500,
+  fontDisplay: 'swap',
+});
+
+globalFontFace(spoqaHanSansNeo, {
+  src: "url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Bold.woff') format('woff')",
+  fontWeight: 700,
+  fontDisplay: 'swap',
+});
+
 globalFontFace(giantsBold, {
   src: "url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2')",
   fontWeight: 700,
