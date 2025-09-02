@@ -9,11 +9,11 @@ const RecordStats = ({ sport }: { sport: string }) => {
   const leagues: string[] = (matchRecord as any)?.map((record: any) => record.league) || [];
   
   // 현재 선택된 리그 state
-  const [selectedLeague, setSelectedLeague] = useState<string>(leagues[0]);
+  const [selectedLeague, setSelectedLeague] = useState<string>("");
   
   // leagues가 변경될 때 첫 번째 리그를 선택
   useEffect(() => {
-    if (leagues.length > 0 && !selectedLeague) {
+    if (leagues.length > 0 && (!selectedLeague || !leagues.includes(selectedLeague))) {
       setSelectedLeague(leagues[0]);
     }
   }, [leagues, selectedLeague]);
@@ -33,7 +33,7 @@ const RecordStats = ({ sport }: { sport: string }) => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col gap-10 mt-10">
+    <div className="w-full flex flex-col gap-10 mt-10 pb-20">
       {getCurrentDescription() && (
         <div className="flex flex-col gap-2 items-center">
           <div className=" text-white/38 text-[14px] leading-[1.6] font-normal">
