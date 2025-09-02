@@ -14,8 +14,8 @@ const carouselVariants = tv({
   variants: {
     size: {
       small: {
-        root: "h-[150px]",
-        content: "h-[150px]"
+        root: "h-[78px]",
+        content: "h-[78px]"
       },
       medium: {
         root: "h-[200px]", 
@@ -95,14 +95,14 @@ const CustomCarousel = ({
 
     if (indicator === 'dots') {
       return (
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {slides.map((_, index) => (
             <button
               key={index}
               className={`transition-all duration-300 rounded-full ${
                 index === current - 1 
-                  ? "w-6 h-3 bg-white" 
-                  : "w-3 h-3 bg-white/40 hover:bg-white/60"
+                  ? "w-[12px] h-[6px] bg-white" 
+                  : "w-[6px] h-[6px] bg-white/40 hover:bg-white/60"
               }`}
               onClick={() => handleDotClick(index)}
               aria-label={`Go to slide ${index + 1}`}

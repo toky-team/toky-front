@@ -14,7 +14,7 @@ const Ranking = () => {
   const [activeTab, setActiveTab] = useState<RankingType>('activity');
 
   // API 호출
-  const { data: activityRankData, fetchNextPage: fetchNextActivityPage, hasNextPage: hasNextActivityPage, isLoading: isActivityLoading } = useActivityRankPagination(1);
+  const { data: activityRankData, fetchNextPage: fetchNextActivityPage, hasNextPage: hasNextActivityPage, isLoading: isActivityLoading } = useActivityRankPagination(20);
   const { data: betHitRankData, fetchNextPage: fetchNextBetHitPage, hasNextPage: hasNextBetHitPage, isLoading: isBetHitLoading } = useBetHitRankPagination(20);
   const { data: myActivityRank } = useGetMyActivityRank();
   const { data: myBetHitRank } = useGetMyBetHitRank();

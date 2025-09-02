@@ -31,6 +31,8 @@ export function DrawCard({ id, totalDraw, productName, productAlias, canDraw, im
   const { mutate: draw } = usePostDraw(id);
   const ticketControls = useAnimation();
 
+  const displayProductName = productName?.replaceAll('\\n', '\n') ?? '';
+
   async function ticketAnimation() {
     await ticketControls.start({
       y: -34,
@@ -73,7 +75,7 @@ export function DrawCard({ id, totalDraw, productName, productAlias, canDraw, im
       <div className={s.drawBoard}>
         현재&nbsp;<span className={s.drawBoardSpan}>{totalDraw}장</span>&nbsp;응모
       </div>
-      <h5 className={s.productName}>{productName}</h5>
+      <h5 className={s.productName}>{displayProductName}</h5>
       <motion.button
         className={s.drawButton({ isDone })}
         onClick={handleClick}
