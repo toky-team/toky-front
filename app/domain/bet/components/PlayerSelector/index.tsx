@@ -13,6 +13,7 @@ import { ChevronRight } from 'lucide-react';
 import { useToast } from '@/common/hooks/useToast';
 import { usePlayerOverlay } from '@/domain/player/hooks/usePlayerOverlay';
 import { Link } from 'react-router';
+import getNoPlayerSelectText from '@/domain/bet/utils/getNoPlayerSelectText';
 
 interface Props {
   sport: SportType;
@@ -205,6 +206,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
               scrollToBottom();
             }, 0);
           }}
+          sport={sport}
         />
         <SelectedPlayerView
           university="연세대학교"
@@ -216,6 +218,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
               scrollToBottom();
             }, 0);
           }}
+          sport={sport}
         />
       </div>
       {status !== null &&
@@ -279,7 +282,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
                       setStatus(null);
                     }}
                   >
-                    {sport === '야구' ? "'안타 없음' 선택" : "'득점 없음' 선택"}
+                    '{getNoPlayerSelectText(sport)}' 선택
                   </button>
                 ) : (
                   <div className={s.ButtonWrapper}>
