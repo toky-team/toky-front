@@ -18,5 +18,6 @@ export const useGetPlayer = (sport?: SportType, university?: UniversityType) => 
   return useQuery({
     queryKey: ['player', sport, university],
     queryFn: () => getPlayer(sport, university),
+    gcTime:0,
   });
 };
