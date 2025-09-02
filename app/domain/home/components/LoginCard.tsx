@@ -1,5 +1,6 @@
 import { tv, type VariantProps } from "tailwind-variants";
 import LoginButton from "./LoginButton";
+import InviteButton from "./InviteButton";
 
 const loginCardVariants = tv({
   slots: {
@@ -10,17 +11,21 @@ const loginCardVariants = tv({
 
 interface LoginCardProps extends VariantProps<typeof loginCardVariants> {
   className?: string;
+  isLoggedIn: boolean;
 }
 
-const LoginCard = ({ className }: LoginCardProps) => {
+const LoginCard = ({ className, isLoggedIn }: LoginCardProps) => {
   const { root, description } = loginCardVariants();
   return (
     <div className={root()}>
       <div className={description()}>
-        <p>간편하게 로그인하고</p>
-        <p>승부예측 참여하세요</p>
+        {!isLoggedIn && <p>간편하게 로그인하고</p>}
+        {!isLoggedIn && <p>승부예측 참여하세요</p>}
+        {isLoggedIn && <p>친구 초대하면</p>}
+        {isLoggedIn && <p>둘다 응모권 5장</p>}
       </div>
-      <LoginButton size="lg"/>
+      {!isLoggedIn && <LoginButton size="lg"/>}
+      {isLoggedIn && <InviteButton />}
     </div>
   );
 };

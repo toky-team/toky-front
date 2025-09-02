@@ -33,7 +33,7 @@ export default function Home() {
       <NavBar />
       <CustomCarousel slides={slides} />
       <div className="flex flex-col items-center justify-center gap-8 px-5 py-8">
-        {!isLoggedIn && <LoginCard />}
+        <LoginCard isLoggedIn={isLoggedIn} />
         <ActionCard />
         <div className="flex w-full flex-col gap-3">
           <div className="text-lg font-bold">정기전 일정</div>
