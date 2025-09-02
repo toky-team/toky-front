@@ -78,7 +78,7 @@ export default function Record() {
         {tab !== "전체" && (
           <>
             <RecordSportDetail sport={tab} />
-            <RecordStats sport={tab} />
+            <RecordStats sport={tab === "빙구" ? "아이스하키" : tab} />
           </>
         )}
       </div>
