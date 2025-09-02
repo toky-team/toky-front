@@ -15,10 +15,12 @@ const AdsCarousel = () => {
     {
       id: "1",
       image: BannerKopas,
+      link: "https://www.koreapas.com/bbs/main.php",
     },
     {
       id: "2",
       image: BannerSofo,
+      link: "https://www.koreapas.com/m/sofo_result.php",
     },
   ]} size="small" indicator="dots" className={root()} />;
 };
