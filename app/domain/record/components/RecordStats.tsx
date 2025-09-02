@@ -9,7 +9,7 @@ const RecordStats = ({ sport }: { sport: string }) => {
   const leagues: string[] = (matchRecord as any)?.map((record: any) => record.league) || [];
   
   // 현재 선택된 리그 state
-  const [selectedLeague, setSelectedLeague] = useState<string>('');
+  const [selectedLeague, setSelectedLeague] = useState<string>(leagues[0]);
   
   // leagues가 변경될 때 첫 번째 리그를 선택
   useEffect(() => {
@@ -92,10 +92,10 @@ const RecordStats = ({ sport }: { sport: string }) => {
                   {/* 선수 통계 테이블 */}
                   {record.playerStatsWithCategory?.map((category: any, categoryIdx: number) => (
                     <div key={categoryIdx} className="flex flex-col">
-                      <div className="flex flex-row justify-between pl-[30px] pr-[20px] pb-[5px]">
+                      <div className="flex justify-between pl-[30px] pr-[20px] pb-[5px]">
                         <div className="text-white/60 text-[10px] w-[160px]">{category.category}</div>
                         {category.playerStatKeys?.slice(1).map((key: string) => (
-                          <div key={key} className="text-white/60 text-[10px]">{key}</div>
+                          <div key={key} className="flex items-center justify-center text-white/60 text-[10px] w-[40px]">{key}</div>
                         ))}
                       </div>
                       {category.playerStats?.map((player: any, playerIdx: number) => (
@@ -111,7 +111,7 @@ const RecordStats = ({ sport }: { sport: string }) => {
                             </div>
                           </div>
                           {category.playerStatKeys?.slice(1).map((key: string) => (
-                            <div key={key} className="flex w-[30px] items-center justify-center text-white">
+                            <div key={key} className="flex w-[40px] items-center justify-center text-white">
                               {player.stats[key] || '0'}
                             </div>
                           ))}
