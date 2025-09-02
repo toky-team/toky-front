@@ -48,7 +48,7 @@ const FullPlayerView = ({ koreaPlayers, yonseiPlayers }: { koreaPlayers: PlayerI
         </div>
         <TabsContent value="korea" className={tabsContent()}>
           <div className={playerGrid()}>
-            {koreaPlayers.map((player) => (
+            {koreaPlayers.sort((a, b) => a.backNumber - b.backNumber).map((player) => (
               <PlayerCard
                 key={player.id}
                 id={player.id}
@@ -65,7 +65,7 @@ const FullPlayerView = ({ koreaPlayers, yonseiPlayers }: { koreaPlayers: PlayerI
         </TabsContent>
         <TabsContent value="yonsei" className={tabsContent()}>
           <div className={playerGrid()}>
-            {yonseiPlayers.map((player) => (
+            {yonseiPlayers.sort((a, b) => a.backNumber - b.backNumber).map((player) => (
               <PlayerCard
                 key={player.id}
                 id={player.id}
