@@ -17,5 +17,6 @@ export default [
     route('attendance/game', 'routes/GamePage/index.tsx'),
     route('account', 'routes/EditInfoPage/index.tsx'),
     route('tickets', 'routes/TicketHistoryPage/index.tsx'),
+    route('guide', 'routes/GuidePage/index.tsx'),
   ]),
 ] satisfies RouteConfig;
