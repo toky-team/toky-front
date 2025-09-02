@@ -12,7 +12,7 @@ const Banner = ({ openShareModal }: Props) => {
       <img src={banner} alt="banner" />
       <div className={s.ButtonWrapper}>
         {/* TODO: 링크 바꿔끼우기 */}
-        <Link className={s.ButtonStyle({ type: 'primary' })} to="/live/soccer">
+        <Link className={s.ButtonStyle({ type: 'primary' })} to="/guide">
           더 알아보기
         </Link>
         <button className={s.ButtonStyle({ type: 'secondary' })} onClick={openShareModal}>

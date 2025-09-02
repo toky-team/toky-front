@@ -1,5 +1,7 @@
 import { tv } from "tailwind-variants";
+import { useState } from "react";
 import Icon from "@/lib/assets/icons";
+import { usePostPlayerLike } from "@/common/apis/usePostPlayerLike";
 import type { PlayerInterface } from "@/lib/types/player";
 
 const playerCardVariants = tv({
@@ -33,17 +35,39 @@ interface PlayerCardProps {
   image: string;
   likes: number;
   team: "korea" | "yonsei";
-  player?: PlayerInterface; // 전체 플레이어 정보 (있으면 오버레이 표시)
-  onClick?: () => void; // 커스텀 클릭 핸들러
+  player?: PlayerInterface;
+  onClick?: () => void;
 }
 
 const PlayerCard = ({ id, name, number, image, likes, team, player, onClick }: PlayerCardProps) => {
   const { card, imageContainer, playerImage, numberBadge, playerName, bottomHalfBlur, likeContainer, likeCount, heartIcon } = playerCardVariants();
+  
+  const [currentLikes, setCurrentLikes] = useState(likes);
+  
+  const { mutate: postPlayerLike, isPending } = usePostPlayerLike();
 
   const handleClick = () => {
     if (onClick) {
       onClick();
     }
+  };
+
+  const handleHeartClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    if (isPending) return;
+    
+    const originalLikes = currentLikes;
+    setCurrentLikes(currentLikes + 1);
+    
+    postPlayerLike(id, {
+      onSuccess: (playerData) => {
+        setCurrentLikes(playerData.likeCount);
+      },
+      onError: (error) => {
+        setCurrentLikes(originalLikes);
+      }
+    });
   };
 
   return (
@@ -62,11 +86,15 @@ const PlayerCard = ({ id, name, number, image, likes, team, player, onClick }: P
         </div>
         <div className={bottomHalfBlur()}></div>
         <div className={likeContainer()}>
-          <div className={heartIcon()}>
+          <button 
+            className={heartIcon()}
+            onClick={handleHeartClick}
+            disabled={isPending}
+          >
             <Icon.Heart />
-          </div>
+          </button>
           <span className={likeCount()}>
-            {likes.toLocaleString()}
+            {currentLikes.toLocaleString()}
           </span>
         </div>
       </div>

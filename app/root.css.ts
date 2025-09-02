@@ -2,6 +2,7 @@ import { createGlobalTheme, globalFontFace, globalStyle, keyframes } from '@vani
 
 const spoqaHanSansNeo = 'SpoqaHanSansNeo-Regular';
 const giantsBold = 'Giants-Bold';
+const esamanru = 'Esamanru';
 
 globalFontFace(spoqaHanSansNeo, {
   src: 'url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css)',
@@ -12,6 +13,21 @@ globalFontFace(giantsBold, {
   src: "url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2')",
   fontWeight: 700,
   fontStyle: 'normal',
+});
+globalFontFace(esamanru, {
+  src: "url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff')",
+  fontWeight: 300,
+  fontDisplay: 'swap',
+});
+globalFontFace(esamanru, {
+  src: "url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff')",
+  fontWeight: 500,
+  fontDisplay: 'swap',
+});
+globalFontFace(esamanru, {
+  src: "url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicBold.woff') format('woff')",
+  fontWeight: 700,
+  fontDisplay: 'swap',
 });
 
 globalStyle('html', {
@@ -64,6 +80,7 @@ export const vars = createGlobalTheme(':root', {
   font: {
     giantsBold,
     spoqaHanSansNeo,
+    esamanru,
   },
 });
 
