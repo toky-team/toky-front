@@ -1,8 +1,11 @@
 import client from '@/common/utils/client';
 import { useMutation } from '@tanstack/react-query';
 
+interface PostShareResponse {
+  isFirstShared: boolean;
+}
 const postShare = async () => {
-  const response = await client.post('/bet-answer/share');
+  const response = await client.post<PostShareResponse>('/bet-answer/share');
   return response.data;
 };
 
