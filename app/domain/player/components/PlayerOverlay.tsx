@@ -1,10 +1,11 @@
 import { tv } from "tailwind-variants";
 import Icon from "@/lib/assets/icons";
 import type { PlayerInterface } from "@/lib/types/player";
+import { useGetMatchRecordByPlayer } from "@/common/apis/useGetMatchRecordByPlayer";
 
 const overlayVariants = tv({
   slots: {
-    container: "fixed inset-0 z-50 bg-[#121212] w-full h-full overflow-auto transform transition-all duration-300",
+    container: "fixed inset-0 z-50 bg-[#121212] w-full h-full overflow-auto transform transition-all duration-300 pb-20",
     topBar: "absolute top-0 left-0 right-0 z-20 flex items-center justify-between h-14 px-5 py-3 bg-gradient-to-b from-black/70 via-black/30 to-transparent",
     backButton: "flex items-center justify-center w-6 h-6 text-white",
     hamburgerButton: "flex items-center justify-center w-6 h-6 text-white",
@@ -27,6 +28,11 @@ const overlayVariants = tv({
     careerItem: "text-sm text-white",
     universityContainer: "flex items-center gap-2",
     universityDepartment: "text-white/60 text-base font-medium [text-shadow:0_4px_40px_rgba(0,0,0,0.25)]",
+    statsHeader: "flex flex-row items-center justify-between border-white/10 bg-[#202020] py-2 px-5",
+    statItem: "text-sm text-white font-medium text-center flex-1",
+    leagueName: "text-sm text-white font-medium flex-1",
+    statsRow: "flex flex-row items-center justify-between bg-[#2A2A2A] py-3 px-5",
+    leagueStats: "flex flex-row justify-between flex-1",
   },
   variants: {
     isOpen: {
@@ -66,6 +72,9 @@ const formatDate = (dateString: string): string => {
 
 const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
   const team = player.university === "고려대학교" ? "korea" : "yonsei";
+  const { data: matchRecordByPlayer } = useGetMatchRecordByPlayer(player.id);
+
+  const displayData = matchRecordByPlayer;
 
   const {
     container,
@@ -91,6 +100,11 @@ const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
     careerItem,
     universityContainer,
     universityDepartment,
+    statsHeader,
+    statItem,
+    leagueName,
+    statsRow,
+    leagueStats,
   } = overlayVariants({ isOpen, team });
 
   return (
@@ -171,6 +185,35 @@ const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
           </div>
         </div>
       </div>
+
+      {displayData && displayData.leagueStats && displayData.leagueStats.length > 0 && (
+        <div className="w-full">
+          <div className="px-5 pb-3">
+            <div className={sectionTitle()}>최근 경기 기록</div>
+          </div>
+          <div className="flex flex-col">
+            <div className={statsHeader()}>
+              <div className={statItem()}>리그명</div>
+              {displayData.leagueStats[0].statKeys.map((statKey) => (
+                <div key={statKey} className={statItem()}>{statKey}</div>
+              ))}
+            </div>
+            
+            {displayData.leagueStats.map((leagueData, leagueIndex) => (
+              <div key={`${leagueIndex}`} className={statsRow()}>
+                <div className={statItem()}>{leagueData.league || '-'}</div>
+                {leagueData.statKeys.map((statKey) => (
+                  <div key={statKey} className={statItem()}>
+                    {leagueData.stats[statKey as keyof typeof leagueData.stats] !== undefined && leagueData.stats[statKey as keyof typeof leagueData.stats] !== null 
+                      ? leagueData.stats[statKey as keyof typeof leagueData.stats] 
+                      : '-'}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
