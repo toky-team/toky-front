@@ -37,7 +37,7 @@ const GamePage = () => {
   };
 
   const handleStart = () => {
-    if (step === 1) {
+    if (step === 1 && todayAttendance?.gameStatus === '시작 전') {
       postGameStart(undefined, {
         onSuccess: () => {
           setPageState('ready');
@@ -90,12 +90,21 @@ const GamePage = () => {
     setPageState('restart');
   };
 
+  const handleRestartGame = () => {
+    setPageState('ready');
+  };
+
   useEffect(() => {
     if (isMount.current) return;
 
     if (!isTodayAttendanceSuccess) return;
 
     isMount.current = true;
+
+    if (todayAttendance.firstStageResult === false) {
+      setPageState('fail');
+      return;
+    }
 
     if (todayAttendance.secondStageResult !== null) {
       navigate('/attendance', { replace: true });
@@ -126,7 +135,7 @@ const GamePage = () => {
       {pageState === 'success' && <GameSuccess step={step} goToNextStep={handleNextStep} />}
       {pageState === 'fail' && <GameFail step={step} handleRestart={handleRestart} />}
       {pageState === 'restart' && (
-        <GameLanding step={step} sport={sport} handleStart={handleStart} university={university} retry />
+        <GameLanding step={step} sport={sport} handleStart={handleRestartGame} university={university} retry />
       )}
     </div>
   );
