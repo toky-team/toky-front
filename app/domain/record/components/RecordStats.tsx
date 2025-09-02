@@ -63,7 +63,7 @@ const RecordStats = ({ sport }: { sport: string }) => {
                     <img src={record.imageUrl} alt={record.league} className="w-full h-full object-cover" />
                   )}
                   {/* 대학 순위 테이블 */}
-                  {record.universityStatKeys && (
+                  {record.universityStatKeys.length > 0 && (
                     <div className="flex flex-col">
                       <div className="flex flex-row justify-between pl-[30px] pr-[20px] pb-[5px]">
                         <div className="text-white/60 text-[10px] w-[110px]">대학순위</div>
