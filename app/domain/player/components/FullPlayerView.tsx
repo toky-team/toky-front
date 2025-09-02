@@ -6,7 +6,7 @@ import type { PlayerInterface } from "@/lib/types/player";
 
 const fullPlayerViewVariants = tv({
   slots: {
-    root: "w-full max-w-screen-sm mx-auto flex flex-col gap-6 px-4",
+    root: "w-full max-w-screen-sm mx-auto flex flex-col gap-6 px-4 pb-10",
     container: "w-full flex flex-row justify-between items-center",
     containerLeft: "flex flex-col gap-1",
     title: "text-base font-bold text-white",
