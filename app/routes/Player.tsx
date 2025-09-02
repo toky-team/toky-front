@@ -66,7 +66,7 @@ const Player = () => {
       <MainTopBar />
       <NavBar />
       <SportsNavBar viewAll={false} value={displayTab} onChange={handleTabChange} />
-      <div className="w-full flex flex-col gap-7">
+      <div className="w-full flex flex-col gap-10">
         <CustomCarousel slides={slides} indicator="dots" />
         <PrimaryPlayerView primaryPlayers={primaryPlayers} />
         <FullPlayerView koreaPlayers={koreaPlayers} yonseiPlayers={yonseiPlayers} />
