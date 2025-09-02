@@ -60,6 +60,10 @@ const GamePage = () => {
         onSuccess: () => {
           setPageState('fail');
         },
+        onError: () => {
+          navigate('/attendance', { replace: true });
+          openToast({ message: '예기치 못한 오류가 발생했어요' });
+        },
       },
     );
   };
@@ -70,6 +74,10 @@ const GamePage = () => {
       {
         onSuccess: () => {
           setPageState('success');
+        },
+        onError: () => {
+          navigate('/attendance', { replace: true });
+          openToast({ message: '예기치 못한 오류가 발생했어요' });
         },
       },
     );
