@@ -9,11 +9,11 @@ type SportItem = {
 };
 
 const sports: SportItem[] = [
-  { label: "축구", KOREA_WINS: 20, YONSEI_WINS: 17 },
-  { label: "럭비", KOREA_WINS: 20, YONSEI_WINS: 25 },
-  { label: "야구", KOREA_WINS: 25, YONSEI_WINS: 18 },
-  { label: "농구", KOREA_WINS: 23, YONSEI_WINS: 22 },
-  { label: "빙구", KOREA_WINS: 17, YONSEI_WINS: 23 },
+  { label: "축구", KOREA_WINS: 21, YONSEI_WINS: 17 },
+  { label: "럭비", KOREA_WINS: 21, YONSEI_WINS: 25 },
+  { label: "야구", KOREA_WINS: 26, YONSEI_WINS: 19 },
+  { label: "농구", KOREA_WINS: 24, YONSEI_WINS: 23 },
+  { label: "빙구", KOREA_WINS: 18, YONSEI_WINS: 24 },
 ];
 
 const overallSummaryVariants = tv({
@@ -29,7 +29,7 @@ const overallSummaryVariants = tv({
     listRoot: "px-5 flex flex-col gap-3",
     sportRow: "w-full flex flex-col gap-2",
     sportLabel: "flex items-center justify-center text-white-87 font-semibold",
-    bar: "relative h-3 bg-white-15 overflow-hidden",
+    bar: "relative h-3 overflow-hidden",
     leftBar: "h-full rounded-l-[34px] bg-gradient-to-l from-[#F3233C] to-[#F3233C]/25",
     rightBar: "absolute right-0 top-0 bottom-0 rounded-r-[34px] bg-gradient-to-l from-[#2948FF]/25 to-[#2948FF]",
     scoreRow: "flex items-center justify-between",
@@ -41,7 +41,7 @@ const overallSummaryVariants = tv({
 });
 
 const RecordOverallSummary = () => {
-  const totalLeft = 19;
+  const totalLeft = 20;
   const totalDraw = 10;
   const totalRight = 20;
 
