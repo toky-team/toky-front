@@ -27,7 +27,7 @@ const DrawTicketInfo = () => {
           {sortedGiftList?.map((gift) => (
             <div key={gift.id} className={s.Item}>
               <h3 className={s.ItemName}>{gift.alias}</h3>
-              <p>{gift.drawCountByUser}</p>
+              <p>{gift.drawCountByUser}장</p>
             </div>
           ))}
         </div>

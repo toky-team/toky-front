@@ -4,7 +4,7 @@ const spoqaHanSansNeo = 'SpoqaHanSansNeo-Regular';
 const giantsBold = 'Giants-Bold';
 
 globalFontFace(spoqaHanSansNeo, {
-  src: 'url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff") format("woff")',
+  src: 'url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css)',
   fontWeight: 'normal',
   fontStyle: 'normal',
 });
