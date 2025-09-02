@@ -40,8 +40,68 @@ export const Index = style({
   fontSize: '0.75rem',
   fontWeight: 700,
   lineHeight: 1.5,
+  fontFamily: vars.font.spoqaHanSansNeo,
 });
-export const GuideTitle = style({});
-export const GuideDescription = style({});
-export const DateText = style({});
-export const Button = style({});
+export const GuideHeader = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '0.75rem',
+  fontFamily: vars.font.esamanru,
+  textAlign: 'center',
+  fontSize: '1.375rem',
+  color: vars.color.white,
+  fontWeight: 500,
+  lineHeight: 1.4,
+});
+export const GuideDescription = style({
+  color: vars.color['white-87'],
+  fontFamily: vars.font.spoqaHanSansNeo,
+  fontSize: '0.875rem',
+  textAlign: 'center',
+  fontWeight: 400,
+  lineHeight: 1.6,
+  letterSpacing: '-0.035rem',
+});
+export const DateText = style({
+  color: '#E3DAFF',
+  textAlign: 'center',
+  fontSize: '0.875rem',
+  fontWeight: 300,
+  lineHeight: 1.6,
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.375rem',
+});
+export const GuideImage = style({
+  width: '100%',
+});
+export const Button = style({
+  height: '2.5rem',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '0 1.25rem',
+  borderRadius: '6.1875rem',
+  background:
+    'linear-gradient(90deg, #58009E 0%, #9100D5 100%), linear-gradient(90deg, rgba(134, 0, 240, 0.80) -12.75%, rgba(70, 0, 183, 0.80) 113.73%)',
+});
+
+export const Guide3Date = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem',
+});
+export const Token = style({
+  display: 'flex',
+  padding: '0.125rem 0.5rem',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '6.1875rem',
+  background: 'rgba(227, 218, 255, 0.10)',
+  color: '#E3DAFF',
+  textAlign: 'center',
+  fontSize: '0.875rem',
+  fontWeight: '300',
+  lineHeight: 1.6,
+});
