@@ -105,3 +105,28 @@ export const Token = style({
   fontWeight: '300',
   lineHeight: 1.6,
 });
+
+export const GameInstruction = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '0.625rem',
+});
+
+export const GameInstructionItem = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  justifyContent: 'center',
+});
+
+export const GameInstructionText = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.36rem',
+  color: vars.color['white-87'],
+  fontSize: '1rem',
+  fontWeight: 500,
+  lineHeight: 1.5,
+  letterSpacing: '-0.04rem',
+});

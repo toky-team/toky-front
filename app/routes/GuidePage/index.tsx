@@ -1,10 +1,12 @@
 import { Link } from 'react-router';
+import { Plus } from 'lucide-react';
 
 import TopBar from '@/common/components/TopBar';
 import guideImage from '@/lib/assets/images/guide_banner.webp';
 import guide1 from '@/lib/assets/images/guide_1.webp';
 import guide2 from '@/lib/assets/images/guide_2.webp';
 import guide3 from '@/lib/assets/images/guide_3.webp';
+import Icon from '@/lib/assets/icons';
 
 import * as s from './style.css';
 
@@ -81,7 +83,22 @@ const Guide = () => {
             <div className={s.DateText}>08.30(토)~09.20(토)</div>
             <p className={s.GuideDescription}>공 잡기 게임으로 매일 추가 응모권에 도전해보세요!</p>
           </div>
-          {/* TODO: 출석게임 룰 추가 */}
+          <div className={s.GameInstruction}>
+            <div className={s.GameInstructionItem}>
+              <span className={s.GameInstructionText}>1단계 성공시</span>
+              <Plus size={20} color="#6C6C6C" strokeWidth={3} />
+              <span className={s.GameInstructionText}>
+                <Icon.Ticket width="21" height="21" /> 1장
+              </span>
+            </div>
+            <div className={s.GameInstructionItem}>
+              <span className={s.GameInstructionText}>2단계 성공시</span>
+              <Plus size={20} color="#6C6C6C" strokeWidth={3} />
+              <span className={s.GameInstructionText}>
+                <Icon.Ticket width="21" height="21" /> 1장 추가!
+              </span>
+            </div>
+          </div>
           <Link to="/attendance" className={s.Button}>
             출석 게임 바로가기
           </Link>
