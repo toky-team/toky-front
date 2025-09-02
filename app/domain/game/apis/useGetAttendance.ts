@@ -6,6 +6,7 @@ export interface GetAttendanceResponse {
   isAttended: boolean;
   firstStageResult: boolean | null;
   secondStageResult: boolean | null;
+  gameStatus: '시작 전' | '진행 중' | '종료';
 }
 
 const getAttendance = async () => {

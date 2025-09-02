@@ -6,7 +6,7 @@ import type { PlayerInterface } from "@/lib/types/player";
 
 const fullPlayerViewVariants = tv({
   slots: {
-    root: "w-full max-w-screen-sm mx-auto flex flex-col gap-6 px-4",
+    root: "w-full max-w-screen-sm mx-auto flex flex-col gap-6 px-4 pb-10",
     container: "w-full flex flex-row justify-between items-center",
     containerLeft: "flex flex-col gap-1",
     title: "text-base font-bold text-white",
@@ -48,7 +48,7 @@ const FullPlayerView = ({ koreaPlayers, yonseiPlayers }: { koreaPlayers: PlayerI
         </div>
         <TabsContent value="korea" className={tabsContent()}>
           <div className={playerGrid()}>
-            {koreaPlayers.map((player) => (
+            {koreaPlayers.sort((a, b) => a.backNumber - b.backNumber).map((player) => (
               <PlayerCard
                 key={player.id}
                 id={player.id}
@@ -65,7 +65,7 @@ const FullPlayerView = ({ koreaPlayers, yonseiPlayers }: { koreaPlayers: PlayerI
         </TabsContent>
         <TabsContent value="yonsei" className={tabsContent()}>
           <div className={playerGrid()}>
-            {yonseiPlayers.map((player) => (
+            {yonseiPlayers.sort((a, b) => a.backNumber - b.backNumber).map((player) => (
               <PlayerCard
                 key={player.id}
                 id={player.id}

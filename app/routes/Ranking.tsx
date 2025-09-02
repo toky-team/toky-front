@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MainTopBar from "@/common/components/MainTopBar";
 import NavBar from "@/common/components/NavBar";
 import { useActivityRankPagination } from "@/common/apis/useActivityRankPagination";
@@ -9,9 +9,11 @@ import RankingTabs from "@/domain/ranking/components/RankingTabs";
 import MyRankCard from "@/domain/ranking/components/MyRankCard";
 import RankingList from "@/domain/ranking/components/RankingList";
 import type { RankingType, RankingItemData } from "@/domain/ranking/types";
+import ScrollTop from "@/lib/assets/icons/ScrollTop";
 
 const Ranking = () => {
   const [activeTab, setActiveTab] = useState<RankingType>('activity');
+  const [showScrollTopButton, setShowScrollTopButton] = useState(false);
 
   // API 호출
   const { data: activityRankData, fetchNextPage: fetchNextActivityPage, hasNextPage: hasNextActivityPage, isLoading: isActivityLoading } = useActivityRankPagination(20);
@@ -27,11 +29,26 @@ const Ranking = () => {
   const hasNextPage = activeTab === 'activity' ? hasNextActivityPage : hasNextBetHitPage;
   const fetchNextPage = activeTab === 'activity' ? fetchNextActivityPage : fetchNextBetHitPage;
 
-  // 모든 랭킹 아이템들
   const allRankItems: RankingItemData[] = currentRankData?.pages.flatMap(page => page.items as RankingItemData[]) ?? [];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setShowScrollTopButton(scrollTop > 400);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   const handleShare = () => {
-    // 공유 로직 구현
     console.log('랭킹 공유하기');
   };
 
@@ -59,6 +76,16 @@ const Ranking = () => {
           </div>
         </RankingTabs>
       </div>
+
+      {showScrollTopButton && (
+        <button
+          onClick={scrollToTop}
+                    className="fixed bottom-6 right-5 z-50 w-12 h-12 bg-[#333333] rounded-full shadow-[0_4px_10px_0_rgba(18,18,18,0.15)] flex items-center justify-center hover:shadow-xl transition-all duration-300"
+          aria-label="맨 위로 가기"
+        >
+          <ScrollTop />
+        </button>
+      )}
     </>
   );
 };
