@@ -1,5 +1,7 @@
 import { tv } from "tailwind-variants";
 import { useState } from "react";
+import { usePostCheer } from "@/common/apis/usePostCheer";
+import { useGetCheerCount } from "@/common/apis/useGetCheerCount";
 
 type Team = "고려대학교" | "연세대학교";
 
@@ -30,14 +32,15 @@ const clicktoCheerVariants = tv({
 
 const ClicktoCheer = () => {
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
-  
-  // TODO: API 훅으로 교체
-  const leftCount = 1500;
-  const rightCount = 1500;
+  const { mutate: postCheer } = usePostCheer(selectedTeam as string);
+
+  const { data: cheerCount } = useGetCheerCount();
+  const leftCount = cheerCount?.KUCheer;
+  const rightCount = cheerCount?.YUCheer;
 
   const handleCheer = (team: Team) => {
     setSelectedTeam(team);
-    // TODO: API 호출
+    postCheer;
   };
 
   const selectedVariant = selectedTeam === "고려대학교" ? "left" : selectedTeam === "연세대학교" ? "right" : "none";

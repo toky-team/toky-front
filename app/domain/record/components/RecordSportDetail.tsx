@@ -1,4 +1,5 @@
 import { tv } from "tailwind-variants";
+import TokyKoreaBaseball from "@/lib/assets/images/toky_korea_baseball.webp";
 
 type Team = "고려대" | "연세대";
 
@@ -8,19 +9,20 @@ interface RecordSportDetailProps {
 
 const recordSportDetailVariants = tv({
   slots: {
-    container: "w-full mt-13 flex flex-col",
+    container: "w-full mt-13 flex flex-col relative overflow-hidden",
     background: "w-full h-90",
     topSection: "flex flex-col pt-6 items-center justify-between",
     caption: "text-sm font-normal text-white/38",
-    title: "text-xl font-bold mt-1",
-    tokensRoot: "flex flex-row gap-2 mt-4",
-    token: "w-8 h-8 flex justify-center items-center rounded-full font-bold relative border-[1px]",
-    tokenText: "inline-block font-bold text-[10px] text-center",
+    title: "text-lg font-bold mt-1",
+    tokensRoot: "flex flex-row gap-[6px] mt-4",
+    token: "w-6 h-6 flex justify-center items-center rounded-full font-bold relative border-[1px]",
+    tokenText: "inline-block font-bold text-[7px] text-center",
     statsRow: "flex flex-row justify-between mt-14 px-5 w-full",
     teamColLeft: "flex flex-col",
     teamColRight: "flex flex-col items-end",
     teamName: "text-sm font-bold",
     teamWins: "text-[42px] font-normal bg-clip-text text-transparent font-giants-bold tracking-[-1.68px]",
+    imageContainer: "absolute bottom-[-45px] left-[45%] -translate-x-1/2 w-full h-full flex items-end",
   },
   variants: {
     isKoreaWins: {
@@ -66,6 +68,10 @@ const sports: SportItem[] = [
   { label: "농구", KOREA_WINS: 24, YONSEI_WINS: 23 },
   { label: "빙구", KOREA_WINS: 18, YONSEI_WINS: 24 },
 ];
+
+const sportsImage: Record<string, string> = {
+  야구: TokyKoreaBaseball,
+};
 
 const matchHistories: Record<string, MatchHistoryItem[]> = {
   야구: [
@@ -122,6 +128,7 @@ const RecordSportDetail = ({ sport }: RecordSportDetailProps) => {
     teamColRight,
     teamName,
     teamWins,
+    imageContainer,
   } = recordSportDetailVariants({ isKoreaWins });
   
   const currentSportHistory = matchHistories[sport] || [];
@@ -160,6 +167,9 @@ const RecordSportDetail = ({ sport }: RecordSportDetailProps) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className={imageContainer()}>
+        <img src={TokyKoreaBaseball} alt="sport" />
       </div>
     </div>
   );
