@@ -222,7 +222,7 @@ const SideBar = ({ onClose }: SideBarProps) => {
                 </button>
               );
             })}
-            <button className={sideBarVariants({ active: false }).navItem()} onClick={() => window.open("https://www.instagram.com/official.toky?igsh=OWxzMnhrMDVvYnU3")}>
+            <button className={sideBarVariants({ active: false }).navItem()} onClick={() => window.open("https://www.instagram.com/official.toky/")}>
               문의하기
             </button>
           {isLoggedIn && (
