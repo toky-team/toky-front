@@ -48,6 +48,8 @@ const PrimaryPlayerCard = ({ id, name, number, image, likes, team, player, onCli
   const { card, imageContainer, playerImage, playerName, bottomBlur, careerContainer } = primaryPlayerCardVariants();
 
   const careerBadgeMap: Record<string, React.FC> = {
+    "2025 한일 농구대회 국가대표": Korjpn2025,
+    "2024 한일 농구대회 국가대표": Korjpn2024,
     "2025 한일대학정기전 국가대표": Korjpn2025,
     "2024 한일대학정기전 국가대표": Korjpn2024,
     "2023 한일대학정기전 국가대표": Korjpn2023,
