@@ -8,6 +8,8 @@ import FibaAsiacup from "@/lib/assets/icons/badge/FibaAsiacup";
 import UnivMvp from "@/lib/assets/icons/badge/UnivMvp";
 import UnivFreshman from "@/lib/assets/icons/badge/UnivFreshman";
 import Avg3rd from "@/lib/assets/icons/badge/Avg3rd";
+import Avg2nd from "@/lib/assets/icons/badge/Avg2nd";
+import MostScore2023 from "@/lib/assets/icons/badge/MostScore2023";
 import Steal from "@/lib/assets/icons/badge/Steal";
 import Torino from "@/lib/assets/icons/badge/Torino";
 import Iihf from "@/lib/assets/icons/badge/Iihf";
@@ -60,6 +62,8 @@ const PrimaryPlayerCard = ({ id, name, number, image, likes, team, player, onCli
     "58회 대통령기 전국대학야구 도루상": Steal,
     "제78회 전국대학야구선수권대회 타격 3위": Avg3rd,
     "토리노 동계세계대학경기대회 국가대표": Torino,
+    "2023 고연전 최다득점자": MostScore2023,
+    "58회 대통령기 전국대학야구 타격 2위": Avg2nd,
   };
 
   const handleClick = () => {
