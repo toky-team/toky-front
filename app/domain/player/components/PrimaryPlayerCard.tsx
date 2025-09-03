@@ -58,7 +58,7 @@ const PrimaryPlayerCard = ({ id, name, number, image, likes, team, player, onCli
     "58회 대통령기 전국대학야구 도루상": Steal,
     "제78회 전국대학야구선수권대회 타격 3위": Avg3rd,
     "토리노 동계세계대학경기대회 국가대표": Torino,
-  }
+  };
 
   const handleClick = () => {
     if (onClick) {
@@ -82,7 +82,7 @@ const PrimaryPlayerCard = ({ id, name, number, image, likes, team, player, onCli
       <div className={careerContainer()}>
         {player?.careers.map((career) => {
           const Badge = careerBadgeMap[career];
-          return <Badge key={career} />;
+          return Badge ? <Badge key={career} /> : null;
         })}
       </div>
     </div>
