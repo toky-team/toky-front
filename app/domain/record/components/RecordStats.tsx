@@ -27,15 +27,15 @@ const RecordStats = ({ sport }: { sport: string }) => {
   const getCurrentDescription = () => {
     const currentLeagueData = getLeagueData(selectedLeague);
     return {
-      winningComment: currentLeagueData[0]?.winningComment || '',
-      leagueFullName: currentLeagueData[0]?.leagueFullName || '',
+      winningComment: currentLeagueData[0]?.winningComment.replaceAll('\\n', '\n') ?? '',
+      leagueFullName: currentLeagueData[0]?.leagueFullName.replaceAll('\\n', '\n') ?? '',
     };
   };
 
   return (
     <div className="mt-10 flex w-full flex-col gap-10 pb-20">
       {getCurrentDescription() && (
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-2 text-center whitespace-pre-line">
           <div className="text-[14px] leading-[1.6] font-normal text-white/38">
             {getCurrentDescription().leagueFullName}
           </div>
