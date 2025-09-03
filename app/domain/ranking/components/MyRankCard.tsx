@@ -1,13 +1,13 @@
 import { tv } from "tailwind-variants";
 import type { RankingItemData, RankingType } from "../types";
 import { useGetUserSummary } from "@/common/apis/useGetUserSummary";
+import { useGetIsAnswerSet } from "@/common/apis/useGetIsAnswerSet";
 import Rank10 from "@/lib/assets/images/rank_10.webp";
 import Rank20 from "@/lib/assets/images/rank_20.webp";
 import Rank30 from "@/lib/assets/images/rank_30.webp";
 import RankDefault from "@/lib/assets/images/rank_default.webp";
 import Medal from "@/lib/assets/icons/Medal";
 import ActivityRankRectangle from "@/lib/assets/icons/ActivityRankRectangle";
-import BetHitRankRectangle from "@/lib/assets/icons/BetHitRankRectangle";
 
 interface MyRankCardProps {
   myRank: RankingItemData | null;

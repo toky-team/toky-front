@@ -37,8 +37,6 @@ const getRankClass = (rank: number) => {
 const RankingItem = ({ item, index, scoreUnit }: RankingItemProps) => {
   const rankClass = getRankClass(item.rank);
 
-  console.log(item);
-
   return (
     <div className={itemContainer()}>
       <div className={rankContainer()}>
