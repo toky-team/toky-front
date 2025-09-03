@@ -6,9 +6,9 @@ export interface PlayerInterface {
   university: UniversityType;
   sport: SportType;
   department: string;
-  birth: string;
-  height: number;
-  weight: number;
+  birth?: string;
+  height?: number;
+  weight?: number;
   position: string;
   backNumber: number;
   isPrimary: boolean;
