@@ -45,7 +45,7 @@ interface PrimaryPlayerCardProps {
 }
 
 const PrimaryPlayerCard = ({ id, name, number, image, likes, team, player, onClick }: PrimaryPlayerCardProps) => {
-  const { card, imageContainer, playerImage, playerName, bottomBlur } = primaryPlayerCardVariants();
+  const { card, imageContainer, playerImage, playerName, bottomBlur, careerContainer } = primaryPlayerCardVariants();
 
   const careerBadgeMap: Record<string, React.FC> = {
     "2025 한일대학정기전 국가대표": Korjpn2025,
