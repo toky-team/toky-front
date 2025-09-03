@@ -1,15 +1,20 @@
-import { useMutation } from "@tanstack/react-query";
-import client from "@/common/utils/client";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import client from '@/common/utils/client';
 
 const postCheer = async (university: string) => {
-  const response = await client.post("/cheer", {
+  const response = await client.post('/cheer', {
     university: university,
   });
   return response.data;
 };
 
-export const usePostCheer = (university: string) => {
+export const usePostCheer = () => {
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => postCheer(university),
+    mutationFn: postCheer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cheer'] });
+      queryClient.invalidateQueries({ queryKey: ['cheer-count'] });
+    },
   });
 };

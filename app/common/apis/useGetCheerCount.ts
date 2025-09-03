@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import client from "@/common/utils/client";
+import { useQuery } from '@tanstack/react-query';
+import client from '@/common/utils/client';
 
 interface CheerCountResponse {
   KUCheer: number;
@@ -7,7 +7,7 @@ interface CheerCountResponse {
 }
 
 const getCheerCount = async () => {
-  const response = await client.get<CheerCountResponse>("/cheer/count");
+  const response = await client.get<CheerCountResponse>('/cheer/count');
   return response.data;
 };
 
