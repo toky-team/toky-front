@@ -1,5 +1,5 @@
 import client from "@/common/utils/client";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export interface PlayerLikeResponse {
   id: string;
@@ -18,9 +18,37 @@ export interface PlayerLikeResponse {
   isPrimary: boolean;
 }
 
+interface PlayerLikeMutationParams {
+  playerId: string;
+  currentLikes: number;
+}
+
 export const usePostPlayerLike = () => {
+  const queryClient = useQueryClient();
+  
   return useMutation({
-    mutationFn: postPlayerLike,
+    mutationFn: ({ playerId }: PlayerLikeMutationParams) => postPlayerLike(playerId),
+    onMutate: async ({ playerId, currentLikes }: PlayerLikeMutationParams) => {
+      const playerLikeKey = ['player', 'like', playerId];
+      
+      await queryClient.cancelQueries({ queryKey: playerLikeKey, exact: true });
+
+      const previousLikeCount = queryClient.getQueryData<number>(playerLikeKey) ?? currentLikes;
+
+      queryClient.setQueryData(playerLikeKey, previousLikeCount + 1);
+
+      return { previousLikeCount, playerId };
+    },
+    onSuccess: (data, { playerId }) => {
+      const playerLikeKey = ['player', 'like', playerId];
+      queryClient.setQueryData(playerLikeKey, data.likeCount);
+    },
+    onError: (err, { playerId }, context) => {
+      if (context?.previousLikeCount !== undefined) {
+        const playerLikeKey = ['player', 'like', playerId];
+        queryClient.setQueryData(playerLikeKey, context.previousLikeCount);
+      }
+    },
   });
 };
 
