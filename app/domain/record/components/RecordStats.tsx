@@ -67,7 +67,7 @@ const RecordStats = ({ sport }: { sport: string }) => {
                     <div className="flex flex-col">
                       <div className="flex flex-row justify-between pl-[30px] pr-[20px] pb-[5px]">
                         <div className="text-white/60 text-[10px] w-[110px]">대학순위</div>
-                        {record.universityStatKeys?.map((key: string) => (
+                        {record.universityStatKeys?.slice(0, record.universityStatKeys.length - 1).map((key: string) => (
                           <div key={key} className="flex items-center justify-center text-white/60 w-[50px] text-[10px]">{key}</div>
                         ))}
                       </div>
@@ -79,7 +79,7 @@ const RecordStats = ({ sport }: { sport: string }) => {
                               {universityStat.university === '연세대학교' ? '연세대' : '고려대'}
                             </span>
                           </div>
-                          {record.universityStatKeys?.map((key: string) => (
+                          {record.universityStatKeys?.slice(0, record.universityStatKeys.length - 1).map((key: string) => (
                             <div key={key} className="flex text-[12px] w-[50px] items-center justify-center text-white">
                               {universityStat.stats[key] || '0'}
                             </div>
@@ -94,7 +94,7 @@ const RecordStats = ({ sport }: { sport: string }) => {
                     <div key={categoryIdx} className="flex flex-col">
                       <div className="flex justify-between pl-[30px] pr-[20px] pb-[5px]">
                         <div className="text-white/60 text-[10px] w-[160px]">{category.category}</div>
-                        {category.playerStatKeys?.slice(1).map((key: string) => (
+                        {category.playerStatKeys?.slice(0, category.playerStatKeys.length - 1).map((key: string) => (
                           <div key={key} className="flex items-center justify-center text-white/60 text-[10px] w-[40px]">{key}</div>
                         ))}
                       </div>
@@ -110,7 +110,7 @@ const RecordStats = ({ sport }: { sport: string }) => {
                               <div className="text-white/60 text-[10px]">{player.position}</div>
                             </div>
                           </div>
-                          {category.playerStatKeys?.slice(1).map((key: string) => (
+                          {category.playerStatKeys?.slice(0, category.playerStatKeys.length - 1).map((key: string) => (
                             <div key={key} className="flex w-[40px] items-center justify-center text-white">
                               {player.stats[key] || '0'}
                             </div>

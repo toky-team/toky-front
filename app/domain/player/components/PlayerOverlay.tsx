@@ -2,6 +2,9 @@ import { tv } from "tailwind-variants";
 import Icon from "@/lib/assets/icons";
 import type { PlayerInterface } from "@/lib/types/player";
 import { useGetMatchRecordByPlayer } from "@/common/apis/useGetMatchRecordByPlayer";
+import SideBar from "@/common/components/SideBar";
+import { useState } from "react";
+import { AnimatePresence } from 'motion/react'
 
 const overlayVariants = tv({
   slots: {
@@ -73,7 +76,7 @@ const formatDate = (dateString: string): string => {
 const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
   const team = player.university === "고려대학교" ? "korea" : "yonsei";
   const { data: matchRecordByPlayer } = useGetMatchRecordByPlayer(player.id);
-
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const displayData = matchRecordByPlayer;
 
   const {
@@ -114,7 +117,7 @@ const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
         <button className={backButton()} onClick={onClose}>
           <Icon.ArrowBack />
         </button>
-        <button className={hamburgerButton()}>
+        <button className={hamburgerButton()} onClick={() => setIsSideBarOpen(true)}>
           <Icon.Hamburger />
         </button>
       </div>
@@ -214,6 +217,7 @@ const PlayerOverlay = ({ isOpen, onClose, player }: PlayerOverlayProps) => {
           </div>
         </div>
       )}
+      <AnimatePresence>{isSideBarOpen && <SideBar onClose={() => setIsSideBarOpen(false)} />}</AnimatePresence>
     </div>
   );
 };
