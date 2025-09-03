@@ -6,7 +6,7 @@ export const Container = style({
   display: 'flex',
   flexDirection: 'row',
   width: '100%',
-  height: '2.875rem',
+  height: '44px',
   alignItems: 'center',
   justifyContent: 'space-between',
   padding: '0.625rem 1.25rem',
