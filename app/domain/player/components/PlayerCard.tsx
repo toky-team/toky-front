@@ -1,5 +1,5 @@
 import { tv } from 'tailwind-variants';
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Icon from '@/lib/assets/icons';
 import { usePostPlayerLike } from '@/common/apis/usePostPlayerLike';
 import type { PlayerInterface } from '@/lib/types/player';
@@ -53,7 +53,12 @@ const PlayerCard = ({ id, name, number, image, likes, team, player, onClick }: P
     heartIcon,
   } = playerCardVariants();
 
-  const [currentLikes, setCurrentLikes] = useState(likes);
+  const { data: currentLikes } = useQuery({
+    queryKey: ['player', 'like', id],
+    queryFn: () => likes,
+    initialData: likes,
+    enabled: false,
+  });
 
   const { mutate: postPlayerLike, isPending } = usePostPlayerLike();
 
@@ -68,17 +73,7 @@ const PlayerCard = ({ id, name, number, image, likes, team, player, onClick }: P
 
     if (isPending) return;
 
-    const originalLikes = currentLikes;
-    setCurrentLikes(currentLikes + 1);
-
-    postPlayerLike(id, {
-      onSuccess: (playerData) => {
-        setCurrentLikes(playerData.likeCount);
-      },
-      onError: (error) => {
-        setCurrentLikes(originalLikes);
-      },
-    });
+    postPlayerLike({ playerId: id, currentLikes: currentLikes ?? likes });
   };
 
   return (
@@ -100,7 +95,7 @@ const PlayerCard = ({ id, name, number, image, likes, team, player, onClick }: P
           <div className={heartIcon()}>
             <Icon.Heart />
           </div>
-          <span className={likeCount()}>{currentLikes.toLocaleString()}</span>
+          <span className={likeCount()}>{currentLikes?.toLocaleString()}</span>
         </button>
       </div>
     </div>
