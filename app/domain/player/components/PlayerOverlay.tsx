@@ -1,46 +1,3 @@
-<<<<<<< HEAD
-import { tv } from 'tailwind-variants';
-import Icon from '@/lib/assets/icons';
-import type { PlayerInterface } from '@/lib/types/player';
-import { useGetMatchRecordByPlayer } from '@/common/apis/useGetMatchRecordByPlayer';
-import SideBar from '@/common/components/SideBar';
-import { useState } from 'react';
-import { AnimatePresence } from 'motion/react';
-
-const overlayVariants = tv({
-  slots: {
-    container:
-      'fixed inset-0 z-50 bg-[#121212] w-full h-full overflow-auto transform transition-all duration-300 pb-20',
-    topBar:
-      'absolute top-0 left-0 right-0 z-20 flex items-center justify-between h-14 px-5 py-3 bg-gradient-to-b from-black/70 via-black/30 to-transparent',
-    backButton: 'flex items-center justify-center w-6 h-6 text-white',
-    hamburgerButton: 'flex items-center justify-center w-6 h-6 text-white',
-    header: 'relative',
-    imageContainer: 'relative h-[60vh]',
-    playerImage: 'w-full h-full object-cover relative',
-    backgroundNumber:
-      'absolute inset-0 flex pb-20 items-center justify-center text-[300px] font-giants-bold pointer-events-none select-none',
-    numberBadge: 'absolute bottom-5 right-5 text-[72px] font-giants-bold text-white z-20',
-    playerInfoBg: 'absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-[#121212]/0 to-[#121212]/80',
-    playerInfo: 'absolute bottom-4 left-4 flex flex-col gap-1 z-10',
-    playerName: 'text-white/80 text-[34px] font-normal [text-shadow:0_4px_40px_rgba(0,0,0,0.25)]',
-    universityName: 'text-white/80 text-lg font-medium [text-shadow:0_4px_40px_rgba(0,0,0,0.25)]',
-    content: 'p-6 space-y-6 pb-8',
-    sectionTitle: 'text-base font-bold text-white mb-4',
-    sectionCard: 'flex flex-col gap-3 bg-[#232323] rounded-[10px] p-4',
-    infoRow: 'flex items-center',
-    infoLabel: 'text-sm text-gray-300 font-medium w-20 flex-shrink-0',
-    infoValue: 'text-base font-semibold text-white flex-1',
-    careersSection: 'gap-3',
-    careerItem: 'text-sm text-white',
-    universityContainer: 'flex items-center gap-2',
-    universityDepartment: 'text-white/60 text-base font-medium [text-shadow:0_4px_40px_rgba(0,0,0,0.25)]',
-    statsHeader: 'flex flex-row items-center justify-between border-white/10 bg-[#202020] py-2 px-5',
-    statItem: 'text-sm text-white font-medium text-center flex-1',
-    leagueName: 'text-sm text-white font-medium flex-1',
-    statsRow: 'flex flex-row items-center justify-between bg-[#2A2A2A] py-3 px-5',
-    leagueStats: 'flex flex-row justify-between flex-1',
-=======
 import { tv } from "tailwind-variants";
 import Icon from "@/lib/assets/icons";
 import type { PlayerInterface } from "@/lib/types/player";
@@ -79,7 +36,6 @@ const overlayVariants = tv({
     leagueName: "text-sm text-white font-medium flex-1",
     statsRow: "flex flex-row items-center justify-between bg-[#2A2A2A] py-3 px-5",
     leagueStats: "flex flex-row justify-between flex-1",
->>>>>>> bdf08f8 (feat: 뱃지, 선수이름 글꼴)
   },
   variants: {
     isOpen: {
