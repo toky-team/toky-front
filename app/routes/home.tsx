@@ -42,7 +42,8 @@ export default function Home() {
         <AdsCarousel />
         <div className="flex w-full flex-col gap-3">
           <div className="flex w-full flex-row justify-between">
-            <div className="text-lg font-bold">적중률 랭킹</div>
+            {/* TODO: 고연전 기간 이후 적중률 랭킹으로 수정 */}
+            <div className="text-lg font-bold">활동 랭킹</div>
             <button
               className="flex items-center text-sm leading-normal font-normal tracking-tight text-white/60"
               onClick={() => navigate('/ranking')}
