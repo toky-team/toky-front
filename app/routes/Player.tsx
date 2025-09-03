@@ -39,7 +39,7 @@ const Player = () => {
   const koreaPrimaryPlayers = koreaPlayers.filter((player) => player.isPrimary === true);
   const yonseiPrimaryPlayers = yonseiPlayers.filter((player) => player.isPrimary === true);
 
-  const primaryPlayers = [...koreaPrimaryPlayers, ...yonseiPrimaryPlayers].sort((a, b) => a.careers.length - b.careers.length);
+  const primaryPlayers = [...koreaPrimaryPlayers, ...yonseiPrimaryPlayers].sort((a, b) => b.careers.length - a.careers.length);
 
   const handleTabChange = (newTab: SportsTab) => {
     if (newTab !== "전체") {
