@@ -74,7 +74,6 @@ const navItems: NavItem[] = [
   { label: '출석게임', path: '/attendance', onlyLoggedIn: false },
   { label: '응모권 내역', path: '/tickets', onlyLoggedIn: true },
   { label: '회원정보 관리', path: '/account', onlyLoggedIn: true },
-  { label: '문의하기', path: '/support', onlyLoggedIn: false },
 ];
 
 interface SideBarProps {
@@ -223,6 +222,9 @@ const SideBar = ({ onClose }: SideBarProps) => {
                 </button>
               );
             })}
+            <button className={sideBarVariants({ active: false }).navItem()} onClick={() => window.open("https://www.instagram.com/official.toky?igsh=OWxzMnhrMDVvYnU3")}>
+              문의하기
+            </button>
           {isLoggedIn && (
             <button className={sideBarVariants({ active: false }).navItem()} onClick={handleLogout}>
               로그아웃
