@@ -8,7 +8,7 @@ import { useSearchParams } from 'react-router';
 import * as s from './style.css';
 import Banner from '@/domain/bet/components/Banner';
 import { useShareModal } from '@/domain/bet/hooks/useShareModal';
-import { Suspense } from 'react';
+import { Suspense, useRef } from 'react';
 
 const PredictionPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,16 +18,17 @@ const PredictionPage = () => {
     setSearchParams(searchParams);
   };
   const { openShareModal } = useShareModal();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className={s.Container}>
       <MainTopBar />
       <NavBar />
-      <div className={s.ScrollContainer}>
+      <div className={s.ScrollContainer} ref={scrollRef}>
         <Banner openShareModal={openShareModal} />
         <SportNav curSport={sport} setSport={setSport} />
         <Suspense>
-          <PredictionContents sport={sport} />
+          <PredictionContents sport={sport} scrollRef={scrollRef} />
         </Suspense>
       </div>
       <PredictionBottomBar curSport={sport} handleNav={setSport} />

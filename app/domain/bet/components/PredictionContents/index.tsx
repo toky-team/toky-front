@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import * as s from './style.css';
 
@@ -15,9 +15,9 @@ import { useToast } from '@/common/hooks/useToast';
 
 interface Props {
   sport: SportType;
+  scrollRef: React.RefObject<HTMLDivElement | null>;
 }
-const PredictionContents = ({ sport }: Props) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+const PredictionContents = ({ sport, scrollRef }: Props) => {
   const {
     data: betData = { sport, predict: null, kuPlayer: null, yuPlayer: null },
     isLoading,
@@ -79,6 +79,7 @@ const PredictionContents = ({ sport }: Props) => {
             if (betData.predict === null) {
               openToast({ message: '응모권 2장 획득!' });
             }
+            scrollToBottom();
           },
         },
       );
@@ -96,7 +97,7 @@ const PredictionContents = ({ sport }: Props) => {
         {isScorePrediction ? (
           <ScorePrediction sport={sport} betData={betData} />
         ) : (
-          <TeamPrediction sport={sport} betData={betData} isLoading={isLoading} />
+          <TeamPrediction sport={sport} betData={betData} isLoading={isLoading} scrollToBottom={scrollToBottom} />
         )}
         {canPredictScore && (
           <button className={s.MoreButton({ isScorePrediction })} onClick={changePredictionMode}>
