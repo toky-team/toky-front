@@ -19,8 +19,9 @@ interface Props {
   sport: SportType;
   betData: BetAnswer;
   isLoading: boolean;
+  scrollToBottom: () => Promise<void>;
 }
-const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading }: Props) => {
+const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading, scrollToBottom }: Props) => {
   const { mutate: postMatchResultBet } = usePostMatchResultBet();
   const { data: betAnswerRatio, isLoading: isBetAnswerRatioLoading } = useGetBetAnswerRatio(sport);
   const { openLoginModal } = useLoginModal();
@@ -39,6 +40,7 @@ const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading }: Props) =>
       { sport, predict: { matchResult: team } },
       {
         onSuccess: () => {
+          scrollToBottom();
           if (betData.predict === null) {
             openToast({ message: '응모권 1장 획득!' });
           }
