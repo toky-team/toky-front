@@ -11,9 +11,9 @@ import SideBar from '@/common/components/SideBar';
 import { AnimatePresence } from 'motion/react';
 
 const MainTopBar = () => {
-  const { data: authCheck, isLoading } = useGetAuthCheck();
+  const { data: authCheck, isSuccess } = useGetAuthCheck();
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const isLogin = authCheck?.isSignup || false;
+  const isSignup = isSuccess && authCheck.isSignup;
 
   return (
     <div className={s.Container}>
@@ -21,7 +21,7 @@ const MainTopBar = () => {
         <Icon.TokyLogo />
       </Link>
       <div className={s.LeftArea}>
-        {!isLoading && (isLogin ? <TicketInfo /> : <LoginButton />)}
+        {isSignup ? <TicketInfo /> : <LoginButton />}
         <button onClick={() => setIsSideBarOpen(true)}>
           <Icon.Hamburger />
         </button>
