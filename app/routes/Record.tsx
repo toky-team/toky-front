@@ -1,7 +1,7 @@
 import MainTopBar from '@/common/components/MainTopBar';
 import SportsNavBar, { type SportsTab } from '@/common/components/SportsNavBar';
 import NavBar from '@/common/components/NavBar';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import RecordSportDetail from '@/domain/record/components/RecordSportDetail';
 import RecordMain from '@/lib/assets/images/record-main.png';
 import RecordOverallSummary from '@/domain/record/components/RecordOverallSummary';
@@ -15,9 +15,9 @@ export default function Record() {
   const navigate = useNavigate();
 
   // 목표 시간: 2025년 9월 19일 오전 11시
-  const targetDate = new Date(2025, 8, 19, 11, 0, 0);
+  const targetDate = useMemo(() => new Date(2025, 8, 19, 11, 0, 0), []);
 
-  const calculateTimeLeft = () => {
+  const calculateTimeLeft = useCallback(() => {
     const now = new Date();
     const difference = targetDate.getTime() - now.getTime();
 
@@ -28,10 +28,9 @@ export default function Record() {
       const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
       return `${days}일 ${hours}시간 ${minutes}분 ${seconds}초`;
-    } else {
-      return '마감되었습니다';
     }
-  };
+    return '마감되었습니다';
+  }, [targetDate]);
 
   useEffect(() => {
     const updateTimer = () => {
@@ -43,7 +42,7 @@ export default function Record() {
     const timer = setInterval(updateTimer, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [calculateTimeLeft]);
 
   return (
     <>
