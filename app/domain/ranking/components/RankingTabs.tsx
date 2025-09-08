@@ -32,7 +32,7 @@ const RankingTabs = ({ activeTab, onTabChange, children }: RankingTabsProps) => 
           className={`${tabsTrigger()} data-[state=active]:bg-[#333333] data-[state=inactive]:bg-transparent`}
           disabled
         >
-          9/20 오픈
+          적중랭킹 9/20 오픈
           {/* 적중랭킹 */}
         </TabsTrigger>
       </TabsList>
