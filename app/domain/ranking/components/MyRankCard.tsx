@@ -1,13 +1,13 @@
-import { tv } from "tailwind-variants";
-import type { RankingItemData, RankingType } from "../types";
-import { useGetUserSummary } from "@/common/apis/useGetUserSummary";
-import { useGetIsAnswerSet } from "@/common/apis/useGetIsAnswerSet";
-import Rank10 from "@/lib/assets/images/rank_10.webp";
-import Rank20 from "@/lib/assets/images/rank_20.webp";
-import Rank30 from "@/lib/assets/images/rank_30.webp";
-import RankDefault from "@/lib/assets/images/rank_default.webp";
-import Medal from "@/lib/assets/icons/Medal";
-import ActivityRankRectangle from "@/lib/assets/icons/ActivityRankRectangle";
+import { tv } from 'tailwind-variants';
+import type { RankingItemData, RankingType } from '../types';
+import { useGetUserSummary } from '@/common/apis/useGetUserSummary';
+import { useGetIsAnswerSet } from '@/common/apis/useGetIsAnswerSet';
+import Rank10 from '@/lib/assets/images/rank_10.webp';
+import Rank20 from '@/lib/assets/images/rank_20.webp';
+import Rank30 from '@/lib/assets/images/rank_30.webp';
+import RankDefault from '@/lib/assets/images/rank_default.webp';
+import Medal from '@/lib/assets/icons/Medal';
+import ActivityRankRectangle from '@/lib/assets/icons/ActivityRankRectangle';
 
 interface MyRankCardProps {
   myRank: RankingItemData | null;
@@ -16,7 +16,15 @@ interface MyRankCardProps {
   activeTab: RankingType;
 }
 
-const { container, descriptionContainer, leftContainer, descriptionIcon, descriptionText, imageContainer, myRankScore } = tv({
+const {
+  container,
+  descriptionContainer,
+  leftContainer,
+  descriptionIcon,
+  descriptionText,
+  imageContainer,
+  myRankScore,
+} = tv({
   slots: {
     container: 'w-full flex pt-3 pb-1 pr-1 pl-1 bg-[#333333] flex-col gap-2 rounded-[16px]',
     descriptionContainer: 'w-full h-4 px-3 flex flex-row justify-between items-center',
@@ -47,28 +55,20 @@ const MyRankCard = ({ myRank, scoreUnit, onShare, activeTab }: MyRankCardProps) 
           <div className={descriptionIcon()}>
             <Medal />
           </div>
-          <div className={descriptionText()}>
-            {myRank.username}님의 랭킹
-          </div>
+          <div className={descriptionText()}>{myRank.username}님의 랭킹</div>
         </div>
-        <div className={myRankScore()}>
-          상위 {percentage.toFixed(2)}%
-        </div>
+        <div className={myRankScore()}>상위 {percentage.toFixed(2)}%</div>
       </div>
       <div className={imageContainer()}>
-        <img src={getRankImage(percentage)} alt="rank" className="w-full h-full object-cover" />
+        <img src={getRankImage(percentage)} alt="rank" className="h-full w-full object-cover" />
         <div className="absolute bottom-0 left-0">
           <ActivityRankRectangle />
-          <div className="absolute bottom-12 left-4 z-10 text-[14px] text-white-87 font-medium">
+          <div className="text-white-87 absolute bottom-12 left-4 z-10 text-[14px] font-medium">
             {activeTab === 'activity' ? '활동' : '적중'}랭킹
           </div>
           <div className="absolute bottom-[10px] left-4 z-10">
-            <span className="text-[28px] text-white font-bold font-giants-bold mr-1">
-              {myRank.rank}
-            </span>
-            <span className="text-[13px] text-white/60 font-bold">
-              등
-            </span>
+            <span className="font-giants-bold mr-1 text-[28px] font-bold text-white">{myRank.rank}</span>
+            <span className="text-[13px] font-bold text-white/60">등</span>
           </div>
         </div>
       </div>

@@ -1,23 +1,33 @@
-import { useState, useEffect } from "react";
-import MainTopBar from "@/common/components/MainTopBar";
-import NavBar from "@/common/components/NavBar";
-import { useActivityRankPagination } from "@/common/apis/useActivityRankPagination";
-import { useBetHitRankPagination } from "@/common/apis/useBetHitRankPagination";
-import { useGetMyActivityRank } from "@/common/apis/useGetMyActivityRank";
-import { useGetMyBetHitRank } from "@/common/apis/useGetMyBetHitRank";
-import RankingTabs from "@/domain/ranking/components/RankingTabs";
-import MyRankCard from "@/domain/ranking/components/MyRankCard";
-import RankingList from "@/domain/ranking/components/RankingList";
-import type { RankingType, RankingItemData } from "@/domain/ranking/types";
-import ScrollTop from "@/lib/assets/icons/ScrollTop";
+import { useState, useEffect } from 'react';
+import MainTopBar from '@/common/components/MainTopBar';
+import NavBar from '@/common/components/NavBar';
+import { useActivityRankPagination } from '@/common/apis/useActivityRankPagination';
+import { useBetHitRankPagination } from '@/common/apis/useBetHitRankPagination';
+import { useGetMyActivityRank } from '@/common/apis/useGetMyActivityRank';
+import { useGetMyBetHitRank } from '@/common/apis/useGetMyBetHitRank';
+import RankingTabs from '@/domain/ranking/components/RankingTabs';
+import MyRankCard from '@/domain/ranking/components/MyRankCard';
+import RankingList from '@/domain/ranking/components/RankingList';
+import type { RankingType, RankingItemData } from '@/domain/ranking/types';
+import ScrollTop from '@/lib/assets/icons/ScrollTop';
 
 const Ranking = () => {
   const [activeTab, setActiveTab] = useState<RankingType>('activity');
   const [showScrollTopButton, setShowScrollTopButton] = useState(false);
 
   // API 호출
-  const { data: activityRankData, fetchNextPage: fetchNextActivityPage, hasNextPage: hasNextActivityPage, isLoading: isActivityLoading } = useActivityRankPagination(20);
-  const { data: betHitRankData, fetchNextPage: fetchNextBetHitPage, hasNextPage: hasNextBetHitPage, isLoading: isBetHitLoading } = useBetHitRankPagination(20);
+  const {
+    data: activityRankData,
+    fetchNextPage: fetchNextActivityPage,
+    hasNextPage: hasNextActivityPage,
+    isLoading: isActivityLoading,
+  } = useActivityRankPagination(20);
+  const {
+    data: betHitRankData,
+    fetchNextPage: fetchNextBetHitPage,
+    hasNextPage: hasNextBetHitPage,
+    isLoading: isBetHitLoading,
+  } = useBetHitRankPagination(20);
   const { data: myActivityRank } = useGetMyActivityRank();
   const { data: myBetHitRank } = useGetMyBetHitRank();
 
@@ -29,7 +39,8 @@ const Ranking = () => {
   const hasNextPage = activeTab === 'activity' ? hasNextActivityPage : hasNextBetHitPage;
   const fetchNextPage = activeTab === 'activity' ? fetchNextActivityPage : fetchNextBetHitPage;
 
-  const allRankItems: RankingItemData[] = currentRankData?.pages.flatMap(page => page.items as RankingItemData[]) ?? [];
+  const allRankItems: RankingItemData[] =
+    currentRankData?.pages.flatMap((page) => page.items as RankingItemData[]) ?? [];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +55,7 @@ const Ranking = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   };
 
@@ -57,7 +68,7 @@ const Ranking = () => {
       <MainTopBar />
       <NavBar />
 
-      <div className="flex flex-col px-5 py-6 gap-4">
+      <div className="flex flex-col gap-4 px-5 py-6">
         <MyRankCard
           myRank={currentMyRank as RankingItemData | null}
           scoreUnit={scoreUnit}
@@ -80,7 +91,7 @@ const Ranking = () => {
       {showScrollTopButton && (
         <button
           onClick={scrollToTop}
-                    className="fixed bottom-6 right-5 z-50 w-12 h-12 bg-[#333333] rounded-full shadow-[0_4px_10px_0_rgba(18,18,18,0.15)] flex items-center justify-center hover:shadow-xl transition-all duration-300"
+          className="fixed right-5 bottom-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#333333] shadow-[0_4px_10px_0_rgba(18,18,18,0.15)] transition-all duration-300 hover:shadow-xl"
           aria-label="맨 위로 가기"
         >
           <ScrollTop />
