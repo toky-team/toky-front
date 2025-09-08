@@ -8,16 +8,17 @@ import PlayerSelector from '@/domain/bet/components/PlayerSelector';
 import ScorePrediction from '@/domain/bet/components/ScorePrediction';
 import TeamPrediction from '@/domain/bet/components/TeamPrediction';
 import { useGetMyBet } from '@/domain/bet/apis/useGetMyBet';
-import { PREDICTION_QUESTION } from '@/domain/bet/constants';
 import { usePostMatchResultBet } from '@/domain/bet/apis/usePostMatchResultBet';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
 import { useToast } from '@/common/hooks/useToast';
+import { useGetBetQuestion } from '@/domain/bet/apis/useGetBetQuestion';
 
 interface Props {
   sport: SportType;
   scrollRef: React.RefObject<HTMLDivElement | null>;
 }
 const PredictionContents = ({ sport, scrollRef }: Props) => {
+  const { data: betQuestion } = useGetBetQuestion(sport);
   const {
     data: betData = { sport, predict: null, kuPlayer: null, yuPlayer: null },
     isLoading,
@@ -88,6 +89,8 @@ const PredictionContents = ({ sport, scrollRef }: Props) => {
     }
   };
 
+  if (betQuestion === undefined) return null;
+
   return (
     <div className={s.Container} ref={scrollRef}>
       <div className={s.Wrapper}>
@@ -114,7 +117,7 @@ const PredictionContents = ({ sport, scrollRef }: Props) => {
         )}
       </div>
       <div className={s.Wrapper}>
-        <h2 className={s.QuestionTitle}>{PREDICTION_QUESTION[sport]}</h2>
+        <h2 className={s.QuestionTitle}>{betQuestion.question}</h2>
         <PlayerSelector
           sport={sport}
           mySelection={{
