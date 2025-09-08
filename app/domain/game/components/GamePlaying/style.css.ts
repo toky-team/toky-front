@@ -5,7 +5,7 @@ export const Container = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  paddingTop: '4rem',
+  paddingTop: '1.25rem',
   gap: '4.31rem',
   height: '100%',
   position: 'relative',
@@ -24,6 +24,8 @@ export const Header = style({
   textAlign: 'center',
   flexShrink: 0,
   zIndex: 1,
+  gap: '0.75rem',
+  width: '100%',
 });
 
 export const BallCount = style({

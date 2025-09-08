@@ -30,6 +30,16 @@ const GamePlaying = ({ step, sport, goToFail, goToSuccess }: Props) => {
   return (
     <div className={s.Container}>
       <div className={s.Header}>
+        <div className={s.ProgressBarContainer}>
+          <div className={s.ProgressBar}>
+            <motion.div
+              className={s.ProgressBarFill}
+              initial={{ width: 0 }}
+              animate={{ width: '100%' }}
+              transition={{ duration: time / 1000, ease: 'linear' }}
+            />
+          </div>
+        </div>
         <div>미션! {BALL_NAME[sport]}을 잡아라</div>
         <div className={s.BallCount}>
           {Array.from({ length: 3 }).map((_, index) => (
@@ -61,16 +71,6 @@ const GamePlaying = ({ step, sport, goToFail, goToSuccess }: Props) => {
             />
           );
         })}
-      </div>
-      <div className={s.ProgressBarContainer}>
-        <div className={s.ProgressBar}>
-          <motion.div
-            className={s.ProgressBarFill}
-            initial={{ width: 0 }}
-            animate={{ width: '100%' }}
-            transition={{ duration: time / 1000, ease: 'linear' }}
-          />
-        </div>
       </div>
       <img src={BOARD_BG_URL_MAP[sport]} className={s.Filter} />
     </div>
