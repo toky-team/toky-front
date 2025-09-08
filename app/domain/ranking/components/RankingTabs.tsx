@@ -1,5 +1,5 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { tv } from "tailwind-variants";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { tv } from 'tailwind-variants';
 
 type RankingType = 'activity' | 'betRate';
 
@@ -21,20 +21,22 @@ const RankingTabs = ({ activeTab, onTabChange, children }: RankingTabsProps) => 
   return (
     <Tabs value={activeTab} onValueChange={(value) => onTabChange(value as RankingType)}>
       <TabsList className={tabsList()}>
-        <TabsTrigger 
-          value="activity" 
+        <TabsTrigger
+          value="activity"
           className={`${tabsTrigger()} data-[state=active]:bg-[#333333] data-[state=inactive]:bg-transparent`}
         >
           활동랭킹
         </TabsTrigger>
-        <TabsTrigger 
-          value="betRate" 
+        <TabsTrigger
+          value="betRate"
           className={`${tabsTrigger()} data-[state=active]:bg-[#333333] data-[state=inactive]:bg-transparent`}
+          disabled
         >
-          적중랭킹
+          9/20 오픈
+          {/* 적중랭킹 */}
         </TabsTrigger>
       </TabsList>
-      
+
       <TabsContent value={activeTab} className={tabsContent()}>
         {children}
       </TabsContent>
