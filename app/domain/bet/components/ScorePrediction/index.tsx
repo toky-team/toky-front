@@ -4,6 +4,7 @@ import type { BetAnswer } from '@/domain/bet/apis/useGetMyBet';
 import { usePostMatchResultBet } from '@/domain/bet/apis/usePostMatchResultBet';
 import type { SportType } from '@/lib/types';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
+import type { BetQuestionAnswer } from '@/domain/bet/apis/useGetBetQuestion';
 
 interface ScoreControllerProps {
   handlePlus: () => void;
@@ -25,15 +26,21 @@ const ScoreController = ({ handlePlus, handleMinus }: ScoreControllerProps) => {
 interface Props {
   sport: SportType;
   betData: BetAnswer;
+  betAnswer: BetQuestionAnswer;
 }
-const ScorePrediction = ({ sport, betData }: Props) => {
+const ScorePrediction = ({ sport, betData, betAnswer }: Props) => {
   const { mutate: postMatchResultBet } = usePostMatchResultBet();
   const { kuScore, yuScore } = betData.predict?.score || { kuScore: 0, yuScore: 0 };
   const { openLoginModal } = useLoginModal();
 
+  const hasRealAnswer = betAnswer?.predict.score !== null && betAnswer?.predict.score !== undefined;
+  const isCorrect =
+    hasRealAnswer && kuScore === betAnswer.predict.score.kuScore && yuScore === betAnswer.predict.score.yuScore;
+
   const handleScorePrediction = (
     setScore: (prev: { kuScore: number; yuScore: number }) => { kuScore: number; yuScore: number },
   ) => {
+    if (hasRealAnswer) return;
     if (openLoginModal() !== false) return;
     const newScore = setScore({ kuScore, yuScore });
     postMatchResultBet({ sport, predict: { score: newScore } });
@@ -41,6 +48,11 @@ const ScorePrediction = ({ sport, betData }: Props) => {
 
   return (
     <div className={s.Container}>
+      {isCorrect && (
+        <div className={s.StickerWrapper}>
+          <Icon.Hit />
+        </div>
+      )}
       <div className={s.ScoreBox}>
         <ScoreController
           handlePlus={() => {

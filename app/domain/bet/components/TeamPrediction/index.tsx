@@ -8,6 +8,7 @@ import OptionButton from '@/domain/bet/components/TeamPrediction/OptionButton';
 import type { BetAnswer } from '@/domain/bet/apis/useGetMyBet';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
 import { useToast } from '@/common/hooks/useToast';
+import type { BetQuestionAnswer } from '@/domain/bet/apis/useGetBetQuestion';
 
 const OPTIONS: { value: UniversityType | '무승부'; text: string; position: 'left' | 'center' | 'right' }[] = [
   { value: '고려대학교', text: '고려대', position: 'left' },
@@ -20,8 +21,9 @@ interface Props {
   betData: BetAnswer;
   isLoading: boolean;
   scrollToBottom: () => Promise<void>;
+  betAnswer: BetQuestionAnswer;
 }
-const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading, scrollToBottom }: Props) => {
+const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading, scrollToBottom, betAnswer }: Props) => {
   const { mutate: postMatchResultBet } = usePostMatchResultBet();
   const { data: betAnswerRatio, isLoading: isBetAnswerRatioLoading } = useGetBetAnswerRatio(sport);
   const { openLoginModal } = useLoginModal();
@@ -71,8 +73,7 @@ const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading, scrollToBot
             handleClick={handleTeamPrediction}
             myAnswer={selectedTeam}
             percentage={percentage}
-            // TODO: 정답 API 연동!!!!
-            realAnswer={null}
+            realAnswer={betAnswer?.predict.matchResult || null}
           />
         );
       })}

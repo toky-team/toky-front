@@ -98,9 +98,15 @@ const PredictionContents = ({ sport, scrollRef }: Props) => {
           {isScorePrediction ? '최종 점수를 예측해주세요' : '우승할 팀을 예측해주세요'}
         </h2>
         {isScorePrediction ? (
-          <ScorePrediction sport={sport} betData={betData} />
+          <ScorePrediction sport={sport} betData={betData} betAnswer={betQuestion.answer} />
         ) : (
-          <TeamPrediction sport={sport} betData={betData} isLoading={isLoading} scrollToBottom={scrollToBottom} />
+          <TeamPrediction
+            sport={sport}
+            betData={betData}
+            isLoading={isLoading}
+            scrollToBottom={scrollToBottom}
+            betAnswer={betQuestion.answer}
+          />
         )}
         {canPredictScore && (
           <button className={s.MoreButton({ isScorePrediction })} onClick={changePredictionMode}>
