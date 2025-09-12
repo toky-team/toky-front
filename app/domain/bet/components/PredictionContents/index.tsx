@@ -131,6 +131,7 @@ const PredictionContents = ({ sport, scrollRef }: Props) => {
             yuPlayerId: betData.yuPlayer ? betData.yuPlayer.playerId : undefined,
           }}
           scrollToBottom={scrollToBottom}
+          betAnswer={betQuestion.answer}
         />
       </div>
     </div>

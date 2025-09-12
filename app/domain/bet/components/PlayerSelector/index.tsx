@@ -14,6 +14,7 @@ import { useToast } from '@/common/hooks/useToast';
 import { usePlayerOverlay } from '@/domain/player/hooks/usePlayerOverlay';
 import { Link } from 'react-router';
 import getNoPlayerSelectText from '@/domain/bet/utils/getNoPlayerSelectText';
+import type { BetQuestionAnswer } from '@/domain/bet/apis/useGetBetQuestion';
 
 interface Props {
   sport: SportType;
@@ -22,11 +23,12 @@ interface Props {
     yuPlayerId: string | null | undefined;
   };
   scrollToBottom: () => void;
+  betAnswer: BetQuestionAnswer;
 }
 
 const ITEMS_PER_PAGE = 8;
 
-const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
+const PlayerSelector = ({ sport, mySelection, scrollToBottom, betAnswer }: Props) => {
   const [status, setStatus] = useState<UniversityType | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const { data } = useGetPlayer(sport);
@@ -42,6 +44,14 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
   const [mouseStart, setMouseStart] = useState<number | null>(null);
   const [mouseEnd, setMouseEnd] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+
+  const hasRealAnswer =
+    betAnswer?.kuPlayer !== undefined &&
+    betAnswer?.yuPlayer !== undefined &&
+    betAnswer.kuPlayer !== null &&
+    betAnswer.yuPlayer !== null;
+  const isKuCorrect = hasRealAnswer && betAnswer.kuPlayer.playerId === mySelection.kuPlayerId;
+  const isYuCorrect = hasRealAnswer && betAnswer.yuPlayer.playerId === mySelection.yuPlayerId;
 
   const kuSelectedPlayer =
     mySelection.kuPlayerId === undefined
@@ -207,6 +217,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
             }, 0);
           }}
           sport={sport}
+          isCorrect={isKuCorrect}
         />
         <SelectedPlayerView
           university="연세대학교"
@@ -219,6 +230,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom }: Props) => {
             }, 0);
           }}
           sport={sport}
+          isCorrect={isYuCorrect}
         />
       </div>
       {status !== null &&
