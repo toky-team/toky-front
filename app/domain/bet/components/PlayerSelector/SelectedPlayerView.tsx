@@ -4,6 +4,7 @@ import * as s from './style.css';
 import type { PlayerInterface } from '@/lib/types/player';
 import defaultImage from '@/lib/assets/images/playerPlaceholder.png';
 import getNoPlayerSelectText from '@/domain/bet/utils/getNoPlayerSelectText';
+import Icon from '@/lib/assets/icons';
 
 interface Props {
   university: UniversityType;
@@ -11,8 +12,9 @@ interface Props {
   selectedPlayer: PlayerInterface | null | undefined;
   onClick: () => void;
   sport: SportType;
+  isCorrect: boolean;
 }
-const SelectedPlayerView = ({ university, status, selectedPlayer, onClick, sport }: Props) => {
+const SelectedPlayerView = ({ university, status, selectedPlayer, onClick, sport, isCorrect }: Props) => {
   return (
     <button
       className={s.SelectedPlayerView({
@@ -21,6 +23,11 @@ const SelectedPlayerView = ({ university, status, selectedPlayer, onClick, sport
       })}
       onClick={onClick}
     >
+      {isCorrect && (
+        <div className={s.CorrectStamp}>
+          <Icon.Hit />
+        </div>
+      )}
       {selectedPlayer !== undefined ? (
         <>
           <div className={s.SelectedPlayerViewText}>

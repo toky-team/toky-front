@@ -81,6 +81,14 @@ export const SelectedPlayerView = recipe({
   ],
 });
 
+export const CorrectStamp = style({
+  position: 'absolute',
+  zIndex: 1,
+  top: '50%',
+  left: '50%',
+  transform: 'translate3d(-50%, -48.5%, 0)',
+});
+
 export const SelectedPlayerViewText = style({
   display: 'flex',
   flexDirection: 'column',
