@@ -67,6 +67,10 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom, betAnswer }: Props
         : data?.find((player) => player.id === mySelection.yuPlayerId) || undefined;
 
   const setKuSelectedPlayer = (player: PlayerInterface | null) => {
+    if (hasRealAnswer) {
+      openToast({ message: '승부 예측 기간이 지났어요' });
+      return;
+    }
     if (openLoginModal() !== false) return;
     postPlayerBet(
       { sport, university: '고려대학교', playerId: player?.id || null },
@@ -83,6 +87,10 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom, betAnswer }: Props
     );
   };
   const setYuSelectedPlayer = (player: PlayerInterface | null) => {
+    if (hasRealAnswer) {
+      openToast({ message: '승부 예측 기간이 지났어요' });
+      return;
+    }
     if (openLoginModal() !== false) return;
     postPlayerBet(
       { sport, university: '연세대학교', playerId: player?.id || null },

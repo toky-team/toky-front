@@ -35,8 +35,13 @@ const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading, scrollToBot
   const { openToast } = useToast();
 
   const isLoading = isBetAnswerRatioLoading || isMyBetLoading;
+  const hasRealAnswer = betAnswer?.predict.matchResult !== undefined && betAnswer.predict.matchResult !== null;
 
   const handleTeamPrediction = (team: UniversityType | '무승부') => {
+    if (hasRealAnswer) {
+      openToast({ message: '승부 예측 기간이 지났어요' });
+      return;
+    }
     if (openLoginModal() !== false) return;
     postMatchResultBet(
       { sport, predict: { matchResult: team } },

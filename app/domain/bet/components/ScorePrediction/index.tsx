@@ -5,6 +5,7 @@ import { usePostMatchResultBet } from '@/domain/bet/apis/usePostMatchResultBet';
 import type { SportType } from '@/lib/types';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
 import type { BetQuestionAnswer } from '@/domain/bet/apis/useGetBetQuestion';
+import { useToast } from '@/common/hooks/useToast';
 
 interface ScoreControllerProps {
   handlePlus: () => void;
@@ -32,6 +33,7 @@ const ScorePrediction = ({ sport, betData, betAnswer }: Props) => {
   const { mutate: postMatchResultBet } = usePostMatchResultBet();
   const { kuScore, yuScore } = betData.predict?.score || { kuScore: 0, yuScore: 0 };
   const { openLoginModal } = useLoginModal();
+  const { openToast } = useToast();
 
   const hasRealAnswer = betAnswer?.predict.score !== null && betAnswer?.predict.score !== undefined;
   const isCorrect =
@@ -40,7 +42,10 @@ const ScorePrediction = ({ sport, betData, betAnswer }: Props) => {
   const handleScorePrediction = (
     setScore: (prev: { kuScore: number; yuScore: number }) => { kuScore: number; yuScore: number },
   ) => {
-    if (hasRealAnswer) return;
+    if (hasRealAnswer) {
+      openToast({ message: '승부 예측 기간이 지났어요' });
+      return;
+    }
     if (openLoginModal() !== false) return;
     const newScore = setScore({ kuScore, yuScore });
     postMatchResultBet({ sport, predict: { score: newScore } });
