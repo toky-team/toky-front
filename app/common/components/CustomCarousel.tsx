@@ -1,4 +1,5 @@
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 import type { CarouselApi } from '@/components/ui/carousel';
 import { useState, useEffect } from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
@@ -14,8 +15,8 @@ const carouselVariants = tv({
   variants: {
     size: {
       small: {
-        root: "h-[78px]",
-        content: "h-[78px]"
+        root: "ratio-350/78",
+        content: "ratio-350/78"
       },
       medium: {
         root: "h-[200px]", 
@@ -43,13 +44,15 @@ interface CustomCarouselProps extends VariantProps<typeof carouselVariants> {
   slides: CarouselSlide[];
   className?: string;
   indicator?: 'default' | 'dots' | false;
+  autoPlay?: boolean;
 }
 
 const CustomCarousel = ({ 
   slides,
   size,
   className,
-  indicator = 'default'
+  indicator = 'default',
+  autoPlay = false
 }: CustomCarouselProps) => {
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
@@ -124,6 +127,7 @@ const CustomCarousel = ({
     <Carousel 
       setApi={setApi}
       className={root({ className })}
+      plugins={autoPlay ? [Autoplay({ delay: 3000 })] : []}
     >
       <CarouselContent className={content()}>
         {slides.map((slideData) => (
