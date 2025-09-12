@@ -65,6 +65,16 @@ export const ItemsList = style({
   background: 'rgba(255, 255, 255, 0.10)',
 });
 
+export const SignupText = style({
+  display: 'flex',
+  width: '100%',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '0.5rem',
+  background: 'rgba(255, 255, 255, 0.10)',
+  padding: '1rem',
+});
+
 export const Item = style({
   display: 'flex',
   flexDirection: 'column',
