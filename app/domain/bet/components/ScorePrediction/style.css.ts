@@ -6,6 +6,7 @@ export const Container = style({
   display: 'flex',
   gap: '0.75rem',
   alignItems: 'center',
+  position: 'relative',
 });
 
 export const Divider = style({
@@ -63,4 +64,12 @@ export const ScoreControllerButton = style({
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '0.5rem',
+});
+
+export const StickerWrapper = style({
+  position: 'absolute',
+  zIndex: 1,
+  top: '50%',
+  left: '50%',
+  transform: 'translate3d(-50%, -48.5%, 0)',
 });

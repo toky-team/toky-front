@@ -1,5 +1,3 @@
-import type { SportType } from '@/lib/types';
-
 import card0 from '@/lib/assets/images/toky-share-card/card-0.webp';
 import card1 from '@/lib/assets/images/toky-share-card/card-1.webp';
 import card2 from '@/lib/assets/images/toky-share-card/card-2.webp';
@@ -26,11 +24,3 @@ export const KOREA_WIN_IMAGE_LIST = [card0, card2, card3, card4, card5, card6, c
 export const YONSEI_WIN_IMAGE_LIST = [card1, card8, card9, card10, card11, card12, card13, card15];
 
 export const DRAW_IMAGE_LIST = [card16, card17, card18, card19];
-
-export const PREDICTION_QUESTION: Record<SportType, string> = {
-  야구: '안타를 칠 선수를 예측해주세요',
-  축구: '총 득점이 가장 많을 선수를 예측해주세요',
-  농구: '총 득점이 가장 많을 선수를 예측해주세요',
-  럭비: '총 득점이 가장 많을 선수를 예측해주세요',
-  아이스하키: '총 득점이 가장 많을 선수를 예측해주세요',
-};
