@@ -6,10 +6,11 @@ export const Container = style({
   flexDirection: 'column',
   alignItems: 'center',
   paddingTop: '1.25rem',
-  gap: '4.31rem',
+  justifyContent: 'space-between',
   height: '100%',
   position: 'relative',
   zIndex: 1,
+  maxHeight: '700px',
 });
 
 export const Header = style({
@@ -56,7 +57,6 @@ export const Board = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gap: '0.625rem',
-  flexGrow: 1,
   zIndex: 1,
 });
 

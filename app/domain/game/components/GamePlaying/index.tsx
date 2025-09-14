@@ -28,52 +28,54 @@ const GamePlaying = ({ step, sport, goToFail, goToSuccess }: Props) => {
   }, [goToFail, time]);
 
   return (
-    <div className={s.Container}>
-      <div className={s.Header}>
-        <div className={s.ProgressBarContainer}>
-          <div className={s.ProgressBar}>
-            <motion.div
-              className={s.ProgressBarFill}
-              initial={{ width: 0 }}
-              animate={{ width: '100%' }}
-              transition={{ duration: time / 1000, ease: 'linear' }}
-            />
+    <>
+      <div className={s.Container}>
+        <div className={s.Header}>
+          <div className={s.ProgressBarContainer}>
+            <div className={s.ProgressBar}>
+              <motion.div
+                className={s.ProgressBarFill}
+                initial={{ width: 0 }}
+                animate={{ width: '100%' }}
+                transition={{ duration: time / 1000, ease: 'linear' }}
+              />
+            </div>
+          </div>
+          <div>미션! {BALL_NAME[sport]}을 잡아라</div>
+          <div className={s.BallCount}>
+            {Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className={s.BallCountItem}>
+                <Ball sport={sport} isNull={index >= catchCount} className={s.BallCountItemBall} />
+              </div>
+            ))}
           </div>
         </div>
-        <div>미션! {BALL_NAME[sport]}을 잡아라</div>
-        <div className={s.BallCount}>
-          {Array.from({ length: 3 }).map((_, index) => (
-            <div key={index} className={s.BallCountItem}>
-              <Ball sport={sport} isNull={index >= catchCount} className={s.BallCountItemBall} />
-            </div>
-          ))}
+        <div className={s.Board}>
+          {board.map((item, index) => {
+            return (
+              <BallItem
+                key={index}
+                sport={item}
+                onClick={() => {
+                  if (item !== sport) {
+                    goToFail();
+                    return;
+                  }
+
+                  setCatchCount((prev) => {
+                    if (prev === 2) {
+                      goToSuccess();
+                    }
+                    return prev + 1;
+                  });
+                }}
+              />
+            );
+          })}
         </div>
       </div>
-      <div className={s.Board}>
-        {board.map((item, index) => {
-          return (
-            <BallItem
-              key={index}
-              sport={item}
-              onClick={() => {
-                if (item !== sport) {
-                  goToFail();
-                  return;
-                }
-
-                setCatchCount((prev) => {
-                  if (prev === 2) {
-                    goToSuccess();
-                  }
-                  return prev + 1;
-                });
-              }}
-            />
-          );
-        })}
-      </div>
       <img src={BOARD_BG_URL_MAP[sport]} className={s.Filter} />
-    </div>
+    </>
   );
 };
 export default GamePlaying;
