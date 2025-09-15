@@ -30,14 +30,6 @@ export const overallSummaryVariants = tv({
     listRoot: 'px-5 flex flex-col gap-3',
     sportRow: 'w-full flex flex-col gap-2',
     sportLabel: 'flex items-center justify-center text-white-87 font-semibold',
-    bar: 'relative h-3 overflow-hidden',
-    leftBar: 'h-full rounded-l-[34px] bg-gradient-to-l from-[#F3233C] to-[#F3233C]/25',
-    rightBar: 'absolute right-0 top-0 bottom-0 rounded-r-[34px] bg-gradient-to-l from-[#2948FF]/25 to-[#2948FF]',
-    scoreRow: 'flex items-center justify-between',
-    scoreColLeft: 'text-white-87 text-sm',
-    scoreColRight: 'text-white-87 text-sm text-right',
-    scoreValue: 'text-white-87 font-bold text-lg',
-    scoreSchool: 'text-white-60 text-xs font-normal',
   },
 });
 

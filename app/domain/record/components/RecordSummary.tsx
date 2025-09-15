@@ -1,7 +1,21 @@
-import { overallSummaryVariants, type SportItem } from '@/domain/record/components/RecordOverallSummary';
+import { tv } from 'tailwind-variants';
 
+import { type SportItem } from '@/domain/record/components/RecordOverallSummary';
+
+const recordSummaryVariants = tv({
+  slots: {
+    bar: 'relative h-3 overflow-hidden',
+    leftBar: 'h-full rounded-l-[34px] bg-gradient-to-l from-[#F3233C] to-[#F3233C]/25',
+    rightBar: 'absolute right-0 top-0 bottom-0 rounded-r-[34px] bg-gradient-to-l from-[#2948FF]/25 to-[#2948FF]',
+    scoreRow: 'flex items-center justify-between',
+    scoreColLeft: 'text-white-87 text-sm',
+    scoreColRight: 'text-white-87 text-sm text-right',
+    scoreValue: 'text-white-87 font-bold text-lg',
+    scoreSchool: 'text-white-60 text-xs font-normal',
+  },
+});
 const { bar, leftBar, rightBar, scoreRow, scoreColLeft, scoreColRight, scoreValue, scoreSchool } =
-  overallSummaryVariants();
+  recordSummaryVariants();
 
 interface Props {
   s: SportItem;
