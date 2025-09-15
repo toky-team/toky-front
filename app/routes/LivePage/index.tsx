@@ -14,6 +14,7 @@ import ChatInput from '@/domain/live/components/ChatInput';
 import useGuideModal from '@/domain/live/hooks/useGuideModal';
 import { useGetLiveUrl } from '@/domain/live/apis/useGetLiveUrl';
 import { FALLBACK_LIVE_URL } from '@/lib/constants';
+import RecordView from '@/domain/live/components/RecordView';
 
 const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
   // TODO: 전력 분석 페이지 구현
@@ -51,8 +52,14 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
       <Player src={liveUrl} />
       <ScoreBoard sport={sport} />
       <LiveMenu page={page} setPage={setPage} />
-      <ChatList sport={sport} />
-      <ChatInput sport={sport} handleSendMessage={handleSendMessage} />
+      {page === 'chat' ? (
+        <>
+          <ChatList sport={sport} />
+          <ChatInput sport={sport} handleSendMessage={handleSendMessage} />
+        </>
+      ) : (
+        <RecordView sport={sport} />
+      )}
     </>
   );
 };
