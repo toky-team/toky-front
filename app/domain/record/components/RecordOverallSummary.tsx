@@ -1,8 +1,9 @@
+import RecordSummary from '@/domain/record/components/RecordSummary';
 import KoreaUniversitySymbol from '@/lib/assets/images/korea-symbol-white.png';
 import YonseiUniversitySymbol from '@/lib/assets/images/yonsei-symbol-white.png';
 import { tv } from 'tailwind-variants';
 
-type SportItem = {
+export type SportItem = {
   label: string;
   KOREA_WINS: number;
   YONSEI_WINS: number;
@@ -16,7 +17,7 @@ export const sports: SportItem[] = [
   { label: '빙구', KOREA_WINS: 18, YONSEI_WINS: 24 },
 ];
 
-const overallSummaryVariants = tv({
+export const overallSummaryVariants = tv({
   slots: {
     root: 'w-full max-w-screen-sm mx-auto flex flex-col gap-6',
     header: 'flex flex-col gap-6 px-5',
@@ -45,27 +46,8 @@ const RecordOverallSummary = () => {
   const totalDraw = 10;
   const totalRight = 20;
 
-  const {
-    root,
-    header,
-    heading,
-    divider,
-    statsRow,
-    statsCol,
-    statsTitle,
-    statsValue,
-    listRoot,
-    sportRow,
-    sportLabel,
-    bar,
-    leftBar,
-    rightBar,
-    scoreRow,
-    scoreColLeft,
-    scoreColRight,
-    scoreValue,
-    scoreSchool,
-  } = overallSummaryVariants();
+  const { root, header, heading, divider, statsRow, statsCol, statsTitle, statsValue, listRoot, sportRow, sportLabel } =
+    overallSummaryVariants();
 
   return (
     <div className={root()}>
@@ -109,24 +91,7 @@ const RecordOverallSummary = () => {
             return (
               <div key={s.label} className={sportRow()}>
                 <div className={sportLabel()}>{s.label}</div>
-                <div className={bar()}>
-                  <div className={leftBar()} style={{ width: `${leftPct}%` }} />
-                  <div className={rightBar()} style={{ width: `${rightPct}%` }} />
-                </div>
-                <div className={scoreRow()}>
-                  <div className={scoreColLeft()}>
-                    <div className="flex flex-col items-start">
-                      <div className={scoreValue()}>{s.KOREA_WINS}승</div>
-                      <div className={scoreSchool()}>고려대학교</div>
-                    </div>
-                  </div>
-                  <div className={scoreColRight()}>
-                    <div className="flex flex-col items-end">
-                      <div className={scoreValue()}>{s.YONSEI_WINS}승</div>
-                      <div className={scoreSchool()}>연세대학교</div>
-                    </div>
-                  </div>
-                </div>
+                <RecordSummary s={s} leftPct={leftPct} rightPct={rightPct} />
               </div>
             );
           })}
