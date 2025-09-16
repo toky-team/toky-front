@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import * as s from './style.css';
 
 import TopBar from '@/common/components/TopBar';
+import BottomSheet from '@/common/components/BottomSheet';
 import Player from '@/domain/live/components/Player';
 import Icon from '@/lib/assets/icons';
 import { chatSocket } from '@/common/utils/socket';
@@ -17,14 +18,29 @@ import { FALLBACK_LIVE_URL } from '@/lib/constants';
 import RecordView from '@/domain/live/components/RecordView';
 
 const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
-  // TODO: 전력 분석 페이지 구현
   const [page, setPage] = useState<'chat' | 'analysis'>('chat');
   const sport = SportsPathMap[params.sports];
   const { openModal } = useGuideModal();
   const { data: rawUrls } = useGetLiveUrl();
   const liveUrls = rawUrls?.filter((url) => url.sport === sport);
-  // TODO: 여러 라이브 주소 변경 가능하도록
-  const liveUrl = liveUrls?.[0]?.url || FALLBACK_LIVE_URL;
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const liveUrl = liveUrls?.[selectedIndex]?.url || FALLBACK_LIVE_URL;
+  const selectedLabel = `${liveUrls?.[selectedIndex]?.broadcastName || ''} ${sport} 라이브`;
+
+  const items = useMemo(
+    () =>
+      (liveUrls || []).map((u, index) => ({
+        id: u.id,
+        label: u.broadcastName,
+        selected: u.url === liveUrl,
+        onSelect: () => {
+          setSelectedIndex(index);
+          setSheetOpen(false);
+        },
+      })),
+    [liveUrls, liveUrl],
+  );
 
   useEffect(() => {
     openModal();
@@ -40,16 +56,17 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
   return (
     <>
       <TopBar>
-        {/* TODO: 드롭다운 방송사 선택 메뉴 */}
-        <div className={s.LiveSrc}>
-          <p>KUBS {sport} 라이브</p>
-          <button>
+        {/* 방송사 선택 바텀시트 트리거 */}
+        <button className={s.LiveSrc} onClick={() => setSheetOpen(true)} type="button">
+          <p>{selectedLabel}</p>
+          <span>
             <Icon.DropdownArrow />
-          </button>
-        </div>
+          </span>
+        </button>
       </TopBar>
       {/* TODO: URI 제대로 끼우기 */}
       <Player src={liveUrl} />
+      <BottomSheet open={sheetOpen} onOpenChange={setSheetOpen} title="방송사" items={items} />
       <ScoreBoard sport={sport} />
       <LiveMenu page={page} setPage={setPage} />
       {page === 'chat' ? (
