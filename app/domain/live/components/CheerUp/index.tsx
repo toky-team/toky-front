@@ -40,6 +40,7 @@ const CheerUp = ({ sport }: Props) => {
         onClick={() => handleLike('고려대학교')}
         whileTap={{ scale: 0.95 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        type="button"
       >
         <Icon.Heart />
         <p className={s.LikeCount}>{data.KULike}</p>
@@ -51,6 +52,7 @@ const CheerUp = ({ sport }: Props) => {
         onClick={() => handleLike('연세대학교')}
         whileTap={{ scale: 0.95 }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        type="button"
       >
         <Icon.Heart />
         <p className={s.LikeCount}>{data.YULike}</p>
