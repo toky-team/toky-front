@@ -12,6 +12,7 @@ import { usePostMatchResultBet } from '@/domain/bet/apis/usePostMatchResultBet';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
 import { useToast } from '@/common/hooks/useToast';
 import { useGetBetQuestion } from '@/domain/bet/apis/useGetBetQuestion';
+import { useGetScore } from '@/domain/live/apis/useGetScore';
 
 interface Props {
   sport: SportType;
@@ -27,6 +28,8 @@ const PredictionContents = ({ sport, scrollRef }: Props) => {
   const { mutate: postMatchResultBet } = usePostMatchResultBet();
   const { openLoginModal } = useLoginModal();
   const { openToast } = useToast();
+  const { data: scoreData } = useGetScore(sport);
+  const canPredict = scoreData?.matchStatus === '시작 전';
 
   const [isScorePrediction, setIsScorePrediction] = useState(false);
   const canPredictScore = sport === '야구' || sport === '축구' || sport === '아이스하키';
@@ -63,6 +66,8 @@ const PredictionContents = ({ sport, scrollRef }: Props) => {
       // 우승팀 예측 -> 점수 예측으로 변경
       // 우승팀 예측 데이터에 맞추어 점수 예측을 만들어주고 (1 : 0), 우승팀 예측 데이터를 삭제
       if (betData.predict && betData.predict.score) return;
+
+      if (!canPredict) return;
 
       let newScore = { kuScore: 0, yuScore: 0 };
       if (betData.predict && betData.predict.matchResult) {

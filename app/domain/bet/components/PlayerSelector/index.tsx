@@ -15,6 +15,7 @@ import { usePlayerOverlay } from '@/domain/player/hooks/usePlayerOverlay';
 import { Link } from 'react-router';
 import getNoPlayerSelectText from '@/domain/bet/utils/getNoPlayerSelectText';
 import type { BetQuestionAnswer } from '@/domain/bet/apis/useGetBetQuestion';
+import { useGetScore } from '@/domain/live/apis/useGetScore';
 
 interface Props {
   sport: SportType;
@@ -36,6 +37,8 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom, betAnswer }: Props
   const { openLoginModal } = useLoginModal();
   const { openToast } = useToast();
   const { openPlayerOverlay } = usePlayerOverlay();
+  const { data: scoreData } = useGetScore(sport);
+  const canPredict = scoreData?.matchStatus === '시작 전';
 
   // 스와이프 제스처를 위한 ref와 상태
   const playerListRef = useRef<HTMLDivElement>(null);
@@ -67,7 +70,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom, betAnswer }: Props
         : data?.find((player) => player.id === mySelection.yuPlayerId) || undefined;
 
   const setKuSelectedPlayer = (player: PlayerInterface | null) => {
-    if (hasRealAnswer) {
+    if (hasRealAnswer || !canPredict) {
       openToast({ message: '승부 예측 기간이 지났어요' });
       return;
     }
@@ -87,7 +90,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom, betAnswer }: Props
     );
   };
   const setYuSelectedPlayer = (player: PlayerInterface | null) => {
-    if (hasRealAnswer) {
+    if (hasRealAnswer || !canPredict) {
       openToast({ message: '승부 예측 기간이 지났어요' });
       return;
     }

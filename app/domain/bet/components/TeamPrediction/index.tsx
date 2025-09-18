@@ -9,6 +9,7 @@ import type { BetAnswer } from '@/domain/bet/apis/useGetMyBet';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
 import { useToast } from '@/common/hooks/useToast';
 import type { BetQuestionAnswer } from '@/domain/bet/apis/useGetBetQuestion';
+import { useGetScore } from '@/domain/live/apis/useGetScore';
 
 const OPTIONS: { value: UniversityType | '무승부'; text: string; position: 'left' | 'center' | 'right' }[] = [
   { value: '고려대학교', text: '고려대', position: 'left' },
@@ -33,12 +34,14 @@ const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading, scrollToBot
     return null;
   }, [betData]);
   const { openToast } = useToast();
+  const { data: scoreData } = useGetScore(sport);
+  const canPredict = scoreData?.matchStatus === '시작 전';
 
   const isLoading = isBetAnswerRatioLoading || isMyBetLoading;
   const hasRealAnswer = betAnswer?.predict.matchResult !== undefined && betAnswer.predict.matchResult !== null;
 
   const handleTeamPrediction = (team: UniversityType | '무승부') => {
-    if (hasRealAnswer) {
+    if (hasRealAnswer || !canPredict) {
       openToast({ message: '승부 예측 기간이 지났어요' });
       return;
     }
