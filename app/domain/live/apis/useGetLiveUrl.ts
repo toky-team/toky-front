@@ -16,6 +16,9 @@ export const useGetLiveUrl = () => {
   return useQuery({
     queryKey: ['live-url'],
     queryFn: getLiveUrl,
-    staleTime: 0,
+    // Reduce refetching to avoid thumbnail/tabs flicker
+    staleTime: 1000 * 30,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };
