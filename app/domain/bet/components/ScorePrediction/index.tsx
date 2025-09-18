@@ -6,6 +6,7 @@ import type { SportType } from '@/lib/types';
 import { useLoginModal } from '@/common/hooks/useLoginModal';
 import type { BetQuestionAnswer } from '@/domain/bet/apis/useGetBetQuestion';
 import { useToast } from '@/common/hooks/useToast';
+import { useGetScore } from '@/domain/live/apis/useGetScore';
 
 interface ScoreControllerProps {
   handlePlus: () => void;
@@ -35,6 +36,9 @@ const ScorePrediction = ({ sport, betData, betAnswer }: Props) => {
   const { openLoginModal } = useLoginModal();
   const { openToast } = useToast();
 
+  const { data: scoreData } = useGetScore(sport);
+  const canPredict = scoreData?.matchStatus === '시작 전';
+
   const hasRealAnswer = betAnswer?.predict.score !== null && betAnswer?.predict.score !== undefined;
   const isCorrect =
     hasRealAnswer && kuScore === betAnswer.predict.score.kuScore && yuScore === betAnswer.predict.score.yuScore;
@@ -42,7 +46,7 @@ const ScorePrediction = ({ sport, betData, betAnswer }: Props) => {
   const handleScorePrediction = (
     setScore: (prev: { kuScore: number; yuScore: number }) => { kuScore: number; yuScore: number },
   ) => {
-    if (hasRealAnswer) {
+    if (hasRealAnswer || !canPredict) {
       openToast({ message: '승부 예측 기간이 지났어요' });
       return;
     }
