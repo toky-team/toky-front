@@ -25,7 +25,7 @@ const buildYouTubeThumbnailUrl = (url: string): string | null => {
   return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
 };
 
-export function LiveTabs() {
+export function LiveTabs({ statusBySport }: { statusBySport: Partial<Record<SportType, '시작 전' | '진행 중' | '종료'>> }) {
   const { data, isFetching } = useGetLiveUrl();
 
   type LiveItem = {
@@ -51,7 +51,10 @@ export function LiveTabs() {
   const entries = (Object.entries(groupedBySport) as Array<[
     SportsPathType,
     { sport: SportType; items: LiveItem[] }
-  ]>).sort((a, b) => SportsToIndexMap[a[1].sport] - SportsToIndexMap[b[1].sport]);
+  ]>)
+    // 경기 상태가 '종료'인 종목은 제외
+    .filter(([, group]) => statusBySport[group.sport] !== '종료')
+    .sort((a, b) => SportsToIndexMap[a[1].sport] - SportsToIndexMap[b[1].sport]);
 
   return (
     <div className="px-5 pt-6">
@@ -61,8 +64,10 @@ export function LiveTabs() {
       </div>
 
       {isFetching && entries.length === 0 ? null : entries.map(([path, group]) => {
-        const items = group.items;
+        // URL이 존재하는 항목만 탭으로 노출
+        const items = group.items.filter((item) => Boolean(item.url));
         const defaultId = items[0]?.id;
+        if (!defaultId) return null;
         return (
           <div key={`${path}-${defaultId}`} className="mb-6">
             <div className="mt-2 mb-4 h-[1px] bg-white/15" />

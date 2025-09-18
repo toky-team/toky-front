@@ -1,9 +1,10 @@
 import LoginCard from '@/domain/home/components/LoginCard';
 import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 import { LiveTabs } from '@/domain/home/components/LiveTabs';
+import type { SportType } from '@/lib/types';
 import ScoreBoard from '@/domain/home/components/ScoreBoard';
 
-export function HomeWhenLive() {
+export function HomeWhenLive({ statusBySport }: { statusBySport: Partial<Record<SportType, '시작 전' | '진행 중' | '종료'>> }) {
   const { data: auth } = useGetAuthCheck();
   const isLoggedIn = Boolean(auth?.isSignup);
 
@@ -16,7 +17,7 @@ export function HomeWhenLive() {
           <LoginCard isLoggedIn={isLoggedIn} backgroundColor="white10" />
         )}
       </div>
-      <LiveTabs />
+      <LiveTabs statusBySport={statusBySport} />
     </div>
   );
 }
