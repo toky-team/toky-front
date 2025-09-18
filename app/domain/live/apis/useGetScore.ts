@@ -21,6 +21,9 @@ export const useGetScore = (sport: SportType) => {
   return useQuery({
     queryKey: ['score', sport],
     queryFn: () => getScore(sport),
-    staleTime: 0,
+    // Avoid aggressive refetching to prevent UI flicker on mount/focus
+    staleTime: 1000 * 30,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };
