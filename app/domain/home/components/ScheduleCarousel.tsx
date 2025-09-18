@@ -7,12 +7,14 @@ import Basketball from "@/lib/assets/images/basketball_background.png"
 import Rugby from "@/lib/assets/images/rugby_background.png"
 import IceHockey from "@/lib/assets/images/icehockey_background.png"
 import Soccer from "@/lib/assets/images/soccer_background.png"
+import { SCHEDULE_LIST } from '@/lib/constants';
 
-interface ScheduleEvent {
+interface ScheduleEventWithImage {
   title: string;
   time: string;
   location: string;
   img: string;
+  date: string;
 }
 
 const scheduleCarouselVariants = tv({
@@ -25,59 +27,30 @@ const scheduleCarouselVariants = tv({
   },
 });
 
-const SCHEDULE_INFO: Record<string, ScheduleEvent[]> = {
-  "9/12 (금)": [
-    {
-      title: "합동응원전",
-      time: "18:00",
-      location: "연세대학교 노천극장",
-      img: Reels,
-    },
-  ],
-  "9/19 (금)": [
-    {
-      title: "야구",
-      time: "11:00", 
-      location: "잠실 야구장",
-      img: Baseball,
-    },
-    {
-      title: "빙구", 
-      time: "14:00",
-      location: "목동 아이스링크",
-      img: IceHockey,
-    },
-    {
-      title: "농구",
-      time: "17:00",
-      location: "고양 체육관", 
-      img: Basketball,
-    },
-  ],
-  "9/20 (토)": [
-    {
-      title: "럭비",
-      time: "11:00",
-      location: "고양 종합운동장",
-      img: Rugby,
-    },
-    {
-      title: "축구",
-      time: "14:00", 
-      location: "고양 종합운동장",
-      img: Soccer,
-    },
-  ],
+const IMAGE_MAP: Record<string, string> = {
+  '합동응원전': Reels,
+  '야구': Baseball,
+  '아이스하키': IceHockey,
+  '농구': Basketball,
+  '럭비': Rugby,
+  '축구': Soccer,
 };
+
+const SCHEDULE_INFO: Record<string, ScheduleEventWithImage[]> = SCHEDULE_LIST.reduce((acc, item) => {
+  const dateKey = item.date;
+  const img = IMAGE_MAP[item.title] ?? Reels;
+  const entry: ScheduleEventWithImage = { title: item.title, time: item.time, location: item.location, img, date: item.date };
+  if (!acc[dateKey]) acc[dateKey] = [entry]; else acc[dateKey].push(entry);
+  return acc;
+}, {} as Record<string, ScheduleEventWithImage[]>);
 
 const ScheduleCarousel = () => {
   const { root, date, dateInvisible } = scheduleCarouselVariants();
   
   // 모든 이벤트를 플랫하게 만들되, 날짜 정보도 포함
-  const flattenedEvents = Object.entries(SCHEDULE_INFO).flatMap(([dateKey, events], dateIndex) =>
+  const flattenedEvents = Object.entries(SCHEDULE_INFO).flatMap(([_dateKey, events], _dateIndex) =>
     events.map((event, eventIndex) => ({
       ...event,
-      date: dateKey,
       isFirstOfDate: eventIndex === 0,
     }))
   );

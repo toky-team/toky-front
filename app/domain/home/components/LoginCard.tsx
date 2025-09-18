@@ -4,20 +4,34 @@ import InviteButton from './InviteButton';
 
 const loginCardVariants = tv({
   slots: {
-    root: 'flex flex-row w-full p-5 justify-between items-center rounded-lg [background:var(--color-background-5)]',
+    root: 'flex flex-row w-full p-5 justify-between items-center rounded-lg',
     description: 'flex flex-col',
+  },
+  variants: {
+    backgroundColor: {
+      white10: {
+        root: "bg-white/10",
+      },
+      default: {
+        root: "[background:var(--color-background-5)]",
+      },
+    },
+  },
+  defaultVariants: {
+    backgroundColor: 'default',
   },
 });
 
 interface LoginCardProps extends VariantProps<typeof loginCardVariants> {
   className?: string;
   isLoggedIn: boolean;
+  backgroundColor?: 'white10';
 }
 
-const LoginCard = ({ className, isLoggedIn }: LoginCardProps) => {
+const LoginCard = ({ className, isLoggedIn, backgroundColor }: LoginCardProps) => {
   const { root, description } = loginCardVariants();
   return (
-    <div className={root()}>
+    <div className={root({ backgroundColor })}>
       <div className={description()}>
         {!isLoggedIn && <p>간편하게 로그인하고</p>}
         {!isLoggedIn && <p>승부예측 참여하세요</p>}

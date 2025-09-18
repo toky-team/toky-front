@@ -1,39 +1,49 @@
-import CustomCarousel from '@/common/components/CustomCarousel';
 import MainTopBar from '@/common/components/MainTopBar';
 import NavBar from '@/common/components/NavBar';
+import { HomeWhenLive } from '@/domain/home/components/HomeWhenLive';
+import { HomeWhenNotLive } from '@/domain/home/components/HomeWhenNotLive';
 import ActionCard from '@/domain/home/components/ActionCard';
 import AdsCarousel from '@/domain/home/components/AdsCarousel';
-import LoginCard from '@/domain/home/components/LoginCard';
 import ScheduleCarousel from '@/domain/home/components/ScheduleCarousel';
-import useGetAuthCheck from '@/common/apis/useGetAuthCheck';
 import ShortRankChart from '@/domain/home/components/ShortRankChart';
-import bannerGuide from '@/lib/assets/images/banner_guide.webp';
-import bannerAttendance from '@/lib/assets/images/banner_attendance.webp';
+import { useGetScore } from '@/domain/live/apis/useGetScore';
 import { useGetIsAnswerSet } from '@/common/apis/useGetIsAnswerSet';
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
 export default function Home() {
-  const slides = [
-    { id: '1', image: bannerGuide, alt: '가이드', link: '/guide' },
-    { id: '2', image: bannerAttendance, alt: '출석퀴즈', link: '/attendance' },
-  ];
-
-  const { data: isAnswerSet } = useGetIsAnswerSet();
-
-  const { data: auth } = useGetAuthCheck();
-  const isLoggedIn = Boolean(auth?.isSignup);
+  const { data: isAnswerSet, isLoading: isLoadingAnswerSet } = useGetIsAnswerSet();
   const navigate = useNavigate();
 
+  const { data: scoreSoccer, isLoading: isLoadingSoccer } = useGetScore('축구');
+  const { data: scoreBaseball, isLoading: isLoadingBaseball } = useGetScore('야구');
+  const { data: scoreBasketball, isLoading: isLoadingBasketball } = useGetScore('농구');
+  const { data: scoreRugby, isLoading: isLoadingRugby } = useGetScore('럭비');
+  const { data: scoreIcehockey, isLoading: isLoadingIcehockey } = useGetScore('아이스하키');
+
+  const statuses = [
+    scoreSoccer?.matchStatus,
+    scoreBaseball?.matchStatus,
+    scoreBasketball?.matchStatus,
+    scoreRugby?.matchStatus,
+    scoreIcehockey?.matchStatus,
+  ];
+  const isLoadingAny = isLoadingSoccer || isLoadingBaseball || isLoadingBasketball || isLoadingRugby || isLoadingIcehockey;
+  const isLive = !isLoadingAny && statuses.some((status) => status === '진행 중');
   const ChartType = isAnswerSet ? 'betRate' : 'activity';
 
   return (
     <>
       <MainTopBar />
       <NavBar />
-      <CustomCarousel slides={slides} />
-      <div className="flex flex-col items-center justify-center gap-8 px-5 py-8">
-        <LoginCard isLoggedIn={isLoggedIn} />
+      {isLoadingAny ? (
+        <HomeWhenNotLive />
+      ) : isLive ? (
+        <HomeWhenLive />
+      ) : (
+        <HomeWhenNotLive />
+      )}
+      <div className="flex flex-col items-center justify-center gap-8 px-5 pb-8">
         <ActionCard />
         <div className="flex w-full flex-col gap-3">
           <div className="text-lg font-bold">정기전 일정</div>
