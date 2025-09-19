@@ -18,7 +18,9 @@ const ScoreBoard = () => {
 
   const { Container, Score, ScoreNumber, ScoreTitle, ScoreTeam } = containerVariants();
 
-  const isFirstDay = new Date().getDay() === 19 && new Date().getMonth() === 9;
+  const localNow = new Date();
+  const kstNow = new Date(localNow.getTime() + (9 * 60 + localNow.getTimezoneOffset()) * 60000);
+  const isFirstDay = kstNow.getMonth() === 8 && kstNow.getDate() === 19;
 
   return (
   <div className={Container()}>
