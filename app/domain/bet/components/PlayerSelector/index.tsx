@@ -53,8 +53,18 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom, betAnswer }: Props
     betAnswer?.yuPlayer !== undefined &&
     betAnswer.kuPlayer !== null &&
     betAnswer.yuPlayer !== null;
-  const isKuCorrect = hasRealAnswer && betAnswer.kuPlayer.playerId === mySelection.kuPlayerId;
-  const isYuCorrect = hasRealAnswer && betAnswer.yuPlayer.playerId === mySelection.yuPlayerId;
+  const isKuCorrect =
+    hasRealAnswer &&
+    ((mySelection.kuPlayerId === null && betAnswer.kuPlayer.playerId.length === 0) ||
+      (mySelection.kuPlayerId !== null &&
+        mySelection.kuPlayerId !== undefined &&
+        betAnswer.kuPlayer.playerId.includes(mySelection.kuPlayerId)));
+  const isYuCorrect =
+    hasRealAnswer &&
+    ((mySelection.yuPlayerId === null && betAnswer.yuPlayer.playerId.length === 0) ||
+      (mySelection.yuPlayerId !== null &&
+        mySelection.yuPlayerId !== undefined &&
+        betAnswer.yuPlayer.playerId.includes(mySelection.yuPlayerId)));
 
   const kuSelectedPlayer =
     mySelection.kuPlayerId === undefined
