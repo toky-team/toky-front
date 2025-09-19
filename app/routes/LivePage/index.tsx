@@ -16,6 +16,7 @@ import useGuideModal from '@/domain/live/hooks/useGuideModal';
 import { useGetLiveUrl } from '@/domain/live/apis/useGetLiveUrl';
 import { FALLBACK_LIVE_URL } from '@/lib/constants';
 import RecordView from '@/domain/live/components/RecordView';
+import { useNavigate } from 'react-router';
 
 const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
   const [page, setPage] = useState<'chat' | 'analysis'>('chat');
@@ -27,6 +28,7 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const liveUrl = liveUrls?.[selectedIndex]?.url || FALLBACK_LIVE_URL;
   const selectedLabel = `${liveUrls?.[selectedIndex]?.broadcastName || ''} ${sport} 라이브`;
+  const navigate = useNavigate();
 
   const items = useMemo(
     () =>
@@ -55,7 +57,7 @@ const LivePage = ({ params }: { params: { sports: SportsPathType } }) => {
 
   return (
     <>
-      <TopBar>
+      <TopBar handlePrevButton={() => navigate('/')}>
         {/* 방송사 선택 바텀시트 트리거 */}
         <button className={s.LiveSrc} onClick={() => setSheetOpen(true)} type="button">
           <p>{selectedLabel}</p>
