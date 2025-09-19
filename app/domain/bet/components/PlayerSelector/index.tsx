@@ -71,7 +71,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom, betAnswer }: Props
 
   const setKuSelectedPlayer = (player: PlayerInterface | null) => {
     if (hasRealAnswer || !canPredict) {
-      openToast({ message: '승부 예측 기간이 지났어요' });
+      openToast({ message: `${sport} 승부 예측 기간이 지났어요` });
       return;
     }
     if (openLoginModal() !== false) return;
@@ -91,7 +91,7 @@ const PlayerSelector = ({ sport, mySelection, scrollToBottom, betAnswer }: Props
   };
   const setYuSelectedPlayer = (player: PlayerInterface | null) => {
     if (hasRealAnswer || !canPredict) {
-      openToast({ message: '승부 예측 기간이 지났어요' });
+      openToast({ message: `${sport} 승부 예측 기간이 지났어요` });
       return;
     }
     if (openLoginModal() !== false) return;

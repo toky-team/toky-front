@@ -47,7 +47,7 @@ const ScorePrediction = ({ sport, betData, betAnswer }: Props) => {
     setScore: (prev: { kuScore: number; yuScore: number }) => { kuScore: number; yuScore: number },
   ) => {
     if (hasRealAnswer || !canPredict) {
-      openToast({ message: '승부 예측 기간이 지났어요' });
+      openToast({ message: `${sport} 승부 예측 기간이 지났어요` });
       return;
     }
     if (openLoginModal() !== false) return;
