@@ -42,7 +42,7 @@ const TeamPrediction = ({ sport, betData, isLoading: isMyBetLoading, scrollToBot
 
   const handleTeamPrediction = (team: UniversityType | '무승부') => {
     if (hasRealAnswer || !canPredict) {
-      openToast({ message: '승부 예측 기간이 지났어요' });
+      openToast({ message: `${sport} 승부 예측 기간이 지났어요` });
       return;
     }
     if (openLoginModal() !== false) return;
