@@ -28,9 +28,17 @@ export default function Home() {
     scoreRugby?.matchStatus,
     scoreIcehockey?.matchStatus,
   ];
-  const isLoadingAny = isLoadingSoccer || isLoadingBaseball || isLoadingBasketball || isLoadingRugby || isLoadingIcehockey;
+  const isLoadingAny =
+    isLoadingSoccer || isLoadingBaseball || isLoadingBasketball || isLoadingRugby || isLoadingIcehockey;
   const isLive = !isLoadingAny && statuses.some((status) => status === '진행 중');
   const ChartType = isAnswerSet ? 'betRate' : 'activity';
+  const statusBySport = {
+    축구: scoreSoccer?.matchStatus,
+    야구: scoreBaseball?.matchStatus,
+    농구: scoreBasketball?.matchStatus,
+    럭비: scoreRugby?.matchStatus,
+    아이스하키: scoreIcehockey?.matchStatus,
+  };
 
   return (
     <>
@@ -39,7 +47,7 @@ export default function Home() {
       {isLoadingAny ? (
         <HomeWhenNotLive />
       ) : isLive ? (
-        <HomeWhenLive />
+        <HomeWhenLive statusBySport={statusBySport} />
       ) : (
         <HomeWhenNotLive />
       )}

@@ -68,7 +68,7 @@ const ChatList = ({ sport }: Props) => {
     <div className={s.Container} ref={scrollRef}>
       <Loader hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextRef={fetchNextRef} />
       {messages.map((message) => (
-        <Chat key={message.id} nickname={message.username} message={message.content} />
+        <Chat key={message.id} nickname={message.username} message={message.content} university={message.university} />
       ))}
     </div>
   );

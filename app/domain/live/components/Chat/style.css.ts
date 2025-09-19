@@ -1,5 +1,6 @@
 import { vars } from '@/root.css';
 import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
 export const Container = style({
   display: 'flex',
@@ -9,12 +10,23 @@ export const Container = style({
   width: '100%',
 });
 
-export const Nickname = style({
-  color: vars.color['white-60'],
-  fontSize: '0.875rem',
-  fontWeight: 500,
-  lineHeight: 1.4,
-  letterSpacing: '-0.035rem',
+export const Nickname = recipe({
+  base: {
+    fontSize: '0.875rem',
+    fontWeight: 500,
+    lineHeight: 1.4,
+    letterSpacing: '-0.035rem',
+  },
+  variants: {
+    university: {
+      고려대학교: {
+        color: vars.color['light-red'],
+      },
+      연세대학교: {
+        color: vars.color['light-blue'],
+      },
+    },
+  },
 });
 
 export const Message = style({
