@@ -4,17 +4,19 @@ import png from '@/lib/assets/images/attendance_banner_png.png';
 import * as s from './style.css';
 import TicketInfo from '@/common/components/TicketInfo';
 import { useNavigate } from 'react-router';
-import { useGetAttendance } from '@/domain/game/apis/useGetAttendance';
+// import { useGetAttendance } from '@/domain/game/apis/useGetAttendance';
 import { useGetAttendanceAll } from '@/domain/game/apis/useGetAttendanceAll';
 import { CALENDAR_DATE } from '@/domain/game/constants';
 import Icon from '@/lib/assets/icons';
 
 const AttendanceBanner = () => {
   const navigate = useNavigate();
-  const { data: todayAttendance, isSuccess: isTodayAttendanceSuccess } = useGetAttendance();
+  // const { data: todayAttendance, isSuccess: isTodayAttendanceSuccess } = useGetAttendance();
   const { data: attendanceData } = useGetAttendanceAll();
 
-  const isDisabled = !isTodayAttendanceSuccess || todayAttendance.secondStageResult !== null;
+  // 9/22 업데이트. 출석 기간 종료로 항상 disabled 처리
+  // const isDisabled = !isTodayAttendanceSuccess || todayAttendance.secondStageResult !== null;
+  const isDisabled = true;
 
   const handleGameStart = () => {
     if (isDisabled) return;
@@ -56,11 +58,12 @@ const AttendanceBanner = () => {
           <TicketInfo number={attendanceData?.ticketCountByAttendance} />
         </div>
         <button className={s.GameButton({ disabled: isDisabled })} onClick={handleGameStart}>
-          {isTodayAttendanceSuccess
+          {/* {isTodayAttendanceSuccess
             ? todayAttendance.secondStageResult !== null
               ? '내일 다시 참여해보세요!'
               : '게임 참여하기'
-            : ''}
+            : ''} */}
+          출석 기간이 끝났어요!
         </button>
       </div>
     </div>
