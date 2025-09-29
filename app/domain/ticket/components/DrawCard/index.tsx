@@ -3,10 +3,7 @@ import { AnimatePresence, motion, useAnimation } from 'motion/react';
 import { useToast } from '@/common/hooks/useToast';
 
 import * as s from './style.css';
-// import { useDrawOneGift } from '@/domain/ticket/apis/useDrawOneGift';
-// import { useLoginModal } from '@/common/hooks/useLoginModal';
-// import { useNeedTicketModal } from '@/common/hooks/useNeedTicketModal';
-// import { useEndModal } from '@/common/hooks/useEndModal';
+
 import Icon from '@/lib/assets/icons';
 import { usePostDraw } from '@/domain/ticket/apis/usePostDraw';
 import { useNeedTicketModal } from '@/domain/ticket/hooks/useNeedTicketModal';
@@ -27,7 +24,6 @@ export function DrawCard({ id, totalDraw, productName, productAlias, canDraw, im
   const { openToast } = useToast();
   const { openLoginModal } = useLoginModal();
   const { openNeedTicketModal } = useNeedTicketModal();
-  // const { openEndModal } = useEndModal();
   const { mutate: draw } = usePostDraw(id);
   const ticketControls = useAnimation();
 
@@ -55,7 +51,7 @@ export function DrawCard({ id, totalDraw, productName, productAlias, canDraw, im
 
   const handleClick = async () => {
     if (isDone) {
-      // openEndModal();
+      openToast({ message: '응모 기간이 지났어요!' });
       return;
     }
     if (openLoginModal() !== false) return;
