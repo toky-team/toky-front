@@ -48,6 +48,7 @@ const DrawPage = () => {
               totalDraw={gift.drawCount}
               canDraw={gift.requiredTicket <= (ticketCount ?? 0)}
               productAlias={gift.alias}
+              isDone
             />
           ))}
         </div>
